@@ -12,7 +12,7 @@ typedef struct {
     float Current_Result;
 } FirstOrder_Filter_t;
 
-extern FirstOrder_Filter_t I_CapacitorF, I_ChassisF, V_CapacitorF, V_BaterryF, V_ChassisF;
+extern FirstOrder_Filter_t I_CapacitorF, I_ChassisF, V_CapacitorF, V_BaterryF, V_ChassisF, P_CapacitorF;
 void FirstOrder_Filter_Config(void);
 void FirstOrder_Filter_Calculate(FirstOrder_Filter_t *param);
 
