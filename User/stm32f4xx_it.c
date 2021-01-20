@@ -1,10 +1,7 @@
 #include "stm32f4xx_hal.h"
 #include "stm32f4xx_it.h"
-#include "encrypt.h"
-#include "system.h"
-#include "config.h"
 #include "tim.h"
-#include "usart.h"
+#include "decrypt.h"
 
 unsigned char TIM10_Flag = 0;
 unsigned char TIM11_Flag = 0;
@@ -77,8 +74,24 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
         TIM11_Flag = 1;
 }
 
+extern unsigned char aRxBuffer[1];
+
 void USART1_IRQHandler(void) {
+    uint32_t timeout = 0;
+    uint32_t maxDelay = 0x1FFFF;
     HAL_UART_IRQHandler(&huart1);
+    timeout = 0;
+    while (HAL_UART_GetState(&huart1) != HAL_UART_STATE_READY) {
+        timeout++;
+        if (timeout > maxDelay)
+            break;
+    }
+    timeout = 0;
+    while (HAL_UART_Receive_IT(&huart1, (uint8_t *) aRxBuffer, 1) != HAL_OK) {
+        timeout++;
+        if (timeout > maxDelay)
+            break;
+    }
 }
 
 void DMA2_Stream0_IRQHandler(void) {

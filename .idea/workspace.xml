@@ -16,26 +16,16 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="Finished low-pass filter and timer configuration, but cannot debug (when you are debugging, it stuck in RCC initialize function).">
+    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="Initialize low-pass filter parameters, but debug RCC still aren't fixed. second problem: when UART received, all global variable were change to zero. I guess the HAL_UART_IRQHandler have problems.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Device/decrypt.c" beforeDir="false" afterPath="$PROJECT_DIR$/Device/decrypt.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Device/filter.c" beforeDir="false" afterPath="$PROJECT_DIR$/Device/filter.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Device/filter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Device/filter.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hardware/adc.c" beforeDir="false" afterPath="$PROJECT_DIR$/Hardware/adc.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hardware/adc.h" beforeDir="false" afterPath="$PROJECT_DIR$/Hardware/adc.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hardware/dma.c" beforeDir="false" afterPath="$PROJECT_DIR$/Hardware/dma.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Device/pid.c" beforeDir="false" afterPath="$PROJECT_DIR$/Device/pid.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Hardware/tim.c" beforeDir="false" afterPath="$PROJECT_DIR$/Hardware/tim.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hardware/tim.h" beforeDir="false" afterPath="$PROJECT_DIR$/Hardware/tim.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Hardware/usart.c" beforeDir="false" afterPath="$PROJECT_DIR$/Hardware/usart.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Hardware/usart.h" beforeDir="false" afterPath="$PROJECT_DIR$/Hardware/usart.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/User/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/User/main.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/User/stm32f4xx_it.c" beforeDir="false" afterPath="$PROJECT_DIR$/User/stm32f4xx_it.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.17.3/CMakeDetermineCompilerABI_C.bin" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.17.3/CMakeDetermineCompilerABI_C.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.17.3/CMakeDetermineCompilerABI_CXX.bin" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.17.3/CMakeDetermineCompilerABI_CXX.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeOutput.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeOutput.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Program.elf.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Program.elf.dir/depend.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,7 +110,7 @@
       <workItem from="1611142632806" duration="8599000" />
       <workItem from="1611152293068" duration="1904000" />
       <workItem from="1611154240932" duration="365000" />
-      <workItem from="1611154646415" duration="1343000" />
+      <workItem from="1611154646415" duration="7391000" />
     </task>
     <task id="LOCAL-00001" summary="Rewrite Functions">
       <created>1611128425695</created>
@@ -143,7 +133,14 @@
       <option name="project" value="LOCAL" />
       <updated>1611135123823</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Initialize low-pass filter parameters, but debug RCC still aren't fixed. second problem: when UART received, all global variable were change to zero. I guess the HAL_UART_IRQHandler have problems.">
+      <created>1611156267651</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1611156267651</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -205,7 +202,8 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Rewrite Functions" />
     <MESSAGE value="Finished Power Calculate" />
-    <option name="LAST_COMMIT_MESSAGE" value="Finished Power Calculate" />
+    <MESSAGE value="Initialize low-pass filter parameters, but debug RCC still aren't fixed. second problem: when UART received, all global variable were change to zero. I guess the HAL_UART_IRQHandler have problems." />
+    <option name="LAST_COMMIT_MESSAGE" value="Initialize low-pass filter parameters, but debug RCC still aren't fixed. second problem: when UART received, all global variable were change to zero. I guess the HAL_UART_IRQHandler have problems." />
   </component>
   <component name="WindowStateProjectService">
     <state x="-1334" y="198" key="#Inspections" timestamp="1611123674518">
@@ -225,22 +223,22 @@
     </state>
     <state x="-1180" y="286" key="FileChooserDialogImpl/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1611123341971" />
     <state x="592" y="227" key="FileChooserDialogImpl/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1611124698264" />
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1611155885184">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1611162098839">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1611155885184" />
-    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1611155885184">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1611162098839" />
+    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1611162098839">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1611155885184" />
-    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1611155885184">
+    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1611162098839" />
+    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1611162098839">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1611155885184" />
-    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1611155885184">
+    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1611162098839" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1611162098839">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1611155885184" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1611162098839" />
     <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1611142618086">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

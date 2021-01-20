@@ -12,9 +12,9 @@ void TIM_Config(void) {
     htim10.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
     while (HAL_TIM_Base_Init(&htim10));
     htim11.Instance = TIM11;
-    htim11.Init.Prescaler = 16799;
+    htim11.Init.Prescaler = 1679;          //168000000 / 1680 = 100000;
     htim11.Init.CounterMode = TIM_COUNTERMODE_UP;
-    htim11.Init.Period = 49;
+    htim11.Init.Period = 49;                //100000 / 50 = 2000Hz
     htim11.Init.ClockDivision = TIM_CLOCKDIVISION_DIV2;
     htim11.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
     while (HAL_TIM_Base_Init(&htim11));

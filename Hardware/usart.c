@@ -2,12 +2,12 @@
 #include "decrypt.h"
 
 UART_HandleTypeDef huart1;
-unsigned char aRxBuffer[128];
+unsigned char aRxBuffer[1];
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
-//    HAL_UART_Receive_IT(&huart1, (unsigned char *) aRxBuffer, 128);
-//    for (unsigned char counter = 0; counter < 128; counter++)
-//        DTP_Received_CallBack(aRxBuffer[counter]);
+    if (huart->Instance == USART1) {
+        DTP_Received_CallBack(aRxBuffer[0]);
+    }
 }
 
 void UART_Config(void) {
@@ -20,7 +20,7 @@ void UART_Config(void) {
     huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
     huart1.Init.OverSampling = UART_OVERSAMPLING_16;
     while (HAL_UART_Init(&huart1));
-    //HAL_UART_Receive_IT(&huart1, (uint8_t *) aRxBuffer, 128);
+    HAL_UART_Receive_IT(&huart1, (uint8_t *) aRxBuffer, 1);
 }
 
 void HAL_UART_MspInit(UART_HandleTypeDef *uartHandle) {

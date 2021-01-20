@@ -1,4 +1,5 @@
 #include "main.h"
+#include "math.h"
 
 extern unsigned char TIM10_Flag;
 extern unsigned char TIM11_Flag;
@@ -6,7 +7,7 @@ extern unsigned char TIM11_Flag;
 #define COEFFICIENT 3.3f / 4096.0f
 
 int main(void) {
-    float I_Capacitor, I_Chassis, V_Capacitor, V_Baterry, V_Chassis, P_Chassis, P_Capacitor;
+    float I_Capacitor, I_Chassis, V_Capacitor, V_Baterry, V_Chassis, P_Chassis, P_Capacitor, theta = 0;
     unsigned short I_Offset;
     HAL_Init();
     SystemClock_Config();
@@ -33,13 +34,15 @@ int main(void) {
             pkg.PID = 0;
             ADC_Resultf[0] = I_Capacitor;
             ADC_Resultf[1] = V_Capacitor;
-            ADC_Resultf[2] = V_Baterry;
+            ADC_Resultf[2] = PID_Capacitor.User;
             ADC_Resultf[3] = P_Capacitor;
             for (unsigned char counter = 0; counter < 4; counter++) {
                 pkg.Data[counter * 2] = FloatToInt16(ADC_Resultf[counter]) >> 8;
                 pkg.Data[counter * 2 + 1] = FloatToInt16(ADC_Resultf[counter]) & 0x00ff;
             }
             DTP_Transmit(&pkg);
+            PID_Capacitor.User = 20 * (sinf(theta) + 1.0f);
+            theta = theta + 0.05f;
         }
         if (TIM11_Flag == 1) {
             TIM11_Flag = 0;
@@ -75,13 +78,13 @@ int main(void) {
             P_CapacitorF.Current_Value = P_Capacitor;
             FirstOrder_Filter_Calculate(&P_CapacitorF);
             P_Capacitor = P_CapacitorF.Current_Result;
+
+            PID_Capacitor.Collect[1] = PID_Capacitor.Collect[0];
+            PID_Capacitor.Collect[0] = P_Capacitor;
+            PID_Get_Result(&PID_Capacitor);
+            HAL_DAC_SetValue(&hdac, DAC_CHANNEL_2, DAC_ALIGN_12B_R, PID_Capacitor.Result / 1);
         }
-//        else if ((INTFlag & (~(0x00000001UL << TIM10_INT_BIT))) != 0) {
         if (V_Capacitor >= 15.0f)
             HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_SET);
-//            PID_Capacitor.Collect[1] = PID_Capacitor.Collect[0];
-//            PID_Capacitor.Collect[0] = P_Capacitor;
-//            PID_Get_Result(&PID_Capacitor);
-//        }
     }
 }
