@@ -21,5 +21,6 @@ typedef struct {
 
 extern PID_Structure PID_Capacitor;
 void PID_Get_Result(PID_Structure *PID_Handler);
+void PID_Value_Config(void);
 
 #endif //_DEVICE_PID_H_

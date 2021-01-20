@@ -8,6 +8,17 @@ PID_Structure PID_Capacitor;
 
 #define Ufabs(x) x >= 0 ? x : -1 * x
 
+void PID_Value_Config(void) {
+    PID_Capacitor.Kp = 100;
+    PID_Capacitor.Ki = 0;
+    PID_Capacitor.Kd = 0;
+    PID_Capacitor.User = 20;
+    PID_Capacitor.I_Sum_Max = 100;
+    PID_Capacitor.Maxinum = 4095;
+    PID_Capacitor.Minium = 1;
+    PID_Capacitor.Offset = 0;
+}
+
 void PID_Get_Result(PID_Structure *PID_Handler) {
     float Error = (PID_Handler->User - PID_Handler->Collect[0]);
     PID_Handler->I_Sum =

@@ -118,6 +118,12 @@
 		<Unit filename="D:/Desktop/Program/Device/encrypt.h">
 			<Option target="Program.elf"/>
 		</Unit>
+		<Unit filename="D:/Desktop/Program/Device/filter.c">
+			<Option target="Program.elf"/>
+		</Unit>
+		<Unit filename="D:/Desktop/Program/Device/filter.h">
+			<Option target="Program.elf"/>
+		</Unit>
 		<Unit filename="D:/Desktop/Program/Device/pid.c">
 			<Option target="Program.elf"/>
 		</Unit>
@@ -359,6 +365,12 @@
 			<Option target="Program.elf"/>
 		</Unit>
 		<Unit filename="D:/Desktop/Program/Hardware/gpio.h">
+			<Option target="Program.elf"/>
+		</Unit>
+		<Unit filename="D:/Desktop/Program/Hardware/tim.c">
+			<Option target="Program.elf"/>
+		</Unit>
+		<Unit filename="D:/Desktop/Program/Hardware/tim.h">
 			<Option target="Program.elf"/>
 		</Unit>
 		<Unit filename="D:/Desktop/Program/Hardware/usart.c">
