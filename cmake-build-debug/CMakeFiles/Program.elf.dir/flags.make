@@ -3,15 +3,15 @@
 
 # compile ASM with D:/gcc-arm-none-eabi/bin/arm-none-eabi-gcc.exe
 # compile C with D:/gcc-arm-none-eabi/bin/arm-none-eabi-gcc.exe
-ASM_FLAGS = -g   -mcpu=cortex-m4 -mthumb -mthumb-interwork -ffunction-sections -fdata-sections -fno-common -fmessage-length=0 -Og -g
+ASM_FLAGS = -g   -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mthumb -mthumb-interwork -ffunction-sections -fdata-sections -fno-common -fmessage-length=0 -Og -g
 
-ASM_DEFINES = -DSTM32F405xx -DUSE_HAL_DRIVER
+ASM_DEFINES = -DARM_MATH_CM4 -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING -DSTM32F405xx -DUSE_HAL_DRIVER
 
-ASM_INCLUDES = -ID:\Desktop\Program\Core\Inc -ID:\Desktop\Program\Drivers\STM32F4xx_HAL_Driver\Inc -ID:\Desktop\Program\Drivers\STM32F4xx_HAL_Driver\Inc\Legacy -ID:\Desktop\Program\Drivers\CMSIS\Device\ST\STM32F4xx\Include -ID:\Desktop\Program\Drivers\CMSIS\Include 
+ASM_INCLUDES = -ID:\Desktop\Program\Drivers\STM32F4xx_HAL_Driver\Inc -ID:\Desktop\Program\Drivers\STM32F4xx_HAL_Driver\Inc\Legacy -ID:\Desktop\Program\Drivers\CMSIS\Device\ST\STM32F4xx\Include -ID:\Desktop\Program\Drivers\CMSIS\Include -ID:\Desktop\Program\User -ID:\Desktop\Program\System -ID:\Desktop\Program\Hardware -ID:\Desktop\Program\Device 
 
-C_FLAGS = -g   -mcpu=cortex-m4 -mthumb -mthumb-interwork -ffunction-sections -fdata-sections -fno-common -fmessage-length=0 -Og -g -std=gnu11
+C_FLAGS = -g   -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -mthumb -mthumb-interwork -ffunction-sections -fdata-sections -fno-common -fmessage-length=0 -Og -g -std=gnu11
 
-C_DEFINES = -DSTM32F405xx -DUSE_HAL_DRIVER
+C_DEFINES = -DARM_MATH_CM4 -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING -DSTM32F405xx -DUSE_HAL_DRIVER
 
-C_INCLUDES = -ID:\Desktop\Program\Core\Inc -ID:\Desktop\Program\Drivers\STM32F4xx_HAL_Driver\Inc -ID:\Desktop\Program\Drivers\STM32F4xx_HAL_Driver\Inc\Legacy -ID:\Desktop\Program\Drivers\CMSIS\Device\ST\STM32F4xx\Include -ID:\Desktop\Program\Drivers\CMSIS\Include 
+C_INCLUDES = -ID:\Desktop\Program\Drivers\STM32F4xx_HAL_Driver\Inc -ID:\Desktop\Program\Drivers\STM32F4xx_HAL_Driver\Inc\Legacy -ID:\Desktop\Program\Drivers\CMSIS\Device\ST\STM32F4xx\Include -ID:\Desktop\Program\Drivers\CMSIS\Include -ID:\Desktop\Program\User -ID:\Desktop\Program\System -ID:\Desktop\Program\Hardware -ID:\Desktop\Program\Device 
 

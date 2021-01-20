@@ -34,13 +34,19 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
+					<Add option="-DARM_MATH_CM4"/>
+					<Add option="-DARM_MATH_MATRIX_CHECK"/>
+					<Add option="-DARM_MATH_ROUNDING"/>
 					<Add option="-DUSE_HAL_DRIVER"/>
 					<Add option="-DSTM32F405xx"/>
-					<Add directory="D:/Desktop/Program/Core/Inc"/>
 					<Add directory="D:/Desktop/Program/Drivers/STM32F4xx_HAL_Driver/Inc"/>
 					<Add directory="D:/Desktop/Program/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy"/>
 					<Add directory="D:/Desktop/Program/Drivers/CMSIS/Device/ST/STM32F4xx/Include"/>
 					<Add directory="D:/Desktop/Program/Drivers/CMSIS/Include"/>
+					<Add directory="D:/Desktop/Program/User"/>
+					<Add directory="D:/Desktop/Program/System"/>
+					<Add directory="D:/Desktop/Program/Hardware"/>
+					<Add directory="D:/Desktop/Program/Device"/>
 					<Add directory="d:\gcc-arm-none-eabi\bin\../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/include/c++/9.3.1"/>
 					<Add directory="d:\gcc-arm-none-eabi\bin\../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/include/c++/9.3.1/arm-none-eabi"/>
 					<Add directory="d:\gcc-arm-none-eabi\bin\../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/include/c++/9.3.1/backward"/>
@@ -62,13 +68,19 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
+					<Add option="-DARM_MATH_CM4"/>
+					<Add option="-DARM_MATH_MATRIX_CHECK"/>
+					<Add option="-DARM_MATH_ROUNDING"/>
 					<Add option="-DUSE_HAL_DRIVER"/>
 					<Add option="-DSTM32F405xx"/>
-					<Add directory="D:/Desktop/Program/Core/Inc"/>
 					<Add directory="D:/Desktop/Program/Drivers/STM32F4xx_HAL_Driver/Inc"/>
 					<Add directory="D:/Desktop/Program/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy"/>
 					<Add directory="D:/Desktop/Program/Drivers/CMSIS/Device/ST/STM32F4xx/Include"/>
 					<Add directory="D:/Desktop/Program/Drivers/CMSIS/Include"/>
+					<Add directory="D:/Desktop/Program/User"/>
+					<Add directory="D:/Desktop/Program/System"/>
+					<Add directory="D:/Desktop/Program/Hardware"/>
+					<Add directory="D:/Desktop/Program/Device"/>
 					<Add directory="d:\gcc-arm-none-eabi\bin\../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/include/c++/9.3.1"/>
 					<Add directory="d:\gcc-arm-none-eabi\bin\../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/include/c++/9.3.1/arm-none-eabi"/>
 					<Add directory="d:\gcc-arm-none-eabi\bin\../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/include/c++/9.3.1/backward"/>
@@ -94,67 +106,22 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="D:/Desktop/Program/Core/Inc/adc.h">
+		<Unit filename="D:/Desktop/Program/Device/decrypt.c">
 			<Option target="Program.elf"/>
 		</Unit>
-		<Unit filename="D:/Desktop/Program/Core/Inc/can.h">
+		<Unit filename="D:/Desktop/Program/Device/decrypt.h">
 			<Option target="Program.elf"/>
 		</Unit>
-		<Unit filename="D:/Desktop/Program/Core/Inc/dac.h">
+		<Unit filename="D:/Desktop/Program/Device/encrypt.c">
 			<Option target="Program.elf"/>
 		</Unit>
-		<Unit filename="D:/Desktop/Program/Core/Inc/dma.h">
+		<Unit filename="D:/Desktop/Program/Device/encrypt.h">
 			<Option target="Program.elf"/>
 		</Unit>
-		<Unit filename="D:/Desktop/Program/Core/Inc/gpio.h">
+		<Unit filename="D:/Desktop/Program/Device/pid.c">
 			<Option target="Program.elf"/>
 		</Unit>
-		<Unit filename="D:/Desktop/Program/Core/Inc/main.h">
-			<Option target="Program.elf"/>
-		</Unit>
-		<Unit filename="D:/Desktop/Program/Core/Inc/stm32f4xx_hal_conf.h">
-			<Option target="Program.elf"/>
-		</Unit>
-		<Unit filename="D:/Desktop/Program/Core/Inc/stm32f4xx_it.h">
-			<Option target="Program.elf"/>
-		</Unit>
-		<Unit filename="D:/Desktop/Program/Core/Inc/usart.h">
-			<Option target="Program.elf"/>
-		</Unit>
-		<Unit filename="D:/Desktop/Program/Core/Src/adc.c">
-			<Option target="Program.elf"/>
-		</Unit>
-		<Unit filename="D:/Desktop/Program/Core/Src/can.c">
-			<Option target="Program.elf"/>
-		</Unit>
-		<Unit filename="D:/Desktop/Program/Core/Src/dac.c">
-			<Option target="Program.elf"/>
-		</Unit>
-		<Unit filename="D:/Desktop/Program/Core/Src/dma.c">
-			<Option target="Program.elf"/>
-		</Unit>
-		<Unit filename="D:/Desktop/Program/Core/Src/gpio.c">
-			<Option target="Program.elf"/>
-		</Unit>
-		<Unit filename="D:/Desktop/Program/Core/Src/main.c">
-			<Option target="Program.elf"/>
-		</Unit>
-		<Unit filename="D:/Desktop/Program/Core/Src/stm32f4xx_hal_msp.c">
-			<Option target="Program.elf"/>
-		</Unit>
-		<Unit filename="D:/Desktop/Program/Core/Src/stm32f4xx_hal_timebase_tim.c">
-			<Option target="Program.elf"/>
-		</Unit>
-		<Unit filename="D:/Desktop/Program/Core/Src/stm32f4xx_it.c">
-			<Option target="Program.elf"/>
-		</Unit>
-		<Unit filename="D:/Desktop/Program/Core/Src/syscalls.c">
-			<Option target="Program.elf"/>
-		</Unit>
-		<Unit filename="D:/Desktop/Program/Core/Src/system_stm32f4xx.c">
-			<Option target="Program.elf"/>
-		</Unit>
-		<Unit filename="D:/Desktop/Program/Core/Src/usart.c">
+		<Unit filename="D:/Desktop/Program/Device/pid.h">
 			<Option target="Program.elf"/>
 		</Unit>
 		<Unit filename="D:/Desktop/Program/Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f405xx.h">
@@ -364,10 +331,70 @@
 		<Unit filename="D:/Desktop/Program/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c">
 			<Option target="Program.elf"/>
 		</Unit>
+		<Unit filename="D:/Desktop/Program/Hardware/adc.c">
+			<Option target="Program.elf"/>
+		</Unit>
+		<Unit filename="D:/Desktop/Program/Hardware/adc.h">
+			<Option target="Program.elf"/>
+		</Unit>
+		<Unit filename="D:/Desktop/Program/Hardware/can.c">
+			<Option target="Program.elf"/>
+		</Unit>
+		<Unit filename="D:/Desktop/Program/Hardware/can.h">
+			<Option target="Program.elf"/>
+		</Unit>
+		<Unit filename="D:/Desktop/Program/Hardware/dac.c">
+			<Option target="Program.elf"/>
+		</Unit>
+		<Unit filename="D:/Desktop/Program/Hardware/dac.h">
+			<Option target="Program.elf"/>
+		</Unit>
+		<Unit filename="D:/Desktop/Program/Hardware/dma.c">
+			<Option target="Program.elf"/>
+		</Unit>
+		<Unit filename="D:/Desktop/Program/Hardware/dma.h">
+			<Option target="Program.elf"/>
+		</Unit>
+		<Unit filename="D:/Desktop/Program/Hardware/gpio.c">
+			<Option target="Program.elf"/>
+		</Unit>
+		<Unit filename="D:/Desktop/Program/Hardware/gpio.h">
+			<Option target="Program.elf"/>
+		</Unit>
+		<Unit filename="D:/Desktop/Program/Hardware/usart.c">
+			<Option target="Program.elf"/>
+		</Unit>
+		<Unit filename="D:/Desktop/Program/Hardware/usart.h">
+			<Option target="Program.elf"/>
+		</Unit>
 		<Unit filename="D:/Desktop/Program/STM32F405RGTx_FLASH.ld">
 			<Option target="Program.elf"/>
 		</Unit>
-		<Unit filename="D:/Desktop/Program/startup/startup_stm32f405xx.s">
+		<Unit filename="D:/Desktop/Program/System/startup_stm32f405xx.s">
+			<Option target="Program.elf"/>
+		</Unit>
+		<Unit filename="D:/Desktop/Program/System/syscalls.c">
+			<Option target="Program.elf"/>
+		</Unit>
+		<Unit filename="D:/Desktop/Program/System/system.c">
+			<Option target="Program.elf"/>
+		</Unit>
+		<Unit filename="D:/Desktop/Program/System/system.h">
+			<Option target="Program.elf"/>
+		</Unit>
+		<Unit filename="D:/Desktop/Program/System/system_stm32f4xx.c">
+			<Option target="Program.elf"/>
+		</Unit>
+		<Unit filename="D:/Desktop/Program/User/main.c">
+			<Option target="Program.elf"/>
+		</Unit>
+		<Unit filename="D:/Desktop/Program/User/main.h">
+			<Option target="Program.elf"/>
+		</Unit>
+		<Unit filename="D:/Desktop/Program/User/stm32f4xx_it.c">
+			<Option target="Program.elf"/>
+		</Unit>
+		<Unit filename="D:/Desktop/Program/User/stm32f4xx_it.h">
 			<Option target="Program.elf"/>
 		</Unit>
 		<Unit filename="D:/Desktop/Program/CMakeLists.txt">
