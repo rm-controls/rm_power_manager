@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="BranchesTreeState">
-    <expand>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-    </expand>
+    <expand />
     <select />
   </component>
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
@@ -21,56 +16,13 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/saveactions_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Device/decrypt.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Device/decrypt.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Device/encrypt.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Device/encrypt.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Device/pid.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Device/pid.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/System/system.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/System/system.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/User/port.h" afterDir="false" />
+    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="Rewrite Functions">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists_template.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/adc.h" beforeDir="false" afterPath="$PROJECT_DIR$/Hardware/adc.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/can.h" beforeDir="false" afterPath="$PROJECT_DIR$/Hardware/can.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/dac.h" beforeDir="false" afterPath="$PROJECT_DIR$/Hardware/dac.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/dma.h" beforeDir="false" afterPath="$PROJECT_DIR$/Hardware/dma.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/gpio.h" beforeDir="false" afterPath="$PROJECT_DIR$/Hardware/gpio.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/main.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/main.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/stm32f4xx_hal_conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/System/stm32f4xx_hal_conf.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/stm32f4xx_it.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/stm32f4xx_it.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/usart.h" beforeDir="false" afterPath="$PROJECT_DIR$/Hardware/usart.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/adc.c" beforeDir="false" afterPath="$PROJECT_DIR$/Hardware/adc.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/can.c" beforeDir="false" afterPath="$PROJECT_DIR$/Hardware/can.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/dac.c" beforeDir="false" afterPath="$PROJECT_DIR$/Hardware/dac.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/dma.c" beforeDir="false" afterPath="$PROJECT_DIR$/Hardware/dma.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/gpio.c" beforeDir="false" afterPath="$PROJECT_DIR$/Hardware/gpio.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/User/main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/stm32f4xx_hal_msp.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/stm32f4xx_hal_timebase_tim.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/stm32f4xx_it.c" beforeDir="false" afterPath="$PROJECT_DIR$/User/stm32f4xx_it.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/syscalls.c" beforeDir="false" afterPath="$PROJECT_DIR$/System/syscalls.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/system_stm32f4xx.c" beforeDir="false" afterPath="$PROJECT_DIR$/System/system_stm32f4xx.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/usart.c" beforeDir="false" afterPath="$PROJECT_DIR$/Hardware/usart.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Program.elf.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Program.elf.dir/DependInfo.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Program.elf.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Program.elf.dir/build.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Program.elf.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Program.elf.dir/cmake_clean.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Program.elf.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Program.elf.dir/depend.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Program.elf.dir/flags.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Program.elf.dir/flags.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Program.elf.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Program.elf.dir/link.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Program.elf.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Program.elf.dir/progress.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progress.marks" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progress.marks" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Program.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Program.cbp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/startup/startup_stm32f405xx.s" beforeDir="false" afterPath="$PROJECT_DIR$/System/startup_stm32f405xx.s" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Device/pid.c" beforeDir="false" afterPath="$PROJECT_DIR$/Device/pid.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Device/pid.h" beforeDir="false" afterPath="$PROJECT_DIR$/Device/pid.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Hardware/gpio.c" beforeDir="false" afterPath="$PROJECT_DIR$/Hardware/gpio.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/User/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/port.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/port.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,11 +67,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -145,8 +92,17 @@
       <workItem from="1611124719771" duration="44000" />
       <workItem from="1611124772084" duration="20000" />
       <workItem from="1611124806173" duration="77000" />
-      <workItem from="1611124898170" duration="3371000" />
+      <workItem from="1611124898170" duration="8317000" />
+      <workItem from="1611133487051" duration="1541000" />
     </task>
+    <task id="LOCAL-00001" summary="Rewrite Functions">
+      <created>1611128425695</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1611128425695</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -155,6 +111,31 @@
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
+        <entry key="1">
+          <value>
+            <State>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="roots">
+                    <value>
+                      <list>
+                        <option value="$PROJECT_DIR$" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
         <entry key="MAIN">
           <value>
             <State />
@@ -162,10 +143,17 @@
         </entry>
       </map>
     </option>
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="1" value="TOOL_WINDOW" />
+      </map>
+    </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Rewrite Functions" />
+    <option name="LAST_COMMIT_MESSAGE" value="Rewrite Functions" />
   </component>
   <component name="WindowStateProjectService">
     <state x="-1334" y="198" key="#Inspections" timestamp="1611123674518">
@@ -176,27 +164,31 @@
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
     <state x="-1506" y="174" width="1092" height="716" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1611123343384" />
+    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog" timestamp="1611133950418">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1611133950418" />
     <state x="592" y="227" key="FileChooserDialogImpl" timestamp="1611124698264">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="-1180" y="286" key="FileChooserDialogImpl/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1611123341971" />
     <state x="592" y="227" key="FileChooserDialogImpl/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1611124698264" />
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1611127276651">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1611134942608">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1611127276651" />
-    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1611127276650">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1611134942608" />
+    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1611134942608">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1611127276650" />
-    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1611127276650">
+    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1611134942608" />
+    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1611134942608">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1611127276650" />
-    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1611127276650">
+    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1611134942608" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1611134942608">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1611127276650" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1611134942608" />
     <state x="-1459" y="164" key="SettingsEditor" timestamp="1611123695258">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>

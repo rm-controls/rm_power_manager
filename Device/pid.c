@@ -4,9 +4,11 @@
 
 #include "pid.h"
 
+PID_Structure PID_Capacitor;
+
 #define Ufabs(x) x >= 0 ? x : -1 * x
 
-float PID_Get_Result(PID_Structure *PID_Handler) {
+void PID_Get_Result(PID_Structure *PID_Handler) {
     float Error = (PID_Handler->User - PID_Handler->Collect[0]);
     PID_Handler->I_Sum =
         PID_Handler->I_Sum + (float) 0.5 * (float) ((PID_Handler->User - PID_Handler->Collect[1]) + Error);
@@ -22,5 +24,4 @@ float PID_Get_Result(PID_Structure *PID_Handler) {
         PID_Handler->Result = PID_Handler->Maxinum;
     if (PID_Handler->Result < PID_Handler->Minium)
         PID_Handler->Result = PID_Handler->Minium;
-    return PID_Handler->Result;
 }
