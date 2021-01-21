@@ -1,5 +1,4 @@
 #include "main.h"
-#include "math.h"
 
 extern unsigned char TIM10_Flag;
 extern unsigned char TIM11_Flag;
@@ -41,8 +40,6 @@ int main(void) {
                 pkg.Data[counter * 2 + 1] = FloatToInt16(ADC_Resultf[counter]) & 0x00ff;
             }
             DTP_Transmit(&pkg);
-            PID_Capacitor.User = 20 * (sinf(theta) + 1.0f);
-            theta = theta + 0.05f;
         }
         if (TIM11_Flag == 1) {
             TIM11_Flag = 0;

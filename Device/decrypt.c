@@ -1,7 +1,7 @@
 #include "decrypt.h"
 #include "string.h"
 #include "system.h"
-#include "filter.h"
+#include "pid.h"
 
 static unsigned char Receive_Buffer[128];
 static unsigned char PingPong_Buffer[128];
@@ -15,8 +15,10 @@ void Receive_CallBack(unsigned char PID, unsigned char Data[8]) {
         Parameters[2] = Int16ToFloat((Data[4] << 8) | Data[5]);
         Parameters[3] = Int16ToFloat((Data[6] << 8) | Data[7]);
 
-        I_CapacitorF.CufOff_Freq = Parameters[0];
-        P_CapacitorF.CufOff_Freq = Parameters[1];
+        PID_Capacitor.User = Parameters[0];
+        PID_Capacitor.Kp = Parameters[1];
+        PID_Capacitor.Ki = Parameters[2];
+        PID_Capacitor.Kd = Parameters[3];
     }
 }
 
