@@ -16,12 +16,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="HAL Library is fine. When Decoding, the for loop &quot;for (Temp_Var = 0; Temp_Var &lt; Receive_Byte; Temp_Var++)&quot; using Receive_Byte as circulate condition, and when receving end of package, the index is 255, which out of range. Now decode codes are debugged.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Device/decrypt.c" beforeDir="false" afterPath="$PROJECT_DIR$/Device/decrypt.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/User/main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Program.elf.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Program.elf.dir/depend.make" afterDir="false" />
-    </list>
+    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="change workspace.xml" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -182,6 +177,11 @@
                 </map>
               </option>
             </State>
+          </value>
+        </entry>
+        <entry key="2">
+          <value>
+            <State />
           </value>
         </entry>
         <entry key="MAIN">
