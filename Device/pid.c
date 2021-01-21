@@ -10,13 +10,13 @@ PID_Structure PID_Capacitor;
 
 void PID_Value_Config(void) {
     PID_Capacitor.Kp = 100;
-    PID_Capacitor.Ki = 0;
-    PID_Capacitor.Kd = 0;
+    PID_Capacitor.Ki = 5;
+    PID_Capacitor.Kd = 10;
     PID_Capacitor.User = 20;
-    PID_Capacitor.I_Sum_Max = 100;
+    PID_Capacitor.I_Sum_Max = 200;
     PID_Capacitor.Maxinum = 4095;
     PID_Capacitor.Minium = 1;
-    PID_Capacitor.Offset = 0;
+    PID_Capacitor.Offset = -100;
 }
 
 void PID_Get_Result(PID_Structure *PID_Handler) {

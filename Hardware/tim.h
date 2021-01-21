@@ -3,8 +3,8 @@
 
 #include "stm32f4xx_hal.h"
 
-extern TIM_HandleTypeDef htim6;
-extern TIM_HandleTypeDef htim7;
+extern TIM_HandleTypeDef htim10;
+extern TIM_HandleTypeDef htim11;
 
 void TIM_Config(void);
 

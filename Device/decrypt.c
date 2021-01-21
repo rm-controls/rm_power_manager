@@ -1,6 +1,7 @@
 #include "decrypt.h"
 #include "string.h"
 #include "system.h"
+#include "pid.h"
 
 static unsigned char Receive_Buffer[128];
 static unsigned char PingPong_Buffer[128];
@@ -13,6 +14,11 @@ void Receive_CallBack(unsigned char PID, unsigned char Data[8]) {
         Parameters[1] = Int16ToFloat((Data[2] << 8) | Data[3]);
         Parameters[2] = Int16ToFloat((Data[4] << 8) | Data[5]);
         Parameters[3] = Int16ToFloat((Data[6] << 8) | Data[7]);
+
+        PID_Capacitor.User = Parameters[0];
+        PID_Capacitor.Kp = Parameters[1];
+        PID_Capacitor.Ki = Parameters[2];
+        PID_Capacitor.Kd = Parameters[3];
     }
 }
 
@@ -36,18 +42,19 @@ void DTP_Received_CallBack(unsigned char Receive_Byte) {
             EOF_Pos = CheckCounter;
             break;
         }
-        if (CheckCounter >= Receive_BufCounter)
+        if (CheckCounter >= (Receive_BufCounter - 1))
             break;
         else
             CheckCounter++;
     }                                                           //Find Package In Buffer
 
+
     if ((EOF_Pos - SOF_Pos) == 11) {
-        unsigned int Temp_Var = 0;
+        unsigned int Temp_Var;
         unsigned char Data_Buffer[8] = {0};
         unsigned char Valid_Buffer[12] = {0};
 
-        for (Temp_Var = 0; Temp_Var < 12; ++Temp_Var)           //Copy Data To Another Buffer
+        for (Temp_Var = 0; Temp_Var < 12; Temp_Var++)           //Copy Data To Another Buffer
             Valid_Buffer[Temp_Var] = Receive_Buffer[SOF_Pos + Temp_Var];
 
         EOF_Pos++;
@@ -56,7 +63,7 @@ void DTP_Received_CallBack(unsigned char Receive_Byte) {
             PingPong_Buffer[Temp_Var] = Receive_Buffer[EOF_Pos + Temp_Var];
         Receive_BufCounter = Receive_BufCounter - EOF_Pos;
         memset(Receive_Buffer, 0x00, sizeof(Receive_Buffer));
-        for (Temp_Var = 0; Temp_Var < Receive_Byte; Temp_Var++)
+        for (Temp_Var = 0; Temp_Var < Receive_BufCounter; Temp_Var++)
             Receive_Buffer[Temp_Var] = PingPong_Buffer[Temp_Var];
 
         unsigned char PID_Bit = Valid_Buffer[1] >> 4;           //Get The PID Bit
@@ -76,6 +83,7 @@ void DTP_Received_CallBack(unsigned char Receive_Byte) {
         }
     } else if ((EOF_Pos - SOF_Pos) != 0 && EOF_Pos != 0) {
         memset(Receive_Buffer, 0x00, sizeof(Receive_Buffer));
+        memset(PingPong_Buffer, 0x00, sizeof(PingPong_Buffer));
         Receive_BufCounter = 0;
     }
 }
