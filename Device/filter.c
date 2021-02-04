@@ -14,12 +14,12 @@ void FirstOrder_Filter_Config(void) {
     memset((void *) &V_BaterryF, 0x00, sizeof(V_BaterryF));
     memset((void *) &V_ChassisF, 0x00, sizeof(V_ChassisF));
     memset((void *) &P_CapacitorF, 0x00, sizeof(P_CapacitorF));
-    I_CapacitorF.CufOff_Freq = 0.3f;
-    I_ChassisF.CufOff_Freq = 0.3f;
-    V_CapacitorF.CufOff_Freq = 0.3f;
-    V_BaterryF.CufOff_Freq = 0.3f;
-    V_ChassisF.CufOff_Freq = 0.3f;
-    P_CapacitorF.CufOff_Freq = 0.3f;
+    I_CapacitorF.CufOff_Freq = 50.0f;
+    I_ChassisF.CufOff_Freq = 50.0f;
+    V_CapacitorF.CufOff_Freq = 50.f;
+    V_BaterryF.CufOff_Freq = 50.0f;
+    V_ChassisF.CufOff_Freq = 50.0f;
+    P_CapacitorF.CufOff_Freq = 50.0f;
 }
 
 void FirstOrder_Filter_Calculate(FirstOrder_Filter_t *param) {

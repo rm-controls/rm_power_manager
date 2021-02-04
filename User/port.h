@@ -5,10 +5,10 @@
 #ifndef _USER_PORT_H_
 #define _USER_PORT_H_
 
-#define CHG_EN_Pin GPIO_PIN_4
-#define CHG_EN_GPIO_Port GPIOC
-#define EN_NMOS_Pin GPIO_PIN_6
-#define EN_NMOS_GPIO_Port GPIOA
+#define CHG_EN_Pin GPIO_PIN_6
+#define CHG_EN_GPIO_Port GPIOA
+#define EN_NMOS_Pin GPIO_PIN_4
+#define EN_NMOS_GPIO_Port GPIOC
 #define LED1_Pin GPIO_PIN_6
 #define LED1_GPIO_Port GPIOC
 #define LED2_Pin GPIO_PIN_7

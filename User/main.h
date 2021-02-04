@@ -7,6 +7,10 @@
 #include "system.h"
 #include "config.h"
 
+/////////////// FreeRTOS ///////////////
+#include "FreeRTOS.h"
+#include "task.h"
+
 /////////////// Hardware ///////////////
 #include "adc.h"
 #include "can.h"

@@ -5,16 +5,16 @@ TIM_HandleTypeDef htim11;
 
 void TIM_Config(void) {
     htim10.Instance = TIM10;
-    htim10.Init.Prescaler = 16799;
+    htim10.Init.Prescaler = 16799;//168000000 / 16800 = 10000;
     htim10.Init.CounterMode = TIM_COUNTERMODE_UP;
-    htim10.Init.Period = 399;
+    htim10.Init.Period = 199;   //10000 / 200 = 50Hz
     htim10.Init.ClockDivision = TIM_CLOCKDIVISION_DIV2;
     htim10.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
     while (HAL_TIM_Base_Init(&htim10));
     htim11.Instance = TIM11;
     htim11.Init.Prescaler = 1679;          //168000000 / 1680 = 100000;
     htim11.Init.CounterMode = TIM_COUNTERMODE_UP;
-    htim11.Init.Period = 49;                //100000 / 50 = 2000Hz
+    htim11.Init.Period = 199;                //100000 / 200 = 500Hz
     htim11.Init.ClockDivision = TIM_CLOCKDIVISION_DIV2;
     htim11.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
     while (HAL_TIM_Base_Init(&htim11));

@@ -7,7 +7,8 @@ void DAC_Config(void) {
     hdac.Instance = DAC;
     while (HAL_DAC_Init(&hdac));
     sConfig.DAC_Trigger = DAC_TRIGGER_NONE;
-    sConfig.DAC_OutputBuffer = DAC_OUTPUTBUFFER_ENABLE;
+//    sConfig.DAC_OutputBuffer = DAC_OUTPUTBUFFER_ENABLE;
+    sConfig.DAC_OutputBuffer = DAC_OUTPUTBUFFER_DISABLE;
     while (HAL_DAC_ConfigChannel(&hdac, &sConfig, DAC_CHANNEL_2));
     HAL_DAC_Start(&hdac, DAC_CHANNEL_2);
     HAL_DAC_SetValue(&hdac, DAC_CHANNEL_2, DAC_ALIGN_12B_R, 0X0000);

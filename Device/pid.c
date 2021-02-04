@@ -9,14 +9,14 @@ PID_Structure PID_Capacitor;
 #define Ufabs(x) x >= 0 ? x : -1 * x
 
 void PID_Value_Config(void) {
-    PID_Capacitor.Kp = 100;
-    PID_Capacitor.Ki = 5;
-    PID_Capacitor.Kd = 10;
-    PID_Capacitor.User = 20;
-    PID_Capacitor.I_Sum_Max = 200;
+    PID_Capacitor.Kp = 17.5f;
+    PID_Capacitor.Ki = 1.0f;
+    PID_Capacitor.Kd = 15.0f;
+    PID_Capacitor.User = 0;
+    PID_Capacitor.I_Sum_Max = 300;
     PID_Capacitor.Maxinum = 4095;
     PID_Capacitor.Minium = 1;
-    PID_Capacitor.Offset = -100;
+    PID_Capacitor.Offset = 0;
 }
 
 void PID_Get_Result(PID_Structure *PID_Handler) {
