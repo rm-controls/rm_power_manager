@@ -48,12 +48,12 @@ endif ()
 
 include_directories(Drivers/STM32F4xx_HAL_Driver/Inc Drivers/STM32F4xx_HAL_Driver/Inc/Legacy
         Drivers/CMSIS/Device/ST/STM32F4xx/Include Drivers/CMSIS/Include User System Hardware Device
-        FreeRTOS)
+        FreeRTOS Functions)
 
 add_definitions(-DUSE_HAL_DRIVER -DSTM32F405xx)
 
 file(GLOB_RECURSE SOURCES "System/*.c" "Drivers/*.*" "User/*.c" "System/*.s" "Hardware/*.c" "Device/*.c"
-        "FreeRTOS/*.c")
+        "FreeRTOS/*.c" "Functions/*.c")
 
 set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/STM32F405RGTx_FLASH.ld)
 

@@ -48,6 +48,7 @@
 					<Add directory="D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/Hardware"/>
 					<Add directory="D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/Device"/>
 					<Add directory="D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/FreeRTOS"/>
+					<Add directory="D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/Functions"/>
 					<Add directory="d:\gcc-arm-none-eabi\bin\../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/include/c++/9.3.1"/>
 					<Add directory="d:\gcc-arm-none-eabi\bin\../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/include/c++/9.3.1/arm-none-eabi"/>
 					<Add directory="d:\gcc-arm-none-eabi\bin\../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/include/c++/9.3.1/backward"/>
@@ -83,6 +84,7 @@
 					<Add directory="D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/Hardware"/>
 					<Add directory="D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/Device"/>
 					<Add directory="D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/FreeRTOS"/>
+					<Add directory="D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/Functions"/>
 					<Add directory="d:\gcc-arm-none-eabi\bin\../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/include/c++/9.3.1"/>
 					<Add directory="d:\gcc-arm-none-eabi\bin\../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/include/c++/9.3.1/arm-none-eabi"/>
 					<Add directory="d:\gcc-arm-none-eabi\bin\../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/include/c++/9.3.1/backward"/>
@@ -351,6 +353,12 @@
 		<Unit filename="D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/FreeRTOS/port.c">
 			<Option target="Program.elf"/>
 		</Unit>
+		<Unit filename="D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/FreeRTOS/queue.c">
+			<Option target="Program.elf"/>
+		</Unit>
+		<Unit filename="D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/FreeRTOS/queue.h">
+			<Option target="Program.elf"/>
+		</Unit>
 		<Unit filename="D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/FreeRTOS/stream_buffer.c">
 			<Option target="Program.elf"/>
 		</Unit>
@@ -358,6 +366,24 @@
 			<Option target="Program.elf"/>
 		</Unit>
 		<Unit filename="D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/FreeRTOS/tasks.c">
+			<Option target="Program.elf"/>
+		</Unit>
+		<Unit filename="D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/FreeRTOS/timers.c">
+			<Option target="Program.elf"/>
+		</Unit>
+		<Unit filename="D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/FreeRTOS/timers.h">
+			<Option target="Program.elf"/>
+		</Unit>
+		<Unit filename="D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/Functions/calculate.c">
+			<Option target="Program.elf"/>
+		</Unit>
+		<Unit filename="D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/Functions/calculate.h">
+			<Option target="Program.elf"/>
+		</Unit>
+		<Unit filename="D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/Functions/report.c">
+			<Option target="Program.elf"/>
+		</Unit>
+		<Unit filename="D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/Functions/report.h">
 			<Option target="Program.elf"/>
 		</Unit>
 		<Unit filename="D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/Hardware/adc.c">
@@ -430,6 +456,12 @@
 			<Option target="Program.elf"/>
 		</Unit>
 		<Unit filename="D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/User/stm32f4xx_it.h">
+			<Option target="Program.elf"/>
+		</Unit>
+		<Unit filename="D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/User/usertask.c">
+			<Option target="Program.elf"/>
+		</Unit>
+		<Unit filename="D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/User/usertask.h">
 			<Option target="Program.elf"/>
 		</Unit>
 		<Unit filename="D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/CMakeLists.txt">

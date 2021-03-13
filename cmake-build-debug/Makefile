@@ -898,6 +898,33 @@ FreeRTOS/port.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Program.elf.dir\build.make CMakeFiles/Program.elf.dir/FreeRTOS/port.c.s
 .PHONY : FreeRTOS/port.c.s
 
+FreeRTOS/queue.obj: FreeRTOS/queue.c.obj
+
+.PHONY : FreeRTOS/queue.obj
+
+# target to build an object file
+FreeRTOS/queue.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Program.elf.dir\build.make CMakeFiles/Program.elf.dir/FreeRTOS/queue.c.obj
+.PHONY : FreeRTOS/queue.c.obj
+
+FreeRTOS/queue.i: FreeRTOS/queue.c.i
+
+.PHONY : FreeRTOS/queue.i
+
+# target to preprocess a source file
+FreeRTOS/queue.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Program.elf.dir\build.make CMakeFiles/Program.elf.dir/FreeRTOS/queue.c.i
+.PHONY : FreeRTOS/queue.c.i
+
+FreeRTOS/queue.s: FreeRTOS/queue.c.s
+
+.PHONY : FreeRTOS/queue.s
+
+# target to generate assembly for a file
+FreeRTOS/queue.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Program.elf.dir\build.make CMakeFiles/Program.elf.dir/FreeRTOS/queue.c.s
+.PHONY : FreeRTOS/queue.c.s
+
 FreeRTOS/stream_buffer.obj: FreeRTOS/stream_buffer.c.obj
 
 .PHONY : FreeRTOS/stream_buffer.obj
@@ -951,6 +978,87 @@ FreeRTOS/tasks.s: FreeRTOS/tasks.c.s
 FreeRTOS/tasks.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Program.elf.dir\build.make CMakeFiles/Program.elf.dir/FreeRTOS/tasks.c.s
 .PHONY : FreeRTOS/tasks.c.s
+
+FreeRTOS/timers.obj: FreeRTOS/timers.c.obj
+
+.PHONY : FreeRTOS/timers.obj
+
+# target to build an object file
+FreeRTOS/timers.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Program.elf.dir\build.make CMakeFiles/Program.elf.dir/FreeRTOS/timers.c.obj
+.PHONY : FreeRTOS/timers.c.obj
+
+FreeRTOS/timers.i: FreeRTOS/timers.c.i
+
+.PHONY : FreeRTOS/timers.i
+
+# target to preprocess a source file
+FreeRTOS/timers.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Program.elf.dir\build.make CMakeFiles/Program.elf.dir/FreeRTOS/timers.c.i
+.PHONY : FreeRTOS/timers.c.i
+
+FreeRTOS/timers.s: FreeRTOS/timers.c.s
+
+.PHONY : FreeRTOS/timers.s
+
+# target to generate assembly for a file
+FreeRTOS/timers.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Program.elf.dir\build.make CMakeFiles/Program.elf.dir/FreeRTOS/timers.c.s
+.PHONY : FreeRTOS/timers.c.s
+
+Functions/calculate.obj: Functions/calculate.c.obj
+
+.PHONY : Functions/calculate.obj
+
+# target to build an object file
+Functions/calculate.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Program.elf.dir\build.make CMakeFiles/Program.elf.dir/Functions/calculate.c.obj
+.PHONY : Functions/calculate.c.obj
+
+Functions/calculate.i: Functions/calculate.c.i
+
+.PHONY : Functions/calculate.i
+
+# target to preprocess a source file
+Functions/calculate.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Program.elf.dir\build.make CMakeFiles/Program.elf.dir/Functions/calculate.c.i
+.PHONY : Functions/calculate.c.i
+
+Functions/calculate.s: Functions/calculate.c.s
+
+.PHONY : Functions/calculate.s
+
+# target to generate assembly for a file
+Functions/calculate.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Program.elf.dir\build.make CMakeFiles/Program.elf.dir/Functions/calculate.c.s
+.PHONY : Functions/calculate.c.s
+
+Functions/report.obj: Functions/report.c.obj
+
+.PHONY : Functions/report.obj
+
+# target to build an object file
+Functions/report.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Program.elf.dir\build.make CMakeFiles/Program.elf.dir/Functions/report.c.obj
+.PHONY : Functions/report.c.obj
+
+Functions/report.i: Functions/report.c.i
+
+.PHONY : Functions/report.i
+
+# target to preprocess a source file
+Functions/report.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Program.elf.dir\build.make CMakeFiles/Program.elf.dir/Functions/report.c.i
+.PHONY : Functions/report.c.i
+
+Functions/report.s: Functions/report.c.s
+
+.PHONY : Functions/report.s
+
+# target to generate assembly for a file
+Functions/report.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Program.elf.dir\build.make CMakeFiles/Program.elf.dir/Functions/report.c.s
+.PHONY : Functions/report.c.s
 
 Hardware/adc.obj: Hardware/adc.c.obj
 
@@ -1285,6 +1393,33 @@ User/stm32f4xx_it.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Program.elf.dir\build.make CMakeFiles/Program.elf.dir/User/stm32f4xx_it.c.s
 .PHONY : User/stm32f4xx_it.c.s
 
+User/usertask.obj: User/usertask.c.obj
+
+.PHONY : User/usertask.obj
+
+# target to build an object file
+User/usertask.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Program.elf.dir\build.make CMakeFiles/Program.elf.dir/User/usertask.c.obj
+.PHONY : User/usertask.c.obj
+
+User/usertask.i: User/usertask.c.i
+
+.PHONY : User/usertask.i
+
+# target to preprocess a source file
+User/usertask.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Program.elf.dir\build.make CMakeFiles/Program.elf.dir/User/usertask.c.i
+.PHONY : User/usertask.c.i
+
+User/usertask.s: User/usertask.c.s
+
+.PHONY : User/usertask.s
+
+# target to generate assembly for a file
+User/usertask.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Program.elf.dir\build.make CMakeFiles/Program.elf.dir/User/usertask.c.s
+.PHONY : User/usertask.c.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -1378,12 +1513,24 @@ help:
 	@echo ... FreeRTOS/port.obj
 	@echo ... FreeRTOS/port.i
 	@echo ... FreeRTOS/port.s
+	@echo ... FreeRTOS/queue.obj
+	@echo ... FreeRTOS/queue.i
+	@echo ... FreeRTOS/queue.s
 	@echo ... FreeRTOS/stream_buffer.obj
 	@echo ... FreeRTOS/stream_buffer.i
 	@echo ... FreeRTOS/stream_buffer.s
 	@echo ... FreeRTOS/tasks.obj
 	@echo ... FreeRTOS/tasks.i
 	@echo ... FreeRTOS/tasks.s
+	@echo ... FreeRTOS/timers.obj
+	@echo ... FreeRTOS/timers.i
+	@echo ... FreeRTOS/timers.s
+	@echo ... Functions/calculate.obj
+	@echo ... Functions/calculate.i
+	@echo ... Functions/calculate.s
+	@echo ... Functions/report.obj
+	@echo ... Functions/report.i
+	@echo ... Functions/report.s
 	@echo ... Hardware/adc.obj
 	@echo ... Hardware/adc.i
 	@echo ... Hardware/adc.s
@@ -1421,6 +1568,9 @@ help:
 	@echo ... User/stm32f4xx_it.obj
 	@echo ... User/stm32f4xx_it.i
 	@echo ... User/stm32f4xx_it.s
+	@echo ... User/usertask.obj
+	@echo ... User/usertask.i
+	@echo ... User/usertask.s
 .PHONY : help
 
 

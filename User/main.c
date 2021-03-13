@@ -1,15 +1,20 @@
 #include "main.h"
 
-extern unsigned char TIM10_Flag;
-extern unsigned char TIM11_Flag;
+TaskHandle_t InitTask_Handler;
+TaskHandle_t ReportTask_Handler;
+TaskHandle_t PIDTask_Handler;
+TaskHandle_t UserTask_Handler;
+TaskHandle_t LEDTask_Handler;
 
-#define COEFFICIENT 3.3f / 4096.0f
+void LED_Shine(void *pvParameters) {
+    while (1) {
+        HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
+        Delayms((unsigned int) (1000.0f / V_Capacitor));
+    }
+}
 
-int main(void) {
-    float I_Capacitor, I_Chassis, V_Capacitor, V_Baterry, V_Chassis, P_Chassis, P_Capacitor;
-    unsigned short I_Offset, counter = 0;
-    HAL_Init();
-    SystemClock_Config();
+void InitTask(void *pvParameters) {
+    taskENTER_CRITICAL();
     GPIO_Config();
     DMA_Config();
     ADC_Config();
@@ -17,83 +22,20 @@ int main(void) {
     DAC_Config();
     UART_Config();
     TIM_Config();
-    FirstOrder_Filter_Config();
-    PID_Value_Config();
-    HAL_DAC_SetValue(&hdac, DAC_CHANNEL_2, DAC_ALIGN_12B_R, 0x01);
-    HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_SET);
-    HAL_Delay(1000);
-    I_Offset = ADC_FinalResult[0];
-    HAL_Delay(100);
-    HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_RESET);
-    PID_Capacitor.User = 25;
-    while (1) {
-        if (TIM10_Flag == 1) {
-            counter++;
-            DTP_Package_t pkg = {0};
-            float ADC_Resultf[4];
-            TIM10_Flag = 0;
-            pkg.PID = 0;
-            ADC_Resultf[0] = I_Capacitor;
-            ADC_Resultf[1] = V_Capacitor;
-            ADC_Resultf[2] = PID_Capacitor.User;
-            ADC_Resultf[3] = P_Capacitor;
-            for (unsigned char lcounter = 0; lcounter < 4; lcounter++) {
-                pkg.Data[lcounter * 2] = FloatToInt16(ADC_Resultf[lcounter]) >> 8UL;
-                pkg.Data[lcounter * 2 + 1] = FloatToInt16(ADC_Resultf[lcounter]) & 0x00ffUL;
-            }
-            DTP_Transmit(&pkg);
-            if (counter == 100)
-                PID_Capacitor.User = 40;
-            if (counter == 200) {
-                PID_Capacitor.User = 25;
-                counter = 0;
-            }
-        }
-        if (TIM11_Flag == 1) {
-            TIM11_Flag = 0;
-            I_Capacitor = (float) (ADC_FinalResult[0] - I_Offset) * COEFFICIENT * 10.0f;
-            I_Chassis = (((float) ADC_FinalResult[1] * COEFFICIENT) - 2.5f) * 10.0f;
-            V_Baterry = (float) ADC_FinalResult[2] * COEFFICIENT * 11.0f;
-            V_Capacitor = (float) ADC_FinalResult[3] * COEFFICIENT * 11.0f;
-            V_Chassis = (float) ADC_FinalResult[4] * COEFFICIENT * 11.0f;
-
-            I_CapacitorF.Current_Value = I_Capacitor;
-            FirstOrder_Filter_Calculate(&I_CapacitorF);
-            I_Capacitor = I_CapacitorF.Current_Result;
-
-            I_ChassisF.Current_Value = I_Chassis;
-            FirstOrder_Filter_Calculate(&I_ChassisF);
-            I_Chassis = I_ChassisF.Current_Result;
-
-            V_BaterryF.Current_Value = V_Baterry;
-            FirstOrder_Filter_Calculate(&V_BaterryF);
-            V_Baterry = V_BaterryF.Current_Result;
-
-            V_CapacitorF.Current_Value = V_Capacitor;
-            FirstOrder_Filter_Calculate(&V_CapacitorF);
-            V_Capacitor = V_CapacitorF.Current_Result;
-
-            V_ChassisF.Current_Value = V_Chassis;
-            FirstOrder_Filter_Calculate(&V_ChassisF);
-            V_Chassis = V_ChassisF.Current_Result;
-
-            P_Chassis = I_Chassis * V_Chassis;
-
-            P_Capacitor = V_Baterry * I_Capacitor;
-            P_CapacitorF.Current_Value = P_Capacitor;
-            FirstOrder_Filter_Calculate(&P_CapacitorF);
-            P_Capacitor = P_CapacitorF.Current_Result;
-
-            if (PID_Capacitor.User >= 20) {
-                PID_Capacitor.Collect[1] = PID_Capacitor.Collect[0];
-                PID_Capacitor.Collect[0] = P_Capacitor;
-                PID_Get_Result(&PID_Capacitor);
-                HAL_DAC_SetValue(&hdac, DAC_CHANNEL_2, DAC_ALIGN_12B_R, PID_Capacitor.Result / 1);
-            }
-        }
-        if (V_Capacitor >= 15.0f)
-            HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_SET);
-//        else
-//            HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_RESET);
-    }
+    Filter_Config();
+    PID_ValueConfig();
+    Sensor_Config();
+    xTaskCreate(Report_Task, "ReportTask", 512, NULL, 1, &ReportTask_Handler);
+    xTaskCreate(PID_CalculateTask, "PIDTask", 1024, NULL, 3, &PIDTask_Handler);
+    xTaskCreate(LED_Shine, "LEDTask", 128, NULL, 1, &LEDTask_Handler);
+    xTaskCreate(UserTask, "UserTask", 1024, NULL, 2, &UserTask_Handler);
+    taskEXIT_CRITICAL();
+    vTaskDelete(NULL);
+}
+int main(void) {
+    HAL_Init();
+    SystemClock_Config();
+    xTaskCreate(InitTask, "InitTask", 512, NULL, 1, &InitTask_Handler);
+    vTaskStartScheduler();
+    while (1);
 }

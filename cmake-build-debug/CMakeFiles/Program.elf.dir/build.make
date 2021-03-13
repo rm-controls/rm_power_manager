@@ -440,9 +440,22 @@ CMakeFiles/Program.elf.dir/FreeRTOS/port.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Program.elf.dir/FreeRTOS/port.c.s"
 	D:\gcc-arm-none-eabi\bin\arm-none-eabi-gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\FreeRTOS\port.c -o CMakeFiles\Program.elf.dir\FreeRTOS\port.c.s
 
+CMakeFiles/Program.elf.dir/FreeRTOS/queue.c.obj: CMakeFiles/Program.elf.dir/flags.make
+CMakeFiles/Program.elf.dir/FreeRTOS/queue.c.obj: ../FreeRTOS/queue.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building C object CMakeFiles/Program.elf.dir/FreeRTOS/queue.c.obj"
+	D:\gcc-arm-none-eabi\bin\arm-none-eabi-gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\Program.elf.dir\FreeRTOS\queue.c.obj   -c D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\FreeRTOS\queue.c
+
+CMakeFiles/Program.elf.dir/FreeRTOS/queue.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Program.elf.dir/FreeRTOS/queue.c.i"
+	D:\gcc-arm-none-eabi\bin\arm-none-eabi-gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\FreeRTOS\queue.c > CMakeFiles\Program.elf.dir\FreeRTOS\queue.c.i
+
+CMakeFiles/Program.elf.dir/FreeRTOS/queue.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Program.elf.dir/FreeRTOS/queue.c.s"
+	D:\gcc-arm-none-eabi\bin\arm-none-eabi-gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\FreeRTOS\queue.c -o CMakeFiles\Program.elf.dir\FreeRTOS\queue.c.s
+
 CMakeFiles/Program.elf.dir/FreeRTOS/stream_buffer.c.obj: CMakeFiles/Program.elf.dir/flags.make
 CMakeFiles/Program.elf.dir/FreeRTOS/stream_buffer.c.obj: ../FreeRTOS/stream_buffer.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building C object CMakeFiles/Program.elf.dir/FreeRTOS/stream_buffer.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building C object CMakeFiles/Program.elf.dir/FreeRTOS/stream_buffer.c.obj"
 	D:\gcc-arm-none-eabi\bin\arm-none-eabi-gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\Program.elf.dir\FreeRTOS\stream_buffer.c.obj   -c D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\FreeRTOS\stream_buffer.c
 
 CMakeFiles/Program.elf.dir/FreeRTOS/stream_buffer.c.i: cmake_force
@@ -455,7 +468,7 @@ CMakeFiles/Program.elf.dir/FreeRTOS/stream_buffer.c.s: cmake_force
 
 CMakeFiles/Program.elf.dir/FreeRTOS/tasks.c.obj: CMakeFiles/Program.elf.dir/flags.make
 CMakeFiles/Program.elf.dir/FreeRTOS/tasks.c.obj: ../FreeRTOS/tasks.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building C object CMakeFiles/Program.elf.dir/FreeRTOS/tasks.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Building C object CMakeFiles/Program.elf.dir/FreeRTOS/tasks.c.obj"
 	D:\gcc-arm-none-eabi\bin\arm-none-eabi-gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\Program.elf.dir\FreeRTOS\tasks.c.obj   -c D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\FreeRTOS\tasks.c
 
 CMakeFiles/Program.elf.dir/FreeRTOS/tasks.c.i: cmake_force
@@ -466,9 +479,48 @@ CMakeFiles/Program.elf.dir/FreeRTOS/tasks.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Program.elf.dir/FreeRTOS/tasks.c.s"
 	D:\gcc-arm-none-eabi\bin\arm-none-eabi-gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\FreeRTOS\tasks.c -o CMakeFiles\Program.elf.dir\FreeRTOS\tasks.c.s
 
+CMakeFiles/Program.elf.dir/FreeRTOS/timers.c.obj: CMakeFiles/Program.elf.dir/flags.make
+CMakeFiles/Program.elf.dir/FreeRTOS/timers.c.obj: ../FreeRTOS/timers.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Building C object CMakeFiles/Program.elf.dir/FreeRTOS/timers.c.obj"
+	D:\gcc-arm-none-eabi\bin\arm-none-eabi-gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\Program.elf.dir\FreeRTOS\timers.c.obj   -c D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\FreeRTOS\timers.c
+
+CMakeFiles/Program.elf.dir/FreeRTOS/timers.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Program.elf.dir/FreeRTOS/timers.c.i"
+	D:\gcc-arm-none-eabi\bin\arm-none-eabi-gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\FreeRTOS\timers.c > CMakeFiles\Program.elf.dir\FreeRTOS\timers.c.i
+
+CMakeFiles/Program.elf.dir/FreeRTOS/timers.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Program.elf.dir/FreeRTOS/timers.c.s"
+	D:\gcc-arm-none-eabi\bin\arm-none-eabi-gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\FreeRTOS\timers.c -o CMakeFiles\Program.elf.dir\FreeRTOS\timers.c.s
+
+CMakeFiles/Program.elf.dir/Functions/calculate.c.obj: CMakeFiles/Program.elf.dir/flags.make
+CMakeFiles/Program.elf.dir/Functions/calculate.c.obj: ../Functions/calculate.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Building C object CMakeFiles/Program.elf.dir/Functions/calculate.c.obj"
+	D:\gcc-arm-none-eabi\bin\arm-none-eabi-gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\Program.elf.dir\Functions\calculate.c.obj   -c D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\Functions\calculate.c
+
+CMakeFiles/Program.elf.dir/Functions/calculate.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Program.elf.dir/Functions/calculate.c.i"
+	D:\gcc-arm-none-eabi\bin\arm-none-eabi-gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\Functions\calculate.c > CMakeFiles\Program.elf.dir\Functions\calculate.c.i
+
+CMakeFiles/Program.elf.dir/Functions/calculate.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Program.elf.dir/Functions/calculate.c.s"
+	D:\gcc-arm-none-eabi\bin\arm-none-eabi-gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\Functions\calculate.c -o CMakeFiles\Program.elf.dir\Functions\calculate.c.s
+
+CMakeFiles/Program.elf.dir/Functions/report.c.obj: CMakeFiles/Program.elf.dir/flags.make
+CMakeFiles/Program.elf.dir/Functions/report.c.obj: ../Functions/report.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Building C object CMakeFiles/Program.elf.dir/Functions/report.c.obj"
+	D:\gcc-arm-none-eabi\bin\arm-none-eabi-gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\Program.elf.dir\Functions\report.c.obj   -c D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\Functions\report.c
+
+CMakeFiles/Program.elf.dir/Functions/report.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Program.elf.dir/Functions/report.c.i"
+	D:\gcc-arm-none-eabi\bin\arm-none-eabi-gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\Functions\report.c > CMakeFiles\Program.elf.dir\Functions\report.c.i
+
+CMakeFiles/Program.elf.dir/Functions/report.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Program.elf.dir/Functions/report.c.s"
+	D:\gcc-arm-none-eabi\bin\arm-none-eabi-gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\Functions\report.c -o CMakeFiles\Program.elf.dir\Functions\report.c.s
+
 CMakeFiles/Program.elf.dir/Hardware/adc.c.obj: CMakeFiles/Program.elf.dir/flags.make
 CMakeFiles/Program.elf.dir/Hardware/adc.c.obj: ../Hardware/adc.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Building C object CMakeFiles/Program.elf.dir/Hardware/adc.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_35) "Building C object CMakeFiles/Program.elf.dir/Hardware/adc.c.obj"
 	D:\gcc-arm-none-eabi\bin\arm-none-eabi-gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\Program.elf.dir\Hardware\adc.c.obj   -c D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\Hardware\adc.c
 
 CMakeFiles/Program.elf.dir/Hardware/adc.c.i: cmake_force
@@ -481,7 +533,7 @@ CMakeFiles/Program.elf.dir/Hardware/adc.c.s: cmake_force
 
 CMakeFiles/Program.elf.dir/Hardware/can.c.obj: CMakeFiles/Program.elf.dir/flags.make
 CMakeFiles/Program.elf.dir/Hardware/can.c.obj: ../Hardware/can.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Building C object CMakeFiles/Program.elf.dir/Hardware/can.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_36) "Building C object CMakeFiles/Program.elf.dir/Hardware/can.c.obj"
 	D:\gcc-arm-none-eabi\bin\arm-none-eabi-gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\Program.elf.dir\Hardware\can.c.obj   -c D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\Hardware\can.c
 
 CMakeFiles/Program.elf.dir/Hardware/can.c.i: cmake_force
@@ -494,7 +546,7 @@ CMakeFiles/Program.elf.dir/Hardware/can.c.s: cmake_force
 
 CMakeFiles/Program.elf.dir/Hardware/dac.c.obj: CMakeFiles/Program.elf.dir/flags.make
 CMakeFiles/Program.elf.dir/Hardware/dac.c.obj: ../Hardware/dac.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Building C object CMakeFiles/Program.elf.dir/Hardware/dac.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_37) "Building C object CMakeFiles/Program.elf.dir/Hardware/dac.c.obj"
 	D:\gcc-arm-none-eabi\bin\arm-none-eabi-gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\Program.elf.dir\Hardware\dac.c.obj   -c D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\Hardware\dac.c
 
 CMakeFiles/Program.elf.dir/Hardware/dac.c.i: cmake_force
@@ -507,7 +559,7 @@ CMakeFiles/Program.elf.dir/Hardware/dac.c.s: cmake_force
 
 CMakeFiles/Program.elf.dir/Hardware/dma.c.obj: CMakeFiles/Program.elf.dir/flags.make
 CMakeFiles/Program.elf.dir/Hardware/dma.c.obj: ../Hardware/dma.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Building C object CMakeFiles/Program.elf.dir/Hardware/dma.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_38) "Building C object CMakeFiles/Program.elf.dir/Hardware/dma.c.obj"
 	D:\gcc-arm-none-eabi\bin\arm-none-eabi-gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\Program.elf.dir\Hardware\dma.c.obj   -c D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\Hardware\dma.c
 
 CMakeFiles/Program.elf.dir/Hardware/dma.c.i: cmake_force
@@ -520,7 +572,7 @@ CMakeFiles/Program.elf.dir/Hardware/dma.c.s: cmake_force
 
 CMakeFiles/Program.elf.dir/Hardware/gpio.c.obj: CMakeFiles/Program.elf.dir/flags.make
 CMakeFiles/Program.elf.dir/Hardware/gpio.c.obj: ../Hardware/gpio.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_35) "Building C object CMakeFiles/Program.elf.dir/Hardware/gpio.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_39) "Building C object CMakeFiles/Program.elf.dir/Hardware/gpio.c.obj"
 	D:\gcc-arm-none-eabi\bin\arm-none-eabi-gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\Program.elf.dir\Hardware\gpio.c.obj   -c D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\Hardware\gpio.c
 
 CMakeFiles/Program.elf.dir/Hardware/gpio.c.i: cmake_force
@@ -533,7 +585,7 @@ CMakeFiles/Program.elf.dir/Hardware/gpio.c.s: cmake_force
 
 CMakeFiles/Program.elf.dir/Hardware/tim.c.obj: CMakeFiles/Program.elf.dir/flags.make
 CMakeFiles/Program.elf.dir/Hardware/tim.c.obj: ../Hardware/tim.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_36) "Building C object CMakeFiles/Program.elf.dir/Hardware/tim.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_40) "Building C object CMakeFiles/Program.elf.dir/Hardware/tim.c.obj"
 	D:\gcc-arm-none-eabi\bin\arm-none-eabi-gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\Program.elf.dir\Hardware\tim.c.obj   -c D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\Hardware\tim.c
 
 CMakeFiles/Program.elf.dir/Hardware/tim.c.i: cmake_force
@@ -546,7 +598,7 @@ CMakeFiles/Program.elf.dir/Hardware/tim.c.s: cmake_force
 
 CMakeFiles/Program.elf.dir/Hardware/usart.c.obj: CMakeFiles/Program.elf.dir/flags.make
 CMakeFiles/Program.elf.dir/Hardware/usart.c.obj: ../Hardware/usart.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_37) "Building C object CMakeFiles/Program.elf.dir/Hardware/usart.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_41) "Building C object CMakeFiles/Program.elf.dir/Hardware/usart.c.obj"
 	D:\gcc-arm-none-eabi\bin\arm-none-eabi-gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\Program.elf.dir\Hardware\usart.c.obj   -c D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\Hardware\usart.c
 
 CMakeFiles/Program.elf.dir/Hardware/usart.c.i: cmake_force
@@ -559,12 +611,12 @@ CMakeFiles/Program.elf.dir/Hardware/usart.c.s: cmake_force
 
 CMakeFiles/Program.elf.dir/System/startup_stm32f405xx.s.obj: CMakeFiles/Program.elf.dir/flags.make
 CMakeFiles/Program.elf.dir/System/startup_stm32f405xx.s.obj: ../System/startup_stm32f405xx.s
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_38) "Building ASM object CMakeFiles/Program.elf.dir/System/startup_stm32f405xx.s.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_42) "Building ASM object CMakeFiles/Program.elf.dir/System/startup_stm32f405xx.s.obj"
 	D:\gcc-arm-none-eabi\bin\arm-none-eabi-gcc.exe $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -o CMakeFiles\Program.elf.dir\System\startup_stm32f405xx.s.obj -c D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\System\startup_stm32f405xx.s
 
 CMakeFiles/Program.elf.dir/System/syscalls.c.obj: CMakeFiles/Program.elf.dir/flags.make
 CMakeFiles/Program.elf.dir/System/syscalls.c.obj: ../System/syscalls.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_39) "Building C object CMakeFiles/Program.elf.dir/System/syscalls.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_43) "Building C object CMakeFiles/Program.elf.dir/System/syscalls.c.obj"
 	D:\gcc-arm-none-eabi\bin\arm-none-eabi-gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\Program.elf.dir\System\syscalls.c.obj   -c D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\System\syscalls.c
 
 CMakeFiles/Program.elf.dir/System/syscalls.c.i: cmake_force
@@ -577,7 +629,7 @@ CMakeFiles/Program.elf.dir/System/syscalls.c.s: cmake_force
 
 CMakeFiles/Program.elf.dir/System/system.c.obj: CMakeFiles/Program.elf.dir/flags.make
 CMakeFiles/Program.elf.dir/System/system.c.obj: ../System/system.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_40) "Building C object CMakeFiles/Program.elf.dir/System/system.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_44) "Building C object CMakeFiles/Program.elf.dir/System/system.c.obj"
 	D:\gcc-arm-none-eabi\bin\arm-none-eabi-gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\Program.elf.dir\System\system.c.obj   -c D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\System\system.c
 
 CMakeFiles/Program.elf.dir/System/system.c.i: cmake_force
@@ -590,7 +642,7 @@ CMakeFiles/Program.elf.dir/System/system.c.s: cmake_force
 
 CMakeFiles/Program.elf.dir/System/system_stm32f4xx.c.obj: CMakeFiles/Program.elf.dir/flags.make
 CMakeFiles/Program.elf.dir/System/system_stm32f4xx.c.obj: ../System/system_stm32f4xx.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_41) "Building C object CMakeFiles/Program.elf.dir/System/system_stm32f4xx.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_45) "Building C object CMakeFiles/Program.elf.dir/System/system_stm32f4xx.c.obj"
 	D:\gcc-arm-none-eabi\bin\arm-none-eabi-gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\Program.elf.dir\System\system_stm32f4xx.c.obj   -c D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\System\system_stm32f4xx.c
 
 CMakeFiles/Program.elf.dir/System/system_stm32f4xx.c.i: cmake_force
@@ -603,7 +655,7 @@ CMakeFiles/Program.elf.dir/System/system_stm32f4xx.c.s: cmake_force
 
 CMakeFiles/Program.elf.dir/User/main.c.obj: CMakeFiles/Program.elf.dir/flags.make
 CMakeFiles/Program.elf.dir/User/main.c.obj: ../User/main.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_42) "Building C object CMakeFiles/Program.elf.dir/User/main.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_46) "Building C object CMakeFiles/Program.elf.dir/User/main.c.obj"
 	D:\gcc-arm-none-eabi\bin\arm-none-eabi-gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\Program.elf.dir\User\main.c.obj   -c D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\User\main.c
 
 CMakeFiles/Program.elf.dir/User/main.c.i: cmake_force
@@ -616,7 +668,7 @@ CMakeFiles/Program.elf.dir/User/main.c.s: cmake_force
 
 CMakeFiles/Program.elf.dir/User/stm32f4xx_it.c.obj: CMakeFiles/Program.elf.dir/flags.make
 CMakeFiles/Program.elf.dir/User/stm32f4xx_it.c.obj: ../User/stm32f4xx_it.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_43) "Building C object CMakeFiles/Program.elf.dir/User/stm32f4xx_it.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_47) "Building C object CMakeFiles/Program.elf.dir/User/stm32f4xx_it.c.obj"
 	D:\gcc-arm-none-eabi\bin\arm-none-eabi-gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\Program.elf.dir\User\stm32f4xx_it.c.obj   -c D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\User\stm32f4xx_it.c
 
 CMakeFiles/Program.elf.dir/User/stm32f4xx_it.c.i: cmake_force
@@ -626,6 +678,19 @@ CMakeFiles/Program.elf.dir/User/stm32f4xx_it.c.i: cmake_force
 CMakeFiles/Program.elf.dir/User/stm32f4xx_it.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Program.elf.dir/User/stm32f4xx_it.c.s"
 	D:\gcc-arm-none-eabi\bin\arm-none-eabi-gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\User\stm32f4xx_it.c -o CMakeFiles\Program.elf.dir\User\stm32f4xx_it.c.s
+
+CMakeFiles/Program.elf.dir/User/usertask.c.obj: CMakeFiles/Program.elf.dir/flags.make
+CMakeFiles/Program.elf.dir/User/usertask.c.obj: ../User/usertask.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_48) "Building C object CMakeFiles/Program.elf.dir/User/usertask.c.obj"
+	D:\gcc-arm-none-eabi\bin\arm-none-eabi-gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\Program.elf.dir\User\usertask.c.obj   -c D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\User\usertask.c
+
+CMakeFiles/Program.elf.dir/User/usertask.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Program.elf.dir/User/usertask.c.i"
+	D:\gcc-arm-none-eabi\bin\arm-none-eabi-gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\User\usertask.c > CMakeFiles\Program.elf.dir\User\usertask.c.i
+
+CMakeFiles/Program.elf.dir/User/usertask.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Program.elf.dir/User/usertask.c.s"
+	D:\gcc-arm-none-eabi\bin\arm-none-eabi-gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\User\usertask.c -o CMakeFiles\Program.elf.dir\User\usertask.c.s
 
 # Object files for target Program.elf
 Program_elf_OBJECTS = \
@@ -657,8 +722,12 @@ Program_elf_OBJECTS = \
 "CMakeFiles/Program.elf.dir/FreeRTOS/heap_4.c.obj" \
 "CMakeFiles/Program.elf.dir/FreeRTOS/list.c.obj" \
 "CMakeFiles/Program.elf.dir/FreeRTOS/port.c.obj" \
+"CMakeFiles/Program.elf.dir/FreeRTOS/queue.c.obj" \
 "CMakeFiles/Program.elf.dir/FreeRTOS/stream_buffer.c.obj" \
 "CMakeFiles/Program.elf.dir/FreeRTOS/tasks.c.obj" \
+"CMakeFiles/Program.elf.dir/FreeRTOS/timers.c.obj" \
+"CMakeFiles/Program.elf.dir/Functions/calculate.c.obj" \
+"CMakeFiles/Program.elf.dir/Functions/report.c.obj" \
 "CMakeFiles/Program.elf.dir/Hardware/adc.c.obj" \
 "CMakeFiles/Program.elf.dir/Hardware/can.c.obj" \
 "CMakeFiles/Program.elf.dir/Hardware/dac.c.obj" \
@@ -671,7 +740,8 @@ Program_elf_OBJECTS = \
 "CMakeFiles/Program.elf.dir/System/system.c.obj" \
 "CMakeFiles/Program.elf.dir/System/system_stm32f4xx.c.obj" \
 "CMakeFiles/Program.elf.dir/User/main.c.obj" \
-"CMakeFiles/Program.elf.dir/User/stm32f4xx_it.c.obj"
+"CMakeFiles/Program.elf.dir/User/stm32f4xx_it.c.obj" \
+"CMakeFiles/Program.elf.dir/User/usertask.c.obj"
 
 # External object files for target Program.elf
 Program_elf_EXTERNAL_OBJECTS =
@@ -704,8 +774,12 @@ Program.elf: CMakeFiles/Program.elf.dir/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4
 Program.elf: CMakeFiles/Program.elf.dir/FreeRTOS/heap_4.c.obj
 Program.elf: CMakeFiles/Program.elf.dir/FreeRTOS/list.c.obj
 Program.elf: CMakeFiles/Program.elf.dir/FreeRTOS/port.c.obj
+Program.elf: CMakeFiles/Program.elf.dir/FreeRTOS/queue.c.obj
 Program.elf: CMakeFiles/Program.elf.dir/FreeRTOS/stream_buffer.c.obj
 Program.elf: CMakeFiles/Program.elf.dir/FreeRTOS/tasks.c.obj
+Program.elf: CMakeFiles/Program.elf.dir/FreeRTOS/timers.c.obj
+Program.elf: CMakeFiles/Program.elf.dir/Functions/calculate.c.obj
+Program.elf: CMakeFiles/Program.elf.dir/Functions/report.c.obj
 Program.elf: CMakeFiles/Program.elf.dir/Hardware/adc.c.obj
 Program.elf: CMakeFiles/Program.elf.dir/Hardware/can.c.obj
 Program.elf: CMakeFiles/Program.elf.dir/Hardware/dac.c.obj
@@ -719,9 +793,10 @@ Program.elf: CMakeFiles/Program.elf.dir/System/system.c.obj
 Program.elf: CMakeFiles/Program.elf.dir/System/system_stm32f4xx.c.obj
 Program.elf: CMakeFiles/Program.elf.dir/User/main.c.obj
 Program.elf: CMakeFiles/Program.elf.dir/User/stm32f4xx_it.c.obj
+Program.elf: CMakeFiles/Program.elf.dir/User/usertask.c.obj
 Program.elf: CMakeFiles/Program.elf.dir/build.make
 Program.elf: CMakeFiles/Program.elf.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_44) "Linking C executable Program.elf"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_49) "Linking C executable Program.elf"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\Program.elf.dir\link.txt --verbose=$(VERBOSE)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Building D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/cmake-build-debug/Program.hex"
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Building D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/cmake-build-debug/Program.bin"

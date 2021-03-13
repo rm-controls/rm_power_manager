@@ -6,6 +6,7 @@
 #include "port.h"
 #include "system.h"
 #include "config.h"
+#include "usertask.h"
 
 /////////////// FreeRTOS ///////////////
 #include "FreeRTOS.h"
@@ -25,5 +26,9 @@
 #include "decrypt.h"
 #include "encrypt.h"
 #include "filter.h"
+
+/////////////// Functions ///////////////
+#include "calculate.h"
+#include "report.h"
 
 #endif /* __MAIN_H */

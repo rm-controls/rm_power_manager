@@ -4,8 +4,44 @@
 
 #include "system.h"
 #include "stm32f4xx_hal.h"
+#include "FreeRTOS.h"
+#include "task.h"
+
+static unsigned int Facus = 0;
+static unsigned int Facms = 0;
 
 TIM_HandleTypeDef htim4;
+
+void Delayus(unsigned int xus) {
+    unsigned int Ticks, Time_Old, Time_Now, Time_Count = 0;
+    unsigned int Reload = SysTick->LOAD;
+    Ticks = xus * Facus;
+    Time_Old = SysTick->VAL;
+    while (1) {
+        Time_Now = SysTick->VAL;
+        if (Time_Now != Time_Old) {
+            if (Time_Now < Time_Old)
+                Time_Count += Time_Old - Time_Now;
+            else
+                Time_Count += Reload - Time_Now + Time_Old;
+            Time_Old = Time_Now;
+            if (Time_Count >= Ticks)
+                break;
+        }
+    }
+}
+
+void Delayms(unsigned int xms) {
+    if (xTaskGetSchedulerState() == taskSCHEDULER_RUNNING) {
+        if (xms >= Facms) {
+            vTaskDelay(xms / Facms);
+        } else {
+            xms %= Facms;
+            Delayus(xms * 1000);
+        }
+    } else
+        Delayus(xms * 1000);
+}
 
 void HAL_MspInit(void) {
     __HAL_RCC_SYSCFG_CLK_ENABLE();
@@ -63,6 +99,14 @@ void SystemClock_Config(void) {
     RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
     RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
     while (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5));
+
+    Facus = HAL_RCC_GetSysClockFreq() / 1000000;
+    unsigned int Reload = HAL_RCC_GetSysClockFreq() / 1000000;
+    Reload *= 1000000 / configTICK_RATE_HZ;
+    Facms = 1000 / configTICK_RATE_HZ;
+    SysTick->CTRL |= SysTick_CTRL_TICKINT_Msk;
+    SysTick->LOAD = Reload;
+    SysTick->CTRL |= SysTick_CTRL_ENABLE_Msk;
 }
 
 unsigned short FloatToInt16(float data0) {

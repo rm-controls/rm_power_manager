@@ -19,8 +19,9 @@ typedef struct {
     float I_Sum_Max;
 } PID_Structure;
 
-extern PID_Structure PID_Capacitor;
+extern PID_Structure PID_Capacitor_P, PID_Capacitor_C;
 void PID_Get_Result(PID_Structure *PID_Handler);
-void PID_Value_Config(void);
+void PID_ValueConfig(void);
+void PID_CalculateTask(void *pvParameters);
 
 #endif //_DEVICE_PID_H_

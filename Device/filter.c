@@ -5,25 +5,37 @@
 #include "filter.h"
 #include "string.h"
 
-FirstOrder_Filter_t I_CapacitorF, I_ChassisF, V_CapacitorF, V_BaterryF, V_ChassisF, P_CapacitorF;
+FirstOrder_Filter_t I_CapacitorF, I_ChassisF, V_CapacitorF, V_BaterryF, V_ChassisF, P_CapacitorF, P_ChassisF;
 
-void FirstOrder_Filter_Config(void) {
-    memset((void *) &I_CapacitorF, 0x00, sizeof(I_CapacitorF));
-    memset((void *) &I_ChassisF, 0x00, sizeof(I_ChassisF));
-    memset((void *) &V_CapacitorF, 0x00, sizeof(V_CapacitorF));
-    memset((void *) &V_BaterryF, 0x00, sizeof(V_BaterryF));
-    memset((void *) &V_ChassisF, 0x00, sizeof(V_ChassisF));
-    memset((void *) &P_CapacitorF, 0x00, sizeof(P_CapacitorF));
+void Filter_Config(void) {
+    memset((void *) &I_CapacitorF, 0x00, sizeof(FirstOrder_Filter_t));
+    memset((void *) &I_ChassisF, 0x00, sizeof(FirstOrder_Filter_t));
+    memset((void *) &V_CapacitorF, 0x00, sizeof(FirstOrder_Filter_t));
+    memset((void *) &V_BaterryF, 0x00, sizeof(FirstOrder_Filter_t));
+    memset((void *) &V_ChassisF, 0x00, sizeof(FirstOrder_Filter_t));
+    memset((void *) &P_CapacitorF, 0x00, sizeof(FirstOrder_Filter_t));
+    memset((void *) &P_ChassisF, 0x00, sizeof(FirstOrder_Filter_t));
+
     I_CapacitorF.CufOff_Freq = 50.0f;
     I_ChassisF.CufOff_Freq = 50.0f;
     V_CapacitorF.CufOff_Freq = 50.f;
     V_BaterryF.CufOff_Freq = 50.0f;
     V_ChassisF.CufOff_Freq = 50.0f;
     P_CapacitorF.CufOff_Freq = 50.0f;
+    P_ChassisF.CufOff_Freq = 50.0f;
+
+    I_CapacitorF.Coeffecient = 6.283185f * I_CapacitorF.CufOff_Freq * 0.001f;
+    I_ChassisF.Coeffecient = 6.283185f * I_ChassisF.CufOff_Freq * 0.001f;
+    V_CapacitorF.Coeffecient = 6.283185f * V_CapacitorF.CufOff_Freq * 0.001f;
+    V_BaterryF.Coeffecient = 6.283185f * V_BaterryF.CufOff_Freq * 0.001f;
+    V_ChassisF.Coeffecient = 6.283185f * V_ChassisF.CufOff_Freq * 0.001f;
+    P_CapacitorF.Coeffecient = 6.283185f * P_CapacitorF.CufOff_Freq * 0.001f;
+    P_ChassisF.Coeffecient = 6.283185f * P_ChassisF.CufOff_Freq * 0.001f;
 }
 
-void FirstOrder_Filter_Calculate(FirstOrder_Filter_t *param) {
-    float alpha = 6.283185f / (6.283185f + param->CufOff_Freq);
+float FirstOrder_Filter_Calculate(FirstOrder_Filter_t *param) {
+    param->Current_Result =
+        param->Coeffecient * param->Current_Value + (1.0f - param->Coeffecient) * param->Last_Result;
     param->Last_Result = param->Current_Result;
-    param->Current_Result = (1.0f - alpha) * param->Current_Value + alpha * param->Last_Result;
+    return param->Current_Result;
 }

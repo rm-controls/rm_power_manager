@@ -29,6 +29,7 @@ set(CMAKE_ASM_TARGET_INCLUDE_PATH
   "../Hardware"
   "../Device"
   "../FreeRTOS"
+  "../Functions"
   )
 set(CMAKE_DEPENDS_CHECK_C
   "D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/Device/decrypt.c" "D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/cmake-build-debug/CMakeFiles/Program.elf.dir/Device/decrypt.c.obj"
@@ -59,8 +60,12 @@ set(CMAKE_DEPENDS_CHECK_C
   "D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/FreeRTOS/heap_4.c" "D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/cmake-build-debug/CMakeFiles/Program.elf.dir/FreeRTOS/heap_4.c.obj"
   "D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/FreeRTOS/list.c" "D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/cmake-build-debug/CMakeFiles/Program.elf.dir/FreeRTOS/list.c.obj"
   "D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/FreeRTOS/port.c" "D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/cmake-build-debug/CMakeFiles/Program.elf.dir/FreeRTOS/port.c.obj"
+  "D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/FreeRTOS/queue.c" "D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/cmake-build-debug/CMakeFiles/Program.elf.dir/FreeRTOS/queue.c.obj"
   "D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/FreeRTOS/stream_buffer.c" "D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/cmake-build-debug/CMakeFiles/Program.elf.dir/FreeRTOS/stream_buffer.c.obj"
   "D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/FreeRTOS/tasks.c" "D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/cmake-build-debug/CMakeFiles/Program.elf.dir/FreeRTOS/tasks.c.obj"
+  "D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/FreeRTOS/timers.c" "D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/cmake-build-debug/CMakeFiles/Program.elf.dir/FreeRTOS/timers.c.obj"
+  "D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/Functions/calculate.c" "D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/cmake-build-debug/CMakeFiles/Program.elf.dir/Functions/calculate.c.obj"
+  "D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/Functions/report.c" "D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/cmake-build-debug/CMakeFiles/Program.elf.dir/Functions/report.c.obj"
   "D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/Hardware/adc.c" "D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/cmake-build-debug/CMakeFiles/Program.elf.dir/Hardware/adc.c.obj"
   "D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/Hardware/can.c" "D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/cmake-build-debug/CMakeFiles/Program.elf.dir/Hardware/can.c.obj"
   "D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/Hardware/dac.c" "D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/cmake-build-debug/CMakeFiles/Program.elf.dir/Hardware/dac.c.obj"
@@ -73,6 +78,7 @@ set(CMAKE_DEPENDS_CHECK_C
   "D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/System/system_stm32f4xx.c" "D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/cmake-build-debug/CMakeFiles/Program.elf.dir/System/system_stm32f4xx.c.obj"
   "D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/User/main.c" "D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/cmake-build-debug/CMakeFiles/Program.elf.dir/User/main.c.obj"
   "D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/User/stm32f4xx_it.c" "D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/cmake-build-debug/CMakeFiles/Program.elf.dir/User/stm32f4xx_it.c.obj"
+  "D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/User/usertask.c" "D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/cmake-build-debug/CMakeFiles/Program.elf.dir/User/usertask.c.obj"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 
@@ -96,6 +102,7 @@ set(CMAKE_C_TARGET_INCLUDE_PATH
   "../Hardware"
   "../Device"
   "../FreeRTOS"
+  "../Functions"
   )
 
 # Targets to which this target links.
