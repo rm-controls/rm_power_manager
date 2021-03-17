@@ -16,47 +16,14 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="squash! Change PID parameter using upper computer">
-      <change afterPath="$PROJECT_DIR$/FreeRTOS/mpu_prototypes.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FreeRTOS/mpu_wrappers.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FreeRTOS/queue.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FreeRTOS/queue.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FreeRTOS/timers.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FreeRTOS/timers.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Functions/calculate.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Functions/calculate.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Functions/report.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Functions/report.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/User/usertask.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/User/usertask.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="repair one order low pass filter bugs, it now can be used.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Device/decrypt.c" beforeDir="false" afterPath="$PROJECT_DIR$/Device/decrypt.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Device/filter.c" beforeDir="false" afterPath="$PROJECT_DIR$/Device/filter.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Device/filter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Device/filter.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Device/pid.c" beforeDir="false" afterPath="$PROJECT_DIR$/Device/pid.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Device/pid.h" beforeDir="false" afterPath="$PROJECT_DIR$/Device/pid.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FreeRTOS/FreeRTOSConfig.h" beforeDir="false" afterPath="$PROJECT_DIR$/FreeRTOS/FreeRTOSConfig.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hardware/adc.c" beforeDir="false" afterPath="$PROJECT_DIR$/Hardware/adc.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hardware/tim.c" beforeDir="false" afterPath="$PROJECT_DIR$/Hardware/tim.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/System/system.c" beforeDir="false" afterPath="$PROJECT_DIR$/System/system.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/System/system.h" beforeDir="false" afterPath="$PROJECT_DIR$/System/system.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Functions/report.c" beforeDir="false" afterPath="$PROJECT_DIR$/Functions/report.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/User/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/User/main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/main.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/main.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/port.h" beforeDir="false" afterPath="$PROJECT_DIR$/User/port.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/stm32f4xx_it.c" beforeDir="false" afterPath="$PROJECT_DIR$/User/stm32f4xx_it.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Program.elf.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Program.elf.dir/DependInfo.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Program.elf.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Program.elf.dir/build.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Program.elf.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Program.elf.dir/cmake_clean.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Program.elf.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Program.elf.dir/depend.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Program.elf.dir/flags.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Program.elf.dir/flags.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Program.elf.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Program.elf.dir/link.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Program.elf.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Program.elf.dir/progress.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progress.marks" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progress.marks" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Program.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Program.cbp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/usertask.c" beforeDir="false" afterPath="$PROJECT_DIR$/User/usertask.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,11 +78,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="OCD Program" type="com.jetbrains.cidr.embedded.openocd.conf.type" factoryName="com.jetbrains.cidr.embedded.openocd.conf.factory" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Program" TARGET_NAME="Program.elf" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Program" RUN_TARGET_NAME="Program.elf">
       <openocd gdb-port="3333" telnet-port="4444" board-config="D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\stm32f4x.cfg" reset-type="INIT" download-type="ALWAYS" />
       <method v="2">
@@ -162,7 +124,10 @@
       <workItem from="1615295303115" duration="5069000" />
       <workItem from="1615382870914" duration="7772000" />
       <workItem from="1615480268074" duration="3000" />
-      <workItem from="1615630667690" duration="5206000" />
+      <workItem from="1615630667690" duration="14001000" />
+      <workItem from="1615733104676" duration="459000" />
+      <workItem from="1615734149469" duration="2891000" />
+      <workItem from="1615808089766" duration="181000" />
     </task>
     <task id="LOCAL-00001" summary="Rewrite Functions">
       <created>1611128425695</created>
@@ -206,7 +171,14 @@
       <option name="project" value="LOCAL" />
       <updated>1611226491425</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="repair one order low pass filter bugs, it now can be used.">
+      <created>1615642842048</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1615642842048</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -295,7 +267,8 @@
     <MESSAGE value="Initialize low-pass filter parameters, but debug RCC still aren't fixed. second problem: when UART received, all global variable were change to zero. I guess the HAL_UART_IRQHandler have problems." />
     <MESSAGE value="HAL Library is fine. When Decoding, the for loop &quot;for (Temp_Var = 0; Temp_Var &lt; Receive_Byte; Temp_Var++)&quot; using Receive_Byte as circulate condition, and when receving end of package, the index is 255, which out of range. Now decode codes are debugged." />
     <MESSAGE value="Change PID parameter using upper computer" />
-    <option name="LAST_COMMIT_MESSAGE" value="Change PID parameter using upper computer" />
+    <MESSAGE value="repair one order low pass filter bugs, it now can be used." />
+    <option name="LAST_COMMIT_MESSAGE" value="repair one order low pass filter bugs, it now can be used." />
   </component>
   <component name="WindowStateProjectService">
     <state x="-1334" y="198" key="#Inspections" timestamp="1611123674518">
@@ -322,58 +295,58 @@
     <state x="-1180" y="286" key="FileChooserDialogImpl/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1611123341971" />
     <state x="592" y="227" key="FileChooserDialogImpl/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1611124698264" />
     <state x="592" y="227" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1612407217316" />
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1615642740408">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1615737594705">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1615642740408" />
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1615737594705" />
     <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1613982261582" />
-    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1615642740408">
+    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1615737594705">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1615642740408" />
+    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1615737594705" />
     <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1613982261582" />
-    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1615642740408">
+    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1615737594705">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1615642740408" />
+    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1615737594705" />
     <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1613982261582" />
-    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1615642740408">
+    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1615737594705">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1615642740408" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1615737594705" />
     <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1613982261582" />
-    <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1615640540824">
+    <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1615699379760">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1615640540824" />
-    <state width="1493" height="261" key="GridCell.Tab.1.center" timestamp="1615640540824">
+    <state width="1493" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1615699379760" />
+    <state width="1493" height="261" key="GridCell.Tab.1.center" timestamp="1615699379760">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.center/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1615640540824" />
-    <state width="1493" height="261" key="GridCell.Tab.1.left" timestamp="1615640540824">
+    <state width="1493" height="261" key="GridCell.Tab.1.center/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1615699379760" />
+    <state width="1493" height="261" key="GridCell.Tab.1.left" timestamp="1615699379760">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.left/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1615640540824" />
-    <state width="1493" height="261" key="GridCell.Tab.1.right" timestamp="1615640540824">
+    <state width="1493" height="261" key="GridCell.Tab.1.left/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1615699379760" />
+    <state width="1493" height="261" key="GridCell.Tab.1.right" timestamp="1615699379760">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.right/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1615640540824" />
-    <state width="1493" height="261" key="GridCell.Tab.2.bottom" timestamp="1615640540824">
+    <state width="1493" height="261" key="GridCell.Tab.1.right/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1615699379760" />
+    <state width="1493" height="261" key="GridCell.Tab.2.bottom" timestamp="1615699379760">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.2.bottom/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1615640540824" />
-    <state width="1493" height="261" key="GridCell.Tab.2.center" timestamp="1615640540824">
+    <state width="1493" height="261" key="GridCell.Tab.2.bottom/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1615699379760" />
+    <state width="1493" height="261" key="GridCell.Tab.2.center" timestamp="1615699379760">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.2.center/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1615640540824" />
-    <state width="1493" height="261" key="GridCell.Tab.2.left" timestamp="1615640540824">
+    <state width="1493" height="261" key="GridCell.Tab.2.center/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1615699379760" />
+    <state width="1493" height="261" key="GridCell.Tab.2.left" timestamp="1615699379760">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.2.left/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1615640540824" />
-    <state width="1493" height="261" key="GridCell.Tab.2.right" timestamp="1615640540824">
+    <state width="1493" height="261" key="GridCell.Tab.2.left/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1615699379760" />
+    <state width="1493" height="261" key="GridCell.Tab.2.right" timestamp="1615699379760">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.2.right/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1615640540824" />
+    <state width="1493" height="261" key="GridCell.Tab.2.right/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1615699379760" />
     <state x="147" y="64" key="MergeDialog" timestamp="1611226674838">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -390,5 +363,16 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="545" y="196" key="refactoring.ChangeSignatureDialog/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1615642116226" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/Hardware/can.c</url>
+          <line>16</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

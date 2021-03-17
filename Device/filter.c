@@ -16,13 +16,13 @@ void Filter_Config(void) {
     memset((void *) &P_CapacitorF, 0x00, sizeof(FirstOrder_Filter_t));
     memset((void *) &P_ChassisF, 0x00, sizeof(FirstOrder_Filter_t));
 
-    I_CapacitorF.CufOff_Freq = 50.0f;
-    I_ChassisF.CufOff_Freq = 50.0f;
-    V_CapacitorF.CufOff_Freq = 50.f;
-    V_BaterryF.CufOff_Freq = 50.0f;
-    V_ChassisF.CufOff_Freq = 50.0f;
-    P_CapacitorF.CufOff_Freq = 50.0f;
-    P_ChassisF.CufOff_Freq = 50.0f;
+    I_CapacitorF.CufOff_Freq = 20.0f;
+    I_ChassisF.CufOff_Freq = 20.0f;
+    V_CapacitorF.CufOff_Freq = 20.f;
+    V_BaterryF.CufOff_Freq = 20.0f;
+    V_ChassisF.CufOff_Freq = 20.0f;
+    P_CapacitorF.CufOff_Freq = 20.0f;
+    P_ChassisF.CufOff_Freq = 20.0f;
 
     I_CapacitorF.Coeffecient = 6.283185f * I_CapacitorF.CufOff_Freq * 0.001f;
     I_ChassisF.Coeffecient = 6.283185f * I_ChassisF.CufOff_Freq * 0.001f;

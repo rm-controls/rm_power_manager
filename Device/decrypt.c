@@ -14,11 +14,11 @@ void Receive_CallBack(unsigned char PID, unsigned char Data[8]) {
         Parameters[1] = Int16ToFloat((Data[2] << 8) | Data[3]);
         Parameters[2] = Int16ToFloat((Data[4] << 8) | Data[5]);
         Parameters[3] = Int16ToFloat((Data[6] << 8) | Data[7]);
-
-        PID_Capacitor_C.I_Sum_Max = Parameters[0];
-        PID_Capacitor_C.Kp = Parameters[1];
-        PID_Capacitor_C.Ki = Parameters[2];
-        PID_Capacitor_C.Kd = Parameters[3];
+//
+//        PID_Capacitor_P.I_Sum_Max = Parameters[0];
+//        PID_Capacitor_P.Kp = Parameters[1];
+//        PID_Capacitor_P.Ki = Parameters[2];
+//        PID_Capacitor_P.Kd = Parameters[3];
     }
 }
 

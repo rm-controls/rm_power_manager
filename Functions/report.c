@@ -19,11 +19,10 @@ void Report_Task(void *pvParameters) {
         DTP_Package_t pkg = {0};
         float ADC_Resultf[4];
         pkg.PID = 0;
-        ADC_Resultf[0] = PID_Capacitor_C.User;
-        ADC_Resultf[1] = I_CapacitorF.Current_Value;
-        ADC_Resultf[2] = I_CapacitorF.Current_Result;
-//        ADC_Resultf[2] = V_Capacitor;
-        ADC_Resultf[3] = P_Capacitor;
+        ADC_Resultf[0] = I_Capacitor;
+        ADC_Resultf[1] = V_Capacitor;
+        ADC_Resultf[2] = P_Capacitor;
+        ADC_Resultf[3] = I_Chassis;
         for (unsigned char lcounter = 0; lcounter < 4; lcounter++) {
             pkg.Data[lcounter * 2] = FloatToInt16(ADC_Resultf[lcounter]) >> 8UL;
             pkg.Data[lcounter * 2 + 1] = FloatToInt16(ADC_Resultf[lcounter]) & 0x00ffUL;
@@ -38,6 +37,6 @@ void Report_Task(void *pvParameters) {
             pkg.Data[lcounter * 2 + 1] = FloatToInt16(ADC_Resultf[lcounter]) & 0x00ffUL;
         }
         DTP_Transmit(&pkg);
-        Delayms(20);
+        Delayms(40);
     }
 }
