@@ -8,7 +8,9 @@
     <select />
   </component>
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
-    <generated />
+    <generated>
+      <config projectName="Program" targetName="Program.elf" />
+    </generated>
   </component>
   <component name="CMakeSettings" AUTO_RELOAD="true">
     <configurations>
@@ -17,13 +19,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="repair one order low pass filter bugs, it now can be used.">
+      <change afterPath="$PROJECT_DIR$/devices/decrypt.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/devices/decrypt.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/devices/encrypt.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/devices/encrypt.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/devices/filter.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/devices/filter.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/devices/pid.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/devices/pid.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.cproject" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Device/decrypt.c" beforeDir="false" afterPath="$PROJECT_DIR$/Device/decrypt.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Device/filter.c" beforeDir="false" afterPath="$PROJECT_DIR$/Device/filter.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Device/pid.c" beforeDir="false" afterPath="$PROJECT_DIR$/Device/pid.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Functions/report.c" beforeDir="false" afterPath="$PROJECT_DIR$/Functions/report.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/User/main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/usertask.c" beforeDir="false" afterPath="$PROJECT_DIR$/User/usertask.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mxproject" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Device/decrypt.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Device/decrypt.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Device/encrypt.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Device/encrypt.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Device/filter.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Device/filter.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Device/pid.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Device/pid.h" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,6 +94,16 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="OCD Program" type="com.jetbrains.cidr.embedded.openocd.conf.type" factoryName="com.jetbrains.cidr.embedded.openocd.conf.factory" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Program" TARGET_NAME="Program.elf" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Program" RUN_TARGET_NAME="Program.elf">
       <openocd gdb-port="3333" telnet-port="4444" board-config="D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\stm32f4x.cfg" reset-type="INIT" download-type="ALWAYS" />
       <method v="2">
@@ -128,6 +154,7 @@
       <workItem from="1615733104676" duration="459000" />
       <workItem from="1615734149469" duration="2891000" />
       <workItem from="1615808089766" duration="181000" />
+      <workItem from="1615996233591" duration="79000" />
     </task>
     <task id="LOCAL-00001" summary="Rewrite Functions">
       <created>1611128425695</created>
@@ -363,16 +390,5 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="545" y="196" key="refactoring.ChangeSignatureDialog/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1615642116226" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/Hardware/can.c</url>
-          <line>16</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
