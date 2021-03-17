@@ -60,4 +60,4 @@ dkms.conf
 *.iml
 out
 gen
-
+cmake-build-debug
