@@ -1,5 +1,0 @@
-D:\CLion\bin\cmake\win\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program
--- Minimal optimization, debug info included
--- Configuring done
--- Generating done
--- Build files have been written to: D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/cmake-build-debug

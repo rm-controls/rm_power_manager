@@ -1,3 +1,0 @@
-D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/cmake-build-debug/CMakeFiles/edit_cache.dir
-D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/cmake-build-debug/CMakeFiles/Program.elf.dir
-D:/Desktop/Files/RoboMaser/Circut/Power/PowerV2_Conservative/Program/cmake-build-debug/CMakeFiles/rebuild_cache.dir
