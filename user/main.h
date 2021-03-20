@@ -2,7 +2,7 @@
 #define __MAIN_H
 
 /////////////// System ///////////////
-#include "stm32f4xx_hal.h"
+#include "stm32h7xx_hal.h"
 #include "port.h"
 #include "system.h"
 #include "config.h"
