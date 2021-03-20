@@ -18,46 +18,21 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="Change directories name and modify CMakeLists.txt">
-      <change afterPath="$PROJECT_DIR$/freertos/FreeRTOS.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/freertos/FreeRTOSConfig.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/freertos/StackMacros.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/freertos/atomic.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/freertos/deprecated_definitions.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/freertos/event_groups.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/freertos/event_groups.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/freertos/heap_4.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/freertos/list.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/freertos/list.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/freertos/message_buffer.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/freertos/mpu_prototypes.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/freertos/mpu_wrappers.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/freertos/port.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/freertos/portable.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/freertos/portmacro.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/freertos/projdefs.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/freertos/queue.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/freertos/queue.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/freertos/semphr.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/freertos/stack_macros.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/freertos/stream_buffer.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/freertos/stream_buffer.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/freertos/task.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/freertos/tasks.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/freertos/timers.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/freertos/timers.h" afterDir="false" />
+    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="Porting FreeRTOS code for stm32h7">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/devices/encrypt.c" beforeDir="false" afterPath="$PROJECT_DIR$/devices/encrypt.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/devices/pid.c" beforeDir="false" afterPath="$PROJECT_DIR$/devices/pid.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions/calculate.c" beforeDir="false" afterPath="$PROJECT_DIR$/functions/calculate.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/stm32h7xx_hal_msp.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/stm32h7xx_hal_timebase_tim.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/system.c" beforeDir="false" afterPath="$PROJECT_DIR$/system/system.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/system.h" beforeDir="false" afterPath="$PROJECT_DIR$/system/system.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hardware/adc.c" beforeDir="false" afterPath="$PROJECT_DIR$/hardware/adc.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hardware/adc.h" beforeDir="false" afterPath="$PROJECT_DIR$/hardware/adc.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hardware/crc.c" beforeDir="false" afterPath="$PROJECT_DIR$/hardware/crc.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hardware/crc.h" beforeDir="false" afterPath="$PROJECT_DIR$/hardware/crc.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hardware/dac.c" beforeDir="false" afterPath="$PROJECT_DIR$/hardware/dac.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hardware/dac.h" beforeDir="false" afterPath="$PROJECT_DIR$/hardware/dac.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hardware/dma.c" beforeDir="false" afterPath="$PROJECT_DIR$/hardware/dma.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hardware/dma.h" beforeDir="false" afterPath="$PROJECT_DIR$/hardware/dma.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hardware/gpio.c" beforeDir="false" afterPath="$PROJECT_DIR$/hardware/gpio.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hardware/gpio.h" beforeDir="false" afterPath="$PROJECT_DIR$/hardware/gpio.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hardware/usart.c" beforeDir="false" afterPath="$PROJECT_DIR$/hardware/usart.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hardware/usart.h" beforeDir="false" afterPath="$PROJECT_DIR$/hardware/usart.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/user/main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/main.h" beforeDir="false" afterPath="$PROJECT_DIR$/user/main.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/main_tmp.c" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,9 +87,9 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
@@ -177,7 +152,8 @@
       <workItem from="1616202270518" duration="2215000" />
       <workItem from="1616210563140" duration="161000" />
       <workItem from="1616211209054" duration="327000" />
-      <workItem from="1616211592773" duration="415000" />
+      <workItem from="1616211592773" duration="515000" />
+      <workItem from="1616212302733" duration="583000" />
     </task>
     <task id="LOCAL-00001" summary="Rewrite Functions">
       <created>1611128425695</created>
@@ -235,7 +211,14 @@
       <option name="project" value="LOCAL" />
       <updated>1615996374598</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Porting FreeRTOS code for stm32h7">
+      <created>1616212049850</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1616212049850</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -326,7 +309,8 @@
     <MESSAGE value="Change PID parameter using upper computer" />
     <MESSAGE value="repair one order low pass filter bugs, it now can be used." />
     <MESSAGE value="Change directories name and modify CMakeLists.txt" />
-    <option name="LAST_COMMIT_MESSAGE" value="Change directories name and modify CMakeLists.txt" />
+    <MESSAGE value="Porting FreeRTOS code for stm32h7" />
+    <option name="LAST_COMMIT_MESSAGE" value="Porting FreeRTOS code for stm32h7" />
   </component>
   <component name="WindowStateProjectService">
     <state x="-1334" y="198" key="#Inspections" timestamp="1611123674518">
@@ -413,10 +397,10 @@
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
     <state x="-1459" y="164" key="SettingsEditor/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1611123695258" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1615996389865">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1616212065259">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1615996389865" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1616212065259" />
     <state x="467" y="144" width="602" height="536" key="find.popup" timestamp="1611144187183">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

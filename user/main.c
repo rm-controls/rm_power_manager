@@ -19,13 +19,13 @@ void LED_Shine(void *pvParameters) {
 
 void InitTask(void *pvParameters) {
     taskENTER_CRITICAL();
+    CRC_Config();
     GPIO_Config();
     DMA_Config();
     ADC_Config();
-    CAN_Config();
     DAC_Config();
-    UART_Config();
-    TIM_Config();
+    UART1_Config();
+    UART2_Config();
     Filter_Config();
     PID_ValueConfig();
     Sensor_Config();
