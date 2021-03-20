@@ -14,12 +14,11 @@
 
 /////////////// Hardware ///////////////
 #include "adc.h"
-#include "can.h"
 #include "dac.h"
 #include "dma.h"
 #include "usart.h"
 #include "gpio.h"
-#include "tim.h"
+#include "crc.h"
 
 /////////////// Device ///////////////
 #include "pid.h"

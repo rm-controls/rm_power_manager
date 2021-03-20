@@ -1,6 +1,6 @@
 #include "encrypt.h"
 #include "string.h"
-#include "stm32f4xx_hal.h"
+#include "stm32h7xx_hal.h"
 #include "usart.h"
 
 void DTP_Transmit(DTP_Package_t *dtp_package) {

@@ -47,7 +47,7 @@ include_directories(drivers/STM32H7xx_HAL_Driver/Inc drivers/STM32H7xx_HAL_Drive
         drivers/CMSIS/Device/ST/STM32H7xx/Include drivers/CMSIS/Include user system hardware devices
         freertos functions)
 
-add_definitions(-DUSE_HAL_DRIVER -DSTM32F405xx)
+add_definitions(-DUSE_HAL_DRIVER -DSTM32H750xx)
 
 file(GLOB_RECURSE SOURCES "system/*.c" "drivers/*.*" "user/*.c" "system/*.s" "hardware/*.c" "devices/*.c"
         "freertos/*.c" "functions/*.c")

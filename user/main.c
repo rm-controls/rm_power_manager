@@ -37,6 +37,9 @@ void InitTask(void *pvParameters) {
     vTaskDelete(NULL);
 }
 int main(void) {
+    MPU_Config();
+    SCB_EnableICache();
+    SCB_EnableDCache();
     HAL_Init();
     SystemClock_Config();
     xTaskCreate(InitTask, "InitTask", 512, NULL, 1, &InitTask_Handler);
