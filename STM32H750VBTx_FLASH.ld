@@ -62,7 +62,8 @@ _Min_Stack_Size = 0x1000; /* required amount of stack */
 MEMORY
 {
 DTCMRAM (xrw)      : ORIGIN = 0x20000000, LENGTH = 128K
-RAM_D1 (xrw)      : ORIGIN = 0x24000000, LENGTH = 512K
+RAM_D1 (xrw)      : ORIGIN = 0x24000000, LENGTH = 508K
+ADC_RAM(xrw)       :ORIGIN = 0x2407F000, LENGTH = 4K
 RAM_D2 (xrw)      : ORIGIN = 0x30000000, LENGTH = 288K
 RAM_D3 (xrw)      : ORIGIN = 0x38000000, LENGTH = 64K
 ITCMRAM (xrw)      : ORIGIN = 0x00000000, LENGTH = 64K
@@ -177,7 +178,14 @@ SECTIONS
     . = ALIGN(8);
   } >DTCMRAM
 
-  
+  .adc_ram :
+  {
+      . = ALIGN(4);
+      *(.dcmi_ram)
+      *(.dcmi_ram.*)
+      . = ALIGN(4);
+      __ram1_free__ = .;
+  } > ADC_RAM
 
   /* Remove information from the standard libraries */
   /DISCARD/ :

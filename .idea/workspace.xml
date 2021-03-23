@@ -18,17 +18,14 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="Rearrange hardware codes to adapt old(stm32f4xx) codes">
-      <change afterPath="$PROJECT_DIR$/board.cfg" afterDir="false" />
+    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="Let LED shine at 1hz">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions/calculate.c" beforeDir="false" afterPath="$PROJECT_DIR$/functions/calculate.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/STM32H750VBTx_FLASH.ld" beforeDir="false" afterPath="$PROJECT_DIR$/STM32H750VBTx_FLASH.ld" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hardware/adc.c" beforeDir="false" afterPath="$PROJECT_DIR$/hardware/adc.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hardware/gpio.c" beforeDir="false" afterPath="$PROJECT_DIR$/hardware/gpio.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stm32h7x.cfg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/system.c" beforeDir="false" afterPath="$PROJECT_DIR$/system/system.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/system.h" beforeDir="false" afterPath="$PROJECT_DIR$/system/system.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/user/main.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user/port.h" beforeDir="false" afterPath="$PROJECT_DIR$/user/port.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/stm32h7xx_it.c" beforeDir="false" afterPath="$PROJECT_DIR$/user/stm32h7xx_it.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/stm32h7xx_it.h" beforeDir="false" afterPath="$PROJECT_DIR$/user/stm32h7xx_it.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,11 +80,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="OCD Program" type="com.jetbrains.cidr.embedded.openocd.conf.type" factoryName="com.jetbrains.cidr.embedded.openocd.conf.factory" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Program" TARGET_NAME="Program.elf" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Program" RUN_TARGET_NAME="Program.elf">
       <openocd gdb-port="3333" telnet-port="4444" board-config="D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\board.cfg" reset-type="INIT" download-type="ALWAYS" />
       <method v="2">
@@ -148,7 +140,11 @@
       <workItem from="1616325817288" duration="1088000" />
       <workItem from="1616341525321" duration="2489000" />
       <workItem from="1616506487139" duration="1653000" />
-      <workItem from="1616508178105" duration="175000" />
+      <workItem from="1616508178105" duration="1314000" />
+      <workItem from="1616509687152" duration="41000" />
+      <workItem from="1616509752129" duration="74000" />
+      <workItem from="1616509839840" duration="115000" />
+      <workItem from="1616509998797" duration="2423000" />
     </task>
     <task id="LOCAL-00001" summary="Rewrite Functions">
       <created>1611128425695</created>
@@ -220,7 +216,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616212924561</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Let LED shine at 1hz">
+      <created>1616508464827</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1616508464827</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -313,7 +316,8 @@
     <MESSAGE value="Change directories name and modify CMakeLists.txt" />
     <MESSAGE value="Porting FreeRTOS code for stm32h7" />
     <MESSAGE value="Rearrange hardware codes to adapt old(stm32f4xx) codes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Rearrange hardware codes to adapt old(stm32f4xx) codes" />
+    <MESSAGE value="Let LED shine at 1hz" />
+    <option name="LAST_COMMIT_MESSAGE" value="Let LED shine at 1hz" />
   </component>
   <component name="WindowStateProjectService">
     <state x="-1334" y="198" key="#Inspections" timestamp="1611123674518">
@@ -330,6 +334,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="369" y="0" key="CommitChangelistDialog2/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1611226609409" />
+    <state width="452" height="466" key="DebuggerActiveHint" timestamp="1616511677232">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="452" height="466" key="DebuggerActiveHint/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1616511677232" />
     <state x="93" y="93" width="1350" height="638" key="DiffContextDialog" timestamp="1611226655854">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -340,58 +348,58 @@
     <state x="-1180" y="286" key="FileChooserDialogImpl/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1611123341971" />
     <state x="592" y="227" key="FileChooserDialogImpl/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1616508025762" />
     <state x="592" y="227" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1612407217316" />
-    <state width="1493" height="261" key="GridCell.Tab.0.bottom" timestamp="1616508286794">
+    <state width="1493" height="261" key="GridCell.Tab.0.bottom" timestamp="1616511829552">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1616508286794" />
+    <state width="1493" height="261" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1616511829552" />
     <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1613982261582" />
-    <state width="1493" height="261" key="GridCell.Tab.0.center" timestamp="1616508286794">
+    <state width="1493" height="261" key="GridCell.Tab.0.center" timestamp="1616511829552">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1616508286794" />
+    <state width="1493" height="261" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1616511829552" />
     <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1613982261582" />
-    <state width="1493" height="261" key="GridCell.Tab.0.left" timestamp="1616508286794">
+    <state width="1493" height="261" key="GridCell.Tab.0.left" timestamp="1616511829552">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1616508286794" />
+    <state width="1493" height="261" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1616511829552" />
     <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1613982261582" />
-    <state width="1493" height="261" key="GridCell.Tab.0.right" timestamp="1616508286794">
+    <state width="1493" height="261" key="GridCell.Tab.0.right" timestamp="1616511829552">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1616508286794" />
+    <state width="1493" height="261" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1616511829552" />
     <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1613982261582" />
-    <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1616508286794">
+    <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1616511829552">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1616508286794" />
-    <state width="1493" height="261" key="GridCell.Tab.1.center" timestamp="1616508286794">
+    <state width="1493" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1616511829552" />
+    <state width="1493" height="261" key="GridCell.Tab.1.center" timestamp="1616511829552">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.center/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1616508286794" />
-    <state width="1493" height="261" key="GridCell.Tab.1.left" timestamp="1616508286794">
+    <state width="1493" height="261" key="GridCell.Tab.1.center/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1616511829552" />
+    <state width="1493" height="261" key="GridCell.Tab.1.left" timestamp="1616511829552">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.left/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1616508286794" />
-    <state width="1493" height="261" key="GridCell.Tab.1.right" timestamp="1616508286794">
+    <state width="1493" height="261" key="GridCell.Tab.1.left/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1616511829552" />
+    <state width="1493" height="261" key="GridCell.Tab.1.right" timestamp="1616511829552">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.right/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1616508286794" />
-    <state width="1493" height="261" key="GridCell.Tab.2.bottom" timestamp="1616508286794">
+    <state width="1493" height="261" key="GridCell.Tab.1.right/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1616511829552" />
+    <state width="1493" height="261" key="GridCell.Tab.2.bottom" timestamp="1616511829552">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.2.bottom/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1616508286794" />
-    <state width="1493" height="261" key="GridCell.Tab.2.center" timestamp="1616508286794">
+    <state width="1493" height="261" key="GridCell.Tab.2.bottom/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1616511829552" />
+    <state width="1493" height="261" key="GridCell.Tab.2.center" timestamp="1616511829552">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.2.center/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1616508286794" />
-    <state width="1493" height="261" key="GridCell.Tab.2.left" timestamp="1616508286794">
+    <state width="1493" height="261" key="GridCell.Tab.2.center/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1616511829552" />
+    <state width="1493" height="261" key="GridCell.Tab.2.left" timestamp="1616511829552">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.2.left/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1616508286794" />
-    <state width="1493" height="261" key="GridCell.Tab.2.right" timestamp="1616508286794">
+    <state width="1493" height="261" key="GridCell.Tab.2.left/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1616511829552" />
+    <state width="1493" height="261" key="GridCell.Tab.2.right" timestamp="1616511829552">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.2.right/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1616508286794" />
+    <state width="1493" height="261" key="GridCell.Tab.2.right/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1616511829552" />
     <state x="147" y="64" key="MergeDialog" timestamp="1611226674838">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -400,10 +408,10 @@
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
     <state x="-1459" y="164" key="SettingsEditor/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1611123695258" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1616212940998">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1616508471235">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1616212940998" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1616508471235" />
     <state x="467" y="144" width="602" height="536" key="find.popup" timestamp="1611144187183">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -412,5 +420,12 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="545" y="196" key="refactoring.ChangeSignatureDialog/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1615642116226" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="com.jetbrains.cidr.embedded.openocd.conf.type">
+        <watch expression="ADC_Result" language="ObjectiveC" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

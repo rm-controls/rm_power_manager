@@ -1,13 +1,19 @@
 #include "adc.h"
+#include "port.h"
 
 ADC_HandleTypeDef hadc1;
 DMA_HandleTypeDef hdma_adc1;
+__attribute__((section(".adc_ram")))volatile unsigned short ADC_Result[5];
+
+void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
+    HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
+}
 
 void ADC_Config(void) {
     ADC_MultiModeTypeDef multimode = {0};
     ADC_ChannelConfTypeDef sConfig = {0};
     hadc1.Instance = ADC1;
-    hadc1.Init.ClockPrescaler = ADC_CLOCK_ASYNC_DIV1;
+    hadc1.Init.ClockPrescaler = ADC_CLOCK_ASYNC_DIV8;
     hadc1.Init.Resolution = ADC_RESOLUTION_12B;
     hadc1.Init.ScanConvMode = ADC_SCAN_ENABLE;
     hadc1.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
@@ -28,7 +34,7 @@ void ADC_Config(void) {
     while (HAL_ADCEx_MultiModeConfigChannel(&hadc1, &multimode) != HAL_OK);
     sConfig.Channel = ADC_CHANNEL_3;
     sConfig.Rank = ADC_REGULAR_RANK_1;
-    sConfig.SamplingTime = ADC_SAMPLETIME_16CYCLES_5;
+    sConfig.SamplingTime = ADC_SAMPLETIME_32CYCLES_5;
     sConfig.SingleDiff = ADC_SINGLE_ENDED;
     sConfig.OffsetNumber = ADC_OFFSET_NONE;
     sConfig.Offset = 0;
@@ -46,6 +52,7 @@ void ADC_Config(void) {
     sConfig.Channel = ADC_CHANNEL_9;
     sConfig.Rank = ADC_REGULAR_RANK_5;
     while (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK);
+    HAL_ADC_Start_DMA(&hadc1, (uint32_t *) &ADC_Result, 5);
 }
 
 void HAL_ADC_MspInit(ADC_HandleTypeDef *adcHandle) {
