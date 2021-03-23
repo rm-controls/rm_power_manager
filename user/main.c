@@ -8,11 +8,12 @@ TaskHandle_t LEDTask_Handler;
 
 void LED_Shine(void *pvParameters) {
     while (1) {
-        unsigned char number = (unsigned char) V_Capacitor / 1;
-        for (unsigned char counter = 0; counter < number * 2; counter++) {
-            HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
-            Delayms((unsigned int) (400 / number));
-        }
+        HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
+//        unsigned char number = (unsigned char) V_Capacitor / 1;
+//        for (unsigned char counter = 0; counter < number * 2; counter++) {
+//            HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
+//            Delayms((unsigned int) (400 / number));
+//        }
         Delayms(1200);
     }
 }

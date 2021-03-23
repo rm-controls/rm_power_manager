@@ -17,11 +17,13 @@ void ADC_Config(void) {
     hadc1.Init.DiscontinuousConvMode = DISABLE;
     hadc1.Init.ExternalTrigConv = ADC_SOFTWARE_START;
     hadc1.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
-    hadc1.Init.ConversionDataManagement = ADC_CONVERSIONDATA_DR;
+    hadc1.Init.ConversionDataManagement = ADC_CONVERSIONDATA_DMA_CIRCULAR;
     hadc1.Init.Overrun = ADC_OVR_DATA_OVERWRITTEN;
     hadc1.Init.LeftBitShift = ADC_LEFTBITSHIFT_NONE;
     hadc1.Init.OversamplingMode = DISABLE;
     while (HAL_ADC_Init(&hadc1) != HAL_OK);
+    while (HAL_ADCEx_Calibration_Start(&hadc1, ADC_CALIB_OFFSET, ADC_SINGLE_ENDED) != HAL_OK);
+    while ((HAL_ADCEx_Calibration_Start(&hadc1, ADC_CALIB_OFFSET_LINEARITY, ADC_SINGLE_ENDED) != HAL_OK));
     multimode.Mode = ADC_MODE_INDEPENDENT;
     while (HAL_ADCEx_MultiModeConfigChannel(&hadc1, &multimode) != HAL_OK);
     sConfig.Channel = ADC_CHANNEL_3;
