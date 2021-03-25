@@ -2,6 +2,17 @@
 
 UART_HandleTypeDef huart1;
 UART_HandleTypeDef huart2;
+unsigned char aRxBuffer1[1] = {0}, aRxBuffer2[1] = {0};
+
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
+    if (huart->Instance == USART1) {
+        unsigned char buf = aRxBuffer1[0];
+        HAL_UART_Transmit(huart, &buf, 1, 0xFFFFFFFFU);
+    } else if (huart->Instance == USART2) {
+        unsigned char buf = aRxBuffer2[0];
+        HAL_UART_Transmit(huart, &buf, 1, 0xFFFFFFFFU);
+    }
+}
 
 void UART1_Config(void) {
     huart1.Instance = USART1;
@@ -13,12 +24,13 @@ void UART1_Config(void) {
     huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
     huart1.Init.OverSampling = UART_OVERSAMPLING_16;
     huart1.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
-    huart1.Init.ClockPrescaler = UART_PRESCALER_DIV1;
+    huart1.Init.ClockPrescaler = UART_PRESCALER_DIV8;
     huart1.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
     while (HAL_UART_Init(&huart1) != HAL_OK);
     while (HAL_UARTEx_SetTxFifoThreshold(&huart1, UART_TXFIFO_THRESHOLD_1_8) != HAL_OK);
     while (HAL_UARTEx_SetRxFifoThreshold(&huart1, UART_RXFIFO_THRESHOLD_1_8) != HAL_OK);
     while (HAL_UARTEx_DisableFifoMode(&huart1) != HAL_OK);
+    HAL_UART_Receive_IT(&huart1, aRxBuffer1, 1);
 }
 
 void UART2_Config(void) {
@@ -31,12 +43,13 @@ void UART2_Config(void) {
     huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
     huart2.Init.OverSampling = UART_OVERSAMPLING_16;
     huart2.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
-    huart2.Init.ClockPrescaler = UART_PRESCALER_DIV1;
+    huart2.Init.ClockPrescaler = UART_PRESCALER_DIV8;
     huart2.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
     while (HAL_UART_Init(&huart2) != HAL_OK);
     while (HAL_UARTEx_SetTxFifoThreshold(&huart2, UART_TXFIFO_THRESHOLD_1_8) != HAL_OK);
     while (HAL_UARTEx_SetRxFifoThreshold(&huart2, UART_RXFIFO_THRESHOLD_1_8) != HAL_OK);
     while (HAL_UARTEx_DisableFifoMode(&huart2) != HAL_OK);
+    HAL_UART_Receive_IT(&huart2, aRxBuffer2, 1);
 }
 
 void HAL_UART_MspInit(UART_HandleTypeDef *uartHandle) {
@@ -61,6 +74,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef *uartHandle) {
         GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
         GPIO_InitStruct.Alternate = GPIO_AF4_USART1;
         HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
         HAL_NVIC_SetPriority(USART1_IRQn, 0, 0);
         HAL_NVIC_EnableIRQ(USART1_IRQn);
     } else if (uartHandle->Instance == USART2) {
@@ -80,7 +94,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef *uartHandle) {
         GPIO_InitStruct.Alternate = GPIO_AF7_USART2;
         HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-        HAL_NVIC_SetPriority(USART2_IRQn, 0, 0);
+        HAL_NVIC_SetPriority(USART2_IRQn, 1, 1);
         HAL_NVIC_EnableIRQ(USART2_IRQn);
     }
 }

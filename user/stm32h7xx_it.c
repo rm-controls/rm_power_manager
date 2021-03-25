@@ -51,10 +51,41 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
         HAL_IncTick();
     }
 }
+
 void USART1_IRQHandler(void) {
+    unsigned long timeout = 0;
+    const unsigned long maxDelay = 0x1FFFF;
     HAL_UART_IRQHandler(&huart1);
+    timeout = 0;
+    while (HAL_UART_GetState(&huart1) != HAL_UART_STATE_READY) {
+        timeout++;
+        if (timeout > maxDelay)
+            break;
+    }
+    timeout = 0;
+    while (HAL_UART_Receive_IT(&huart1, aRxBuffer1, 1)
+        != HAL_OK) {
+        timeout++;
+        if (timeout > maxDelay)
+            break;
+    }
 }
 
 void USART2_IRQHandler(void) {
+    unsigned long timeout = 0;
+    const unsigned long maxDelay = 0x1FFFF;
     HAL_UART_IRQHandler(&huart2);
+    timeout = 0;
+    while (HAL_UART_GetState(&huart2) != HAL_UART_STATE_READY) {
+        timeout++;
+        if (timeout > maxDelay)
+            break;
+    }
+    timeout = 0;
+    while (HAL_UART_Receive_IT(&huart2, aRxBuffer2, 1)
+        != HAL_OK) {
+        timeout++;
+        if (timeout > maxDelay)
+            break;
+    }
 }
