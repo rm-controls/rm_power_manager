@@ -14,7 +14,7 @@ void LED_Shine(void *pvParameters) {
 //            HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
 //            Delayms((unsigned int) (400 / number));
 //        }
-        Delayms(1200);
+        Delayms(2000);
     }
 }
 
@@ -24,8 +24,9 @@ void InitTask(void *pvParameters) {
     GPIO_Config();
     DMA_Config();
     ADC_Config();
+    Referee_init();
     DAC_Config();
-    UART1_Config();
+//    UART1_Config();
     UART2_Config();
 //    Filter_Config();
 //    PID_ValueConfig();

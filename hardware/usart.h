@@ -6,7 +6,7 @@
 extern UART_HandleTypeDef huart1;
 extern UART_HandleTypeDef huart2;
 extern unsigned char aRxBuffer1[1];
-extern unsigned char aRxBuffer2[1];
+extern unsigned char aRxBuffer2[64];
 
 void UART1_Config(void);
 void UART2_Config(void);

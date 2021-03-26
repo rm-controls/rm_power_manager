@@ -5,6 +5,7 @@ DAC_HandleTypeDef hdac1;
 void DAC_Config(void) {
     DAC_ChannelConfTypeDef sConfig = {0};
     hdac1.Instance = DAC1;
+    while (HAL_DAC_DeInit(&hdac1) != HAL_OK);
     while (HAL_DAC_Init(&hdac1) != HAL_OK);
     sConfig.DAC_SampleAndHold = DAC_SAMPLEANDHOLD_DISABLE;
     sConfig.DAC_Trigger = DAC_TRIGGER_NONE;
@@ -13,7 +14,7 @@ void DAC_Config(void) {
     sConfig.DAC_UserTrimming = DAC_TRIMMING_FACTORY;
     while (HAL_DAC_ConfigChannel(&hdac1, &sConfig, DAC_CHANNEL_1) != HAL_OK);
     HAL_DAC_Start(&hdac1, DAC_CHANNEL_1);
-    HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_12B_R, 0x00);
+    HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_12B_R, 0x0000UL);
 }
 
 void HAL_DAC_MspInit(DAC_HandleTypeDef *dacHandle) {

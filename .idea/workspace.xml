@@ -18,15 +18,15 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="Finished uart initialize codes, but uart2 still have some bugs which would receive 0xfe after normal data">
-      <change afterPath="$PROJECT_DIR$/devices/refree.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/devices/refree.h" afterDir="false" />
+    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="It is found that usart2 will be affected by dac1 initialization, that is, the serial port can be used normally after the DAC initialization is commented out">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hardware/adc.c" beforeDir="false" afterPath="$PROJECT_DIR$/hardware/adc.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hardware/adc.h" beforeDir="false" afterPath="$PROJECT_DIR$/hardware/adc.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hardware/gpio.c" beforeDir="false" afterPath="$PROJECT_DIR$/hardware/gpio.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/devices/refree.c" beforeDir="false" afterPath="$PROJECT_DIR$/devices/refree.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/devices/refree.h" beforeDir="false" afterPath="$PROJECT_DIR$/devices/refree.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hardware/dac.c" beforeDir="false" afterPath="$PROJECT_DIR$/hardware/dac.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hardware/usart.c" beforeDir="false" afterPath="$PROJECT_DIR$/hardware/usart.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hardware/usart.h" beforeDir="false" afterPath="$PROJECT_DIR$/hardware/usart.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/user/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/main.h" beforeDir="false" afterPath="$PROJECT_DIR$/user/main.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user/stm32h7xx_it.c" beforeDir="false" afterPath="$PROJECT_DIR$/user/stm32h7xx_it.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -362,8 +362,8 @@
   <component name="XDebuggerManager">
     <watches-manager>
       <configuration name="com.jetbrains.cidr.embedded.openocd.conf.type">
-        <watch expression="ADC_Result" language="ObjectiveC" />
-        <watch expression="last_time" language="ObjectiveC" />
+        <watch expression="referee_data_" language="ObjectiveC" />
+        <watch expression="referee_unpack_obj" language="ObjectiveC" />
       </configuration>
     </watches-manager>
   </component>
