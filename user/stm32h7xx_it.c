@@ -53,7 +53,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 }
 
 void USART1_IRQHandler(void) {
-    unsigned long timeout = 0;
+    unsigned long timeout;
     const unsigned long maxDelay = 0x1FFFF;
     HAL_UART_IRQHandler(&huart1);
     timeout = 0;
@@ -72,7 +72,7 @@ void USART1_IRQHandler(void) {
 }
 
 void USART2_IRQHandler(void) {
-    unsigned long timeout = 0;
+    unsigned long timeout;
     const unsigned long maxDelay = 0x1FFFF;
     HAL_UART_IRQHandler(&huart2);
     timeout = 0;

@@ -3,26 +3,26 @@
 
 ADC_HandleTypeDef hadc1;
 DMA_HandleTypeDef hdma_adc1;
-__attribute__((section(".adc_ram")))volatile unsigned short ADC_Result[5];
-unsigned short ADC_Buffer[5][10], ADC_FinalResult[5], Buf_Counter = 0;
+__attribute__((section(".adc_ram")))volatile unsigned short ADC_Result[6];
+unsigned short ADC_Buffer[6][10], ADC_FinalResult[6], Buf_Counter = 0;
 
 int compare_int(const void *a, const void *b) {
     return (*(int *) a) - (*(int *) b);
 }
 
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
-    for (unsigned char counter = 0; counter < 5; counter++)
+    for (unsigned char counter = 0; counter < 6; counter++)
         ADC_Buffer[counter][Buf_Counter] = ADC_Result[counter];
     Buf_Counter++;
     if (Buf_Counter == 10) {
-        unsigned long Tmp_Buffer[5] = {0, 0, 0, 0, 0};
+        unsigned long Tmp_Buffer[6] = {0, 0, 0, 0, 0, 0};
         Buf_Counter = 0;
-        for (unsigned char counter = 0; counter < 5; counter++)
+        for (unsigned char counter = 0; counter < 6; counter++)
             qsort((void *) ADC_Buffer[counter], 10, sizeof(ADC_Buffer[0][0]), compare_int);
-        for (unsigned char counter1 = 0; counter1 < 5; counter1++)
+        for (unsigned char counter1 = 0; counter1 < 6; counter1++)
             for (unsigned char counter2 = 0; counter2 < 4; counter2++)
                 Tmp_Buffer[counter1] += (unsigned long) ADC_Buffer[counter1][counter2 + 3];
-        for (unsigned char counter = 0; counter < 5; counter++)
+        for (unsigned char counter = 0; counter < 6; counter++)
             ADC_FinalResult[counter] = Tmp_Buffer[counter] / 4;
     }
 }
@@ -37,7 +37,7 @@ void ADC_Config(void) {
     hadc1.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
     hadc1.Init.LowPowerAutoWait = DISABLE;
     hadc1.Init.ContinuousConvMode = ENABLE;
-    hadc1.Init.NbrOfConversion = 5;
+    hadc1.Init.NbrOfConversion = 6;
     hadc1.Init.DiscontinuousConvMode = DISABLE;
     hadc1.Init.ExternalTrigConv = ADC_SOFTWARE_START;
     hadc1.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
@@ -70,7 +70,10 @@ void ADC_Config(void) {
     sConfig.Channel = ADC_CHANNEL_9;
     sConfig.Rank = ADC_REGULAR_RANK_5;
     while (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK);
-    HAL_ADC_Start_DMA(&hadc1, (uint32_t *) &ADC_Result, 5);
+    sConfig.Channel = ADC_CHANNEL_5;
+    sConfig.Rank = ADC_REGULAR_RANK_6;
+    while (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK);
+    HAL_ADC_Start_DMA(&hadc1, (uint32_t *) &ADC_Result, 6);
 }
 
 void HAL_ADC_MspInit(ADC_HandleTypeDef *adcHandle) {
@@ -135,7 +138,7 @@ void HAL_ADC_MspInit(ADC_HandleTypeDef *adcHandle) {
 
         __HAL_LINKDMA(adcHandle, DMA_Handle, hdma_adc1);
 
-        HAL_NVIC_SetPriority(ADC_IRQn, 0, 0);
+        HAL_NVIC_SetPriority(ADC_IRQn, 2, 0);
         HAL_NVIC_EnableIRQ(ADC_IRQn);
     }
 }

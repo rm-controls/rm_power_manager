@@ -20,7 +20,7 @@ void LED_Shine(void *pvParameters) {
 
 void InitTask(void *pvParameters) {
     taskENTER_CRITICAL();
-    CRC_Config();
+//    CRC_Config();
     GPIO_Config();
     DMA_Config();
     ADC_Config();
