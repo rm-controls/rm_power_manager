@@ -331,6 +331,7 @@ struct RefereeData {
 };
 
 extern struct RefereeData referee_data_;
+extern UnpackData referee_unpack_obj;
 void Referee_init();
 void Referee_unpack(unsigned char byte);
 

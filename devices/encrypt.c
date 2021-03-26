@@ -20,5 +20,5 @@ void DTP_Transmit(DTP_Package_t *dtp_package) {
     }
     temp_buf[1] = dtp_package->PID << 4 | ((~dtp_package->PID) & 0x0f);     //set pid and check
     temp_buf[11] = 0xff;                                                    //set end of frame
-//    HAL_UART_Transmit(&huart1, temp_buf, sizeof(temp_buf), 0xFFFFFFFFUL);
+    HAL_UART_Transmit(&huart1, temp_buf, sizeof(temp_buf), 0xFFFFFFFFUL);
 }

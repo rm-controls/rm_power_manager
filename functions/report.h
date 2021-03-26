@@ -6,5 +6,6 @@
 #define _FUNCTIONS_REPORT_H_
 
 void Report_Task(void *pvParameters);
+void Upload_Refree(void *pvParameters);
 
 #endif //PROGRAM_FUNCTIONS_REPORT_H_

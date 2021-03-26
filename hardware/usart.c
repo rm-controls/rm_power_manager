@@ -1,22 +1,26 @@
 #include "usart.h"
-#include "refree.h"
-#include "port.h"
+#include "decrypt.h"
+#include "FreeRTOS.h"
+#include "queue.h"
 
 UART_HandleTypeDef huart1;
 UART_HandleTypeDef huart2;
-unsigned char aRxBuffer1[1] = {0}, aRxBuffer2[64] = {0};
+unsigned char aRxBuffer1[16] = {0}, aRxBuffer2[64] = {0};
+extern QueueHandle_t Refree_Data, DTP_Data;
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
     if (huart->Instance == USART1) {
-        unsigned char buf = aRxBuffer1[0];
-        HAL_UART_Transmit(huart, &buf, 1, 0xFFFFFFFFU);
-        HAL_UART_Receive_IT(&huart1, aRxBuffer1, 1);
+        if (DTP_Data != NULL) {
+            BaseType_t pxHigherPriorityTaskWoken;
+            xQueueSendToBackFromISR(DTP_Data, aRxBuffer1, &pxHigherPriorityTaskWoken);
+        }
+        HAL_UART_Receive_IT(&huart1, aRxBuffer1, 16);
     } else if (huart->Instance == USART2) {
-        HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
-        for (unsigned char counter = 0; counter < 64; counter++)
-            Referee_unpack(aRxBuffer2[counter]);
+        if (Refree_Data != NULL) {
+            BaseType_t pxHigherPriorityTaskWoken;
+            xQueueSendToBackFromISR(Refree_Data, aRxBuffer2, &pxHigherPriorityTaskWoken);
+        }
         HAL_UART_Receive_IT(&huart2, aRxBuffer2, 64);
-//        HAL_UART_Transmit(huart, &buf, 1, 0xFFFFFFFFU);
     }
 }
 
@@ -36,7 +40,7 @@ void UART1_Config(void) {
     while (HAL_UARTEx_SetTxFifoThreshold(&huart1, UART_TXFIFO_THRESHOLD_1_8) != HAL_OK);
     while (HAL_UARTEx_SetRxFifoThreshold(&huart1, UART_RXFIFO_THRESHOLD_1_8) != HAL_OK);
     while (HAL_UARTEx_DisableFifoMode(&huart1) != HAL_OK);
-    HAL_UART_Receive_IT(&huart1, aRxBuffer1, 1);
+    HAL_UART_Receive_IT(&huart1, aRxBuffer1, 16);
 }
 
 void UART2_Config(void) {
