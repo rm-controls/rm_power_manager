@@ -3,7 +3,7 @@
 
 #include "stm32h7xx_hal.h"
 
-#define DEBUG_PARAM 1
+#define DEBUG_PARAM 0
 
 extern UART_HandleTypeDef huart1;
 extern UART_HandleTypeDef huart2;

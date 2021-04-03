@@ -3,28 +3,28 @@
 //
 
 #include "report.h"
-#include "encrypt.h"
-#include "system.h"
-#include "calculate.h"
 #include "string.h"
 #include "FreeRTOS.h"
 #include "queue.h"
-#include "refree.h"
-#include "decrypt.h"
-#include "stm32h7xx_hal.h"
 #include "usart.h"
-#include "pid.h"
 
 #if DEBUG_PARAM != 1
+#include "refree.h"
+#include "stm32h7xx_hal.h"
 QueueHandle_t Refree_Data = NULL, Forward_Data = NULL;
 #else
+#include "encrypt.h"
+#include "system.h"
+#include "calculate.h"
+#include "pid.h"
+#include "decrypt.h"
 QueueHandle_t DTP_Data = NULL;
 TaskHandle_t ReportTask_Handler;
 #endif
 
 void Upload_Refree(void *pvParameters) {
 #if DEBUG_PARAM != 1
-    unsigned char Refree_Buf[64], DTP_Buf[16];
+    unsigned char Refree_Buf[64], Forward_Buf[16];
     Refree_Data = xQueueCreate(4, 64);
     Forward_Data = xQueueCreate(4, 16);
     while (1) {
@@ -33,8 +33,8 @@ void Upload_Refree(void *pvParameters) {
                 Referee_unpack(Refree_Buf[counter]);
             HAL_UART_Transmit(&huart1, Refree_Buf, 64, 0xFFFFFFFFUL);
         }
-        if (xQueueReceive(Forward_Data, DTP_Buf, 10) == pdTRUE) {
-            HAL_UART_Transmit(&huart2, DTP_Buf, 16, 0xFFFFFFFFUL);
+        if (xQueueReceive(Forward_Data, Forward_Buf, 10) == pdTRUE) {
+            HAL_UART_Transmit(&huart2, Forward_Buf, 16, 0xFFFFFFFFUL);
         }
     }
 #else
@@ -48,25 +48,16 @@ void Upload_Refree(void *pvParameters) {
     }
 #endif
 }
-
+#if DEBUG_PARAM == 1
 void Report_Task(void *pvParameters) {
     while (1) {
         DTP_Package_t pkg = {0};
         float ADC_Resultf[4];
         pkg.PID = 0;
         ADC_Resultf[0] = P_Capacitor;
-        ADC_Resultf[1] = PID_Capacitor.User;
-        ADC_Resultf[2] = V_Capacitor;
-        ADC_Resultf[3] = I_Capacitor;
-        for (unsigned char lcounter = 0; lcounter < 4; lcounter++) {
-            pkg.Data[lcounter * 2] = FloatToInt16(ADC_Resultf[lcounter]) >> 8UL;
-            pkg.Data[lcounter * 2 + 1] = FloatToInt16(ADC_Resultf[lcounter]) & 0x00ffUL;
-        }
-        DTP_Transmit(&pkg);
-        Delayms(1);
-        pkg.PID = 1;
-        memset(ADC_Resultf, 0x00, sizeof(ADC_Resultf));
-        ADC_Resultf[1] = (xPortGetFreeHeapSize() / 1024.0f);
+        ADC_Resultf[1] = P_Chassis;
+        ADC_Resultf[2] = V_Chassis;
+        ADC_Resultf[3] = I_Chassis;
         for (unsigned char lcounter = 0; lcounter < 4; lcounter++) {
             pkg.Data[lcounter * 2] = FloatToInt16(ADC_Resultf[lcounter]) >> 8UL;
             pkg.Data[lcounter * 2 + 1] = FloatToInt16(ADC_Resultf[lcounter]) & 0x00ffUL;
@@ -75,3 +66,4 @@ void Report_Task(void *pvParameters) {
         Delayms(40);
     }
 }
+#endif

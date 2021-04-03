@@ -7,10 +7,13 @@
 #include "filter.h"
 #include "dac.h"
 #include "port.h"
+#include "encrypt.h"
+#include "system.h"
 
 #define ADC_COEFFICIENT 3.0f / 4096.0f
 
-float I_Capacitor, I_Chassis, V_Capacitor, V_Baterry, V_Chassis, P_Chassis, P_Capacitor;
+float I_Capacitor, I_Chassis, V_Capacitor, V_Baterry, V_Chassis
+, P_Chassis, P_Capacitor, EP_Chassis, W_Capacitor;
 unsigned short I_CapOffset, I_ChaOffset;
 
 void Sensor_Config(void) {
@@ -46,4 +49,19 @@ void Calculate_Power(void) {
 
     P_CapacitorF.Current_Value = V_Baterry * I_Capacitor;
     P_Capacitor = FirstOrder_Filter_Calculate(&P_CapacitorF);
+
+    W_Capacitor = 0.5f * 15 * V_Capacitor * V_Capacitor - 367.5f;
+    if (W_Capacitor < 0)
+        W_Capacitor = 0;
+    float Capacitor_Percent = W_Capacitor / 1434.375f;
+
+    Upload_Package.PID = 0;
+    Upload_Package.Data[0] = FloatToInt16(P_Chassis) >> 8UL;
+    Upload_Package.Data[1] = FloatToInt16(P_Chassis) & 0x00ffUL;
+    Upload_Package.Data[2] = FloatToInt16(EP_Chassis) >> 8UL;
+    Upload_Package.Data[3] = FloatToInt16(EP_Chassis) & 0x00ffUL;
+    Upload_Package.Data[4] = FloatToInt16(V_Chassis) >> 8UL;
+    Upload_Package.Data[5] = FloatToInt16(V_Chassis) & 0x00ffUL;
+    Upload_Package.Data[6] = FloatToInt16(Capacitor_Percent) >> 8UL;
+    Upload_Package.Data[7] = FloatToInt16(Capacitor_Percent) & 0x00ffUL;
 }

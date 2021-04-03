@@ -6,6 +6,7 @@ typedef struct {
     unsigned char Data[8];
 } DTP_Package_t;
 
+extern DTP_Package_t Upload_Package;
 extern float Parameters[4];
 void DTP_Transmit(DTP_Package_t *dtp_package);
 
