@@ -18,7 +18,6 @@
 QueueHandle_t Refree_Data = NULL, DTP_Data = NULL;
 
 void Upload_Refree(void *pvParameters) {
-    DTP_Package_t pkg = {.PID=0, .Data={0, 1, 2, 3, 4, 5, 6, 7},};
     unsigned char Refree_Buf[64], DTP_Buf[16];
     Refree_Data = xQueueCreate(4, 64);
     DTP_Data = xQueueCreate(4, 16);
@@ -27,11 +26,9 @@ void Upload_Refree(void *pvParameters) {
             for (unsigned char counter = 0; counter < 64; counter++)
                 Referee_unpack(Refree_Buf[counter]);
             HAL_UART_Transmit(&huart1, Refree_Buf, 64, 0xFFFFFFFFUL);
-        } else if (referee_unpack_obj.unpack_step == kStepHeaderSof)
-            DTP_Transmit(&pkg);
+        }
         if (xQueueReceive(DTP_Data, DTP_Buf, 10) == pdTRUE) {
-            for (unsigned char counter = 0; counter < 16; counter++)
-                DTP_Received_CallBack(DTP_Buf[counter]);
+            HAL_UART_Transmit(&huart2, DTP_Buf, 16, 0xFFFFFFFFUL);
         }
     }
 }

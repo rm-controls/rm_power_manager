@@ -18,7 +18,7 @@
 #include "dma.h"
 #include "usart.h"
 #include "gpio.h"
-#include "crc.h"
+#include "timer.h"
 
 /////////////// Device ///////////////
 #include "pid.h"

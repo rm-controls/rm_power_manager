@@ -46,10 +46,14 @@ void ADC_IRQHandler(void) {
 void TIM4_IRQHandler(void) {
     HAL_TIM_IRQHandler(&htim4);
 }
+void TIM7_IRQHandler(void) {
+    HAL_TIM_IRQHandler(&htim7);
+}
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
-    if (htim->Instance == TIM4) {
+    if (htim->Instance == TIM4)
         HAL_IncTick();
-    }
+    else if (htim->Instance == TIM7)
+        Calculate_Power();
 }
 
 void USART1_IRQHandler(void) {

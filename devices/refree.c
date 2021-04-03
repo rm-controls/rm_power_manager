@@ -7,6 +7,7 @@
 #include "stdbool.h"
 #include "stm32h7xx_hal.h"
 #include "port.h"
+#include "encrypt.h"
 
 struct RefereeData referee_data_;
 bool flag = false;
@@ -91,12 +92,14 @@ void Referee_unpack(unsigned char byte) {
 }
 
 void Referee_getData(unsigned char *frame) {
+    DTP_Package_t pkg = {.PID=0, .Data={0, 1, 2, 3, 4, 5, 6, 7},};
     unsigned short cmd_id = 0;
     unsigned char index = 0;
     index += (sizeof(FrameHeaderStruct) - 1);
     memcpy(&cmd_id, frame + index, sizeof(unsigned short));
     index += sizeof(unsigned short);
     HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
+    DTP_Transmit(&pkg);
     switch (cmd_id) {
         case kGameStatusCmdId:memcpy(&referee_data_.game_status_, frame + index, sizeof(GameStatus));
             break;
