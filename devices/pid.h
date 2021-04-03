@@ -9,18 +9,17 @@ typedef struct {
     float Kp;
     float Ki;
     float Kd;
-    float Offset;
-    float Collect[2];
     float I_Sum;
     float User;
     float Result;
+    float LastError;
     float Maxinum;
     float Minium;
     float I_Sum_Max;
 } PID_Structure;
 
-extern PID_Structure PID_Capacitor_P, PID_Capacitor_C;
-void PID_Get_Result(PID_Structure *PID_Handler);
+extern PID_Structure PID_Capacitor;
+void PID_Get_Result(PID_Structure *PID_Handler, float collect);
 void PID_ValueConfig(void);
 void PID_CalculateTask(void *pvParameters);
 

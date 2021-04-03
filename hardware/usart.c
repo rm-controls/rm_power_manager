@@ -1,26 +1,43 @@
 #include "usart.h"
-#include "decrypt.h"
 #include "FreeRTOS.h"
 #include "queue.h"
 
 UART_HandleTypeDef huart1;
 UART_HandleTypeDef huart2;
-unsigned char aRxBuffer1[16] = {0}, aRxBuffer2[64] = {0};
-extern QueueHandle_t Refree_Data, DTP_Data;
+
+#if DEBUG_PARAM != 1
+extern QueueHandle_t Refree_Data, Forward_Data;
+unsigned char aRxBuffer1[16] = {0};
+unsigned char aRxBuffer2[64] = {0};
+#else
+unsigned char aRxBuffer1[16] = {0};
+unsigned char aRxBuffer2[10] = {0};
+extern QueueHandle_t DTP_Data;
+#endif
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
     if (huart->Instance == USART1) {
-        if (DTP_Data != NULL) {
+#if DEBUG_PARAM != 1
+        if (Forward_Data != NULL) {
             BaseType_t pxHigherPriorityTaskWoken;
-            xQueueSendToBackFromISR(DTP_Data, aRxBuffer1, &pxHigherPriorityTaskWoken);
+            xQueueSendToBackFromISR(Forward_Data, aRxBuffer1, &pxHigherPriorityTaskWoken);
         }
+#endif
         HAL_UART_Receive_IT(&huart1, aRxBuffer1, 16);
     } else if (huart->Instance == USART2) {
+#if DEBUG_PARAM != 1
         if (Refree_Data != NULL) {
             BaseType_t pxHigherPriorityTaskWoken;
             xQueueSendToBackFromISR(Refree_Data, aRxBuffer2, &pxHigherPriorityTaskWoken);
         }
         HAL_UART_Receive_IT(&huart2, aRxBuffer2, 64);
+#else
+        if (DTP_Data != NULL) {
+            BaseType_t pxHigherPriorityTaskWoken;
+            xQueueSendToBackFromISR(DTP_Data, aRxBuffer2, &pxHigherPriorityTaskWoken);
+        }
+        HAL_UART_Receive_IT(&huart2, aRxBuffer2, 10);
+#endif
     }
 }
 
@@ -59,7 +76,11 @@ void UART2_Config(void) {
     while (HAL_UARTEx_SetTxFifoThreshold(&huart2, UART_TXFIFO_THRESHOLD_1_8) != HAL_OK);
     while (HAL_UARTEx_SetRxFifoThreshold(&huart2, UART_RXFIFO_THRESHOLD_1_8) != HAL_OK);
     while (HAL_UARTEx_DisableFifoMode(&huart2) != HAL_OK);
+#if DEBUG_PARAM != 1
     HAL_UART_Receive_IT(&huart2, aRxBuffer2, 64);
+#else
+    HAL_UART_Receive_IT(&huart2, aRxBuffer2, 10);
+#endif
 }
 
 void HAL_UART_MspInit(UART_HandleTypeDef *uartHandle) {

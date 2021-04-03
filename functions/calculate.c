@@ -21,7 +21,7 @@ void Sensor_Config(void) {
     HAL_Delay(1000);
     I_CapOffset = ADC_FinalResult[0];
     I_ChaOffset = ADC_FinalResult[1];
-    HAL_Delay(100);
+    HAL_Delay(200);
     HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_RESET);
 }
 

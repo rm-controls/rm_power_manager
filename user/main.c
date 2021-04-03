@@ -1,7 +1,6 @@
 #include "main.h"
 
 TaskHandle_t InitTask_Handler;
-TaskHandle_t ReportTask_Handler;
 TaskHandle_t PIDTask_Handler;
 TaskHandle_t UserTask_Handler;
 TaskHandle_t LEDTask_Handler;
@@ -43,7 +42,6 @@ void InitTask() {
     Filter_Config();
     PID_ValueConfig();
     Sensor_Config();
-//    xTaskCreate(Report_Task, "ReportTask", 512, NULL, 1, &ReportTask_Handler);
     xTaskCreate(PID_CalculateTask, "PIDTask", 1024, NULL, 3, &PIDTask_Handler);
     xTaskCreate(Upload_Refree, "UploadTask", 512, NULL, 2, &UploadTask_Handler);
     xTaskCreate(LED_Shine, "LEDTask", 128, NULL, 1, &LEDTask_Handler);
