@@ -45,12 +45,19 @@ void Referee_unpack(unsigned char byte) {
             referee_unpack_obj.unpack_step = kStepLengthHigh;
             break;
         case kStepLengthHigh:referee_unpack_obj.data_len |= (byte << 8);
-            referee_unpack_obj.protocol_packet[referee_unpack_obj.index++] = byte;
-            if (referee_unpack_obj.data_len < kProtocolFrameLength - kProtocolCmdIdLength - kProtocolCmdIdLength)
-                referee_unpack_obj.unpack_step = kStepFrameSeq;
-            else {
+            if (referee_unpack_obj.index == 127) {
                 referee_unpack_obj.unpack_step = kStepHeaderSof;
+                memset(referee_unpack_obj.protocol_packet, 0, sizeof(referee_unpack_obj.protocol_packet));
                 referee_unpack_obj.index = 0;
+            } else {
+                referee_unpack_obj.protocol_packet[referee_unpack_obj.index++] = byte;
+                if (referee_unpack_obj.data_len < kProtocolFrameLength - kProtocolCmdIdLength - kProtocolCmdIdLength)
+                    referee_unpack_obj.unpack_step = kStepFrameSeq;
+                else {
+                    memset(referee_unpack_obj.protocol_packet, 0, sizeof(referee_unpack_obj.protocol_packet));
+                    referee_unpack_obj.unpack_step = kStepHeaderSof;
+                    referee_unpack_obj.index = 0;
+                }
             }
             break;
         case kStepFrameSeq:referee_unpack_obj.protocol_packet[referee_unpack_obj.index++] = byte;
@@ -61,6 +68,7 @@ void Referee_unpack(unsigned char byte) {
                 if (verifyCRC8CheckSum(referee_unpack_obj.protocol_packet, kProtocolHeaderLength))
                     referee_unpack_obj.unpack_step = kStepDataCrc16;
                 else {
+                    memset(referee_unpack_obj.protocol_packet, 0, sizeof(referee_unpack_obj.protocol_packet));
                     referee_unpack_obj.unpack_step = kStepHeaderSof;
                     referee_unpack_obj.index = 0;
                 }

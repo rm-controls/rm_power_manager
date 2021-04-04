@@ -7,13 +7,13 @@
 #include "FreeRTOS.h"
 #include "queue.h"
 #include "usart.h"
+#include "encrypt.h"
 
 #if DEBUG_PARAM != 1
 #include "refree.h"
 #include "stm32h7xx_hal.h"
 QueueHandle_t Refree_Data = NULL, Forward_Data = NULL;
 #else
-#include "encrypt.h"
 #include "system.h"
 #include "calculate.h"
 #include "pid.h"
@@ -29,9 +29,10 @@ void Upload_Refree(void *pvParameters) {
     Forward_Data = xQueueCreate(4, 16);
     while (1) {
         if (xQueueReceive(Refree_Data, Refree_Buf, 10) == pdTRUE) {
-            for (unsigned char counter = 0; counter < 64; counter++)
+            for (unsigned char counter = 0; counter < 64; counter++) {
+                HAL_UART_Transmit(&huart1, &Refree_Buf[counter], 1, 0xFFFFFFFFUL);
                 Referee_unpack(Refree_Buf[counter]);
-            HAL_UART_Transmit(&huart1, Refree_Buf, 64, 0xFFFFFFFFUL);
+            }
         }
         if (xQueueReceive(Forward_Data, Forward_Buf, 10) == pdTRUE) {
             HAL_UART_Transmit(&huart2, Forward_Buf, 16, 0xFFFFFFFFUL);

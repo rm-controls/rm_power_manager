@@ -22,5 +22,7 @@ void DTP_Transmit(DTP_Package_t *dtp_package) {
     temp_buf[11] = 0xff;                                                    //set end of frame
 #if DEBUG_PARAM == 1
     HAL_UART_Transmit(&huart2, temp_buf, sizeof(temp_buf), 0xFFFFFFFFUL);
+#else
+    HAL_UART_Transmit(&huart1, temp_buf, sizeof(temp_buf), 0xFFFFFFFFUL);
 #endif
 }
