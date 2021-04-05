@@ -9,22 +9,44 @@
 #include "port.h"
 #include "encrypt.h"
 #include "system.h"
+#include "refree.h"
 
 #define ADC_COEFFICIENT 3.0f / 4096.0f
 
+Power_Calibrate_t Capacitor_Calibrate, Chassis_Calibrate;
 float I_Capacitor, I_Chassis, V_Capacitor, V_Baterry, V_Chassis
 , P_Chassis, P_Capacitor, EP_Chassis, W_Capacitor;
 unsigned short I_CapOffset, I_ChaOffset;
 
+void Calibrate_Power(void) {
+    HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_12B_R, (unsigned short) (5460.0f / V_Capacitor)); //20W
+    HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_RESET);
+    Delayms(500);
+    Capacitor_Calibrate.x1 = P_Capacitor;
+    Capacitor_Calibrate.y1 = referee_data_.power_heat_data_.chassis_power;
+    HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_12B_R, (unsigned short) (10920.0f / V_Capacitor)); //40W
+    HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_RESET);
+    Delayms(500);
+    Capacitor_Calibrate.x2 = P_Capacitor;
+    Capacitor_Calibrate.y2 = referee_data_.power_heat_data_.chassis_power;
+    Capacitor_Calibrate.a =
+        (Capacitor_Calibrate.x1 - Capacitor_Calibrate.x2) / (Capacitor_Calibrate.y1 - Capacitor_Calibrate.y2);
+    Capacitor_Calibrate.b = Capacitor_Calibrate.y1 - Capacitor_Calibrate.a * Capacitor_Calibrate.x1;
+}
+
 void Sensor_Config(void) {
+    Capacitor_Calibrate.a = 1.0f;
+    Capacitor_Calibrate.b = 0;
+    Chassis_Calibrate.a = 1.0f;
+    Chassis_Calibrate.b = 0;
     HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_12B_R, 0x00);
     HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_SET);
     HAL_GPIO_WritePin(BOOST_EN_GPIO_Port, BOOST_EN_Pin, GPIO_PIN_SET);
     HAL_GPIO_WritePin(EN_NMOS_GPIO_Port, EN_NMOS_Pin, GPIO_PIN_SET);
-    HAL_Delay(1000);
+    HAL_Delay(500);
     I_CapOffset = ADC_FinalResult[0];
     I_ChaOffset = ADC_FinalResult[1];
-    HAL_Delay(200);
+    HAL_Delay(500);
     HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_RESET);
 }
 
@@ -48,7 +70,7 @@ void Calculate_Power(void) {
     P_Chassis = FirstOrder_Filter_Calculate(&P_ChassisF);
 
     P_CapacitorF.Current_Value = V_Baterry * I_Capacitor;
-    P_Capacitor = FirstOrder_Filter_Calculate(&P_CapacitorF);
+    P_Capacitor = FirstOrder_Filter_Calculate(&P_CapacitorF) * Capacitor_Calibrate.a + Capacitor_Calibrate.b;
 
     W_Capacitor = 0.5f * 15 * V_Capacitor * V_Capacitor - 367.5f;
     if (W_Capacitor < 0)

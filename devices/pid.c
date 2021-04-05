@@ -16,6 +16,7 @@ void PID_CalculateTask(void *pvParameters) {
         if (V_Capacitor <= 15.0f)
             break;
     }
+    Calibrate_Power();
     HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_RESET);
     while (1) {
         PID_Get_Result(&PID_Capacitor, P_Capacitor);
