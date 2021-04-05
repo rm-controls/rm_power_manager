@@ -133,10 +133,16 @@ typedef struct {
     unsigned char robot_level;
     unsigned short remain_HP;
     unsigned short max_HP;
-    unsigned short shooter_heat0_cooling_rate;
-    unsigned short shooter_heat0_cooling_limit;
-    unsigned short shooter_heat1_cooling_rate;
-    unsigned short shooter_heat1_cooling_limit;
+    unsigned short shooter_id1_17mm_cooling_rate;
+    unsigned short shooter_id1_17mm_cooling_limit;
+    unsigned short shooter_id1_17mm_speed_limit;
+    unsigned short shooter_id2_17mm_cooling_rate;
+    unsigned short shooter_id2_17mm_cooling_limit;
+    unsigned short shooter_id2_17mm_speed_limit;
+    unsigned short shooter_id1_42mm_cooling_rate;
+    unsigned short shooter_id1_42mm_cooling_limit;
+    unsigned short shooter_id1_42mm_speed_limit;
+    unsigned short chassis_power_limit;
     unsigned char mains_power_gimbal_output: 1;
     unsigned char mains_power_chassis_output: 1;
     unsigned char mains_power_shooter_output: 1;
@@ -147,8 +153,9 @@ typedef struct {
     unsigned short chassis_current;
     float chassis_power;
     unsigned short chassis_power_buffer;
-    unsigned short shooter_heat0;
-    unsigned short shooter_heat1;
+    unsigned short shooter_id1_17mm_cooling_heat;
+    unsigned short shooter_id2_17mm_cooling_heat;
+    unsigned short shooter_id1_42mm_cooling_heat;
 } PowerHeatData;
 
 typedef struct {

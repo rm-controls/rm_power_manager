@@ -11,7 +11,7 @@
 PID_Structure PID_Capacitor;
 
 void PID_CalculateTask(void *pvParameters) {
-    while (1) {
+    while (1) {     // OverVoltage Protection
         Delayms(1);
         if (V_Capacitor <= 15.0f)
             break;
@@ -20,15 +20,6 @@ void PID_CalculateTask(void *pvParameters) {
     while (1) {
         PID_Get_Result(&PID_Capacitor, P_Capacitor);
         HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_12B_R, (unsigned short) PID_Capacitor.Result);
-        if (V_Capacitor >= 15.5f) {
-            HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_SET);
-            while (1) {
-                Delayms(1);
-                if (V_Capacitor <= 15.0f)
-                    break;
-            }
-            HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_RESET);
-        }
         Delayms(1);
     }
 }

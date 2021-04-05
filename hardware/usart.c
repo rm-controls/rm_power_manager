@@ -7,7 +7,7 @@ UART_HandleTypeDef huart2;
 
 #if DEBUG_PARAM != 1
 extern QueueHandle_t Refree_Data, Forward_Data;
-unsigned char aRxBuffer1[16] = {0};
+unsigned char aRxBuffer1[1] = {0};
 unsigned char aRxBuffer2[64] = {0};
 #else
 unsigned char aRxBuffer1[16] = {0};
@@ -23,7 +23,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
             xQueueSendToBackFromISR(Forward_Data, aRxBuffer1, &pxHigherPriorityTaskWoken);
         }
 #endif
-        HAL_UART_Receive_IT(&huart1, aRxBuffer1, 16);
+        HAL_UART_Receive_IT(&huart1, aRxBuffer1, 1);
     } else if (huart->Instance == USART2) {
 #if DEBUG_PARAM != 1
         if (Refree_Data != NULL) {
@@ -57,7 +57,7 @@ void UART1_Config(void) {
     while (HAL_UARTEx_SetTxFifoThreshold(&huart1, UART_TXFIFO_THRESHOLD_1_8) != HAL_OK);
     while (HAL_UARTEx_SetRxFifoThreshold(&huart1, UART_RXFIFO_THRESHOLD_1_8) != HAL_OK);
     while (HAL_UARTEx_DisableFifoMode(&huart1) != HAL_OK);
-    HAL_UART_Receive_IT(&huart1, aRxBuffer1, 16);
+    HAL_UART_Receive_IT(&huart1, aRxBuffer1, 1);
 }
 
 void UART2_Config(void) {

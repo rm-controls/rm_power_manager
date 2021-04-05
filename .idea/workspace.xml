@@ -18,11 +18,19 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="The basic logic of docking with the host computer has been completed, waiting for joint debugging">
+    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="Fixed the problem of unpacking error when the referee system was connected to WiFi">
+      <change afterPath="$PROJECT_DIR$/functions/fsm.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/functions/fsm.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/functions/protect.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/functions/protect.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/devices/encrypt.c" beforeDir="false" afterPath="$PROJECT_DIR$/devices/encrypt.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/devices/refree.c" beforeDir="false" afterPath="$PROJECT_DIR$/devices/refree.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/devices/pid.c" beforeDir="false" afterPath="$PROJECT_DIR$/devices/pid.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/devices/refree.h" beforeDir="false" afterPath="$PROJECT_DIR$/devices/refree.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/functions/report.c" beforeDir="false" afterPath="$PROJECT_DIR$/functions/report.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hardware/usart.c" beforeDir="false" afterPath="$PROJECT_DIR$/hardware/usart.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/system.c" beforeDir="false" afterPath="$PROJECT_DIR$/system/system.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/user/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/main.h" beforeDir="false" afterPath="$PROJECT_DIR$/user/main.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user/usertask.c" beforeDir="false" afterPath="$PROJECT_DIR$/user/usertask.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -78,6 +86,16 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="OCD Program" type="com.jetbrains.cidr.embedded.openocd.conf.type" factoryName="com.jetbrains.cidr.embedded.openocd.conf.factory" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Program" TARGET_NAME="Program.elf" CONFIG_NAME="Debug" version="1" RUN_TARGET_PROJECT_NAME="Program" RUN_TARGET_NAME="Program.elf">
       <openocd version="1" gdb-port="3333" telnet-port="4444" board-config="D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\board.cfg" reset-type="INIT" download-type="ALWAYS">
         <debugger kind="GDB" isBundled="true" />
@@ -157,7 +175,9 @@
       <workItem from="1617452633009" duration="20850000" />
       <workItem from="1617489097248" duration="1241000" />
       <workItem from="1617541036059" duration="3628000" />
-      <workItem from="1617547218897" duration="448000" />
+      <workItem from="1617547218897" duration="2492000" />
+      <workItem from="1617551093321" duration="4840000" />
+      <workItem from="1617626351956" duration="11375000" />
     </task>
     <task id="LOCAL-00001" summary="Rewrite Functions">
       <created>1611128425695</created>
@@ -292,7 +312,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617488648156</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Fixed the problem of unpacking error when the referee system was connected to WiFi">
+      <created>1617547879196</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1617547879196</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -394,13 +421,15 @@
     <MESSAGE value="Complete the model testing codes, it can test all module." />
     <MESSAGE value="PID current loop parameter setting successful" />
     <MESSAGE value="The basic logic of docking with the host computer has been completed, waiting for joint debugging" />
-    <option name="LAST_COMMIT_MESSAGE" value="The basic logic of docking with the host computer has been completed, waiting for joint debugging" />
+    <MESSAGE value="Fixed the problem of unpacking error when the referee system was connected to WiFi" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed the problem of unpacking error when the referee system was connected to WiFi" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
       <configuration name="com.jetbrains.cidr.embedded.openocd.conf.type">
         <watch expression="referee_data_" language="ObjectiveC" />
         <watch expression="referee_unpack_obj" language="ObjectiveC" />
+        <watch expression="FSM_Status" language="ObjectiveC" />
       </configuration>
     </watches-manager>
   </component>

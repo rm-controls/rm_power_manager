@@ -30,6 +30,11 @@ void Delayus(unsigned int xus) {
     }
 }
 
+void SoftReset(void) {
+    __set_FAULTMASK(1);
+    NVIC_SystemReset();
+}
+
 void Delayms(unsigned int xms) {
     if (xTaskGetSchedulerState() == taskSCHEDULER_RUNNING) {
         if (xms >= Facms) {

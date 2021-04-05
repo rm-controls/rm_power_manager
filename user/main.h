@@ -30,5 +30,7 @@
 /////////////// Functions ///////////////
 #include "calculate.h"
 #include "report.h"
+#include "fsm.h"
+#include "protect.h"
 
 #endif /* __MAIN_H */

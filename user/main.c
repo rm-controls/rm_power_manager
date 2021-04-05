@@ -2,9 +2,11 @@
 
 TaskHandle_t InitTask_Handler;
 TaskHandle_t PIDTask_Handler;
+TaskHandle_t FSMTask_Handler;
 TaskHandle_t UserTask_Handler;
 TaskHandle_t LEDTask_Handler;
 TaskHandle_t UploadTask_Handler;
+TaskHandle_t ProtectTask_Handler;
 
 void LED_Shine(void *pvParameters) {
     while (1) {
@@ -42,7 +44,9 @@ void InitTask() {
     Filter_Config();
     PID_ValueConfig();
     Sensor_Config();
+    xTaskCreate(Protect_Task, "ProtectTask", 512, NULL, 3, &ProtectTask_Handler);
     xTaskCreate(PID_CalculateTask, "PIDTask", 1024, NULL, 3, &PIDTask_Handler);
+    xTaskCreate(FSM_Task, "FSMTask", 1024, NULL, 3, &FSMTask_Handler);
     xTaskCreate(Upload_Refree, "UploadTask", 512, NULL, 2, &UploadTask_Handler);
     xTaskCreate(LED_Shine, "LEDTask", 128, NULL, 1, &LEDTask_Handler);
     xTaskCreate(UserTask, "UserTask", 1024, NULL, 2, &UserTask_Handler);
