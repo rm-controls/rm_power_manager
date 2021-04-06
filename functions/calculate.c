@@ -22,15 +22,15 @@ unsigned short I_CapOffset, I_ChaOffset;
 
 void Refree_Power_Callback(void) {
     if (FSM_Status.Charge_Mode == Full_Power_Charge) {
-        Capacitor_Calibrateh.Pd[0] = P_Capacitor;
+        Capacitor_Calibrateh.Pd[0] = V_Baterry * I_Capacitor;
         Capacitor_Calibrateh.Pr[0] = referee_data_.power_heat_data_.chassis_power;
         Capacitor_Calibrateh.Iw[0] = I_Capacitor;
         Capacitor_Calibrateh.Rw = (Capacitor_Calibrateh.Pr[0] - Capacitor_Calibrateh.Pd[0])
             / (Capacitor_Calibrateh.Iw[0] * Capacitor_Calibrateh.Iw[0]);
-        if (referee_data_.power_heat_data_.chassis_power_buffer <= 30)
+        if (referee_data_.power_heat_data_.chassis_power_buffer <= 50)
             PID_Capacitor.User = (float) referee_data_.game_robot_status_.chassis_power_limit - 10.0f;
         if (referee_data_.power_heat_data_.chassis_power_buffer == 60)
-            PID_Capacitor.User = (float) referee_data_.game_robot_status_.chassis_power_limit;
+            PID_Capacitor.User = (float) referee_data_.game_robot_status_.chassis_power_limit - 4.0f;
     }
 }
 

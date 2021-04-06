@@ -9,6 +9,7 @@ typedef enum {
     Only_Charge = 1,
     Only_PMOS = 2,
     PMOS_With_Charge = 3,
+    All_Off = 4,
 } Topology_Mode_e;
 
 typedef enum {

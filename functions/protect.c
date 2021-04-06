@@ -27,9 +27,12 @@ void Protect_Task(void *pvParameters) {
                 FSM_Status.Charge_Mode = Record_FSM.Charge_Mode;
         }
         if (V_Baterry <= 20.0f) {
-            FSM_Status.FSM_Mode = Halt_Mode;
+            Delayms(100);
+            if (V_Baterry <= 20.0f)
+                FSM_Status.FSM_Mode = Halt_Mode;
         } else if (FSM_Status.FSM_Mode == Halt_Mode) {
             DataSave_To_Flash(RePowerOn_Reset);
+            Delayms(1000);
             SoftReset();
         }
         Delayms(1);

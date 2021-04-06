@@ -10,6 +10,7 @@ void UserTask(void *pvParameters) {
     FSM_Status.FSM_Mode = Normal_Mode;
     FSM_Status.Charge_Power = 20;
     FSM_Status.Max_Power = 100;
+//    Delayms(1000);
     while (1) {
         if (V_Capacitor >= 15.0f) {     //Enter Over Power Mode
             FSM_Status.FSM_Mode = OverPower_Mode;
