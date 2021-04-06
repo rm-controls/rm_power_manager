@@ -7,6 +7,7 @@
 #include "system.h"
 #include "config.h"
 #include "usertask.h"
+#include "string.h"
 
 /////////////// FreeRTOS ///////////////
 #include "FreeRTOS.h"

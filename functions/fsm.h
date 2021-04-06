@@ -31,6 +31,7 @@ typedef enum {
     Normal_Mode = 1,
     OverPower_Mode = 2,
     Halt_Mode = 3,
+    Transition_Mode = 4,
 } FSM_Mode_e;
 
 typedef struct {

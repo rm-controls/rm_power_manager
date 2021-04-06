@@ -34,6 +34,10 @@ void FSM_Task(void *pvParameters) {
                     FSM_Status.Expect_Mode = FSM_Status.uExpect_Mode;
                     FSM_Status.Typology_Mode = Only_PMOS;
                     break;
+                case Transition_Mode:FSM_Status.Charge_Mode = Full_Power_Charge;
+                    FSM_Status.Expect_Mode = FSM_Status.uExpect_Mode;
+                    FSM_Status.Typology_Mode = Only_Charge;
+                    break;
             }
         }
         if (Last_FSM_Status.Charge_Mode != FSM_Status.Charge_Mode) {
@@ -52,7 +56,8 @@ void FSM_Task(void *pvParameters) {
                     vTaskResume(PIDTask_Handler);
                     HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_RESET);
                     break;
-                case Full_Power_Charge:PID_Capacitor.User = referee_data_.game_robot_status_.chassis_power_limit;
+                case Full_Power_Charge:
+                    PID_Capacitor.User = (float) referee_data_.game_robot_status_.chassis_power_limit - 4.0f;
                     vTaskResume(PIDTask_Handler);
                     HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_RESET);
                     break;

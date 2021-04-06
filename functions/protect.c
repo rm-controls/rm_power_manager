@@ -23,6 +23,7 @@ void Protect_Task(void *pvParameters) {
             FSM_Status.FSM_Mode = Halt_Mode;
         } else if (FSM_Status.FSM_Mode == Halt_Mode) {
             FSM_Status.FSM_Mode = Normal_Mode;
+            SoftReset();
         }
         Delayms(1);
     }

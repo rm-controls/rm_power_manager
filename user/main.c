@@ -44,6 +44,7 @@ void InitTask() {
     Filter_Config();
     PID_ValueConfig();
     Sensor_Config();
+    memset(&FSM_Status, 0x00, sizeof(FSM_Status_t));
     xTaskCreate(Protect_Task, "ProtectTask", 512, NULL, 3, &ProtectTask_Handler);
     xTaskCreate(PID_CalculateTask, "PIDTask", 1024, NULL, 3, &PIDTask_Handler);
     xTaskCreate(FSM_Task, "FSMTask", 1024, NULL, 3, &FSMTask_Handler);

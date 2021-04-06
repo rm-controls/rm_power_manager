@@ -10,35 +10,47 @@
 #include "encrypt.h"
 #include "system.h"
 #include "refree.h"
+#include "fsm.h"
+#include "pid.h"
 
 #define ADC_COEFFICIENT 3.0f / 4096.0f
 
-Power_Calibrate_t Capacitor_Calibrate, Chassis_Calibrate;
+Power_Calibrate_t Capacitor_Calibratel, Capacitor_Calibrateh, Chassis_Calibrate;
 float I_Capacitor, I_Chassis, V_Capacitor, V_Baterry, V_Chassis
 , P_Chassis, P_Capacitor, EP_Chassis, W_Capacitor;
 unsigned short I_CapOffset, I_ChaOffset;
+
+void Refree_Power_Callback(void) {
+    if (FSM_Status.Charge_Mode == Full_Power_Charge) {
+        Capacitor_Calibrateh.Pd[0] = P_Capacitor;
+        Capacitor_Calibrateh.Pr[0] = referee_data_.power_heat_data_.chassis_power;
+        Capacitor_Calibrateh.Iw[0] = I_Capacitor;
+        Capacitor_Calibrateh.Rw = (Capacitor_Calibrateh.Pr[0] - Capacitor_Calibrateh.Pd[0])
+            / (Capacitor_Calibrateh.Iw[0] * Capacitor_Calibrateh.Iw[0]);
+    }
+}
 
 void Calibrate_Power(void) {
     HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_12B_R, (unsigned short) (5460.0f / V_Capacitor)); //20W
     HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_RESET);
     Delayms(500);
-    Capacitor_Calibrate.Pd[0] = P_Capacitor;
-    Capacitor_Calibrate.Pr[0] = referee_data_.power_heat_data_.chassis_power;
-    Capacitor_Calibrate.Iw[0] = I_Capacitor;
+    Capacitor_Calibratel.Pd[0] = P_Capacitor;
+    Capacitor_Calibratel.Pr[0] = referee_data_.power_heat_data_.chassis_power;
+    Capacitor_Calibratel.Iw[0] = I_Capacitor;
     HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_12B_R, (unsigned short) (10920.0f / V_Capacitor)); //40W
     HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_RESET);
     Delayms(500);
-    Capacitor_Calibrate.Pd[1] = P_Capacitor;
-    Capacitor_Calibrate.Pr[1] = referee_data_.power_heat_data_.chassis_power;
-    Capacitor_Calibrate.Iw[1] = I_Capacitor;
-    Capacitor_Calibrate.Rw = (Capacitor_Calibrate.Pr[0] - Capacitor_Calibrate.Pd[0])
-        / (Capacitor_Calibrate.Iw[0] * Capacitor_Calibrate.Iw[0]);
-    Capacitor_Calibrate.Rw = (Capacitor_Calibrate.Rw + (Capacitor_Calibrate.Pr[1] - Capacitor_Calibrate.Pd[1])
-        / (Capacitor_Calibrate.Iw[1] * Capacitor_Calibrate.Iw[1])) * 0.5f;
+    Capacitor_Calibratel.Pd[1] = P_Capacitor;
+    Capacitor_Calibratel.Pr[1] = referee_data_.power_heat_data_.chassis_power;
+    Capacitor_Calibratel.Iw[1] = I_Capacitor;
+    Capacitor_Calibratel.Rw = (Capacitor_Calibratel.Pr[0] - Capacitor_Calibratel.Pd[0])
+        / (Capacitor_Calibratel.Iw[0] * Capacitor_Calibratel.Iw[0]);
+    Capacitor_Calibratel.Rw = (Capacitor_Calibratel.Rw + (Capacitor_Calibratel.Pr[1] - Capacitor_Calibratel.Pd[1])
+        / (Capacitor_Calibratel.Iw[1] * Capacitor_Calibratel.Iw[1])) * 0.5f;
 }
 
 void Sensor_Config(void) {
-    Capacitor_Calibrate.Rw = 0;
+    Capacitor_Calibratel.Rw = 0;
     Chassis_Calibrate.Rw = 0;
     HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_12B_R, 0x00);
     HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_SET);
@@ -70,8 +82,13 @@ void Calculate_Power(void) {
     P_ChassisF.Current_Value = I_Chassis * V_Chassis;
     P_Chassis = FirstOrder_Filter_Calculate(&P_ChassisF);
 
-    P_CapacitorF.Current_Value = V_Baterry * I_Capacitor;
-    P_Capacitor = FirstOrder_Filter_Calculate(&P_CapacitorF) + I_Capacitor * I_Capacitor * Capacitor_Calibrate.Rw;
+    if (FSM_Status.Charge_Mode != Full_Power_Charge) {
+        P_CapacitorF.Current_Value = V_Baterry * I_Capacitor;
+        P_Capacitor = FirstOrder_Filter_Calculate(&P_CapacitorF) + I_Capacitor * I_Capacitor * Capacitor_Calibratel.Rw;
+    } else {
+        P_CapacitorF.Current_Value = V_Baterry * I_Capacitor;
+        P_Capacitor = FirstOrder_Filter_Calculate(&P_CapacitorF) + I_Capacitor * I_Capacitor * Capacitor_Calibrateh.Rw;
+    }
 
     W_Capacitor = 0.5f * 15 * V_Capacitor * V_Capacitor - 367.5f;
     if (W_Capacitor < 0)
