@@ -44,31 +44,29 @@ extern "C" {
 /**
   * @brief   GPIO Init structure definition
   */
-typedef struct
-{
-  uint32_t Pin;       /*!< Specifies the GPIO pins to be configured.
+typedef struct {
+    uint32_t Pin;       /*!< Specifies the GPIO pins to be configured.
                            This parameter can be any value of @ref GPIO_pins_define */
 
-  uint32_t Mode;      /*!< Specifies the operating mode for the selected pins.
+    uint32_t Mode;      /*!< Specifies the operating mode for the selected pins.
                            This parameter can be a value of @ref GPIO_mode_define */
 
-  uint32_t Pull;      /*!< Specifies the Pull-up or Pull-Down activation for the selected pins.
+    uint32_t Pull;      /*!< Specifies the Pull-up or Pull-Down activation for the selected pins.
                            This parameter can be a value of @ref GPIO_pull_define */
 
-  uint32_t Speed;     /*!< Specifies the speed for the selected pins.
+    uint32_t Speed;     /*!< Specifies the speed for the selected pins.
                            This parameter can be a value of @ref GPIO_speed_define */
 
-  uint32_t Alternate;  /*!< Peripheral to be connected to the selected pins.
+    uint32_t Alternate;  /*!< Peripheral to be connected to the selected pins.
                             This parameter can be a value of @ref GPIO_Alternate_function_selection */
 } GPIO_InitTypeDef;
 
 /**
   * @brief  GPIO Bit SET and Bit RESET enumeration
   */
-typedef enum
-{
-  GPIO_PIN_RESET = 0U,
-  GPIO_PIN_SET
+typedef enum {
+    GPIO_PIN_RESET = 0U,
+    GPIO_PIN_SET = 1,
 } GPIO_PinState;
 /**
   * @}
@@ -256,8 +254,8 @@ typedef enum
   * @{
   */
 /* Initialization and de-initialization functions *****************************/
-void  HAL_GPIO_Init(GPIO_TypeDef  *GPIOx, GPIO_InitTypeDef *GPIO_Init);
-void  HAL_GPIO_DeInit(GPIO_TypeDef  *GPIOx, uint32_t GPIO_Pin);
+void HAL_GPIO_Init(GPIO_TypeDef *GPIOx, GPIO_InitTypeDef *GPIO_Init);
+void HAL_GPIO_DeInit(GPIO_TypeDef *GPIOx, uint32_t GPIO_Pin);
 /**
   * @}
   */

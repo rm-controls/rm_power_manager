@@ -8,6 +8,7 @@
 #include "port.h"
 #include "FreeRTOS.h"
 #include "task.h"
+#include "semphr.h"
 #include "pid.h"
 #include "refree.h"
 #include "calculate.h"
@@ -15,9 +16,21 @@
 
 extern TaskHandle_t PIDTask_Handler;
 FSM_Status_t FSM_Status, Last_FSM_Status;
+extern SemaphoreHandle_t Calibrate_Semaphore;
 
 void FSM_Task(void *pvParameters) {
     memset(&Last_FSM_Status, 0x00, sizeof(FSM_Status_t));
+
+    xSemaphoreTake(Calibrate_Semaphore, 0xFFFFFFFFUL);
+    HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(EN_NMOS_GPIO_Port, EN_NMOS_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(BOOST_EN_GPIO_Port, BOOST_EN_Pin, GPIO_PIN_SET);
+    Calibrate_Power();
+    HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(EN_NMOS_GPIO_Port, EN_NMOS_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(BOOST_EN_GPIO_Port, BOOST_EN_Pin, GPIO_PIN_SET);
+    xSemaphoreGive(Calibrate_Semaphore);
+
     Delayms(10);
     while (1) {
         if (Last_FSM_Status.FSM_Mode != FSM_Status.FSM_Mode) {
@@ -90,15 +103,18 @@ void FSM_Task(void *pvParameters) {
         if (Last_FSM_Status.Typology_Mode != FSM_Status.Typology_Mode) {
             switch (FSM_Status.Typology_Mode) {
                 case Only_Charge:HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_RESET);
-                    HAL_GPIO_WritePin(EN_NMOS_GPIO_Port, EN_NMOS_Pin, GPIO_PIN_SET);
                     HAL_GPIO_WritePin(BOOST_EN_GPIO_Port, BOOST_EN_Pin, GPIO_PIN_RESET);
+                    Delayms(50);
+                    HAL_GPIO_WritePin(EN_NMOS_GPIO_Port, EN_NMOS_Pin, GPIO_PIN_SET);
                     break;
                 case Only_PMOS:HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_SET);
                     HAL_GPIO_WritePin(EN_NMOS_GPIO_Port, EN_NMOS_Pin, GPIO_PIN_RESET);
+                    Delayms(50);
                     HAL_GPIO_WritePin(BOOST_EN_GPIO_Port, BOOST_EN_Pin, GPIO_PIN_SET);
                     break;
                 case PMOS_With_Charge:HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_RESET);
                     HAL_GPIO_WritePin(EN_NMOS_GPIO_Port, EN_NMOS_Pin, GPIO_PIN_RESET);
+                    Delayms(50);
                     HAL_GPIO_WritePin(BOOST_EN_GPIO_Port, BOOST_EN_Pin, GPIO_PIN_SET);
                     break;
             }

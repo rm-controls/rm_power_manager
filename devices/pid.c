@@ -7,16 +7,16 @@
 #include "dac.h"
 #include "calculate.h"
 #include "port.h"
+#include "FreeRTOS.h"
+#include "semphr.h"
 
+extern SemaphoreHandle_t Calibrate_Semaphore;
 PID_Structure PID_Capacitor;
 
 void PID_CalculateTask(void *pvParameters) {
-    while (1) {     // OverVoltage Protection
-        Delayms(1);
-        if (V_Capacitor <= 15.0f)
-            break;
-    }
-    Calibrate_Power();
+    Delayms(1);
+    xSemaphoreTake(Calibrate_Semaphore, 0xFFFFFFFFUL);
+    xSemaphoreGive(Calibrate_Semaphore);
     HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_RESET);
     while (1) {
         PID_Get_Result(&PID_Capacitor, P_Capacitor);

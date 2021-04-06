@@ -6,13 +6,15 @@ extern TIM_HandleTypeDef htim4;
 
 void NMI_Handler(void) {
     HAL_RCC_NMI_IRQHandler();
-    while (1) {
-    }
+    DataSave_To_Flash(NMI_Reset);
+    SoftReset();
+    while (1);
 }
 
 void HardFault_Handler(void) {
-    while (1) {
-    }
+    DataSave_To_Flash(Hardfault_Reset);
+    SoftReset();
+    while (1);
 }
 
 void MemManage_Handler(void) {
@@ -22,14 +24,14 @@ void MemManage_Handler(void) {
 }
 
 void BusFault_Handler(void) {
-    while (1) {
-
-    }
+    DataSave_To_Flash(BusFault_Reset);
+    SoftReset();
+    while (1);
 }
 void UsageFault_Handler(void) {
-    while (1) {
-
-    }
+    DataSave_To_Flash(UsageFault_Reset);
+    SoftReset();
+    while (1);
 }
 
 void DebugMon_Handler(void) {

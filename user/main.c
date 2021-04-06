@@ -7,6 +7,7 @@ TaskHandle_t UserTask_Handler;
 TaskHandle_t LEDTask_Handler;
 TaskHandle_t UploadTask_Handler;
 TaskHandle_t ProtectTask_Handler;
+SemaphoreHandle_t Calibrate_Semaphore;
 
 void LED_Shine(void *pvParameters) {
     while (1) {
@@ -45,6 +46,7 @@ void InitTask() {
     PID_ValueConfig();
     Sensor_Config();
     memset(&FSM_Status, 0x00, sizeof(FSM_Status_t));
+    Calibrate_Semaphore = xSemaphoreCreateMutex();
     xTaskCreate(Protect_Task, "ProtectTask", 512, NULL, 3, &ProtectTask_Handler);
     xTaskCreate(PID_CalculateTask, "PIDTask", 1024, NULL, 3, &PIDTask_Handler);
     xTaskCreate(FSM_Task, "FSMTask", 1024, NULL, 3, &FSMTask_Handler);
@@ -59,6 +61,7 @@ int main(void) {
     Cache_Config();
     HAL_Init();
     SystemClock_Config();
+    Check_ResetReason();
     xTaskCreate(InitTask, "InitTask", 512, NULL, 1, &InitTask_Handler);
     vTaskStartScheduler();
     while (1);

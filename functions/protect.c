@@ -6,10 +6,17 @@
 #include "fsm.h"
 #include "calculate.h"
 #include "system.h"
+#include "datasave.h"
+#include "FreeRTOS.h"
+#include "semphr.h"
+
+extern SemaphoreHandle_t Calibrate_Semaphore;
 
 void Protect_Task(void *pvParameters) {
     FSM_Status_t Record_FSM;
-    Delayms(1000);
+    Delayms(10);
+    xSemaphoreTake(Calibrate_Semaphore, 0xFFFFFFFFUL);
+    xSemaphoreGive(Calibrate_Semaphore);
     Record_FSM.Charge_Mode = FSM_Status.uCharge_Mode;
     while (1) {
         if (V_Capacitor >= 15.5f) { // OverVoltage Protection
@@ -22,7 +29,7 @@ void Protect_Task(void *pvParameters) {
         if (V_Baterry <= 20.0f) {
             FSM_Status.FSM_Mode = Halt_Mode;
         } else if (FSM_Status.FSM_Mode == Halt_Mode) {
-            FSM_Status.FSM_Mode = Normal_Mode;
+            DataSave_To_Flash(RePowerOn_Reset);
             SoftReset();
         }
         Delayms(1);

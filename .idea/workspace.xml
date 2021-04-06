@@ -18,17 +18,20 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="The power correction algorithm is modified, which is relatively accurate at low power, but the actual power is much smaller than the calculated power at high power">
+    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="Modify the power correction code of the super power mode. Now the power in the super power mode can be guaranteed within the limited power">
+      <change afterPath="$PROJECT_DIR$/functions/datasave.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/functions/datasave.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/devices/refree.c" beforeDir="false" afterPath="$PROJECT_DIR$/devices/refree.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/devices/pid.c" beforeDir="false" afterPath="$PROJECT_DIR$/devices/pid.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_gpio.h" beforeDir="false" afterPath="$PROJECT_DIR$/drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_gpio.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/functions/calculate.c" beforeDir="false" afterPath="$PROJECT_DIR$/functions/calculate.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions/calculate.h" beforeDir="false" afterPath="$PROJECT_DIR$/functions/calculate.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/functions/fsm.c" beforeDir="false" afterPath="$PROJECT_DIR$/functions/fsm.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions/fsm.h" beforeDir="false" afterPath="$PROJECT_DIR$/functions/fsm.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/functions/protect.c" beforeDir="false" afterPath="$PROJECT_DIR$/functions/protect.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/system.c" beforeDir="false" afterPath="$PROJECT_DIR$/system/system.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/system/system.h" beforeDir="false" afterPath="$PROJECT_DIR$/system/system.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/user/main.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user/main.h" beforeDir="false" afterPath="$PROJECT_DIR$/user/main.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/stm32h7xx_it.c" beforeDir="false" afterPath="$PROJECT_DIR$/user/stm32h7xx_it.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user/usertask.c" beforeDir="false" afterPath="$PROJECT_DIR$/user/usertask.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -175,7 +178,7 @@
       <workItem from="1617541036059" duration="3628000" />
       <workItem from="1617547218897" duration="2492000" />
       <workItem from="1617551093321" duration="4840000" />
-      <workItem from="1617626351956" duration="20351000" />
+      <workItem from="1617626351956" duration="45367000" />
     </task>
     <task id="LOCAL-00001" summary="Rewrite Functions">
       <created>1611128425695</created>
@@ -338,7 +341,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617693530536</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Modify the power correction code of the super power mode. Now the power in the super power mode can be guaranteed within the limited power">
+      <created>1617696787857</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1617696787857</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -444,7 +454,8 @@
     <MESSAGE value="Refactoring the code with the state machine, now all the power will be cut off when the bus power is off. But now UART2 can not receive the referee system packet continuously, which needs to be solved" />
     <MESSAGE value="The power correction code is added, but the result is not ideal" />
     <MESSAGE value="The power correction algorithm is modified, which is relatively accurate at low power, but the actual power is much smaller than the calculated power at high power" />
-    <option name="LAST_COMMIT_MESSAGE" value="The power correction algorithm is modified, which is relatively accurate at low power, but the actual power is much smaller than the calculated power at high power" />
+    <MESSAGE value="Modify the power correction code of the super power mode. Now the power in the super power mode can be guaranteed within the limited power" />
+    <option name="LAST_COMMIT_MESSAGE" value="Modify the power correction code of the super power mode. Now the power in the super power mode can be guaranteed within the limited power" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

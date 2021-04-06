@@ -30,11 +30,6 @@ void Delayus(unsigned int xus) {
     }
 }
 
-void SoftReset(void) {
-    __set_FAULTMASK(1);
-    NVIC_SystemReset();
-}
-
 void Delayms(unsigned int xms) {
     if (xTaskGetSchedulerState() == taskSCHEDULER_RUNNING) {
         if (xms >= Facms) {
@@ -51,6 +46,29 @@ void HAL_MspInit(void) {
     __HAL_RCC_SYSCFG_CLK_ENABLE();
     HAL_SYSCFG_DisableVREFBUF();
     HAL_SYSCFG_VREFBUF_HighImpedanceConfig(SYSCFG_VREFBUF_HIGH_IMPEDANCE_ENABLE);
+}
+
+Reset_Reason_e Check_ResetReason(void) {
+    if (__HAL_RCC_GET_FLAG(RCC_FLAG_PORRST) != RESET)
+        return Power_On_Reset;
+    else if (__HAL_RCC_GET_FLAG(RCC_FLAG_PINRST) != RESET)
+        return RST_Pin_Reset;
+    else if (__HAL_RCC_GET_FLAG(RCC_FLAG_SFTRST) != RESET)
+        return Software_Reset;
+    else if (__HAL_RCC_GET_FLAG(RCC_FLAG_IWDG1RST) != RESET)
+        return IWDG_Reset;
+    else if (__HAL_RCC_GET_FLAG(RCC_FLAG_WWDG1RST) != RESET)
+        return WWDG_Reset;
+    else if (__HAL_RCC_GET_FLAG(RCC_FLAG_LPWR1RST) != RESET
+        || __HAL_RCC_GET_FLAG(RCC_FLAG_LPWR2RST) != RESET)
+        return LowPower_Reset;
+    else
+        return Other_Reason;
+}
+
+void SoftReset(void) {
+    __set_FAULTMASK(1);
+    NVIC_SystemReset();
 }
 
 HAL_StatusTypeDef HAL_InitTick(uint32_t TickPriority) {

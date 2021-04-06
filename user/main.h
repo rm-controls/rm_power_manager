@@ -12,6 +12,8 @@
 /////////////// FreeRTOS ///////////////
 #include "FreeRTOS.h"
 #include "task.h"
+#include "queue.h"
+#include "semphr.h"
 
 /////////////// Hardware ///////////////
 #include "adc.h"
@@ -33,5 +35,6 @@
 #include "report.h"
 #include "fsm.h"
 #include "protect.h"
+#include "datasave.h"
 
 #endif /* __MAIN_H */

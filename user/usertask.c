@@ -11,11 +11,11 @@ void UserTask(void *pvParameters) {
     FSM_Status.Charge_Power = 20;
     FSM_Status.Max_Power = 100;
     while (1) {
-//        referee_data_.game_robot_status_.chassis_power_limit = 50;
         if (V_Capacitor >= 15.0f) {     //Enter Over Power Mode
             FSM_Status.FSM_Mode = OverPower_Mode;
             HAL_GPIO_WritePin(LED2_GPIO_Port, LED2_Pin, GPIO_PIN_RESET);
-        } else if (V_Capacitor <= 8.0f && V_Capacitor > 7.0f) {
+        } else if (V_Capacitor <= 8.0f && V_Capacitor > 7.0f &&
+            FSM_Status.FSM_Mode == OverPower_Mode) {
             FSM_Status.FSM_Mode = Transition_Mode;
         } else if (V_Capacitor <= 7.0f) {   //Exit OverPower Mode
             FSM_Status.FSM_Mode = Normal_Mode;

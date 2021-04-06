@@ -27,6 +27,10 @@ void Refree_Power_Callback(void) {
         Capacitor_Calibrateh.Iw[0] = I_Capacitor;
         Capacitor_Calibrateh.Rw = (Capacitor_Calibrateh.Pr[0] - Capacitor_Calibrateh.Pd[0])
             / (Capacitor_Calibrateh.Iw[0] * Capacitor_Calibrateh.Iw[0]);
+        if (referee_data_.power_heat_data_.chassis_power_buffer <= 30)
+            PID_Capacitor.User = (float) referee_data_.game_robot_status_.chassis_power_limit - 10.0f;
+        if (referee_data_.power_heat_data_.chassis_power_buffer == 60)
+            PID_Capacitor.User = (float) referee_data_.game_robot_status_.chassis_power_limit;
     }
 }
 
@@ -47,6 +51,7 @@ void Calibrate_Power(void) {
         / (Capacitor_Calibratel.Iw[0] * Capacitor_Calibratel.Iw[0]);
     Capacitor_Calibratel.Rw = (Capacitor_Calibratel.Rw + (Capacitor_Calibratel.Pr[1] - Capacitor_Calibratel.Pd[1])
         / (Capacitor_Calibratel.Iw[1] * Capacitor_Calibratel.Iw[1])) * 0.5f;
+    HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_12B_R, 0);
 }
 
 void Sensor_Config(void) {
@@ -60,7 +65,6 @@ void Sensor_Config(void) {
     I_CapOffset = ADC_FinalResult[0];
     I_ChaOffset = ADC_FinalResult[1];
     HAL_Delay(500);
-    HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_RESET);
 }
 
 void Calculate_Power(void) {
