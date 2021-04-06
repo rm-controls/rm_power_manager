@@ -18,9 +18,8 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="Refactoring the code with the state machine, now all the power will be cut off when the bus power is off. But now UART2 can not receive the referee system packet continuously, which needs to be solved">
+    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="The power correction code is added, but the result is not ideal">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/devices/pid.c" beforeDir="false" afterPath="$PROJECT_DIR$/devices/pid.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/functions/calculate.c" beforeDir="false" afterPath="$PROJECT_DIR$/functions/calculate.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/functions/calculate.h" beforeDir="false" afterPath="$PROJECT_DIR$/functions/calculate.h" afterDir="false" />
     </list>
@@ -168,7 +167,7 @@
       <workItem from="1617541036059" duration="3628000" />
       <workItem from="1617547218897" duration="2492000" />
       <workItem from="1617551093321" duration="4840000" />
-      <workItem from="1617626351956" duration="13666000" />
+      <workItem from="1617626351956" duration="17679000" />
     </task>
     <task id="LOCAL-00001" summary="Rewrite Functions">
       <created>1611128425695</created>
@@ -317,7 +316,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617638279428</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="The power correction code is added, but the result is not ideal">
+      <created>1617640757033</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1617640757033</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -421,7 +427,8 @@
     <MESSAGE value="The basic logic of docking with the host computer has been completed, waiting for joint debugging" />
     <MESSAGE value="Fixed the problem of unpacking error when the referee system was connected to WiFi" />
     <MESSAGE value="Refactoring the code with the state machine, now all the power will be cut off when the bus power is off. But now UART2 can not receive the referee system packet continuously, which needs to be solved" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactoring the code with the state machine, now all the power will be cut off when the bus power is off. But now UART2 can not receive the referee system packet continuously, which needs to be solved" />
+    <MESSAGE value="The power correction code is added, but the result is not ideal" />
+    <option name="LAST_COMMIT_MESSAGE" value="The power correction code is added, but the result is not ideal" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

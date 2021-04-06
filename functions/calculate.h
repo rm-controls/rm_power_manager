@@ -6,12 +6,10 @@
 #define _FUNCTIONS_CALCULATE_H_
 
 typedef struct {
-    float a;
-    float b;
-    float x1;
-    float x2;
-    float y1;
-    float y2;
+    float Rw;
+    float Pr[2];
+    float Pd[2];
+    float Iw[2];
 } Power_Calibrate_t;
 
 extern Power_Calibrate_t Capacitor_Calibrate, Chassis_Calibrate;
