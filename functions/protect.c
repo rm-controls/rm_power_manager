@@ -13,19 +13,10 @@
 extern SemaphoreHandle_t Calibrate_Semaphore;
 
 void Protect_Task(void *pvParameters) {
-    FSM_Status_t Record_FSM;
     Delayms(10);
     xSemaphoreTake(Calibrate_Semaphore, 0xFFFFFFFFUL);
     xSemaphoreGive(Calibrate_Semaphore);
-    Record_FSM.Charge_Mode = FSM_Status.uCharge_Mode;
     while (1) {
-        if (V_Capacitor >= 15.5f) { // OverVoltage Protection
-            Record_FSM.Charge_Mode = FSM_Status.Charge_Mode;
-            FSM_Status.Charge_Mode = Zero_Power_Charge;
-        } else if (V_Capacitor <= 15.0f) {
-            if (FSM_Status.Charge_Mode == Zero_Power_Charge)
-                FSM_Status.Charge_Mode = Record_FSM.Charge_Mode;
-        }
         if (V_Baterry <= 20.0f) {
             Delayms(100);
             if (V_Baterry <= 20.0f)

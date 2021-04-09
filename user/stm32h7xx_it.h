@@ -12,5 +12,6 @@ void ADC_IRQHandler(void);
 void TIM4_IRQHandler(void);
 void USART1_IRQHandler(void);
 void USART2_IRQHandler(void);
+void WWDG_IRQHandler(void);
 
 #endif /* __STM32H7xx_IT_H */

@@ -22,6 +22,7 @@
 #include "usart.h"
 #include "gpio.h"
 #include "timer.h"
+#include "watchdog.h"
 
 /////////////// Device ///////////////
 #include "pid.h"

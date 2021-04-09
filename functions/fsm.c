@@ -13,10 +13,13 @@
 #include "refree.h"
 #include "calculate.h"
 #include "string.h"
+#include "watchdog.h"
 
 extern TaskHandle_t PIDTask_Handler;
 FSM_Status_t FSM_Status, Last_FSM_Status;
 extern SemaphoreHandle_t Calibrate_Semaphore;
+extern TaskHandle_t ProtectTask_Handler;
+TaskHandle_t WatchdogTask_Handler;
 
 void FSM_Task(void *pvParameters) {
     memset(&Last_FSM_Status, 0x00, sizeof(FSM_Status_t));
@@ -25,28 +28,45 @@ void FSM_Task(void *pvParameters) {
     HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_SET);
     HAL_GPIO_WritePin(EN_NMOS_GPIO_Port, EN_NMOS_Pin, GPIO_PIN_SET);
     HAL_GPIO_WritePin(BOOST_EN_GPIO_Port, BOOST_EN_Pin, GPIO_PIN_SET);
-    Calibrate_Power();
+    Calibrate_Powerl();
     HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_SET);
     HAL_GPIO_WritePin(EN_NMOS_GPIO_Port, EN_NMOS_Pin, GPIO_PIN_SET);
     HAL_GPIO_WritePin(BOOST_EN_GPIO_Port, BOOST_EN_Pin, GPIO_PIN_SET);
     xSemaphoreGive(Calibrate_Semaphore);
 
     Delayms(10);
+
+    xTaskCreate(WatchDog_Task, "WatchDogTask", 128, NULL, 1, &WatchdogTask_Handler);
+
     while (1) {
         switch (FSM_Status.FSM_Mode) {
-            case Normal_Mode:FSM_Status.Charge_Mode = FSM_Status.uCharge_Mode;
+            case Normal_Mode:
+                if (FSM_Status.Charge_Mode != Zero_Power_Charge || V_Capacitor <= 15.0)
+                    FSM_Status.Charge_Mode = FSM_Status.uCharge_Mode;
                 FSM_Status.Expect_Mode = FSM_Status.uExpect_Mode;
                 FSM_Status.Typology_Mode = PMOS_With_Charge;
                 break;
-            case OverPower_Mode:FSM_Status.Charge_Mode = Full_Power_Charge;
+            case OverPower_Mode:
+                if (Last_FSM_Status.FSM_Mode == Normal_Mode) {
+                    vTaskSuspend(PIDTask_Handler);
+                    vTaskSuspend(ProtectTask_Handler);
+                    Calibrate_Powerh();
+                    vTaskResume(PIDTask_Handler);
+                    vTaskResume(ProtectTask_Handler);
+                }
+                if (FSM_Status.Charge_Mode != Zero_Power_Charge || V_Capacitor <= 15.0)
+                    FSM_Status.Charge_Mode = Full_Power_Charge;
                 FSM_Status.Expect_Mode = OverPower_Expect;
                 FSM_Status.Typology_Mode = Only_Charge;
                 break;
             case Halt_Mode:FSM_Status.Charge_Mode = Zero_Power_Charge;
                 FSM_Status.Expect_Mode = FSM_Status.uExpect_Mode;
-                FSM_Status.Typology_Mode = Only_PMOS;
+                FSM_Status.Typology_Mode = All_Off;
+                HAL_GPIO_WritePin(LED2_GPIO_Port, LED2_Pin, GPIO_PIN_SET);
                 break;
-            case Transition_Mode:FSM_Status.Charge_Mode = Full_Power_Charge;
+            case Transition_Mode:
+                if (FSM_Status.Charge_Mode != Zero_Power_Charge || V_Capacitor <= 15.0)
+                    FSM_Status.Charge_Mode = Full_Power_Charge;
                 FSM_Status.Expect_Mode = FSM_Status.uExpect_Mode;
                 FSM_Status.Typology_Mode = Only_Charge;
                 break;
@@ -69,7 +89,7 @@ void FSM_Task(void *pvParameters) {
                 HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_RESET);
                 break;
             case Full_Power_Charge:
-                PID_Capacitor.User = (float) referee_data_.game_robot_status_.chassis_power_limit - 4.0f;
+//                PID_Capacitor.User = (float) referee_data_.game_robot_status_.chassis_power_limit - 4.0f;
                 vTaskResume(PIDTask_Handler);
                 HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_RESET);
                 break;
@@ -110,6 +130,7 @@ void FSM_Task(void *pvParameters) {
                 HAL_GPIO_WritePin(EN_NMOS_GPIO_Port, EN_NMOS_Pin, GPIO_PIN_SET);
                 break;
         }
+        Last_FSM_Status.FSM_Mode = FSM_Status.FSM_Mode;
         Delayms(5);
     }
 }

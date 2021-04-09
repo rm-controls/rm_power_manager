@@ -49,21 +49,35 @@ void HAL_MspInit(void) {
 }
 
 Reset_Reason_e Check_ResetReason(void) {
-    if (__HAL_RCC_GET_FLAG(RCC_FLAG_PORRST) != RESET)
+    if (__HAL_RCC_GET_FLAG(RCC_FLAG_PORRST) != RESET) {
+        __HAL_RCC_CLEAR_RESET_FLAGS();
         return Power_On_Reset;
-    else if (__HAL_RCC_GET_FLAG(RCC_FLAG_PINRST) != RESET)
+    }
+    else if (__HAL_RCC_GET_FLAG(RCC_FLAG_PINRST) != RESET) {
+        __HAL_RCC_CLEAR_RESET_FLAGS();
         return RST_Pin_Reset;
-    else if (__HAL_RCC_GET_FLAG(RCC_FLAG_SFTRST) != RESET)
+    }
+    else if (__HAL_RCC_GET_FLAG(RCC_FLAG_SFTRST) != RESET) {
+        __HAL_RCC_CLEAR_RESET_FLAGS();
         return Software_Reset;
-    else if (__HAL_RCC_GET_FLAG(RCC_FLAG_IWDG1RST) != RESET)
+    }
+    else if (__HAL_RCC_GET_FLAG(RCC_FLAG_IWDG1RST) != RESET) {
+        __HAL_RCC_CLEAR_RESET_FLAGS();
         return IWDG_Reset;
-    else if (__HAL_RCC_GET_FLAG(RCC_FLAG_WWDG1RST) != RESET)
+    }
+    else if (__HAL_RCC_GET_FLAG(RCC_FLAG_WWDG1RST) != RESET) {
+        __HAL_RCC_CLEAR_RESET_FLAGS();
         return WWDG_Reset;
+    }
     else if (__HAL_RCC_GET_FLAG(RCC_FLAG_LPWR1RST) != RESET
-        || __HAL_RCC_GET_FLAG(RCC_FLAG_LPWR2RST) != RESET)
+        || __HAL_RCC_GET_FLAG(RCC_FLAG_LPWR2RST) != RESET) {
+        __HAL_RCC_CLEAR_RESET_FLAGS();
         return LowPower_Reset;
-    else
+    }
+    else {
+        __HAL_RCC_CLEAR_RESET_FLAGS();
         return Other_Reason;
+    }
 }
 
 void SoftReset(void) {

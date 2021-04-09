@@ -22,19 +22,42 @@ unsigned short I_CapOffset, I_ChaOffset;
 
 void Refree_Power_Callback(void) {
     if (FSM_Status.Charge_Mode == Full_Power_Charge) {
-        Capacitor_Calibrateh.Pd[0] = V_Baterry * I_Capacitor;
-        Capacitor_Calibrateh.Pr[0] = referee_data_.power_heat_data_.chassis_power;
-        Capacitor_Calibrateh.Iw[0] = I_Capacitor;
-        Capacitor_Calibrateh.Rw = (Capacitor_Calibrateh.Pr[0] - Capacitor_Calibrateh.Pd[0])
-            / (Capacitor_Calibrateh.Iw[0] * Capacitor_Calibrateh.Iw[0]);
-        if (referee_data_.power_heat_data_.chassis_power_buffer <= 50)
+        if (referee_data_.power_heat_data_.chassis_power_buffer <= 30)
             PID_Capacitor.User = (float) referee_data_.game_robot_status_.chassis_power_limit - 10.0f;
-        if (referee_data_.power_heat_data_.chassis_power_buffer == 60)
-            PID_Capacitor.User = (float) referee_data_.game_robot_status_.chassis_power_limit - 4.0f;
+        else
+            PID_Capacitor.User = (float) referee_data_.game_robot_status_.chassis_power_limit;
     }
 }
 
-void Calibrate_Power(void) {
+void Calibrate_Powerh(void) {
+    HAL_DAC_SetValue(&hdac1,
+                     DAC_CHANNEL_1,
+                     DAC_ALIGN_12B_R,
+                     (unsigned short) (273.0f * (float) referee_data_.game_robot_status_.chassis_power_limit
+                         / V_Capacitor));
+    HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_RESET);
+    Delayms(500);
+    Capacitor_Calibrateh.Pd[0] = P_Capacitor;
+    Capacitor_Calibrateh.Pr[0] = referee_data_.power_heat_data_.chassis_power;
+    Capacitor_Calibrateh.Iw[0] = I_Capacitor;
+    HAL_DAC_SetValue(&hdac1,
+                     DAC_CHANNEL_1,
+                     DAC_ALIGN_12B_R,
+                     (unsigned short) (273.0f * ((float) referee_data_.game_robot_status_.chassis_power_limit - 10.0f)
+                         / V_Capacitor));
+    HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_RESET);
+    Delayms(500);
+    Capacitor_Calibrateh.Pd[1] = P_Capacitor;
+    Capacitor_Calibrateh.Pr[1] = referee_data_.power_heat_data_.chassis_power;
+    Capacitor_Calibrateh.Iw[1] = I_Capacitor;
+    Capacitor_Calibrateh.Rw = (Capacitor_Calibrateh.Pr[0] - Capacitor_Calibrateh.Pd[0])
+        / (Capacitor_Calibrateh.Iw[0] * Capacitor_Calibrateh.Iw[0]);
+    Capacitor_Calibrateh.Rw = (Capacitor_Calibrateh.Rw + (Capacitor_Calibrateh.Pr[1] - Capacitor_Calibrateh.Pd[1])
+        / (Capacitor_Calibrateh.Iw[1] * Capacitor_Calibrateh.Iw[1])) * 0.5f;
+    HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_12B_R, 0);
+}
+
+void Calibrate_Powerl(void) {
     HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_12B_R, (unsigned short) (5460.0f / V_Capacitor)); //20W
     HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_RESET);
     Delayms(500);

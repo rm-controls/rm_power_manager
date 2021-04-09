@@ -18,7 +18,8 @@ extern float I_Capacitor, I_Chassis, V_Capacitor, V_Baterry,
 extern unsigned short I_CapOffset, I_ChaOffset;
 void Calculate_Power(void);
 void Sensor_Config(void);
-void Calibrate_Power(void);
+void Calibrate_Powerl(void);
+void Calibrate_Powerh(void);
 void Refree_Power_Callback(void);
 
 #endif //_FUNCTIONS_CALCULATE_H_

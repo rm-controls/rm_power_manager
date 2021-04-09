@@ -65,3 +65,7 @@ void USART1_IRQHandler(void) {
 void USART2_IRQHandler(void) {
     HAL_UART_IRQHandler(&huart2);
 }
+
+void WWDG_IRQHandler(void) {
+    HAL_WWDG_IRQHandler(&hwwdg1);
+}

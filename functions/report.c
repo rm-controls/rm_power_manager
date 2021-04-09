@@ -24,7 +24,7 @@ TaskHandle_t ReportTask_Handler;
 
 void Upload_Refree(void *pvParameters) {
 #if DEBUG_PARAM != 1
-    unsigned char Refree_Buf[64], Forward_Buf[1];
+    unsigned char Refree_Buf[64], Forward_Buf[1] = {0xa5};
     Refree_Data = xQueueCreate(4, 64);
     Forward_Data = xQueueCreate(1024, 1);
     while (1) {
@@ -34,9 +34,10 @@ void Upload_Refree(void *pvParameters) {
                 Referee_unpack(Refree_Buf[counter]);
             }
         }
-        while (xQueueReceive(Forward_Data, Forward_Buf, 1) == pdTRUE) {
+//        HAL_UART_Transmit(&huart2, Forward_Buf, 1, 0xFFFFFFFFUL);
+//        while (xQueueReceive(Forward_Data, Forward_Buf, 1) == pdTRUE) {
 //            HAL_UART_Transmit(&huart2, Forward_Buf, 1, 0xFFFFFFFFUL);
-        }
+//        }
     }
 #else
     unsigned char DTP_Buf[10];
