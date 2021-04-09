@@ -2,6 +2,7 @@
 // Created by Lao·Zhu on 2021/3/26.
 //
 
+#include <protect.h>
 #include "refree.h"
 #include "string.h"
 #include "stdbool.h"
@@ -107,7 +108,9 @@ void Referee_getData(unsigned char *frame) {
     index += (sizeof(FrameHeaderStruct) - 1);
     memcpy(&cmd_id, frame + index, sizeof(unsigned short));
     index += sizeof(unsigned short);
+    referee_time_counter = 0;
     DTP_Transmit(&Upload_Package);
+    HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
     switch (cmd_id) {
         case kGameStatusCmdId:memcpy(&referee_data_.game_status_, frame + index, sizeof(GameStatus));
             break;

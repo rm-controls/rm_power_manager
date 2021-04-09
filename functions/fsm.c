@@ -71,7 +71,7 @@ void FSM_Task(void *pvParameters) {
                 FSM_Status.Typology_Mode = Only_Charge;
                 break;
         }
-        if (V_Capacitor >= 15.5f)
+        if (V_Capacitor >= 15.5f || referee_data_.power_heat_data_.chassis_power_buffer <= 5)
             FSM_Status.Charge_Mode = Zero_Power_Charge;
         switch (FSM_Status.Charge_Mode) {
             case Zero_Power_Charge:vTaskSuspend(PIDTask_Handler);

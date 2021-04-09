@@ -19,6 +19,8 @@ void PID_CalculateTask(void *pvParameters) {
     xSemaphoreGive(Calibrate_Semaphore);
     HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_RESET);
     while (1) {
+        if (PID_Capacitor.User / V_Capacitor > 10.0f)
+            PID_Capacitor.User = V_Capacitor * 10;
         PID_Get_Result(&PID_Capacitor, P_Capacitor);
         HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_12B_R, (unsigned short) PID_Capacitor.Result);
         Delayms(1);

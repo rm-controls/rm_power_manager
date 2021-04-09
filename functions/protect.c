@@ -10,6 +10,7 @@
 #include "FreeRTOS.h"
 #include "semphr.h"
 
+unsigned short referee_avaiflag = 1, referee_time_counter = 0;
 extern SemaphoreHandle_t Calibrate_Semaphore;
 
 void Protect_Task(void *pvParameters) {
@@ -17,6 +18,7 @@ void Protect_Task(void *pvParameters) {
     xSemaphoreTake(Calibrate_Semaphore, 0xFFFFFFFFUL);
     xSemaphoreGive(Calibrate_Semaphore);
     while (1) {
+        referee_time_counter++;
         if (V_Baterry <= 20.0f) {
             Delayms(100);
             if (V_Baterry <= 20.0f)
@@ -26,6 +28,8 @@ void Protect_Task(void *pvParameters) {
             Delayms(1000);
             SoftReset();
         }
+        if (referee_time_counter >= 1000)
+            referee_avaiflag = 0;
         Delayms(1);
     }
 }

@@ -11,7 +11,7 @@
 #if DEBUG_PARAM != 1
 #include "refree.h"
 #include "stm32h7xx_hal.h"
-QueueHandle_t Refree_Data = NULL, Forward_Data = NULL;
+QueueHandle_t Refree_Data = NULL;
 #else
 #include "encrypt.h"
 #include "system.h"
@@ -24,9 +24,8 @@ TaskHandle_t ReportTask_Handler;
 
 void Upload_Refree(void *pvParameters) {
 #if DEBUG_PARAM != 1
-    unsigned char Refree_Buf[64], Forward_Buf[1] = {0xa5};
+    unsigned char Refree_Buf[64];
     Refree_Data = xQueueCreate(4, 64);
-    Forward_Data = xQueueCreate(1024, 1);
     while (1) {
         if (xQueueReceive(Refree_Data, Refree_Buf, 10) == pdTRUE) {
             for (unsigned char counter = 0; counter < 64; counter++) {
@@ -34,10 +33,6 @@ void Upload_Refree(void *pvParameters) {
                 Referee_unpack(Refree_Buf[counter]);
             }
         }
-//        HAL_UART_Transmit(&huart2, Forward_Buf, 1, 0xFFFFFFFFUL);
-//        while (xQueueReceive(Forward_Data, Forward_Buf, 1) == pdTRUE) {
-//            HAL_UART_Transmit(&huart2, Forward_Buf, 1, 0xFFFFFFFFUL);
-//        }
     }
 #else
     unsigned char DTP_Buf[10];

@@ -4,13 +4,10 @@
 
 #include "main.h"
 
-unsigned char *Savebuf = (unsigned char *) 0x38800000UL;
 unsigned char Reset_Number = 0;
 
 void DataRead_From_Flash(void) {
-    unsigned char Buffer[16];
-    for (unsigned int counter = 0; counter < sizeof(Buffer); counter++)
-        Buffer[counter] = Savebuf[counter];
+
 }
 
 void DataSave_To_Flash(Saving_Reason_e reason) {
@@ -39,6 +36,4 @@ void DataSave_To_Flash(Saving_Reason_e reason) {
         | ((HAL_GPIO_ReadPin(BOOST_EN_GPIO_Port, BOOST_EN_Pin) & 0x01) << 5)
         | ((HAL_GPIO_ReadPin(LED1_GPIO_Port, LED1_Pin) & 0x01) << 4)
         | ((HAL_GPIO_ReadPin(LED2_GPIO_Port, LED2_Pin) & 0x01) << 3);
-    for (unsigned int counter = 0; counter < sizeof(Buffer); counter++)
-        Savebuf[counter] = Buffer[counter];
 }

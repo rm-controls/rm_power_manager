@@ -5,6 +5,7 @@
 #ifndef PROGRAM_FUNCTIONS_PROTECT_H_
 #define PROGRAM_FUNCTIONS_PROTECT_H_
 
+extern unsigned short referee_avaiflag, referee_time_counter;
 void Protect_Task(void *pvParameters);
 
 #endif //PROGRAM_FUNCTIONS_PROTECT_H_
