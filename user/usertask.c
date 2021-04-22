@@ -27,3 +27,11 @@ void UserTask(void *pvParameters) {
         Delayms(1);
     }
 }
+
+void LCD_Refresh(void *pvParameters) {
+    GUI_Clear(C_WHITE);
+    while (1) {
+
+        Delayms(1000);
+    }
+}

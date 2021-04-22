@@ -4,33 +4,10 @@ TaskHandle_t InitTask_Handler;
 TaskHandle_t PIDTask_Handler;
 TaskHandle_t FSMTask_Handler;
 TaskHandle_t UserTask_Handler;
-TaskHandle_t LEDTask_Handler;
+TaskHandle_t LCDTask_Handler;
 TaskHandle_t UploadTask_Handler;
 TaskHandle_t ProtectTask_Handler;
 SemaphoreHandle_t Calibrate_Semaphore;
-
-void LED_Shine(void *pvParameters) {
-    while (1) {
-        unsigned char number = (unsigned char) V_Capacitor / 1;
-        if (number / 5 >= 1) {
-            while (1) {
-                if (number >= 5) {
-                    number = number - 5;
-                    HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
-                    Delayms(500);
-                    HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
-                    Delayms(500);
-                } else
-                    break;
-            }
-        }
-        for (unsigned char counter = 0; counter < number * 2; counter++) {
-            HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
-            Delayms(100);
-        }
-        Delayms(1000);
-    }
-}
 
 void InitTask() {
     taskENTER_CRITICAL();
@@ -44,6 +21,9 @@ void InitTask() {
     TIM7_Config();
     Filter_Config();
     PID_ValueConfig();
+    LCD_Config();
+    LCD_Scan(4);
+    GUI_Clear(C_WHITE);
     Sensor_Config();
     memset(&FSM_Status, 0x00, sizeof(FSM_Status_t));
     Calibrate_Semaphore = xSemaphoreCreateMutex();
@@ -51,7 +31,7 @@ void InitTask() {
     xTaskCreate(PID_CalculateTask, "PIDTask", 1024, NULL, 3, &PIDTask_Handler);
     xTaskCreate(FSM_Task, "FSMTask", 1024, NULL, 3, &FSMTask_Handler);
     xTaskCreate(Upload_Refree, "UploadTask", 512, NULL, 2, &UploadTask_Handler);
-    xTaskCreate(LED_Shine, "LEDTask", 128, NULL, 1, &LEDTask_Handler);
+    xTaskCreate(LCD_Refresh, "LCDTask", 128, NULL, 1, &LCDTask_Handler);
     xTaskCreate(UserTask, "UserTask", 1024, NULL, 2, &UserTask_Handler);
     taskEXIT_CRITICAL();
     vTaskDelete(NULL);

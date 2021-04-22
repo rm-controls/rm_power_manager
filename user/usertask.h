@@ -6,5 +6,6 @@
 #define _USER_USERTASK_H_
 
 void UserTask(void *pvParameters);
+void LCD_Refresh(void *pvParameters);
 
 #endif //_USER_USERTASK_H_

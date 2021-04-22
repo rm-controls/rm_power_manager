@@ -23,6 +23,8 @@
 #include "gpio.h"
 #include "timer.h"
 #include "watchdog.h"
+#include "key.h"
+#include "lcd.h"
 
 /////////////// Device ///////////////
 #include "pid.h"
@@ -30,6 +32,8 @@
 #include "encrypt.h"
 #include "filter.h"
 #include "refree.h"
+#include "gui.h"
+#include "color.h"
 
 /////////////// Functions ///////////////
 #include "calculate.h"
