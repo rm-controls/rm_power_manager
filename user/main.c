@@ -36,6 +36,7 @@ void InitTask() {
     taskEXIT_CRITICAL();
     vTaskDelete(NULL);
 }
+
 int main(void) {
     MPU_Config();
     Cache_Config();

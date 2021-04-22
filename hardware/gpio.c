@@ -18,31 +18,31 @@ void GPIO_Config(void) {
 
     GPIO_Structure.Pin = LCD_A0_Pin;
     GPIO_Structure.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-    GPIO_Structure.Mode = GPIO_MODE_INPUT;
+    GPIO_Structure.Mode = GPIO_MODE_OUTPUT_PP;
     GPIO_Structure.Pull = GPIO_PULLUP;
     HAL_GPIO_Init(LCD_A0_Port, &GPIO_Structure);
 
     GPIO_Structure.Pin = LCD_CSB_Pin;
     GPIO_Structure.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-    GPIO_Structure.Mode = GPIO_MODE_INPUT;
+    GPIO_Structure.Mode = GPIO_MODE_OUTPUT_PP;
     GPIO_Structure.Pull = GPIO_PULLUP;
     HAL_GPIO_Init(LCD_CSB_Port, &GPIO_Structure);
 
     GPIO_Structure.Pin = LCD_SDA_Pin;
     GPIO_Structure.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-    GPIO_Structure.Mode = GPIO_MODE_INPUT;
+    GPIO_Structure.Mode = GPIO_MODE_OUTPUT_PP;
     GPIO_Structure.Pull = GPIO_PULLUP;
     HAL_GPIO_Init(LCD_SDA_Port, &GPIO_Structure);
 
     GPIO_Structure.Pin = LCD_SCL_Pin;
     GPIO_Structure.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-    GPIO_Structure.Mode = GPIO_MODE_INPUT;
+    GPIO_Structure.Mode = GPIO_MODE_OUTPUT_PP;
     GPIO_Structure.Pull = GPIO_PULLUP;
     HAL_GPIO_Init(LCD_SCL_Port, &GPIO_Structure);
 
     GPIO_Structure.Pin = LCD_RES_Pin;
     GPIO_Structure.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-    GPIO_Structure.Mode = GPIO_MODE_INPUT;
+    GPIO_Structure.Mode = GPIO_MODE_OUTPUT_PP;
     GPIO_Structure.Pull = GPIO_PULLUP;
     HAL_GPIO_Init(LCD_RES_Port, &GPIO_Structure);
 

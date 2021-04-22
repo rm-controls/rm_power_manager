@@ -31,7 +31,15 @@ void UserTask(void *pvParameters) {
 void LCD_Refresh(void *pvParameters) {
     GUI_Clear(C_WHITE);
     while (1) {
-
+        GUI_Clear(C_BLUE);
+        Delayms(1000);
+        GUI_Clear(C_RED);
+        Delayms(1000);
+        GUI_Clear(C_GREEN);
+        Delayms(1000);
+        GUI_Clear(C_BLACK);
+        Delayms(1000);
+        GUI_Clear(C_WHITE);
         Delayms(1000);
     }
 }
