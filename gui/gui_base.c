@@ -1,5 +1,5 @@
 #include "lcd.h"
-#include "gui.h"
+#include "gui_base.h"
 #include "stdio.h"
 #include "string.h"
 #include "stdarg.h"
@@ -17,7 +17,6 @@ void LCD_SendChar(unsigned char x,
                   unsigned int dcolor,
                   unsigned int bgcolor) {
     unsigned char i, j;
-    dcolor = TransColor(dcolor);
     unsigned char *temp = (unsigned char *) &Font_8_16[0];
     temp += (value - 32) * 16;
     Address_set(x, line, x + 7, line + 15);
@@ -40,6 +39,8 @@ void GUI_Printf(unsigned char row,
                 ...) {
     char LCD_BUF[32] = {0};
     unsigned char n = 0;
+    dcolor = TransColor(dcolor);
+    bgcolor = TransColor(bgcolor);
     va_list ap;
     memset(LCD_BUF, '\0', sizeof(LCD_BUF));
     va_start(ap, fmt);

@@ -38,13 +38,4 @@
 #define BOOST_EN_Pin GPIO_PIN_10
 #define BOOST_EN_GPIO_Port GPIOE
 
-#define LED1_Pin GPIO_PIN_14
-#define LED1_GPIO_Port GPIOD
-
-#define LED2_Pin GPIO_PIN_15
-#define LED2_GPIO_Port GPIOD
-
-#define KEY1_Pin GPIO_PIN_8
-#define KEY1_GPIO_Port GPIOB
-
 #endif //PROGRAM_USER_PORT_H_

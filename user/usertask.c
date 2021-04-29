@@ -15,13 +15,13 @@ void UserTask(void *pvParameters) {
         if (FSM_Status.FSM_Mode != Halt_Mode) {
             if (V_Capacitor >= 15.0f) {         //Enter Over Power Mode
                 FSM_Status.FSM_Mode = OverPower_Mode;
-                HAL_GPIO_WritePin(LED2_GPIO_Port, LED2_Pin, GPIO_PIN_RESET);
+//                HAL_GPIO_WritePin(LED2_GPIO_Port, LED2_Pin, GPIO_PIN_RESET);
             } else if (V_Capacitor <= 8.0f && V_Capacitor > 7.0f &&
                 FSM_Status.FSM_Mode == OverPower_Mode) {
                 FSM_Status.FSM_Mode = Transition_Mode;
             } else if (V_Capacitor <= 7.0f) {   //Exit OverPower Mode
                 FSM_Status.FSM_Mode = Normal_Mode;
-                HAL_GPIO_WritePin(LED2_GPIO_Port, LED2_Pin, GPIO_PIN_SET);
+//                HAL_GPIO_WritePin(LED2_GPIO_Port, LED2_Pin, GPIO_PIN_SET);
             }
         }
         Delayms(1);
@@ -30,14 +30,15 @@ void UserTask(void *pvParameters) {
 
 void LCD_Refresh(void *pvParameters) {
     GUI_Init();
-    GUI_DrawCircle(50, 50, 40, C_YELLOW_GREEN, Filled);
-    GUI_DrawCircle(50, 50, 40, C_DARK_RED, UnFilled);
-    GUI_DrawLine(0, 0, 20, 40, C_BROWN);
-    GUI_DrawRectangle(100, 100, 20, 40, C_DARK_OLIVE_GREEN, Filled);
-    GUI_DrawRectangle(100, 100, 20, 40, C_DARK_RED, UnFilled);
-    GUI_DrawRoundRectangle(20, 100, 70, 50, 10, C_BLUE, Filled);
-    GUI_DrawRoundRectangle(20, 100, 70, 50, 10, C_DARK_RED, UnFilled);
+    GUI_Button(20, 20, 88, 40, (unsigned char *) "Hello", Button_Normal);
+    Delayms(1000);
+    GUI_Button(20, 20, 88, 40, (unsigned char *) "Hello", Button_Focus);
     while (1) {
+        Key_Num_e key_num = ReadKey();
+        if (key_num == Up_Key)
+            GUI_Button(20, 20, 88, 40, (unsigned char *) "Hello", Button_Click);
+        else
+            GUI_Button(20, 20, 88, 40, (unsigned char *) "Hello", Button_Focus);
         Delayms(200);
     }
 }

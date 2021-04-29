@@ -18,18 +18,20 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="Fix the problem that the control GPIO port of LCD screen is initialized as input.">
+    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="Complete the drawing and testing of basic graphics (including filled / unfilled rectangle, circle, rounded rectangle and semicircle)">
+      <change afterPath="$PROJECT_DIR$/gui/gui_button.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gui/gui_button.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/STM32H750VBTx_FLASH.ld" beforeDir="false" afterPath="$PROJECT_DIR$/STM32H750VBTx_FLASH.ld" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/devices/color.h" beforeDir="false" afterPath="$PROJECT_DIR$/gui/color.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/devices/font.h" beforeDir="false" afterPath="$PROJECT_DIR$/gui/font.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/devices/gui.c" beforeDir="false" afterPath="$PROJECT_DIR$/gui/gui.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/devices/gui.h" beforeDir="false" afterPath="$PROJECT_DIR$/gui/gui.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/freertos/heap_4.c" beforeDir="false" afterPath="$PROJECT_DIR$/freertos/heap_4.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/freertos/portable.h" beforeDir="false" afterPath="$PROJECT_DIR$/freertos/portable.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/user/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/devices/refree.c" beforeDir="false" afterPath="$PROJECT_DIR$/devices/refree.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/functions/datasave.c" beforeDir="false" afterPath="$PROJECT_DIR$/functions/datasave.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/functions/fsm.c" beforeDir="false" afterPath="$PROJECT_DIR$/functions/fsm.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/gui.c" beforeDir="false" afterPath="$PROJECT_DIR$/gui/gui_base.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/gui.h" beforeDir="false" afterPath="$PROJECT_DIR$/gui/gui_base.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hardware/gpio.c" beforeDir="false" afterPath="$PROJECT_DIR$/hardware/gpio.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hardware/key.c" beforeDir="false" afterPath="$PROJECT_DIR$/hardware/key.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user/main.h" beforeDir="false" afterPath="$PROJECT_DIR$/user/main.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/port.h" beforeDir="false" afterPath="$PROJECT_DIR$/user/port.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user/usertask.c" beforeDir="false" afterPath="$PROJECT_DIR$/user/usertask.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -200,7 +202,7 @@
       <workItem from="1619519742203" duration="529000" />
       <workItem from="1619528706090" duration="984000" />
       <workItem from="1619536558552" duration="6379000" />
-      <workItem from="1619599363424" duration="14422000" />
+      <workItem from="1619599363424" duration="17634000" />
     </task>
     <task id="LOCAL-00001" summary="Rewrite Functions">
       <created>1611128425695</created>
@@ -419,7 +421,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619103949270</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="Complete the drawing and testing of basic graphics (including filled / unfilled rectangle, circle, rounded rectangle and semicircle)">
+      <created>1619697075739</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1619697075739</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -503,7 +512,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="repair one order low pass filter bugs, it now can be used." />
     <MESSAGE value="Change directories name and modify CMakeLists.txt" />
     <MESSAGE value="Porting FreeRTOS code for stm32h7" />
     <MESSAGE value="Rearrange hardware codes to adapt old(stm32f4xx) codes" />
@@ -528,7 +536,8 @@
     <MESSAGE value="The problem of serial port is solved, and the emergency handling code is added when the referee system cannot detect, but it has not been tested" />
     <MESSAGE value="Add LCD driver and key driver to the program" />
     <MESSAGE value="Fix the problem that the control GPIO port of LCD screen is initialized as input." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix the problem that the control GPIO port of LCD screen is initialized as input." />
+    <MESSAGE value="Complete the drawing and testing of basic graphics (including filled / unfilled rectangle, circle, rounded rectangle and semicircle)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Complete the drawing and testing of basic graphics (including filled / unfilled rectangle, circle, rounded rectangle and semicircle)" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

@@ -110,7 +110,7 @@ void Referee_getData(unsigned char *frame) {
     index += sizeof(unsigned short);
     referee_time_counter = 0;
     DTP_Transmit(&Upload_Package);
-    HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
+//    HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
     switch (cmd_id) {
         case kGameStatusCmdId:memcpy(&referee_data_.game_status_, frame + index, sizeof(GameStatus));
             break;

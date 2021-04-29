@@ -41,7 +41,8 @@
 #include "datasave.h"
 
 /////////////// GUI ///////////////
-#include "gui.h"
+#include "gui_base.h"
 #include "color.h"
+#include "gui_button.h"
 
 #endif /* __MAIN_H */

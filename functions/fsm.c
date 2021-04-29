@@ -62,7 +62,7 @@ void FSM_Task(void *pvParameters) {
             case Halt_Mode:FSM_Status.Charge_Mode = Zero_Power_Charge;
                 FSM_Status.Expect_Mode = FSM_Status.uExpect_Mode;
                 FSM_Status.Typology_Mode = All_Off;
-                HAL_GPIO_WritePin(LED2_GPIO_Port, LED2_Pin, GPIO_PIN_SET);
+//                HAL_GPIO_WritePin(LED2_GPIO_Port, LED2_Pin, GPIO_PIN_SET);
                 break;
             case Transition_Mode:
                 if (FSM_Status.Charge_Mode != Zero_Power_Charge || V_Capacitor <= 15.0)
