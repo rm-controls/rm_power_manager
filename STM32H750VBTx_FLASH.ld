@@ -55,8 +55,8 @@ ENTRY(Reset_Handler)
 /* Highest address of the user mode stack */
 _estack = 0x20020000;    /* end of RAM */
 /* Generate a link error if heap and stack don't fit into RAM */
-_Min_Heap_Size = 0x800;      /* required amount of heap  */
-_Min_Stack_Size = 0x1000; /* required amount of stack */
+_Min_Heap_Size = 0x2000;      /* required amount of heap  */
+_Min_Stack_Size = 0x2000; /* required amount of stack */
 
 /* Specify the memory areas */
 MEMORY
@@ -181,11 +181,20 @@ SECTIONS
   .adc_ram :
   {
       . = ALIGN(4);
-      *(.dcmi_ram)
-      *(.dcmi_ram.*)
+      *(.adc_ram)
+      *(.adc_ram.*)
       . = ALIGN(4);
       __ram1_free__ = .;
   } > ADC_RAM
+
+  .ram1 :
+  {
+      . = ALIGN(4);
+      *(.ram1)
+      *(.ram1.*)
+      . = ALIGN(4);
+      __ram1_free__ = .;
+  } > RAM_D1
 
   /* Remove information from the standard libraries */
   /DISCARD/ :

@@ -32,8 +32,6 @@
 #include "encrypt.h"
 #include "filter.h"
 #include "refree.h"
-#include "gui.h"
-#include "color.h"
 
 /////////////// Functions ///////////////
 #include "calculate.h"
@@ -41,5 +39,9 @@
 #include "fsm.h"
 #include "protect.h"
 #include "datasave.h"
+
+/////////////// GUI ///////////////
+#include "gui.h"
+#include "color.h"
 
 #endif /* __MAIN_H */

@@ -29,17 +29,15 @@ void UserTask(void *pvParameters) {
 }
 
 void LCD_Refresh(void *pvParameters) {
-    GUI_Clear(C_WHITE);
+    GUI_Init();
+    GUI_DrawCircle(50, 50, 40, C_YELLOW_GREEN, Filled);
+    GUI_DrawCircle(50, 50, 40, C_DARK_RED, UnFilled);
+    GUI_DrawLine(0, 0, 20, 40, C_BROWN);
+    GUI_DrawRectangle(100, 100, 20, 40, C_DARK_OLIVE_GREEN, Filled);
+    GUI_DrawRectangle(100, 100, 20, 40, C_DARK_RED, UnFilled);
+    GUI_DrawRoundRectangle(20, 100, 70, 50, 10, C_BLUE, Filled);
+    GUI_DrawRoundRectangle(20, 100, 70, 50, 10, C_DARK_RED, UnFilled);
     while (1) {
-        GUI_Clear(C_BLUE);
-        Delayms(1000);
-        GUI_Clear(C_RED);
-        Delayms(1000);
-        GUI_Clear(C_GREEN);
-        Delayms(1000);
-        GUI_Clear(C_BLACK);
-        Delayms(1000);
-        GUI_Clear(C_WHITE);
-        Delayms(1000);
+        Delayms(200);
     }
 }

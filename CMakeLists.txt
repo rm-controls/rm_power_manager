@@ -29,6 +29,7 @@ add_compile_options(-ffunction-sections -fdata-sections -fno-common -fmessage-le
 # uncomment to mitigate c++17 absolute addresses warnings
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-register")
 
+#add_compile_options(-Os)
 if ("${CMAKE_BUILD_TYPE}" STREQUAL "Release")
     message(STATUS "Maximum optimization for speed")
     add_compile_options(-Ofast)
@@ -45,12 +46,12 @@ endif ()
 
 include_directories(drivers/STM32H7xx_HAL_Driver/Inc drivers/STM32H7xx_HAL_Driver/Inc/Legacy
         drivers/CMSIS/Device/ST/STM32H7xx/Include drivers/CMSIS/Include user system hardware devices
-        freertos functions)
+        freertos functions gui)
 
 add_definitions(-DUSE_HAL_DRIVER -DSTM32H750xx)
 
 file(GLOB_RECURSE SOURCES "system/*.c" "drivers/*.*" "user/*.c" "system/*.s" "hardware/*.c" "devices/*.c"
-        "freertos/*.c" "functions/*.c")
+        "freertos/*.c" "functions/*.c" "gui/*.c")
 
 set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/STM32H750VBTx_FLASH.ld)
 
