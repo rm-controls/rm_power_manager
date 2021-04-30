@@ -34,6 +34,5 @@ void DataSave_To_Flash(Saving_Reason_e reason) {
     Buffer[15] = ((HAL_GPIO_ReadPin(EN_NMOS_GPIO_Port, EN_NMOS_Pin) & 0x01) << 7)
         | ((HAL_GPIO_ReadPin(CHG_EN_GPIO_Port, CHG_EN_Pin) & 0x01) << 6)
         | ((HAL_GPIO_ReadPin(BOOST_EN_GPIO_Port, BOOST_EN_Pin) & 0x01) << 5);
-//        | ((HAL_GPIO_ReadPin(LED1_GPIO_Port, LED1_Pin) & 0x01) << 4)
-//        | ((HAL_GPIO_ReadPin(LED2_GPIO_Port, LED2_Pin) & 0x01) << 3);
+    EEPROM_Write(0x00, Buffer, sizeof(Buffer));
 }

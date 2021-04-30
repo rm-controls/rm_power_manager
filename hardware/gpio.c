@@ -16,6 +16,18 @@ void GPIO_Config(void) {
     __HAL_RCC_GPIOE_CLK_ENABLE();
     __HAL_RCC_GPIOH_CLK_ENABLE();
 
+    GPIO_Structure.Pin = IIC_SCL_PIN;
+    GPIO_Structure.Mode = GPIO_MODE_OUTPUT_PP;
+    GPIO_Structure.Pull = GPIO_PULLUP;
+    GPIO_Structure.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+    HAL_GPIO_Init(IIC_SCL_PORT, &GPIO_Structure);
+
+    GPIO_Structure.Pin = IIC_SDA_PIN;
+    GPIO_Structure.Mode = GPIO_MODE_OUTPUT_PP;
+    GPIO_Structure.Pull = GPIO_PULLUP;
+    GPIO_Structure.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+    HAL_GPIO_Init(IIC_SDA_PORT, &GPIO_Structure);
+
     GPIO_Structure.Pin = LCD_A0_Pin;
     GPIO_Structure.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
     GPIO_Structure.Mode = GPIO_MODE_OUTPUT_PP;
@@ -97,4 +109,6 @@ void GPIO_Config(void) {
     HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_SET);
     HAL_GPIO_WritePin(BOOST_EN_GPIO_Port, BOOST_EN_Pin, GPIO_PIN_SET);
     HAL_GPIO_WritePin(EN_NMOS_GPIO_Port, EN_NMOS_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(IIC_SCL_PORT, IIC_SCL_PIN, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(IIC_SDA_PORT, IIC_SDA_PIN, GPIO_PIN_SET);
 }

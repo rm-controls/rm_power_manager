@@ -28,7 +28,7 @@ void InitTask() {
     xTaskCreate(PID_CalculateTask, "PIDTask", 1024, NULL, 3, &PIDTask_Handler);
     xTaskCreate(FSM_Task, "FSMTask", 1024, NULL, 3, &FSMTask_Handler);
     xTaskCreate(Upload_Refree, "UploadTask", 512, NULL, 2, &UploadTask_Handler);
-    xTaskCreate(LCD_Refresh, "LCDTask", 128, NULL, 1, &LCDTask_Handler);
+    xTaskCreate(LCD_Refresh, "LCDTask", 512, NULL, 1, &LCDTask_Handler);
     xTaskCreate(UserTask, "UserTask", 1024, NULL, 2, &UserTask_Handler);
     taskEXIT_CRITICAL();
     vTaskDelete(NULL);

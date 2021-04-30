@@ -25,6 +25,7 @@
 #include "watchdog.h"
 #include "key.h"
 #include "lcd.h"
+#include "iic.h"
 
 /////////////// Device ///////////////
 #include "pid.h"
@@ -32,6 +33,7 @@
 #include "encrypt.h"
 #include "filter.h"
 #include "refree.h"
+#include "eeprom.h"
 
 /////////////// Functions ///////////////
 #include "calculate.h"
@@ -44,5 +46,6 @@
 #include "gui_base.h"
 #include "color.h"
 #include "gui_button.h"
+#include "gui_chart.h"
 
 #endif /* __MAIN_H */

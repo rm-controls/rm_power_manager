@@ -5,6 +5,12 @@
 #ifndef _USER_PORT_H_
 #define _USER_PORT_H_
 
+#define IIC_SDA_PIN GPIO_PIN_12
+#define IIC_SCL_PIN GPIO_PIN_11
+
+#define IIC_SDA_PORT GPIOD
+#define IIC_SCL_PORT GPIOD
+
 #define UP_KEY_PIN GPIO_PIN_3
 #define DOWN_KEY_PIN GPIO_PIN_5
 #define LEFT_KEY_PIN GPIO_PIN_4
