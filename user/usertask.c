@@ -30,6 +30,7 @@ void LCD_Refresh(void *pvParameters) {
     GUI_Printf(22, 74, C_DARK_BLUE, C_WHITE, "Calibrating...");
     xSemaphoreTake(Calibrate_Semaphore, 0xFFFFFFFFUL);
     xSemaphoreGive(Calibrate_Semaphore);
+    Form_Info_Structure.Form_Index = Main_Form_Index;
     MainForm_Init();
     while (1) {
         Form_UpdateEvent();

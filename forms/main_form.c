@@ -10,11 +10,12 @@ Button_Struct_t Settings_Button, Log_Button;
 extern Button_Struct_t *FirstButton;
 
 void Log_Button_Callback(Button_Struct_t *button) {
-    Form_Info_Structure.Widget_Index = 1;
+    Form_Info_Structure.Form_Index = Log_Form_Index;
+    LogForm_Init();
 }
 
 void Settings_Button_Callback(Button_Struct_t *button) {
-    Form_Info_Structure.Widget_Index = 0;
+//    Form_Info_Structure.Widget_Index = 0;
 }
 
 void MainForm_Update(void) {
@@ -74,6 +75,7 @@ void MainForm_Update(void) {
 
 void MainForm_Init(void) {
     Form_Info_Structure.Widget_Index = 0;
+    FirstButton = &Log_Button;
 
     Voltage_Chart.X_Pos = 2;
     Voltage_Chart.Y_Pos = 2;
@@ -134,7 +136,6 @@ void MainForm_Init(void) {
     Typology_Lable.Color = C_BLACK;
     Typology_Lable.Text = "Typology: Charge&PMOS";
 
-    FirstButton = &Log_Button;
     Log_Button.X_Pos = 2;
     Log_Button.Y_Pos = 134;
     Log_Button.Width = 60;

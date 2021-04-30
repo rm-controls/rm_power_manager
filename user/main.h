@@ -52,5 +52,6 @@
 /////////////// Forms ///////////////
 #include "form_logic.h"
 #include "main_form.h"
+#include "log_form.h"
 
 #endif /* __MAIN_H */

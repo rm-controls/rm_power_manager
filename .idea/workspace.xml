@@ -18,16 +18,14 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="Complete the main window interface update program, now you can display important parameter information">
-      <change afterPath="$PROJECT_DIR$/forms/form_logic.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/forms/form_logic.h" afterDir="false" />
+    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="Simple completion of the button press callback function, but also consider the situation of other buttons pressed">
+      <change afterPath="$PROJECT_DIR$/forms/log_form.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/forms/log_form.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/forms/form_logic.c" beforeDir="false" afterPath="$PROJECT_DIR$/forms/form_logic.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/forms/main_form.c" beforeDir="false" afterPath="$PROJECT_DIR$/forms/main_form.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forms/main_form.h" beforeDir="false" afterPath="$PROJECT_DIR$/forms/main_form.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/gui_button.c" beforeDir="false" afterPath="$PROJECT_DIR$/gui/gui_button.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/gui_button.h" beforeDir="false" afterPath="$PROJECT_DIR$/gui/gui_button.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/gui_chart.c" beforeDir="false" afterPath="$PROJECT_DIR$/gui/gui_chart.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hardware/key.c" beforeDir="false" afterPath="$PROJECT_DIR$/hardware/key.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/freertos/FreeRTOSConfig.h" beforeDir="false" afterPath="$PROJECT_DIR$/freertos/FreeRTOSConfig.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/user/main.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user/main.h" beforeDir="false" afterPath="$PROJECT_DIR$/user/main.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user/usertask.c" beforeDir="false" afterPath="$PROJECT_DIR$/user/usertask.c" afterDir="false" />
     </list>
@@ -209,7 +207,7 @@
       <workItem from="1619536558552" duration="6379000" />
       <workItem from="1619599363424" duration="25884000" />
       <workItem from="1619778924442" duration="13845000" />
-      <workItem from="1619806300690" duration="6712000" />
+      <workItem from="1619806300690" duration="8172000" />
     </task>
     <task id="LOCAL-00001" summary="Rewrite Functions">
       <created>1611128425695</created>
@@ -484,7 +482,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619810345463</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="Simple completion of the button press callback function, but also consider the situation of other buttons pressed">
+      <created>1619813170483</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1619813170483</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -568,7 +573,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="It seems that the decoding of the referee system can work normally, and whether the decoding result is correct still needs further testing" />
     <MESSAGE value="Complete the serial protocol forwarding code, waiting for the joint test with the host computer" />
     <MESSAGE value="Complete the model testing codes, it can test all module." />
     <MESSAGE value="PID current loop parameter setting successful" />
@@ -593,7 +597,8 @@
     <MESSAGE value="The display of current detection bias calibration status and power calibration status of referee system are added" />
     <MESSAGE value="Complete the layout of the main window interface" />
     <MESSAGE value="Complete the main window interface update program, now you can display important parameter information" />
-    <option name="LAST_COMMIT_MESSAGE" value="Complete the main window interface update program, now you can display important parameter information" />
+    <MESSAGE value="Simple completion of the button press callback function, but also consider the situation of other buttons pressed" />
+    <option name="LAST_COMMIT_MESSAGE" value="Simple completion of the button press callback function, but also consider the situation of other buttons pressed" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
