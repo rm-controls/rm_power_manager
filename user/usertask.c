@@ -10,7 +10,6 @@ void UserTask(void *pvParameters) {
     FSM_Status.FSM_Mode = Normal_Mode;
     FSM_Status.Charge_Power = 20;
     FSM_Status.Max_Power = 100;
-
     while (1) {
         if (FSM_Status.FSM_Mode != Halt_Mode) {
             if (V_Capacitor >= 15.0f) {         //Enter Over Power Mode
@@ -31,19 +30,10 @@ void LCD_Refresh(void *pvParameters) {
     xSemaphoreTake(Calibrate_Semaphore, 0xFFFFFFFFUL);
     xSemaphoreGive(Calibrate_Semaphore);
     MainWidget_Init();
-//    unsigned char address = 0;
-//    for (address = 0; address < 0xff; address++) {
-//        IIC_Start();
-//        if (IIC_SendByte(address) == 0)
-//            break;
-//        IIC_Stop();
-//        Delayms(1);
-//    }
-//    GUI_Printf(0, 0, C_BLACK, C_WHITE, "0x%x", address);
     while (1) {
-        GUI_DrawCircle(123, 155, 4, C_WHITE, Filled);
+        GUI_DrawCircle(123, 5, 4, C_WHITE, Filled);
         Delayms(1000);
-        GUI_DrawCircle(123, 155, 4, C_DARK_GREEN, Filled);
+        GUI_DrawCircle(123, 5, 4, C_DARK_GREEN, Filled);
         Delayms(1000);
     }
 }
