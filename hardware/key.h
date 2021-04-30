@@ -13,6 +13,11 @@ typedef enum {
     Center_Key = 5,
 } Key_Num_e;
 
-Key_Num_e ReadKey();
+typedef struct {
+    Key_Num_e Last_Num;
+    Key_Num_e Num;
+} Key_Press_t;
+
+Key_Press_t ReadKey();
 
 #endif //STM32_HARDWARE_KEY_H_

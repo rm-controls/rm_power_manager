@@ -20,11 +20,14 @@ typedef enum {
     Button_Click = 2,
 } Button_State_e;
 
-void GUI_Button(unsigned char x,
-                unsigned char y,
-                unsigned char width,
-                unsigned char height,
-                unsigned char *text,
-                Button_State_e state);
+typedef struct {
+    unsigned char X_Pos;
+    unsigned char Y_Pos;
+    unsigned char Width;
+    unsigned char Height;
+    const char *Text;
+} Button_Struct_t;
+
+void GUI_InitButton(Button_Struct_t *button);
 
 #endif //PROGRAM_GUI_GUI_BUTTON_H_

@@ -17,11 +17,11 @@ void LCD_SendChar(unsigned char x,
                   unsigned int dcolor,
                   unsigned int bgcolor) {
     unsigned char i, j;
-    unsigned char *temp = (unsigned char *) &Font_8_16[0];
-    temp += (value - 32) * 16;
-    Address_set(x, line, x + 7, line + 15);
-    for (j = 0; j < 16; j++) {
-        for (i = 0; i < 8; i++) {
+    unsigned char *temp = (unsigned char *) &Font_6_12[0];
+    temp += (value - 32) * 12;
+    Address_set(x, line, x + 5, line + 11);
+    for (j = 0; j < 12; j++) {
+        for (i = 0; i < 6; i++) {
             if ((*temp & (1 << (7 - i))) != 0)
                 Lcd_Write_Data(dcolor);
             else
@@ -48,7 +48,7 @@ void GUI_Printf(unsigned char row,
     va_end(ap);
     while (LCD_BUF[n] != '\0') {
         LCD_SendChar(row, column, LCD_BUF[n], dcolor, bgcolor);
-        row += 8;
+        row += 6;
         n++;
     }
 }

@@ -46,12 +46,12 @@ add_compile_options(-Os)
 
 include_directories(drivers/STM32H7xx_HAL_Driver/Inc drivers/STM32H7xx_HAL_Driver/Inc/Legacy
         drivers/CMSIS/Device/ST/STM32H7xx/Include drivers/CMSIS/Include user system hardware devices
-        freertos functions gui)
+        freertos functions gui forms)
 
 add_definitions(-DUSE_HAL_DRIVER -DSTM32H750xx)
 
 file(GLOB_RECURSE SOURCES "system/*.c" "drivers/*.*" "user/*.c" "system/*.s" "hardware/*.c" "devices/*.c"
-        "freertos/*.c" "functions/*.c" "gui/*.c")
+        "freertos/*.c" "functions/*.c" "gui/*.c" "forms/*.c")
 
 set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/STM32H750VBTx_FLASH.ld)
 

@@ -47,5 +47,9 @@
 #include "color.h"
 #include "gui_button.h"
 #include "gui_chart.h"
+#include "gui_lable.h"
+
+/////////////// Forms ///////////////
+#include "main_form.h"
 
 #endif /* __MAIN_H */

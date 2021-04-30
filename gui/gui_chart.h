@@ -15,8 +15,8 @@ typedef enum {
 } Value_Style_e;
 
 typedef struct {
-    unsigned char Start_X;
-    unsigned char Start_Y;
+    unsigned char X_Pos;
+    unsigned char Y_Pos;
     unsigned char Width;
     unsigned char Height;
     unsigned char Value_Style;
@@ -33,6 +33,7 @@ typedef struct {
 } Curve_Struct_t;
 
 void GUI_InitChart(Chart_Struct_t *Chart);
+void GUI_InitCurve(Curve_Struct_t *Curve, Chart_Struct_t *Chart, unsigned short color);
 void GUI_CurveAppend(Curve_Struct_t *Curve, float Value);
 
 #endif //PROGRAM_GUI_GUI_CHART_H_

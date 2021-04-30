@@ -46,6 +46,11 @@ void GUI_DrawRoundRectangle(unsigned char x,
 void GUI_DrawVLine(unsigned char x1, unsigned char y1, unsigned char height, unsigned short color);
 void GUI_DrawHLine(unsigned char x1, unsigned char y1, unsigned char height, unsigned short color);
 void GUI_DrawLine(unsigned char x1, unsigned char y1, unsigned char x2, unsigned char y2, unsigned short color);
+void LCD_SendChar(unsigned char x,
+                  unsigned char line,
+                  unsigned char value,
+                  unsigned int dcolor,
+                  unsigned int bgcolor);
 void GUI_Printf(unsigned char row,
                 unsigned char column,
                 unsigned int dcolor,
