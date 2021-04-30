@@ -31,8 +31,10 @@ void LCD_Refresh(void *pvParameters) {
     xSemaphoreGive(Calibrate_Semaphore);
     MainWidget_Init();
     while (1) {
+        MainWidget_Update();
         GUI_DrawCircle(123, 5, 4, C_WHITE, Filled);
         Delayms(1000);
+        MainWidget_Update();
         GUI_DrawCircle(123, 5, 4, C_DARK_GREEN, Filled);
         Delayms(1000);
     }

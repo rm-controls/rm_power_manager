@@ -6,5 +6,6 @@
 #define PROGRAM_FORMS_MAIN_FORM_H_
 
 void MainWidget_Init(void);
+void MainWidget_Update(void);
 
 #endif //PROGRAM_FORMS_MAIN_FORM_H_

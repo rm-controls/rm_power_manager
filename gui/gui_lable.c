@@ -19,7 +19,7 @@ void GUI_InitLable(Lable_Struct_t *lable) {
 }
 
 void GUI_LableSetText(Lable_Struct_t *lable, const char *fmt, ...) {
-    char LCD_BUF[16], n = 0, row = lable->X_Pos;
+    char LCD_BUF[24], n = 0, row = lable->X_Pos;
     va_list ap;
     memset(LCD_BUF, '\0', sizeof(LCD_BUF));
     va_start(ap, fmt);

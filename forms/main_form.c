@@ -8,6 +8,61 @@ Lable_Struct_t PCapacitor_Lable, PChassis_Lable;
 Lable_Struct_t FSM_Mode_Lable, Charge_Mode_Lable, Expect_Power_Lable, Typology_Lable;
 Button_Struct_t Settings_Button, Log_Button;
 
+void MainWidget_Update(void) {
+    GUI_CurveAppend(&VCapacitor_Curve, V_Capacitor);
+    GUI_CurveAppend(&VChassis_Curve, V_Chassis);
+    GUI_CurveAppend(&VBaterry_Curve, V_Baterry);
+    GUI_CurveAppend(&PCapacitor_Curve, P_Capacitor);
+    GUI_CurveAppend(&PChassis_Curve, P_Chassis);
+
+    GUI_LableSetText(&VCapacitor_Lable,
+                     "%2d.%1dV",
+                     (unsigned int) V_Capacitor,
+                     (unsigned int) (V_Capacitor * 10) - ((unsigned int) V_Capacitor * 10));
+    GUI_LableSetText(&VChassis_Lable, "%2d.%1dV", (unsigned int) V_Chassis,
+                     (unsigned int) (V_Chassis * 10) - ((unsigned int) V_Chassis * 10));
+    GUI_LableSetText(&VBaterry_Lable, "%2d.%1dV", (unsigned int) V_Baterry,
+                     (unsigned int) (V_Baterry * 10) - ((unsigned int) V_Baterry * 10));
+    GUI_LableSetText(&PCapacitor_Lable, "%3d.%1dW", (unsigned int) P_Capacitor,
+                     (unsigned int) (P_Capacitor * 10) - ((unsigned int) P_Capacitor * 10));
+    GUI_LableSetText(&PChassis_Lable, "%3d.%1dW", (unsigned int) P_Chassis,
+                     (unsigned int) (P_Chassis * 10) - ((unsigned int) P_Chassis * 10));
+
+    switch (FSM_Status.FSM_Mode) {
+        case Normal_Mode:GUI_LableSetText(&FSM_Mode_Lable, "FSM Status: Normal   ");
+            break;
+        case OverPower_Mode:GUI_LableSetText(&FSM_Mode_Lable, "FSM Status: OverPower");
+            break;
+        case Halt_Mode:GUI_LableSetText(&FSM_Mode_Lable, "FSM Status: Halt     ");
+            break;
+        case Transition_Mode:GUI_LableSetText(&FSM_Mode_Lable, "FSM Status: Transit  ");
+            break;
+    }
+    switch (FSM_Status.Charge_Mode) {
+        case Zero_Power_Charge:GUI_LableSetText(&Charge_Mode_Lable, "Charge: ZeroPower    ");
+            break;
+        case Const_Power_Charge:GUI_LableSetText(&Charge_Mode_Lable, "Charge: ConstPower   ");
+            break;
+        case Proportional_Charge:GUI_LableSetText(&Charge_Mode_Lable, "Charge: Proportional ");
+            break;
+        case Full_Power_Charge:GUI_LableSetText(&Charge_Mode_Lable, "Charge: FullPower    ");
+            break;
+        case Remain_Power_Charge:GUI_LableSetText(&Charge_Mode_Lable, "Charge: RemainPower  ");
+            break;
+    }
+    GUI_LableSetText(&Expect_Power_Lable, "Expect Power: %3dW   ", (int) EP_Chassis);
+    switch (FSM_Status.Typology_Mode) {
+        case Only_Charge:GUI_LableSetText(&Typology_Lable, "Typology: Only Charge");
+            break;
+        case Only_PMOS:GUI_LableSetText(&Typology_Lable, "Typology: Only PMOS  ");
+            break;
+        case PMOS_With_Charge:GUI_LableSetText(&Typology_Lable, "Typology: PMOS&Charge");
+            break;
+        case All_Off:GUI_LableSetText(&Typology_Lable, "Typology: All Off    ");
+            break;
+    }
+}
+
 void MainWidget_Init(void) {
     Voltage_Chart.X_Pos = 2;
     Voltage_Chart.Y_Pos = 2;
@@ -51,7 +106,7 @@ void MainWidget_Init(void) {
     FSM_Mode_Lable.X_Pos = 2;
     FSM_Mode_Lable.Y_Pos = 72;
     FSM_Mode_Lable.Color = C_BLACK;
-    FSM_Mode_Lable.Text = "FSM: Normal";
+    FSM_Mode_Lable.Text = "FSM Status: Normal";
 
     Charge_Mode_Lable.X_Pos = 2;
     Charge_Mode_Lable.Y_Pos = 86;

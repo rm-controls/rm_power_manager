@@ -18,9 +18,12 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="The display of current detection bias calibration status and power calibration status of referee system are added">
+    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="Complete the layout of the main window interface">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/forms/main_form.c" beforeDir="false" afterPath="$PROJECT_DIR$/forms/main_form.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/forms/main_form.h" beforeDir="false" afterPath="$PROJECT_DIR$/forms/main_form.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/gui_lable.c" beforeDir="false" afterPath="$PROJECT_DIR$/gui/gui_lable.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/user/main.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user/usertask.c" beforeDir="false" afterPath="$PROJECT_DIR$/user/usertask.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -196,7 +199,7 @@
       <workItem from="1619536558552" duration="6379000" />
       <workItem from="1619599363424" duration="25884000" />
       <workItem from="1619778924442" duration="13845000" />
-      <workItem from="1619806300690" duration="2671000" />
+      <workItem from="1619806300690" duration="3955000" />
     </task>
     <task id="LOCAL-00001" summary="Rewrite Functions">
       <created>1611128425695</created>
@@ -457,7 +460,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619808304395</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="Complete the layout of the main window interface">
+      <created>1619809028022</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1619809028022</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -541,7 +551,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Add .idea directory to gitignore" />
     <MESSAGE value="Finished uart initialize codes, but uart2 still have some bugs which would receive 0xfe after normal data" />
     <MESSAGE value="It seems that the decoding of the referee system can work normally, and whether the decoding result is correct still needs further testing" />
     <MESSAGE value="Complete the serial protocol forwarding code, waiting for the joint test with the host computer" />
@@ -566,7 +575,8 @@
     <MESSAGE value="Updated font library, now use smaller font" />
     <MESSAGE value="Completed the main interface of the voltage and current display and image drawing part of the code" />
     <MESSAGE value="The display of current detection bias calibration status and power calibration status of referee system are added" />
-    <option name="LAST_COMMIT_MESSAGE" value="The display of current detection bias calibration status and power calibration status of referee system are added" />
+    <MESSAGE value="Complete the layout of the main window interface" />
+    <option name="LAST_COMMIT_MESSAGE" value="Complete the layout of the main window interface" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
