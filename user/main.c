@@ -21,6 +21,8 @@ void InitTask() {
     TIM7_Config();
     Filter_Config();
     PID_ValueConfig();
+    GUI_Init();
+    GUI_Printf(31, 74, C_DARK_GREEN, C_WHITE, "Init Offset");
     Sensor_Config();
     memset(&FSM_Status, 0x00, sizeof(FSM_Status_t));
     Calibrate_Semaphore = xSemaphoreCreateMutex();

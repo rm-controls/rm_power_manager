@@ -18,10 +18,11 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="Updated font library, now use smaller font">
+    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="Completed the main interface of the voltage and current display and image drawing part of the code">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/forms/main_form.c" beforeDir="false" afterPath="$PROJECT_DIR$/forms/main_form.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/font.h" beforeDir="false" afterPath="$PROJECT_DIR$/gui/font.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/user/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/usertask.c" beforeDir="false" afterPath="$PROJECT_DIR$/user/usertask.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -196,7 +197,7 @@
       <workItem from="1619536558552" duration="6379000" />
       <workItem from="1619599363424" duration="25884000" />
       <workItem from="1619778924442" duration="13845000" />
-      <workItem from="1619806300690" duration="1104000" />
+      <workItem from="1619806300690" duration="1926000" />
     </task>
     <task id="LOCAL-00001" summary="Rewrite Functions">
       <created>1611128425695</created>
@@ -443,7 +444,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619806461174</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="Completed the main interface of the voltage and current display and image drawing part of the code">
+      <created>1619807457808</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1619807457808</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -527,7 +535,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Let LED shine at 1hz" />
     <MESSAGE value="ADC hardware seems can be used" />
     <MESSAGE value="Add .idea directory to gitignore" />
     <MESSAGE value="Finished uart initialize codes, but uart2 still have some bugs which would receive 0xfe after normal data" />
@@ -552,7 +559,8 @@
     <MESSAGE value="Completed the drawing of the button control, now you can draw the normal state, focus state and press state of the button" />
     <MESSAGE value="Complete the LCD screen curve drawing code transplantation, but EEPROM communication is not complete, EEPROM seems to be damaged, any address does not respond." />
     <MESSAGE value="Updated font library, now use smaller font" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated font library, now use smaller font" />
+    <MESSAGE value="Completed the main interface of the voltage and current display and image drawing part of the code" />
+    <option name="LAST_COMMIT_MESSAGE" value="Completed the main interface of the voltage and current display and image drawing part of the code" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

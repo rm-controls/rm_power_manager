@@ -3,7 +3,7 @@
 //
 
 #include "main.h"
-
+extern SemaphoreHandle_t Calibrate_Semaphore;
 void UserTask(void *pvParameters) {
     FSM_Status.uExpect_Mode = Remain_Power_Expect;
     FSM_Status.uCharge_Mode = Const_Power_Charge;
@@ -15,13 +15,11 @@ void UserTask(void *pvParameters) {
         if (FSM_Status.FSM_Mode != Halt_Mode) {
             if (V_Capacitor >= 15.0f) {         //Enter Over Power Mode
                 FSM_Status.FSM_Mode = OverPower_Mode;
-//                HAL_GPIO_WritePin(LED2_GPIO_Port, LED2_Pin, GPIO_PIN_RESET);
             } else if (V_Capacitor <= 8.0f && V_Capacitor > 7.0f &&
                 FSM_Status.FSM_Mode == OverPower_Mode) {
                 FSM_Status.FSM_Mode = Transition_Mode;
             } else if (V_Capacitor <= 7.0f) {   //Exit OverPower Mode
                 FSM_Status.FSM_Mode = Normal_Mode;
-//                HAL_GPIO_WritePin(LED2_GPIO_Port, LED2_Pin, GPIO_PIN_SET);
             }
         }
         Delayms(1);
@@ -29,7 +27,9 @@ void UserTask(void *pvParameters) {
 }
 
 void LCD_Refresh(void *pvParameters) {
-    GUI_Init();
+    GUI_Printf(22, 74, C_DARK_BLUE, C_WHITE, "Calibrating...");
+    xSemaphoreTake(Calibrate_Semaphore, 0xFFFFFFFFUL);
+    xSemaphoreGive(Calibrate_Semaphore);
     MainWidget_Init();
 //    unsigned char address = 0;
 //    for (address = 0; address < 0xff; address++) {
@@ -41,8 +41,9 @@ void LCD_Refresh(void *pvParameters) {
 //    }
 //    GUI_Printf(0, 0, C_BLACK, C_WHITE, "0x%x", address);
     while (1) {
-//        GUI_CurveAppend(&VChassis_Curve, V_Chassis);
-//        GUI_CurveAppend(&VCapacitor_Curve, V_Capacitor);
-        Delayms(100);
+        GUI_DrawCircle(123, 155, 4, C_WHITE, Filled);
+        Delayms(1000);
+        GUI_DrawCircle(123, 155, 4, C_DARK_GREEN, Filled);
+        Delayms(1000);
     }
 }

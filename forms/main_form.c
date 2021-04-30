@@ -47,12 +47,13 @@ void MainWidget_Init(void) {
     PChassis_Lable.Color = C_DARK_GREEN;
     PChassis_Lable.Text = "---.-W";
 
-    Settings_Button.X_Pos = 30;
+    Settings_Button.X_Pos = 22;
     Settings_Button.Y_Pos = 134;
-    Settings_Button.Width = 64;
+    Settings_Button.Width = 84;
     Settings_Button.Height = 22;
     Settings_Button.Text = "Settings";
 
+    GUI_Clear(C_WHITE);
     GUI_InitCurve(&VCapacitor_Curve, &Voltage_Chart, VCapacitor_Lable.Color);
     GUI_InitCurve(&VChassis_Curve, &Voltage_Chart, VChassis_Lable.Color);
     GUI_InitCurve(&VBaterry_Curve, &Voltage_Chart, VBaterry_Lable.Color);
