@@ -26,16 +26,20 @@ void UserTask(void *pvParameters) {
 }
 
 void LCD_Refresh(void *pvParameters) {
+    unsigned char running_timer_counter = 0;
     GUI_Printf(22, 74, C_DARK_BLUE, C_WHITE, "Calibrating...");
     xSemaphoreTake(Calibrate_Semaphore, 0xFFFFFFFFUL);
     xSemaphoreGive(Calibrate_Semaphore);
-    MainWidget_Init();
+    MainForm_Init();
     while (1) {
-        MainWidget_Update();
-        GUI_DrawCircle(123, 5, 4, C_WHITE, Filled);
-        Delayms(1000);
-        MainWidget_Update();
-        GUI_DrawCircle(123, 5, 4, C_DARK_GREEN, Filled);
-        Delayms(1000);
+        Form_UpdateEvent();
+        running_timer_counter++;
+        if (running_timer_counter == 20)
+            GUI_DrawCircle(123, 5, 4, C_WHITE, Filled);
+        else if (running_timer_counter == 40) {
+            running_timer_counter = 0;
+            GUI_DrawCircle(123, 5, 4, C_DARK_GREEN, Filled);
+        }
+        Delayms(50);
     }
 }

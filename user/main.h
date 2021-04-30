@@ -50,6 +50,7 @@
 #include "gui_lable.h"
 
 /////////////// Forms ///////////////
+#include "form_logic.h"
 #include "main_form.h"
 
 #endif /* __MAIN_H */

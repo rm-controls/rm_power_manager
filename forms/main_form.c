@@ -7,8 +7,17 @@ Lable_Struct_t VCapacitor_Lable, VChassis_Lable, VBaterry_Lable;
 Lable_Struct_t PCapacitor_Lable, PChassis_Lable;
 Lable_Struct_t FSM_Mode_Lable, Charge_Mode_Lable, Expect_Power_Lable, Typology_Lable;
 Button_Struct_t Settings_Button, Log_Button;
+extern Button_Struct_t *FirstButton;
 
-void MainWidget_Update(void) {
+void Log_Button_Callback(Button_Struct_t *button) {
+    Form_Info_Structure.Widget_Index = 1;
+}
+
+void Settings_Button_Callback(Button_Struct_t *button) {
+    Form_Info_Structure.Widget_Index = 0;
+}
+
+void MainForm_Update(void) {
     GUI_CurveAppend(&VCapacitor_Curve, V_Capacitor);
     GUI_CurveAppend(&VChassis_Curve, V_Chassis);
     GUI_CurveAppend(&VBaterry_Curve, V_Baterry);
@@ -63,7 +72,9 @@ void MainWidget_Update(void) {
     }
 }
 
-void MainWidget_Init(void) {
+void MainForm_Init(void) {
+    Form_Info_Structure.Widget_Index = 0;
+
     Voltage_Chart.X_Pos = 2;
     Voltage_Chart.Y_Pos = 2;
     Voltage_Chart.Height = 40;
@@ -123,17 +134,22 @@ void MainWidget_Init(void) {
     Typology_Lable.Color = C_BLACK;
     Typology_Lable.Text = "Typology: Charge&PMOS";
 
+    FirstButton = &Log_Button;
     Log_Button.X_Pos = 2;
     Log_Button.Y_Pos = 134;
     Log_Button.Width = 60;
     Log_Button.Height = 22;
     Log_Button.Text = "Log";
+    Log_Button.NextButton = &Settings_Button;
+    Log_Button.CallbackFunction = Log_Button_Callback;
 
     Settings_Button.X_Pos = 64;
     Settings_Button.Y_Pos = 134;
     Settings_Button.Width = 60;
     Settings_Button.Height = 22;
     Settings_Button.Text = "Settings";
+    Settings_Button.NextButton = NULL;
+    Settings_Button.CallbackFunction = Settings_Button_Callback;
 
     GUI_Clear(C_WHITE);
     GUI_InitCurve(&VCapacitor_Curve, &Voltage_Chart, VCapacitor_Lable.Color);

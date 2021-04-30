@@ -73,10 +73,10 @@ void GUI_CurveAppend(Curve_Struct_t *Curve, float Value) {
               Curve->Color);
     if (Curve->Chart->Value_Style == Display_8x16_Value)
         GUI_Printf(Curve->Chart->X_Pos + 3, Curve->Chart->Y_Pos + 2, Curve->Color, C_WHITE, "%.2f", Value);
-    if (Curve->Pos_Counter < 124)
+    if (Curve->Pos_Counter < (Curve->Chart->Width - 3))
         Curve->Pos_Counter++;
     else {
-        for (unsigned char counter = 1; counter < Curve->Pos_Counter; counter++)
+        for (unsigned char counter = 1; counter < (Curve->Pos_Counter + 1); counter++)
             GUI_Point(counter + Curve->Chart->X_Pos,
                       Curve->Chart->Y_Pos + Curve->Chart->Height - Curve->Y_Pos[counter],
                       C_WHITE);

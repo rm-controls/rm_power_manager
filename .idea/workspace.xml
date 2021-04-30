@@ -18,12 +18,17 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="Complete the layout of the main window interface">
+    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="Complete the main window interface update program, now you can display important parameter information">
+      <change afterPath="$PROJECT_DIR$/forms/form_logic.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/forms/form_logic.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/forms/main_form.c" beforeDir="false" afterPath="$PROJECT_DIR$/forms/main_form.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/forms/main_form.h" beforeDir="false" afterPath="$PROJECT_DIR$/forms/main_form.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/gui_lable.c" beforeDir="false" afterPath="$PROJECT_DIR$/gui/gui_lable.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/user/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/gui_button.c" beforeDir="false" afterPath="$PROJECT_DIR$/gui/gui_button.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/gui_button.h" beforeDir="false" afterPath="$PROJECT_DIR$/gui/gui_button.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/gui_chart.c" beforeDir="false" afterPath="$PROJECT_DIR$/gui/gui_chart.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hardware/key.c" beforeDir="false" afterPath="$PROJECT_DIR$/hardware/key.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/main.h" beforeDir="false" afterPath="$PROJECT_DIR$/user/main.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user/usertask.c" beforeDir="false" afterPath="$PROJECT_DIR$/user/usertask.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -93,6 +98,11 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -199,7 +209,7 @@
       <workItem from="1619536558552" duration="6379000" />
       <workItem from="1619599363424" duration="25884000" />
       <workItem from="1619778924442" duration="13845000" />
-      <workItem from="1619806300690" duration="3955000" />
+      <workItem from="1619806300690" duration="6712000" />
     </task>
     <task id="LOCAL-00001" summary="Rewrite Functions">
       <created>1611128425695</created>
@@ -467,7 +477,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619809028022</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="Complete the main window interface update program, now you can display important parameter information">
+      <created>1619810345463</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1619810345463</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -551,7 +568,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Finished uart initialize codes, but uart2 still have some bugs which would receive 0xfe after normal data" />
     <MESSAGE value="It seems that the decoding of the referee system can work normally, and whether the decoding result is correct still needs further testing" />
     <MESSAGE value="Complete the serial protocol forwarding code, waiting for the joint test with the host computer" />
     <MESSAGE value="Complete the model testing codes, it can test all module." />
@@ -576,7 +592,8 @@
     <MESSAGE value="Completed the main interface of the voltage and current display and image drawing part of the code" />
     <MESSAGE value="The display of current detection bias calibration status and power calibration status of referee system are added" />
     <MESSAGE value="Complete the layout of the main window interface" />
-    <option name="LAST_COMMIT_MESSAGE" value="Complete the layout of the main window interface" />
+    <MESSAGE value="Complete the main window interface update program, now you can display important parameter information" />
+    <option name="LAST_COMMIT_MESSAGE" value="Complete the main window interface update program, now you can display important parameter information" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
