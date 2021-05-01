@@ -18,35 +18,15 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="Realized the switching function between forms, now you can design multiple forms to switch">
-      <change afterPath="$PROJECT_DIR$/fatfs/diskio.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fatfs/diskio.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fatfs/ff.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fatfs/ff.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fatfs/ffconf.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fatfs/ffsystem.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fatfs/ffunicode.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/forms/settings_form.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/forms/settings_form.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gui/gui_numeric.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gui/gui_numeric.h" afterDir="false" />
+    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="Fixed the bug when the referee system data could not be received. At the same time, completed the function of drawing triangle on LCD screen, standardized the structure of callback control, so that different control callbacks are consistent. FatFs file system is also introduced to prepare for accessing flash. Deleted the useless arm fast math accelerator library.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/devices/refree.c" beforeDir="false" afterPath="$PROJECT_DIR$/devices/refree.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forms/form_logic.c" beforeDir="false" afterPath="$PROJECT_DIR$/forms/form_logic.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forms/form_logic.h" beforeDir="false" afterPath="$PROJECT_DIR$/forms/form_logic.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forms/log_form.c" beforeDir="false" afterPath="$PROJECT_DIR$/forms/log_form.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forms/log_form.h" beforeDir="false" afterPath="$PROJECT_DIR$/forms/log_form.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forms/main_form.c" beforeDir="false" afterPath="$PROJECT_DIR$/forms/main_form.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions/fsm.c" beforeDir="false" afterPath="$PROJECT_DIR$/functions/fsm.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/gui_base.c" beforeDir="false" afterPath="$PROJECT_DIR$/gui/gui_base.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/gui_base.h" beforeDir="false" afterPath="$PROJECT_DIR$/gui/gui_base.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/gui_button.c" beforeDir="false" afterPath="$PROJECT_DIR$/gui/gui_button.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/gui_button.h" beforeDir="false" afterPath="$PROJECT_DIR$/gui/gui_button.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/arm_common_tables.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/arm_const_structs.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/arm_math.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/libarm_cortexM7lfsp_math.a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Program.ioc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Program.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/devices/eeprom.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/devices/eeprom.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/functions/datasave.c" beforeDir="false" afterPath="$PROJECT_DIR$/functions/datasave.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hardware/iic.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hardware/iic.h" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/user/main.h" beforeDir="false" afterPath="$PROJECT_DIR$/user/main.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -229,7 +209,7 @@
       <workItem from="1619778924442" duration="13845000" />
       <workItem from="1619806300690" duration="8508000" />
       <workItem from="1619859167197" duration="7210000" />
-      <workItem from="1619874087410" duration="5816000" />
+      <workItem from="1619874087410" duration="6235000" />
     </task>
     <task id="LOCAL-00001" summary="Rewrite Functions">
       <created>1611128425695</created>
@@ -518,7 +498,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619814637330</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="Fixed the bug when the referee system data could not be received. At the same time, completed the function of drawing triangle on LCD screen, standardized the structure of callback control, so that different control callbacks are consistent. FatFs file system is also introduced to prepare for accessing flash. Deleted the useless arm fast math accelerator library.">
+      <created>1619881000671</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1619881000671</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -602,7 +589,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Complete the model testing codes, it can test all module." />
     <MESSAGE value="PID current loop parameter setting successful" />
     <MESSAGE value="The basic logic of docking with the host computer has been completed, waiting for joint debugging" />
     <MESSAGE value="Fixed the problem of unpacking error when the referee system was connected to WiFi" />
@@ -627,7 +613,8 @@
     <MESSAGE value="Complete the main window interface update program, now you can display important parameter information" />
     <MESSAGE value="Simple completion of the button press callback function, but also consider the situation of other buttons pressed" />
     <MESSAGE value="Realized the switching function between forms, now you can design multiple forms to switch" />
-    <option name="LAST_COMMIT_MESSAGE" value="Realized the switching function between forms, now you can design multiple forms to switch" />
+    <MESSAGE value="Fixed the bug when the referee system data could not be received. At the same time, completed the function of drawing triangle on LCD screen, standardized the structure of callback control, so that different control callbacks are consistent. FatFs file system is also introduced to prepare for accessing flash. Deleted the useless arm fast math accelerator library." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed the bug when the referee system data could not be received. At the same time, completed the function of drawing triangle on LCD screen, standardized the structure of callback control, so that different control callbacks are consistent. FatFs file system is also introduced to prepare for accessing flash. Deleted the useless arm fast math accelerator library." />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

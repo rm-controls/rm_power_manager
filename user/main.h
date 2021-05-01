@@ -25,7 +25,6 @@
 #include "watchdog.h"
 #include "key.h"
 #include "lcd.h"
-#include "iic.h"
 
 /////////////// Device ///////////////
 #include "pid.h"
@@ -33,7 +32,6 @@
 #include "encrypt.h"
 #include "filter.h"
 #include "refree.h"
-#include "eeprom.h"
 
 /////////////// Functions ///////////////
 #include "calculate.h"
