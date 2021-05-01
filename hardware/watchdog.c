@@ -15,7 +15,7 @@ void HAL_WWDG_EarlyWakeupCallback(WWDG_HandleTypeDef *hwwdg) {
 void WatchDog_Task(void *pvParameters) {
     Watchdog_Config();
     while (1) {
-        Delayms(50);
+        Delayms(20);
         HAL_WWDG_Refresh(&hwwdg1);
     }
 }

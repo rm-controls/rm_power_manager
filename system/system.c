@@ -52,29 +52,23 @@ Reset_Reason_e Check_ResetReason(void) {
     if (__HAL_RCC_GET_FLAG(RCC_FLAG_PORRST) != RESET) {
         __HAL_RCC_CLEAR_RESET_FLAGS();
         return Power_On_Reset;
-    }
-    else if (__HAL_RCC_GET_FLAG(RCC_FLAG_PINRST) != RESET) {
+    } else if (__HAL_RCC_GET_FLAG(RCC_FLAG_PINRST) != RESET) {
         __HAL_RCC_CLEAR_RESET_FLAGS();
         return RST_Pin_Reset;
-    }
-    else if (__HAL_RCC_GET_FLAG(RCC_FLAG_SFTRST) != RESET) {
+    } else if (__HAL_RCC_GET_FLAG(RCC_FLAG_SFTRST) != RESET) {
         __HAL_RCC_CLEAR_RESET_FLAGS();
         return Software_Reset;
-    }
-    else if (__HAL_RCC_GET_FLAG(RCC_FLAG_IWDG1RST) != RESET) {
+    } else if (__HAL_RCC_GET_FLAG(RCC_FLAG_IWDG1RST) != RESET) {
         __HAL_RCC_CLEAR_RESET_FLAGS();
         return IWDG_Reset;
-    }
-    else if (__HAL_RCC_GET_FLAG(RCC_FLAG_WWDG1RST) != RESET) {
+    } else if (__HAL_RCC_GET_FLAG(RCC_FLAG_WWDG1RST) != RESET) {
         __HAL_RCC_CLEAR_RESET_FLAGS();
         return WWDG_Reset;
-    }
-    else if (__HAL_RCC_GET_FLAG(RCC_FLAG_LPWR1RST) != RESET
+    } else if (__HAL_RCC_GET_FLAG(RCC_FLAG_LPWR1RST) != RESET
         || __HAL_RCC_GET_FLAG(RCC_FLAG_LPWR2RST) != RESET) {
         __HAL_RCC_CLEAR_RESET_FLAGS();
         return LowPower_Reset;
-    }
-    else {
+    } else {
         __HAL_RCC_CLEAR_RESET_FLAGS();
         return Other_Reason;
     }
@@ -168,6 +162,8 @@ void MPU_Config(void) {
 void SystemClock_Config(void) {
     RCC_OscInitTypeDef RCC_OscInitStruct = {0};
     RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+    RCC_PeriphCLKInitTypeDef PeriphClkInitStruct = {0};
+
     HAL_PWREx_ConfigSupply(PWR_LDO_SUPPLY);
     __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE0);
     while (!__HAL_PWR_GET_FLAG(PWR_FLAG_VOSRDY)) {}
@@ -197,6 +193,10 @@ void SystemClock_Config(void) {
     RCC_ClkInitStruct.APB4CLKDivider = RCC_APB4_DIV2;
     while (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_4) != HAL_OK);
     HAL_RCC_EnableCSS();
+
+    PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_CKPER;
+    PeriphClkInitStruct.CkperClockSelection = RCC_CLKPSOURCE_HSI;
+    while (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK);
 
     Facus = HAL_RCC_GetSysClockFreq() / 1000000;
     unsigned int Reload = HAL_RCC_GetSysClockFreq() / 1000000;

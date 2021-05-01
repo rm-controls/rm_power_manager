@@ -12,6 +12,7 @@ SemaphoreHandle_t Calibrate_Semaphore;
 void InitTask() {
     taskENTER_CRITICAL();
     GPIO_Config();
+    SPI_Config();
     DMA_Config();
     ADC_Config();
     Referee_init();
@@ -23,6 +24,22 @@ void InitTask() {
     PID_ValueConfig();
     GUI_Init();
     GUI_Printf(31, 74, C_DARK_GREEN, C_WHITE, "Init Offset");
+    switch (Check_ResetReason()) {
+        case Power_On_Reset:GUI_Printf(21, 60, C_DARK_RED, C_WHITE, "Poweron Reset");
+            break;
+        case RST_Pin_Reset:GUI_Printf(21, 60, C_DARK_RED, C_WHITE, "RST Pin Reset");
+            break;
+        case Software_Reset:GUI_Printf(21, 60, C_DARK_RED, C_WHITE, "Software Reset");
+            break;
+        case IWDG_Reset:GUI_Printf(21, 60, C_DARK_RED, C_WHITE, "IWDG Reset");
+            break;
+        case WWDG_Reset:GUI_Printf(21, 60, C_DARK_RED, C_WHITE, "WWDG Reset");
+            break;
+        case LowPower_Reset:GUI_Printf(21, 60, C_DARK_RED, C_WHITE, "LowPower Reset");
+            break;
+        case Other_Reason:GUI_Printf(21, 60, C_DARK_RED, C_WHITE, "Other Reset");
+            break;
+    }
     Sensor_Config();
     memset(&FSM_Status, 0x00, sizeof(FSM_Status_t));
     Calibrate_Semaphore = xSemaphoreCreateMutex();

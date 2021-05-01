@@ -27,16 +27,16 @@ void MainForm_Update(void) {
 
     GUI_LableSetText(&VCapacitor_Lable,
                      "%2d.%1dV",
-                     (unsigned int) V_Capacitor,
-                     (unsigned int) (V_Capacitor * 10) - ((unsigned int) V_Capacitor * 10));
-    GUI_LableSetText(&VChassis_Lable, "%2d.%1dV", (unsigned int) V_Chassis,
-                     (unsigned int) (V_Chassis * 10) - ((unsigned int) V_Chassis * 10));
-    GUI_LableSetText(&VBaterry_Lable, "%2d.%1dV", (unsigned int) V_Baterry,
-                     (unsigned int) (V_Baterry * 10) - ((unsigned int) V_Baterry * 10));
-    GUI_LableSetText(&PCapacitor_Lable, "%3d.%1dW", (unsigned int) P_Capacitor,
-                     (unsigned int) (P_Capacitor * 10) - ((unsigned int) P_Capacitor * 10));
-    GUI_LableSetText(&PChassis_Lable, "%3d.%1dW", (unsigned int) P_Chassis,
-                     (unsigned int) (P_Chassis * 10) - ((unsigned int) P_Chassis * 10));
+                     (int) V_Capacitor,
+                     (int) (V_Capacitor * 10) - ((int) V_Capacitor * 10));
+    GUI_LableSetText(&VChassis_Lable, "%2d.%1dV", (int) V_Chassis,
+                     (int) (V_Chassis * 10) - ((int) V_Chassis * 10));
+    GUI_LableSetText(&VBaterry_Lable, "%2d.%1dV", (int) V_Baterry,
+                     (int) (V_Baterry * 10) - ((int) V_Baterry * 10));
+    GUI_LableSetText(&PCapacitor_Lable, "%3d.%1dW", (int) P_Capacitor,
+                     (int) (P_Capacitor * 10) - ((int) P_Capacitor * 10));
+    GUI_LableSetText(&PChassis_Lable, "%3d.%1dW", (int) P_Chassis,
+                     (int) (P_Chassis * 10) - ((int) P_Chassis * 10));
 
     switch (FSM_Status.FSM_Mode) {
         case Normal_Mode:GUI_LableSetText(&FSM_Mode_Lable, "FSM Status: Normal   ");

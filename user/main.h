@@ -25,6 +25,7 @@
 #include "watchdog.h"
 #include "key.h"
 #include "lcd.h"
+#include "spi.h"
 
 /////////////// Device ///////////////
 #include "pid.h"

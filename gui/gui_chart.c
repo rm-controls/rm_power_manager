@@ -48,6 +48,12 @@ void GUI_CurveAppend(Curve_Struct_t *Curve, float Value) {
     else
         Current_Amplify =
             (float) (Curve->Chart->Y_Pos + Curve->Chart->Height - Curve->Chart->Y_Pos) / (Value + 10000.0f);
+
+    if (Current_Amplify < Curve->Chart->MaxAmplification)
+        Curve->Chart->MaxAmplification = Current_Amplify;
+    else
+        Current_Amplify = Curve->Chart->MaxAmplification;
+
     if (Current_Amplify < Curve->Amplification_Factor) {
         float Alpha = Current_Amplify / Curve->Amplification_Factor;
         Curve->Amplification_Factor = Current_Amplify;
@@ -63,10 +69,12 @@ void GUI_CurveAppend(Curve_Struct_t *Curve, float Value) {
         }
     } else
         Current_Amplify = Curve->Amplification_Factor;
+
     if (Current_Amplify < Curve->Chart->MaxAmplification)
         Curve->Chart->MaxAmplification = Current_Amplify;
     else
         Current_Amplify = Curve->Chart->MaxAmplification;
+
     Curve->Y_Pos[Curve->Pos_Counter] = (unsigned char) (Value * Current_Amplify);
     GUI_Point(Curve->Pos_Counter + Curve->Chart->X_Pos,
               Curve->Chart->Y_Pos + Curve->Chart->Height - Curve->Y_Pos[Curve->Pos_Counter],

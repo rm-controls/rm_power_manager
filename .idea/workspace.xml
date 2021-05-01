@@ -18,15 +18,22 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="Fixed the bug when the referee system data could not be received. At the same time, completed the function of drawing triangle on LCD screen, standardized the structure of callback control, so that different control callbacks are consistent. FatFs file system is also introduced to prepare for accessing flash. Deleted the useless arm fast math accelerator library.">
+    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="Deleted IIC software simulation function and EEPROM driver function">
+      <change afterPath="$PROJECT_DIR$/drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi_ex.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_spi.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_spi_ex.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hardware/spi.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hardware/spi.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Program.ioc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Program.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devices/eeprom.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/devices/eeprom.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions/datasave.c" beforeDir="false" afterPath="$PROJECT_DIR$/functions/datasave.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hardware/iic.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hardware/iic.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/forms/main_form.c" beforeDir="false" afterPath="$PROJECT_DIR$/forms/main_form.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/functions/fsm.c" beforeDir="false" afterPath="$PROJECT_DIR$/functions/fsm.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/gui_chart.c" beforeDir="false" afterPath="$PROJECT_DIR$/gui/gui_chart.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/gui_lable.c" beforeDir="false" afterPath="$PROJECT_DIR$/gui/gui_lable.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hardware/watchdog.c" beforeDir="false" afterPath="$PROJECT_DIR$/hardware/watchdog.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/stm32h7xx_hal_conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/system/stm32h7xx_hal_conf.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/system.c" beforeDir="false" afterPath="$PROJECT_DIR$/system/system.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/user/main.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user/main.h" beforeDir="false" afterPath="$PROJECT_DIR$/user/main.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -69,7 +76,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/devices" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/drivers/STM32H7xx_HAL_Driver/Src" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -81,10 +88,10 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\drivers\STM32H7xx_HAL_Driver\Src" />
+      <recent name="D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\drivers\STM32H7xx_HAL_Driver\Inc" />
       <recent name="D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\devices" />
       <recent name="D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\hardware" />
-      <recent name="D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\drivers\STM32H7xx_HAL_Driver\Inc" />
-      <recent name="D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\drivers\STM32H7xx_HAL_Driver\Src" />
       <recent name="D:\Desktop\Program\Hardware" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -209,7 +216,7 @@
       <workItem from="1619778924442" duration="13845000" />
       <workItem from="1619806300690" duration="8508000" />
       <workItem from="1619859167197" duration="7210000" />
-      <workItem from="1619874087410" duration="6235000" />
+      <workItem from="1619874087410" duration="11146000" />
     </task>
     <task id="LOCAL-00001" summary="Rewrite Functions">
       <created>1611128425695</created>
@@ -505,7 +512,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619881000671</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="Deleted IIC software simulation function and EEPROM driver function">
+      <created>1619881175861</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1619881175861</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -589,7 +603,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="PID current loop parameter setting successful" />
     <MESSAGE value="The basic logic of docking with the host computer has been completed, waiting for joint debugging" />
     <MESSAGE value="Fixed the problem of unpacking error when the referee system was connected to WiFi" />
     <MESSAGE value="Refactoring the code with the state machine, now all the power will be cut off when the bus power is off. But now UART2 can not receive the referee system packet continuously, which needs to be solved" />
@@ -614,7 +627,8 @@
     <MESSAGE value="Simple completion of the button press callback function, but also consider the situation of other buttons pressed" />
     <MESSAGE value="Realized the switching function between forms, now you can design multiple forms to switch" />
     <MESSAGE value="Fixed the bug when the referee system data could not be received. At the same time, completed the function of drawing triangle on LCD screen, standardized the structure of callback control, so that different control callbacks are consistent. FatFs file system is also introduced to prepare for accessing flash. Deleted the useless arm fast math accelerator library." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed the bug when the referee system data could not be received. At the same time, completed the function of drawing triangle on LCD screen, standardized the structure of callback control, so that different control callbacks are consistent. FatFs file system is also introduced to prepare for accessing flash. Deleted the useless arm fast math accelerator library." />
+    <MESSAGE value="Deleted IIC software simulation function and EEPROM driver function" />
+    <option name="LAST_COMMIT_MESSAGE" value="Deleted IIC software simulation function and EEPROM driver function" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

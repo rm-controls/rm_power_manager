@@ -118,20 +118,23 @@ void FSM_Task(void *pvParameters) {
             case OverPower_Expect:EP_Chassis = FSM_Status.Max_Power;
                 break;
         }
-        switch (FSM_Status.Typology_Mode) {
-            case Only_Charge:HAL_GPIO_WritePin(BOOST_EN_GPIO_Port, BOOST_EN_Pin, GPIO_PIN_RESET);
-                Delayms(50);
-                HAL_GPIO_WritePin(EN_NMOS_GPIO_Port, EN_NMOS_Pin, GPIO_PIN_SET);
-                break;
-            case Only_PMOS:
-            case PMOS_With_Charge:HAL_GPIO_WritePin(EN_NMOS_GPIO_Port, EN_NMOS_Pin, GPIO_PIN_RESET);
-                Delayms(50);
-                HAL_GPIO_WritePin(BOOST_EN_GPIO_Port, BOOST_EN_Pin, GPIO_PIN_SET);
-                break;
-            case All_Off:HAL_GPIO_WritePin(BOOST_EN_GPIO_Port, BOOST_EN_Pin, GPIO_PIN_SET);
-                HAL_GPIO_WritePin(EN_NMOS_GPIO_Port, EN_NMOS_Pin, GPIO_PIN_SET);
-                break;
+        if (Last_FSM_Status.Typology_Mode != FSM_Status.Typology_Mode) {
+            switch (FSM_Status.Typology_Mode) {
+                case Only_Charge:HAL_GPIO_WritePin(BOOST_EN_GPIO_Port, BOOST_EN_Pin, GPIO_PIN_RESET);
+                    Delayms(50);
+                    HAL_GPIO_WritePin(EN_NMOS_GPIO_Port, EN_NMOS_Pin, GPIO_PIN_SET);
+                    break;
+                case Only_PMOS:
+                case PMOS_With_Charge:HAL_GPIO_WritePin(EN_NMOS_GPIO_Port, EN_NMOS_Pin, GPIO_PIN_RESET);
+                    Delayms(50);
+                    HAL_GPIO_WritePin(BOOST_EN_GPIO_Port, BOOST_EN_Pin, GPIO_PIN_SET);
+                    break;
+                case All_Off:HAL_GPIO_WritePin(BOOST_EN_GPIO_Port, BOOST_EN_Pin, GPIO_PIN_SET);
+                    HAL_GPIO_WritePin(EN_NMOS_GPIO_Port, EN_NMOS_Pin, GPIO_PIN_SET);
+                    break;
+            }
         }
+        Last_FSM_Status.Typology_Mode = FSM_Status.Typology_Mode;
         Last_FSM_Status.FSM_Mode = FSM_Status.FSM_Mode;
         Delayms(5);
     }
