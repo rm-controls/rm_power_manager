@@ -53,5 +53,9 @@
 #include "form_logic.h"
 #include "main_form.h"
 #include "log_form.h"
+#include "settings_form.h"
+
+/////////////// FatFS ///////////////
+#include "ff.h"
 
 #endif /* __MAIN_H */

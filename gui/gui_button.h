@@ -25,10 +25,11 @@ typedef struct BUTTON_TYPE_T {
     unsigned char Y_Pos;
     unsigned char Width;
     unsigned char Height;
-    Button_State_e Status;
     const char *Text;
-    struct BUTTON_TYPE_T *NextButton;
-    void (*CallbackFunction)(struct BUTTON_TYPE_T *Button);
+    void *NextButton;
+    void (*CallbackFunction)(void *Object, unsigned char Key);
+    unsigned char Widget_Type;
+    Button_State_e Status;
 } Button_Struct_t;
 
 void GUI_InitButton(Button_Struct_t *button);

@@ -7,15 +7,15 @@ Lable_Struct_t VCapacitor_Lable, VChassis_Lable, VBaterry_Lable;
 Lable_Struct_t PCapacitor_Lable, PChassis_Lable;
 Lable_Struct_t FSM_Mode_Lable, Charge_Mode_Lable, Expect_Power_Lable, Typology_Lable;
 Button_Struct_t Settings_Button, Log_Button;
-extern Button_Struct_t *FirstButton;
 
-void Log_Button_Callback(Button_Struct_t *button) {
+void Log_Button_Callback(void *object, unsigned char key) {
     Form_Info_Structure.Form_Index = Log_Form_Index;
     LogForm_Init();
 }
 
-void Settings_Button_Callback(Button_Struct_t *button) {
-//    Form_Info_Structure.Widget_Index = 0;
+void Settings_Button_Callback(void *object, unsigned char key) {
+    Form_Info_Structure.Form_Index = Settings_Form_Index;
+    SettingsForm_Init();
 }
 
 void MainForm_Update(void) {
@@ -75,7 +75,7 @@ void MainForm_Update(void) {
 
 void MainForm_Init(void) {
     Form_Info_Structure.Widget_Index = 0;
-    FirstButton = &Log_Button;
+    FirstWidget = (GUI_Object_Struct_t *) &Log_Button;
 
     Voltage_Chart.X_Pos = 2;
     Voltage_Chart.Y_Pos = 2;

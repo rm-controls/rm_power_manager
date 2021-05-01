@@ -5,11 +5,13 @@
 #include "gui_button.h"
 #include "gui_base.h"
 #include "string.h"
+#include "form_logic.h"
 
 void GUI_InitButton(Button_Struct_t *button) {
     unsigned char text_x = button->X_Pos + (button->Width - strlen(button->Text) * 6) / 2;
     unsigned char text_y = button->Y_Pos + (button->Height - 12) / 2;
     button->Status = Button_Normal;
+    button->Widget_Type = Button_Widget_Type;
     GUI_DrawRectangle(button->X_Pos,
                       button->Y_Pos,
                       button->Width,

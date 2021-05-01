@@ -57,5 +57,13 @@ void GUI_Printf(unsigned char row,
                 unsigned int bgcolor,
                 const char *fmt,
                 ...);
+void GUI_DrawTriangle(unsigned char x1,
+                      unsigned char y1,
+                      unsigned char x2,
+                      unsigned char y2,
+                      unsigned char x3,
+                      unsigned char y3,
+                      unsigned short color,
+                      Filled_Status_e filled);
 
 #endif
