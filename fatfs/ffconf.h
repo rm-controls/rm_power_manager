@@ -30,11 +30,11 @@
 /  f_findnext(). (0:Disable, 1:Enable 2:Enable with matching altname[] too) */
 
 
-#define FF_USE_MKFS        0
+#define FF_USE_MKFS        1
 /* This option switches f_mkfs() function. (0:Disable or 1:Enable) */
 
 
-#define FF_USE_FASTSEEK    0
+#define FF_USE_FASTSEEK    1
 /* This option switches fast seek function. (0:Disable or 1:Enable) */
 
 
@@ -56,7 +56,7 @@
 /* This option switches f_forward() function. (0:Disable or 1:Enable) */
 
 
-#define FF_USE_STRFUNC    0
+#define FF_USE_STRFUNC    1
 #define FF_PRINT_LLI    0
 #define FF_PRINT_FLOAT    0
 #define FF_STRF_ENCODE    0
@@ -113,7 +113,7 @@
 */
 
 
-#define FF_USE_LFN        0
+#define FF_USE_LFN        3
 #define FF_MAX_LFN        255
 /* The FF_USE_LFN switches the support for LFN (long file name).
 /
@@ -237,10 +237,10 @@
 /  Note that enabling exFAT discards ANSI C (C89) compatibility. */
 
 
-#define FF_FS_NORTC        0
-#define FF_NORTC_MON    1
-#define FF_NORTC_MDAY    1
-#define FF_NORTC_YEAR    2020
+#define FF_FS_NORTC      1
+#define FF_NORTC_MON     5
+#define FF_NORTC_MDAY    3
+#define FF_NORTC_YEAR    2021
 /* The option FF_FS_NORTC switches timestamp functiton. If the system does not have
 /  any RTC function or valid timestamp is not needed, set FF_FS_NORTC = 1 to disable
 /  the timestamp function. Every object modified by FatFs will have a fixed timestamp

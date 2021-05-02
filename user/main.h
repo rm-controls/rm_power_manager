@@ -33,6 +33,8 @@
 #include "encrypt.h"
 #include "filter.h"
 #include "refree.h"
+#include "flash.h"
+#include "fs_operate.h"
 
 /////////////// Functions ///////////////
 #include "calculate.h"

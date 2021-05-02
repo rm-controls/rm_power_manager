@@ -8,7 +8,8 @@
 #include "stm32h7xx_hal.h"
 
 extern SPI_HandleTypeDef hspi1;
-unsigned char SPI_ReadWriteByte(unsigned char data);
+unsigned char SPI_ReadWriteByte(unsigned char Txdata);
+void SPI_SetSpeed(unsigned int SPI_BaudRatePrescaler);
 void SPI_Config(void);
 
 #endif //PROGRAM_HARDWARE_SPI_H_
