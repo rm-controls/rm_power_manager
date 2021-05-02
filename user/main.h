@@ -49,6 +49,7 @@
 #include "gui_button.h"
 #include "gui_chart.h"
 #include "gui_lable.h"
+#include "gui_numeric.h"
 
 /////////////// Forms ///////////////
 #include "form_logic.h"

@@ -18,22 +18,13 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="Add the program to check the reset reason and display, but obviously this code can not display the reset reason correctly. SPI hardware initialization program has been added, and it has not been tested whether it is normal. Fixed watchdog feeding time to avoid abnormal reset of watchdog at some time.">
-      <change afterPath="$PROJECT_DIR$/devices/flash.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/devices/flash.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/devices/fs_operate.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/devices/fs_operate.h" afterDir="false" />
+    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="After porting FatFs file system and flash driver of w25q series, we need to wait for a new board to test whether FatFs and flash are available.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/devices/filter.c" beforeDir="false" afterPath="$PROJECT_DIR$/devices/filter.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fatfs/diskio.c" beforeDir="false" afterPath="$PROJECT_DIR$/fatfs/diskio.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fatfs/ffconf.h" beforeDir="false" afterPath="$PROJECT_DIR$/fatfs/ffconf.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fatfs/ffsystem.c" beforeDir="false" afterPath="$PROJECT_DIR$/fatfs/ffsystem.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hardware/gpio.c" beforeDir="false" afterPath="$PROJECT_DIR$/hardware/gpio.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hardware/spi.c" beforeDir="false" afterPath="$PROJECT_DIR$/hardware/spi.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hardware/spi.h" beforeDir="false" afterPath="$PROJECT_DIR$/hardware/spi.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/user/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/forms/form_logic.c" beforeDir="false" afterPath="$PROJECT_DIR$/forms/form_logic.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/forms/settings_form.c" beforeDir="false" afterPath="$PROJECT_DIR$/forms/settings_form.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/gui_numeric.c" beforeDir="false" afterPath="$PROJECT_DIR$/gui/gui_numeric.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/gui_numeric.h" beforeDir="false" afterPath="$PROJECT_DIR$/gui/gui_numeric.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user/main.h" beforeDir="false" afterPath="$PROJECT_DIR$/user/main.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/port.h" beforeDir="false" afterPath="$PROJECT_DIR$/user/port.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -216,7 +207,7 @@
       <workItem from="1619806300690" duration="8508000" />
       <workItem from="1619859167197" duration="7210000" />
       <workItem from="1619874087410" duration="11477000" />
-      <workItem from="1619959288906" duration="10483000" />
+      <workItem from="1619959288906" duration="15700000" />
     </task>
     <task id="LOCAL-00001" summary="Rewrite Functions">
       <created>1611128425695</created>
@@ -526,7 +517,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619889993963</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="After porting FatFs file system and flash driver of w25q series, we need to wait for a new board to test whether FatFs and flash are available.">
+      <created>1619982375944</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1619982375944</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -610,7 +608,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Fixed the problem of unpacking error when the referee system was connected to WiFi" />
     <MESSAGE value="Refactoring the code with the state machine, now all the power will be cut off when the bus power is off. But now UART2 can not receive the referee system packet continuously, which needs to be solved" />
     <MESSAGE value="The power correction code is added, but the result is not ideal" />
     <MESSAGE value="The power correction algorithm is modified, which is relatively accurate at low power, but the actual power is much smaller than the calculated power at high power" />
@@ -635,7 +632,8 @@
     <MESSAGE value="Fixed the bug when the referee system data could not be received. At the same time, completed the function of drawing triangle on LCD screen, standardized the structure of callback control, so that different control callbacks are consistent. FatFs file system is also introduced to prepare for accessing flash. Deleted the useless arm fast math accelerator library." />
     <MESSAGE value="Deleted IIC software simulation function and EEPROM driver function" />
     <MESSAGE value="Add the program to check the reset reason and display, but obviously this code can not display the reset reason correctly. SPI hardware initialization program has been added, and it has not been tested whether it is normal. Fixed watchdog feeding time to avoid abnormal reset of watchdog at some time." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add the program to check the reset reason and display, but obviously this code can not display the reset reason correctly. SPI hardware initialization program has been added, and it has not been tested whether it is normal. Fixed watchdog feeding time to avoid abnormal reset of watchdog at some time." />
+    <MESSAGE value="After porting FatFs file system and flash driver of w25q series, we need to wait for a new board to test whether FatFs and flash are available." />
+    <option name="LAST_COMMIT_MESSAGE" value="After porting FatFs file system and flash driver of w25q series, we need to wait for a new board to test whether FatFs and flash are available." />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
