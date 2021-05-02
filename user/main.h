@@ -26,6 +26,7 @@
 #include "key.h"
 #include "lcd.h"
 #include "spi.h"
+#include "rtc.h"
 
 /////////////// Device ///////////////
 #include "pid.h"

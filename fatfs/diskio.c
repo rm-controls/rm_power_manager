@@ -1,10 +1,11 @@
 #include "ff.h"
 #include "diskio.h"
 #include "flash.h"
+#include "rtc.h"
 
-#define FLASH_SECTOR_SIZE    512    // 每个扇区为512字节
-#define FLASH_SECTOR_COUNT   1024   // 512 * 1024 = 512KB
-#define FLASH_BLOCK_SIZE     8      // 每个BLOCK有8个扇区
+#define NORFLASH_SECTOR_SIZE    512    // 每个扇区为512字节
+#define NORFLASH_SECTOR_COUNT   1024   // 512 * 1024 = 512KB
+#define NORFLASH_BLOCK_SIZE     8      // 每个BLOCK有8个扇区
 
 /*-----------------------------------------------------------------------*/
 /* Get Drive Status                                                      */
@@ -34,9 +35,9 @@ DRESULT disk_read(
     UINT count
 ) {
     for (; count > 0; count--) {
-        W25QXX_Read(buff, sector * FLASH_SECTOR_SIZE, FLASH_SECTOR_SIZE);
+        W25QXX_Read(buff, sector * NORFLASH_SECTOR_SIZE, NORFLASH_SECTOR_SIZE);
         sector++;
-        buff += FLASH_SECTOR_SIZE;
+        buff += NORFLASH_SECTOR_SIZE;
     }
     return RES_OK;
 }
@@ -52,9 +53,9 @@ DRESULT disk_write(
     UINT count
 ) {
     for (; count > 0; count--) {
-        W25QXX_Write((unsigned char *) buff, sector * FLASH_SECTOR_SIZE, FLASH_SECTOR_SIZE);
+        W25QXX_Write((unsigned char *) buff, sector * NORFLASH_SECTOR_SIZE, NORFLASH_SECTOR_SIZE);
         sector++;
-        buff += FLASH_SECTOR_SIZE;
+        buff += NORFLASH_SECTOR_SIZE;
     }
     return RES_OK;
 }
@@ -72,13 +73,13 @@ DRESULT disk_ioctl(
     switch (cmd) {
         case CTRL_SYNC:res = RES_OK;
             break;
-        case GET_SECTOR_SIZE:*(WORD *) buff = FLASH_SECTOR_SIZE;
+        case GET_SECTOR_SIZE:*(WORD *) buff = NORFLASH_SECTOR_SIZE;
             res = RES_OK;
             break;
-        case GET_BLOCK_SIZE:*(WORD *) buff = FLASH_BLOCK_SIZE;
+        case GET_BLOCK_SIZE:*(WORD *) buff = NORFLASH_BLOCK_SIZE;
             res = RES_OK;
             break;
-        case GET_SECTOR_COUNT:*(DWORD *) buff = FLASH_SECTOR_COUNT;
+        case GET_SECTOR_COUNT:*(DWORD *) buff = NORFLASH_SECTOR_COUNT;
             res = RES_OK;
             break;
         default:res = RES_PARERR;
@@ -87,3 +88,16 @@ DRESULT disk_ioctl(
     return res;
 }
 
+DWORD get_fattime(void) {
+    RTC_TimeTypeDef RTC_TimeStruct;
+    RTC_DateTypeDef RTC_DateStruct;
+    HAL_RTC_GetTime(&hrtc, &RTC_TimeStruct, RTC_FORMAT_BIN);
+    HAL_RTC_GetDate(&hrtc, &RTC_DateStruct, RTC_FORMAT_BIN);
+    return ((2000UL - 1980 + RTC_DateStruct.Year) << 25) /* Year = 2010 */
+        | (RTC_DateStruct.Month << 21) /* Month = 11 */
+        | (RTC_DateStruct.Date << 16) /* Day = 2 */
+        | (RTC_TimeStruct.Hours << 11) /* Hour = 15 */
+        | (RTC_TimeStruct.Minutes << 5) /* Min = 0 */
+        | (RTC_TimeStruct.Seconds >> 1) /* Sec = 0 */
+        ;
+}

@@ -11,10 +11,11 @@ SemaphoreHandle_t Calibrate_Semaphore;
 
 void InitTask() {
     taskENTER_CRITICAL();
+    RTC_Config();
     GPIO_Config();
     SPI_Config();
     W25QXX_Init();
-//    FileSystem_Config();
+    FileSystem_Config();
     DMA_Config();
     ADC_Config();
     Referee_init();

@@ -18,12 +18,20 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="After porting FatFs file system and flash driver of w25q series, we need to wait for a new board to test whether FatFs and flash are available.">
+    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="Complete the GUI design of the digital modification control and complete the writing of its logic function">
+      <change afterPath="$PROJECT_DIR$/drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rtc.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rtc_ex.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_rtc.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_rtc_ex.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hardware/rtc.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hardware/rtc.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forms/form_logic.c" beforeDir="false" afterPath="$PROJECT_DIR$/forms/form_logic.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forms/settings_form.c" beforeDir="false" afterPath="$PROJECT_DIR$/forms/settings_form.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/gui_numeric.c" beforeDir="false" afterPath="$PROJECT_DIR$/gui/gui_numeric.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/gui_numeric.h" beforeDir="false" afterPath="$PROJECT_DIR$/gui/gui_numeric.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fatfs/diskio.c" beforeDir="false" afterPath="$PROJECT_DIR$/fatfs/diskio.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fatfs/diskio.h" beforeDir="false" afterPath="$PROJECT_DIR$/fatfs/diskio.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fatfs/ffconf.h" beforeDir="false" afterPath="$PROJECT_DIR$/fatfs/ffconf.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/stm32h7xx_hal_conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/system/stm32h7xx_hal_conf.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/system.c" beforeDir="false" afterPath="$PROJECT_DIR$/system/system.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/user/main.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user/main.h" beforeDir="false" afterPath="$PROJECT_DIR$/user/main.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -207,7 +215,7 @@
       <workItem from="1619806300690" duration="8508000" />
       <workItem from="1619859167197" duration="7210000" />
       <workItem from="1619874087410" duration="11477000" />
-      <workItem from="1619959288906" duration="15700000" />
+      <workItem from="1619959288906" duration="19285000" />
     </task>
     <task id="LOCAL-00001" summary="Rewrite Functions">
       <created>1611128425695</created>
@@ -524,7 +532,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619982375944</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="Complete the GUI design of the digital modification control and complete the writing of its logic function">
+      <created>1619987687532</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1619987687532</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -608,7 +623,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Refactoring the code with the state machine, now all the power will be cut off when the bus power is off. But now UART2 can not receive the referee system packet continuously, which needs to be solved" />
     <MESSAGE value="The power correction code is added, but the result is not ideal" />
     <MESSAGE value="The power correction algorithm is modified, which is relatively accurate at low power, but the actual power is much smaller than the calculated power at high power" />
     <MESSAGE value="Modify the power correction code of the super power mode. Now the power in the super power mode can be guaranteed within the limited power" />
@@ -633,7 +647,8 @@
     <MESSAGE value="Deleted IIC software simulation function and EEPROM driver function" />
     <MESSAGE value="Add the program to check the reset reason and display, but obviously this code can not display the reset reason correctly. SPI hardware initialization program has been added, and it has not been tested whether it is normal. Fixed watchdog feeding time to avoid abnormal reset of watchdog at some time." />
     <MESSAGE value="After porting FatFs file system and flash driver of w25q series, we need to wait for a new board to test whether FatFs and flash are available." />
-    <option name="LAST_COMMIT_MESSAGE" value="After porting FatFs file system and flash driver of w25q series, we need to wait for a new board to test whether FatFs and flash are available." />
+    <MESSAGE value="Complete the GUI design of the digital modification control and complete the writing of its logic function" />
+    <option name="LAST_COMMIT_MESSAGE" value="Complete the GUI design of the digital modification control and complete the writing of its logic function" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

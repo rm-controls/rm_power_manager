@@ -168,8 +168,11 @@ void SystemClock_Config(void) {
     __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE0);
     while (!__HAL_PWR_GET_FLAG(PWR_FLAG_VOSRDY)) {}
     __HAL_RCC_PLL_PLLSOURCE_CONFIG(RCC_PLLSOURCE_HSE);
-    RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+    HAL_PWR_EnableBkUpAccess();
+    __HAL_RCC_LSEDRIVE_CONFIG(RCC_LSEDRIVE_LOW);
+    RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE | RCC_OSCILLATORTYPE_LSE;
     RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+    RCC_OscInitStruct.LSEState = RCC_LSE_ON;
     RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
     RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
     RCC_OscInitStruct.PLL.PLLM = 5;
@@ -193,6 +196,7 @@ void SystemClock_Config(void) {
     RCC_ClkInitStruct.APB4CLKDivider = RCC_APB4_DIV2;
     while (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_4) != HAL_OK);
     HAL_RCC_EnableCSS();
+    HAL_RCCEx_EnableLSECSS();
 
     PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_CKPER;
     PeriphClkInitStruct.CkperClockSelection = RCC_CLKPSOURCE_HSI;
