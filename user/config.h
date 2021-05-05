@@ -1,13 +1,11 @@
 //
-// Created by Lao·Zhu on 2021/1/20.
+// Created by Lao·Zhu on 2021/5/5.
 //
 
-#ifndef _USER_CONFIG_H_
-#define _USER_CONFIG_H_
+#ifndef PROGRAM_USER_CONFIG_H_
+#define PROGRAM_USER_CONFIG_H_
 
-#define TIM6_INT_BIT    0
-#define TIM7_INT_BIT    1
-#define TIM10_INT_BIT   2
-#define TIM11_INT_BIT   3
+#define USE_SPI_FLASH_FATFS 0
+#define USE_OSC_32KHZ_RTC   0
 
 #endif //PROGRAM_USER_CONFIG_H_

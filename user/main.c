@@ -11,11 +11,15 @@ SemaphoreHandle_t Calibrate_Semaphore;
 
 void InitTask() {
     taskENTER_CRITICAL();
+#if USE_OSC_32KHZ_RTC
     RTC_Config();
+#endif
     GPIO_Config();
+#if USE_SPI_FLASH_FATFS == 1
     SPI_Config();
     W25QXX_Init();
     FileSystem_Config();
+#endif
     DMA_Config();
     ADC_Config();
     Referee_init();

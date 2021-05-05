@@ -6,6 +6,7 @@
 #include "stm32h7xx_hal.h"
 #include "FreeRTOS.h"
 #include "task.h"
+#include "config.h"
 
 static unsigned int Facus = 0;
 static unsigned int Facms = 0;
@@ -162,17 +163,27 @@ void MPU_Config(void) {
 void SystemClock_Config(void) {
     RCC_OscInitTypeDef RCC_OscInitStruct = {0};
     RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+
+#if USE_SPI_FLASH_FATFS == 1
     RCC_PeriphCLKInitTypeDef PeriphClkInitStruct = {0};
+#endif
 
     HAL_PWREx_ConfigSupply(PWR_LDO_SUPPLY);
     __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE0);
     while (!__HAL_PWR_GET_FLAG(PWR_FLAG_VOSRDY)) {}
     __HAL_RCC_PLL_PLLSOURCE_CONFIG(RCC_PLLSOURCE_HSE);
+#if USE_OSC_32KHZ_RTC == 1
     HAL_PWR_EnableBkUpAccess();
     __HAL_RCC_LSEDRIVE_CONFIG(RCC_LSEDRIVE_LOW);
     RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE | RCC_OSCILLATORTYPE_LSE;
     RCC_OscInitStruct.HSEState = RCC_HSE_ON;
     RCC_OscInitStruct.LSEState = RCC_LSE_ON;
+
+#else
+    RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE ;
+    RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+#endif
+
     RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
     RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
     RCC_OscInitStruct.PLL.PLLM = 5;
@@ -198,9 +209,11 @@ void SystemClock_Config(void) {
     HAL_RCC_EnableCSS();
     HAL_RCCEx_EnableLSECSS();
 
+#if USE_SPI_FLASH_FATFS == 1
     PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_CKPER;
     PeriphClkInitStruct.CkperClockSelection = RCC_CLKPSOURCE_HSI;
     while (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK);
+#endif
 
     Facus = HAL_RCC_GetSysClockFreq() / 1000000;
     unsigned int Reload = HAL_RCC_GetSysClockFreq() / 1000000;
