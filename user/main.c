@@ -11,7 +11,7 @@ SemaphoreHandle_t Calibrate_Semaphore;
 
 void InitTask() {
     taskENTER_CRITICAL();
-#if USE_OSC_32KHZ_RTC
+#if USE_RTC_ONCHIP
     RTC_Config();
 #endif
     GPIO_Config();

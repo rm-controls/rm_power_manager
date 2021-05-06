@@ -3,6 +3,7 @@
 //
 
 #include "rtc.h"
+#include "config.h"
 
 RTC_HandleTypeDef hrtc;
 
@@ -51,9 +52,15 @@ void HAL_RTC_MspInit(RTC_HandleTypeDef *rtcHandle) {
     RCC_PeriphCLKInitTypeDef PeriphClkInitStruct = {0};
     if (rtcHandle->Instance == RTC) {
         __HAL_RCC_RTC_CLK_ENABLE();
+#if USE_OSC_32KHZ == 1
         PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_RTC;
         PeriphClkInitStruct.RTCClockSelection = RCC_RTCCLKSOURCE_LSE;
         while (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK);
+#else
+        PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_RTC;
+        PeriphClkInitStruct.RTCClockSelection = RCC_RTCCLKSOURCE_LSI;
+        while (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK);
+#endif
         __HAL_RCC_RTC_ENABLE();
     }
 }

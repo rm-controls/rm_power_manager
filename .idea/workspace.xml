@@ -18,12 +18,13 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="Open the external low-speed clock source, add RTC clock configuration code, and realize the time acquisition function of FatFs, so that it can obtain the time on RTC.">
+    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="Add macro definition to make the code downward compatible with 32.768KHz crystal oscillator without external SPI flash and RTC power supply">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hardware/gpio.c" beforeDir="false" afterPath="$PROJECT_DIR$/hardware/gpio.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hardware/rtc.c" beforeDir="false" afterPath="$PROJECT_DIR$/hardware/rtc.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/system/system.c" beforeDir="false" afterPath="$PROJECT_DIR$/system/system.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user/config.h" beforeDir="false" afterPath="$PROJECT_DIR$/user/config.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/user/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/usertask.c" beforeDir="false" afterPath="$PROJECT_DIR$/user/usertask.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -203,7 +204,7 @@
       <workItem from="1619874087410" duration="11477000" />
       <workItem from="1619959288906" duration="20722000" />
       <workItem from="1620045502855" duration="6801000" />
-      <workItem from="1620228342760" duration="1617000" />
+      <workItem from="1620228342760" duration="10624000" />
     </task>
     <task id="LOCAL-00001" summary="Rewrite Functions">
       <created>1611128425695</created>
@@ -534,7 +535,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619993303042</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="Add macro definition to make the code downward compatible with 32.768KHz crystal oscillator without external SPI flash and RTC power supply">
+      <created>1620230054668</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1620230054668</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -618,7 +626,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="The power correction algorithm is modified, which is relatively accurate at low power, but the actual power is much smaller than the calculated power at high power" />
     <MESSAGE value="Modify the power correction code of the super power mode. Now the power in the super power mode can be guaranteed within the limited power" />
     <MESSAGE value="It solves the problem of PMOS burn out due to current jump when switching from super power mode to normal mode, solves the problem of sudden charging power increase in a certain period after power on, solves the problem of power correction failure when power on, and adds the code of data compression to buffer" />
     <MESSAGE value="The problem that the finite state machine fails when the robot is revived, the problem that the finite state machine cannot be protected when the capacitor is over-voltage, and the problem that the capacitor is charged intermittently when the finite state machine is restarted are solved." />
@@ -643,7 +650,8 @@
     <MESSAGE value="After porting FatFs file system and flash driver of w25q series, we need to wait for a new board to test whether FatFs and flash are available." />
     <MESSAGE value="Complete the GUI design of the digital modification control and complete the writing of its logic function" />
     <MESSAGE value="Open the external low-speed clock source, add RTC clock configuration code, and realize the time acquisition function of FatFs, so that it can obtain the time on RTC." />
-    <option name="LAST_COMMIT_MESSAGE" value="Open the external low-speed clock source, add RTC clock configuration code, and realize the time acquisition function of FatFs, so that it can obtain the time on RTC." />
+    <MESSAGE value="Add macro definition to make the code downward compatible with 32.768KHz crystal oscillator without external SPI flash and RTC power supply" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add macro definition to make the code downward compatible with 32.768KHz crystal oscillator without external SPI flash and RTC power supply" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
