@@ -13,9 +13,9 @@ void TurnBack_Button2_Callback(void *object, unsigned char key) {
 }
 
 void Numeric_Test_Callback(void *object, unsigned char key) {
-    if (key == Right_Key)
+    if (key == Up_Key)
         ((Numeric_Struct_t *) object)->Value++;
-    else if (((Numeric_Struct_t *) object)->Value != 0)
+    else if (key == Down_Key && ((Numeric_Struct_t *) object)->Value != 0)
         ((Numeric_Struct_t *) object)->Value--;
     GUI_NumericSetText((Numeric_Struct_t *) object, "%d", ((Numeric_Struct_t *) object)->Value);
 }

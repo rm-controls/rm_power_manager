@@ -41,8 +41,8 @@ void RTC_Config(void) {
     while (HAL_RTC_Init(&hrtc) != HAL_OK);
 
     if (HAL_RTCEx_BKUPRead(&hrtc, RTC_BKP_DR31) != 0X5A5A) {
-        RTC_Set_Time(5, 52, 0);
-        RTC_Set_Date(21, 5, 3, 1);
+        RTC_Set_Time(23, 12, 5);
+        RTC_Set_Date(21, 5, 7, 5);
         HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR31, 0X5A5A);
     }
 

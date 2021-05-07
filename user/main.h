@@ -8,6 +8,7 @@
 #include "config.h"
 #include "usertask.h"
 #include "string.h"
+#include "stdio.h"
 
 /////////////// FreeRTOS ///////////////
 #include "FreeRTOS.h"
@@ -35,7 +36,6 @@
 #include "filter.h"
 #include "refree.h"
 #include "flash.h"
-#include "fs_operate.h"
 
 /////////////// Functions ///////////////
 #include "calculate.h"
@@ -51,6 +51,7 @@
 #include "gui_chart.h"
 #include "gui_lable.h"
 #include "gui_numeric.h"
+#include "gui_listbox.h"
 
 /////////////// Forms ///////////////
 #include "form_logic.h"
@@ -58,7 +59,7 @@
 #include "log_form.h"
 #include "settings_form.h"
 
-/////////////// FatFS ///////////////
-#include "ff.h"
+/////////////// FileSystem ///////////////
+#include "fs_operate.h"
 
 #endif /* __MAIN_H */

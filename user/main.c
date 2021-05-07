@@ -11,10 +11,13 @@ SemaphoreHandle_t Calibrate_Semaphore;
 
 void InitTask() {
     taskENTER_CRITICAL();
-#if USE_RTC_ONCHIP
+#if USE_RTC_ONCHIP == 1
+    Delayms(1000);
     RTC_Config();
 #endif
     GPIO_Config();
+    GUI_Init();
+    GUI_Printf(31, 74, C_DARK_GREEN, C_WHITE, "Init Offset");
 #if USE_SPI_FLASH_FATFS == 1
     SPI_Config();
     W25QXX_Init();
@@ -29,8 +32,6 @@ void InitTask() {
     TIM7_Config();
     Filter_Config();
     PID_ValueConfig();
-    GUI_Init();
-    GUI_Printf(31, 74, C_DARK_GREEN, C_WHITE, "Init Offset");
     Sensor_Config();
     memset(&FSM_Status, 0x00, sizeof(FSM_Status_t));
     Calibrate_Semaphore = xSemaphoreCreateMutex();
@@ -50,7 +51,7 @@ int main(void) {
     HAL_Init();
     SystemClock_Config();
     DataRead_From_Flash();
-    xTaskCreate(InitTask, "InitTask", 512, NULL, 1, &InitTask_Handler);
+    xTaskCreate(InitTask, "InitTask", 10240, NULL, 1, &InitTask_Handler);
     vTaskStartScheduler();
     while (1);
 }

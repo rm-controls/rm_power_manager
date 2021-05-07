@@ -7,7 +7,8 @@
 
 #include "port.h"
 
-#define W25QXX_CS(x) HAL_GPIO_WritePin(SPI_FLASH_CS_PORT, SPI_FLASH_CS_PIN, x)
+#define W25QXX_CS_LOW HAL_GPIO_WritePin(SPI_FLASH_CS_PORT, SPI_FLASH_CS_PIN, GPIO_PIN_RESET)
+#define W25QXX_CS_HIGH HAL_GPIO_WritePin(SPI_FLASH_CS_PORT, SPI_FLASH_CS_PIN, GPIO_PIN_SET)
 
 #define W25X_WriteEnable        0x06
 #define W25X_WriteDisable        0x04

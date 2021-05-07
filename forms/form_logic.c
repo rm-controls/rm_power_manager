@@ -19,24 +19,24 @@ void Form_UpdateEvent(void) {
     GUI_Object_Struct_t *Current_Widget = FirstWidget, *Tmp_Widget = NULL;
     for (unsigned char counter = 0; counter < Form_Info_Structure.Widget_Index; counter++)
         Current_Widget = Current_Widget->NextObject;
-    if (key_num.Last_Num == Up_Key && key_num.Num == 0)
+    if (key_num.Last_Num == Left_Key && key_num.Num == 0)
         if (Form_Info_Structure.Widget_Index != 0)
             Form_Info_Structure.Widget_Index--;
-    if (key_num.Last_Num == Down_Key && key_num.Num == 0)
+    if (key_num.Last_Num == Right_Key && key_num.Num == 0)
         if (Current_Widget->NextObject != NULL)
             Form_Info_Structure.Widget_Index++;
 
-    if (key_num.Last_Num == 0 && key_num.Num == Left_Key && Current_Widget->Widget_Type == Numeric_Widget_Type)
+    if (key_num.Last_Num == 0 && key_num.Num == Down_Key && Current_Widget->Widget_Type == Numeric_Widget_Type)
         GUI_UpdateNumeric((Numeric_Struct_t *) Current_Widget, Numeric_Down_Button_Click);
-    if (key_num.Last_Num == 0 && key_num.Num == Right_Key && Current_Widget->Widget_Type == Numeric_Widget_Type)
+    if (key_num.Last_Num == 0 && key_num.Num == Up_Key && Current_Widget->Widget_Type == Numeric_Widget_Type)
         GUI_UpdateNumeric((Numeric_Struct_t *) Current_Widget, Numeric_Up_Button_Click);
-    if (key_num.Num == 0 && key_num.Last_Num == Left_Key && Current_Widget->Widget_Type == Numeric_Widget_Type) {
+    if (key_num.Num == 0 && key_num.Last_Num == Down_Key && Current_Widget->Widget_Type == Numeric_Widget_Type) {
         GUI_UpdateNumeric((Numeric_Struct_t *) Current_Widget, Numeric_Down_Button_Focus);
-        Current_Widget->CallbackFunction(Current_Widget, Left_Key);
+        Current_Widget->CallbackFunction(Current_Widget, Down_Key);
     }
-    if (key_num.Num == 0 && key_num.Last_Num == Right_Key && Current_Widget->Widget_Type == Numeric_Widget_Type) {
+    if (key_num.Num == 0 && key_num.Last_Num == Up_Key && Current_Widget->Widget_Type == Numeric_Widget_Type) {
         GUI_UpdateNumeric((Numeric_Struct_t *) Current_Widget, Numeric_Up_Button_Focus);
-        Current_Widget->CallbackFunction(Current_Widget, Right_Key);
+        Current_Widget->CallbackFunction(Current_Widget, Up_Key);
     }
 
     if (key_num.Last_Num == 0 && key_num.Num == Center_Key && Current_Widget->Widget_Type == Button_Widget_Type)

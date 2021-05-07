@@ -6,6 +6,8 @@
 #define PROGRAM_DEVICES_FS_OPERATE_H_
 
 void FileSystem_Config(void);
+void FileSystem_FormatFlash(void);
+void FileSystem_CreateFiles(const char *Filename);
 void FileSystem_GetFree(unsigned int *total, unsigned int *free);
 void FileSystem_ScanFiles(unsigned char **filename);
 
