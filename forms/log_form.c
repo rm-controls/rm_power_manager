@@ -30,7 +30,10 @@ void LogForm_Update(void) {
                      RTC_TimeStruct.Hours,
                      RTC_TimeStruct.Minutes,
                      RTC_TimeStruct.Seconds);
-    GUI_LableSetText(&FreeRTOS_FreeSize_Lable, "RTOS:%03dKB", (int) (xPortGetFreeHeapSize() / 1024));
+    GUI_LableSetText(&FreeRTOS_FreeSize_Lable,
+                     "RTOS:%2d.%1dKB",
+                     xPortGetFreeHeapSize() / 1024,
+                     (xPortGetFreeHeapSize() % 1024) / 100);
 }
 
 void GUI_ListBox_ScanFile() {
@@ -52,15 +55,10 @@ void LogForm_Init(void) {
     FileList_ListBox.Height = 76;
     FileList_ListBox.Text = "FileList";
 
-    Flash_FreeSize_Lable.X_Pos = 6;
-    Flash_FreeSize_Lable.Y_Pos = 96;
-    Flash_FreeSize_Lable.Color = C_BLACK;
-    Flash_FreeSize_Lable.Text = "FS:NANKB";
-
-    FreeRTOS_FreeSize_Lable.X_Pos = 62;
+    FreeRTOS_FreeSize_Lable.X_Pos = 9;
     FreeRTOS_FreeSize_Lable.Y_Pos = 96;
     FreeRTOS_FreeSize_Lable.Color = C_BLACK;
-    FreeRTOS_FreeSize_Lable.Text = "RTOS:NANKB";
+    FreeRTOS_FreeSize_Lable.Text = "RTOS:--.-KB";
 
     TurnBack_Button1.X_Pos = 2;
     TurnBack_Button1.Y_Pos = 135;

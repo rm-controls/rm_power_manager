@@ -18,33 +18,10 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="Add the code of internal low-speed clock source, so that the MCU can use RTC when there is no external 32K clock">
-      <change afterPath="$PROJECT_DIR$/gui/gui_listbox.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gui/gui_listbox.h" afterDir="false" />
+    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="Debugging for five hours, but FatFs file system will appear after writing the file restart disappear, this situation can not be solved. I tried to modify the flash read function, and the phenomenon did not change. So now I'm going to rewrite a file system.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/devices/flash.c" beforeDir="false" afterPath="$PROJECT_DIR$/devices/flash.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/devices/flash.h" beforeDir="false" afterPath="$PROJECT_DIR$/devices/flash.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/devices/fs_operate.c" beforeDir="false" afterPath="$PROJECT_DIR$/filesystem/fs_operate.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/devices/fs_operate.h" beforeDir="false" afterPath="$PROJECT_DIR$/filesystem/fs_operate.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fatfs/diskio.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fatfs/diskio.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fatfs/ff.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fatfs/ff.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fatfs/ffconf.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fatfs/ffsystem.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fatfs/ffunicode.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/forms/form_logic.c" beforeDir="false" afterPath="$PROJECT_DIR$/forms/form_logic.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forms/form_logic.h" beforeDir="false" afterPath="$PROJECT_DIR$/forms/form_logic.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/forms/log_form.c" beforeDir="false" afterPath="$PROJECT_DIR$/forms/log_form.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forms/settings_form.c" beforeDir="false" afterPath="$PROJECT_DIR$/forms/settings_form.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions/datasave.c" beforeDir="false" afterPath="$PROJECT_DIR$/functions/datasave.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hardware/gpio.c" beforeDir="false" afterPath="$PROJECT_DIR$/hardware/gpio.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hardware/rtc.c" beforeDir="false" afterPath="$PROJECT_DIR$/hardware/rtc.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hardware/spi.c" beforeDir="false" afterPath="$PROJECT_DIR$/hardware/spi.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/config.h" beforeDir="false" afterPath="$PROJECT_DIR$/user/config.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/user/main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/main.h" beforeDir="false" afterPath="$PROJECT_DIR$/user/main.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/functions/calculate.c" beforeDir="false" afterPath="$PROJECT_DIR$/functions/calculate.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -229,14 +206,7 @@
       <workItem from="1619874087410" duration="11477000" />
       <workItem from="1619959288906" duration="20722000" />
       <workItem from="1620045502855" duration="6801000" />
-      <workItem from="1620228342760" duration="49029000" />
-    </task>
-    <task id="LOCAL-00001" summary="Rewrite Functions">
-      <created>1611128425695</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1611128425695</updated>
+      <workItem from="1620228342760" duration="49816000" />
     </task>
     <task id="LOCAL-00002" summary="Finished Power Calculate">
       <created>1611135119791</created>
@@ -574,7 +544,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620288317577</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="Debugging for five hours, but FatFs file system will appear after writing the file restart disappear, this situation can not be solved. I tried to modify the flash read function, and the phenomenon did not change. So now I'm going to rewrite a file system.">
+      <created>1620414542252</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1620414542252</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -658,7 +635,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="It solves the problem of PMOS burn out due to current jump when switching from super power mode to normal mode, solves the problem of sudden charging power increase in a certain period after power on, solves the problem of power correction failure when power on, and adds the code of data compression to buffer" />
     <MESSAGE value="The problem that the finite state machine fails when the robot is revived, the problem that the finite state machine cannot be protected when the capacitor is over-voltage, and the problem that the capacitor is charged intermittently when the finite state machine is restarted are solved." />
     <MESSAGE value="The watchdog function has been added, but there is still a problem with the exception saving program. In addition, the program has been basically able to use" />
     <MESSAGE value="Add arm cortex fast single precision fast math lib" />
@@ -683,7 +659,8 @@
     <MESSAGE value="Open the external low-speed clock source, add RTC clock configuration code, and realize the time acquisition function of FatFs, so that it can obtain the time on RTC." />
     <MESSAGE value="Add macro definition to make the code downward compatible with 32.768KHz crystal oscillator without external SPI flash and RTC power supply" />
     <MESSAGE value="Add the code of internal low-speed clock source, so that the MCU can use RTC when there is no external 32K clock" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add the code of internal low-speed clock source, so that the MCU can use RTC when there is no external 32K clock" />
+    <MESSAGE value="Debugging for five hours, but FatFs file system will appear after writing the file restart disappear, this situation can not be solved. I tried to modify the flash read function, and the phenomenon did not change. So now I'm going to rewrite a file system." />
+    <option name="LAST_COMMIT_MESSAGE" value="Debugging for five hours, but FatFs file system will appear after writing the file restart disappear, this situation can not be solved. I tried to modify the flash read function, and the phenomenon did not change. So now I'm going to rewrite a file system." />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

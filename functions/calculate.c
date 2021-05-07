@@ -129,6 +129,17 @@ void Calculate_Power(void) {
     V_ChassisF.Current_Value = (float) ADC_FinalResult[4] * ADC_COEFFICIENT * 21.0f;
     V_Chassis = FirstOrder_Filter_Calculate(&V_ChassisF);
 
+    if (I_Capacitor < 0.05f || I_Capacitor > 10.0f)
+        I_Capacitor = 0;
+    if (I_Chassis < 0.05f || I_Chassis > 10.0f)
+        I_Chassis = 0;
+    if (V_Capacitor < 0.1f || V_Capacitor > 25.0f)
+        V_Capacitor = 0;
+    if (V_Baterry < 0.1f || V_Baterry > 35.0f)
+        V_Baterry = 0;
+    if (V_Chassis < 0.1f || V_Chassis > 25.0f)
+        V_Chassis = 0;
+
     P_ChassisF.Current_Value = I_Chassis * V_Chassis;
     P_Chassis = FirstOrder_Filter_Calculate(&P_ChassisF);
 
@@ -139,6 +150,11 @@ void Calculate_Power(void) {
         P_CapacitorF.Current_Value = V_Baterry * I_Capacitor;
         P_Capacitor = FirstOrder_Filter_Calculate(&P_CapacitorF) + I_Capacitor * I_Capacitor * Capacitor_Calibrateh.Rw;
     }
+
+    if (P_Chassis < 0.1f || P_Chassis > 250.0f)
+        P_Chassis = 0;
+    if (P_Capacitor < 0.1f || P_Capacitor > 200.0f)
+        P_Capacitor = 0;
 
     W_Capacitor = 0.5f * 15 * V_Capacitor * V_Capacitor - 367.5f;
     if (W_Capacitor < 0)
