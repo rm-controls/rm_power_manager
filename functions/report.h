@@ -5,6 +5,7 @@
 #ifndef _FUNCTIONS_REPORT_H_
 #define _FUNCTIONS_REPORT_H_
 
+void Packup_Info(void);
 void Report_Task(void *pvParameters);
 void Upload_Refree(void *pvParameters);
 

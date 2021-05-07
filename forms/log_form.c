@@ -5,7 +5,7 @@
 #include "main.h"
 
 Button_Struct_t TurnBack_Button1, Format_Button;
-Lable_Struct_t DateTime_Lable, Flash_FreeSize_Lable, FreeRTOS_FreeSize_Lable;
+Lable_Struct_t DateTime_Lable, FreeRTOS_FreeSize_Lable;
 ListBox_Struct_t FileList_ListBox;
 
 void TurnBack_Button1_Callback(void *object, unsigned char key) {
@@ -79,7 +79,6 @@ void LogForm_Init(void) {
     GUI_Clear(C_WHITE);
     GUI_InitListBox(&FileList_ListBox);
     GUI_InitLable(&DateTime_Lable);
-    GUI_InitLable(&Flash_FreeSize_Lable);
     GUI_InitLable(&FreeRTOS_FreeSize_Lable);
     GUI_InitButton(&TurnBack_Button1);
     GUI_InitButton(&Format_Button);

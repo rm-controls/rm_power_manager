@@ -6,10 +6,9 @@
 #include "refree.h"
 #include "string.h"
 #include "stdbool.h"
-#include "stm32h7xx_hal.h"
-#include "port.h"
 #include "encrypt.h"
 #include "calculate.h"
+#include "report.h"
 
 DTP_Package_t Upload_Package;
 struct RefereeData referee_data_;
@@ -110,6 +109,7 @@ void Referee_getData(unsigned char *frame) {
     index += sizeof(unsigned short);
     referee_time_counter = 0;
     referee_avaiflag = 1;
+    Packup_Info();
     DTP_Transmit(&Upload_Package);
     switch (cmd_id) {
         case kGameStatusCmdId:memcpy(&referee_data_.game_status_, frame + index, sizeof(GameStatus));

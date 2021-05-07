@@ -18,10 +18,13 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="Debugging for five hours, but FatFs file system will appear after writing the file restart disappear, this situation can not be solved. I tried to modify the flash read function, and the phenomenon did not change. So now I'm going to rewrite a file system.">
+    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="The sampling current, voltage and power are limited">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/devices/refree.c" beforeDir="false" afterPath="$PROJECT_DIR$/devices/refree.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/forms/log_form.c" beforeDir="false" afterPath="$PROJECT_DIR$/forms/log_form.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/functions/calculate.c" beforeDir="false" afterPath="$PROJECT_DIR$/functions/calculate.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/functions/report.c" beforeDir="false" afterPath="$PROJECT_DIR$/functions/report.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/functions/report.h" beforeDir="false" afterPath="$PROJECT_DIR$/functions/report.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -206,14 +209,7 @@
       <workItem from="1619874087410" duration="11477000" />
       <workItem from="1619959288906" duration="20722000" />
       <workItem from="1620045502855" duration="6801000" />
-      <workItem from="1620228342760" duration="49816000" />
-    </task>
-    <task id="LOCAL-00002" summary="Finished Power Calculate">
-      <created>1611135119791</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1611135119791</updated>
+      <workItem from="1620228342760" duration="50202000" />
     </task>
     <task id="LOCAL-00003" summary="Finished Power Calculate">
       <created>1611135123823</created>
@@ -551,7 +547,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620414542252</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="The sampling current, voltage and power are limited">
+      <created>1620415278125</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1620415278125</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -635,7 +638,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="The problem that the finite state machine fails when the robot is revived, the problem that the finite state machine cannot be protected when the capacitor is over-voltage, and the problem that the capacitor is charged intermittently when the finite state machine is restarted are solved." />
     <MESSAGE value="The watchdog function has been added, but there is still a problem with the exception saving program. In addition, the program has been basically able to use" />
     <MESSAGE value="Add arm cortex fast single precision fast math lib" />
     <MESSAGE value="The problem of serial port is solved, and the emergency handling code is added when the referee system cannot detect, but it has not been tested" />
@@ -660,7 +662,8 @@
     <MESSAGE value="Add macro definition to make the code downward compatible with 32.768KHz crystal oscillator without external SPI flash and RTC power supply" />
     <MESSAGE value="Add the code of internal low-speed clock source, so that the MCU can use RTC when there is no external 32K clock" />
     <MESSAGE value="Debugging for five hours, but FatFs file system will appear after writing the file restart disappear, this situation can not be solved. I tried to modify the flash read function, and the phenomenon did not change. So now I'm going to rewrite a file system." />
-    <option name="LAST_COMMIT_MESSAGE" value="Debugging for five hours, but FatFs file system will appear after writing the file restart disappear, this situation can not be solved. I tried to modify the flash read function, and the phenomenon did not change. So now I'm going to rewrite a file system." />
+    <MESSAGE value="The sampling current, voltage and power are limited" />
+    <option name="LAST_COMMIT_MESSAGE" value="The sampling current, voltage and power are limited" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
