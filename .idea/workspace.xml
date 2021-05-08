@@ -18,9 +18,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="When saving data to flash, close the watchdog to prevent the watchdog from triggering reset">
+    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="Add critical code segment protection when saving data to flash">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions/datasave.c" beforeDir="false" afterPath="$PROJECT_DIR$/functions/datasave.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,7 +70,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.cidr.embedded.config" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -201,14 +201,7 @@
       <workItem from="1619959288906" duration="20722000" />
       <workItem from="1620045502855" duration="6801000" />
       <workItem from="1620228342760" duration="76724000" />
-      <workItem from="1620499527174" duration="955000" />
-    </task>
-    <task id="LOCAL-00011" summary="Let LED shine at 1hz">
-      <created>1616508464827</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1616508464827</updated>
+      <workItem from="1620499527174" duration="1969000" />
     </task>
     <task id="LOCAL-00012" summary="ADC hardware seems can be used">
       <created>1616512764379</created>
@@ -546,7 +539,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620500095960</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="Add critical code segment protection when saving data to flash">
+      <created>1620500720722</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1620500720722</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -630,7 +630,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Updated font library, now use smaller font" />
     <MESSAGE value="Completed the main interface of the voltage and current display and image drawing part of the code" />
     <MESSAGE value="The display of current detection bias calibration status and power calibration status of referee system are added" />
     <MESSAGE value="Complete the layout of the main window interface" />
@@ -655,7 +654,8 @@
     <MESSAGE value="Fixed the problem of listbox item display. Now the item is fully filled when it is selected." />
     <MESSAGE value="The function of reset reason display is added" />
     <MESSAGE value="When saving data to flash, close the watchdog to prevent the watchdog from triggering reset" />
-    <option name="LAST_COMMIT_MESSAGE" value="When saving data to flash, close the watchdog to prevent the watchdog from triggering reset" />
+    <MESSAGE value="Add critical code segment protection when saving data to flash" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add critical code segment protection when saving data to flash" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
