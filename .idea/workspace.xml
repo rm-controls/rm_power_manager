@@ -18,7 +18,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="The function of reset reason display is added">
+    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="When saving data to flash, close the watchdog to prevent the watchdog from triggering reset">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/functions/datasave.c" beforeDir="false" afterPath="$PROJECT_DIR$/functions/datasave.c" afterDir="false" />
     </list>
@@ -201,14 +201,7 @@
       <workItem from="1619959288906" duration="20722000" />
       <workItem from="1620045502855" duration="6801000" />
       <workItem from="1620228342760" duration="76724000" />
-      <workItem from="1620499527174" duration="483000" />
-    </task>
-    <task id="LOCAL-00010" summary="Rearrange hardware codes to adapt old(stm32f4xx) codes">
-      <created>1616212924561</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1616212924561</updated>
+      <workItem from="1620499527174" duration="955000" />
     </task>
     <task id="LOCAL-00011" summary="Let LED shine at 1hz">
       <created>1616508464827</created>
@@ -546,7 +539,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620499779610</updated>
     </task>
-    <option name="localTasksCounter" value="59" />
+    <task id="LOCAL-00059" summary="When saving data to flash, close the watchdog to prevent the watchdog from triggering reset">
+      <created>1620500095960</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1620500095960</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -630,7 +630,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Complete the LCD screen curve drawing code transplantation, but EEPROM communication is not complete, EEPROM seems to be damaged, any address does not respond." />
     <MESSAGE value="Updated font library, now use smaller font" />
     <MESSAGE value="Completed the main interface of the voltage and current display and image drawing part of the code" />
     <MESSAGE value="The display of current detection bias calibration status and power calibration status of referee system are added" />
@@ -655,7 +654,8 @@
     <MESSAGE value="It solves the problem of memory leakage when listbox initializes items. Add the memory recovery code to recover the memory requested by the previous item before each initialization." />
     <MESSAGE value="Fixed the problem of listbox item display. Now the item is fully filled when it is selected." />
     <MESSAGE value="The function of reset reason display is added" />
-    <option name="LAST_COMMIT_MESSAGE" value="The function of reset reason display is added" />
+    <MESSAGE value="When saving data to flash, close the watchdog to prevent the watchdog from triggering reset" />
+    <option name="LAST_COMMIT_MESSAGE" value="When saving data to flash, close the watchdog to prevent the watchdog from triggering reset" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

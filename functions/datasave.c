@@ -12,9 +12,13 @@ void vApplicationStackOverflowHook(TaskHandle_t xTask, char *pcTaskName) {
 
 void DataSave_To_Flash(Saving_Reason_e reason) {
     unsigned char Buffer[16];
+    unsigned int ulOriginalBASEPRI;
+    if (reason == RePowerOn_Reset || reason == StackOverflow_Reset)
+        taskENTER_CRITICAL();
+    else
+        ulOriginalBASEPRI = taskENTER_CRITICAL_FROM_ISR();
     __HAL_RCC_WWDG1_CLK_DISABLE();
     HAL_NVIC_DisableIRQ(WWDG_IRQn);
-
     GUI_Clear(C_WHITE);
     switch (reason) {
         case RePowerOn_Reset:GUI_Printf(4, 4, C_BLACK, C_WHITE, "Repoweron Reset");
@@ -60,4 +64,8 @@ void DataSave_To_Flash(Saving_Reason_e reason) {
         CurrentFile_Structure->ResetInfo[counter] = Buffer[counter];
     FileSystem_WriteIntoFlash();
     HAL_Delay(500);
+    if (reason == RePowerOn_Reset || reason == StackOverflow_Reset)
+        taskEXIT_CRITICAL();
+    else
+        taskEXIT_CRITICAL_FROM_ISR(ulOriginalBASEPRI);
 }

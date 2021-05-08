@@ -10,6 +10,7 @@ WWDG_HandleTypeDef hwwdg1;
 
 void HAL_WWDG_EarlyWakeupCallback(WWDG_HandleTypeDef *hwwdg) {
     DataSave_To_Flash(Watchdog_Reset);
+    SoftReset();
 }
 
 void WatchDog_Task(void *pvParameters) {
