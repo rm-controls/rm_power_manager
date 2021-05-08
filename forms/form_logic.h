@@ -30,7 +30,7 @@ typedef struct GUI_OBJECT_TYPE_T {
 typedef enum {
     Button_Widget_Type = 1,
     Numeric_Widget_Type = 2,
-    ListView_Widget_Type = 3,
+    ListBox_Widget_Type = 3,
 } Widget_Type_e;
 
 extern GUI_Object_Struct_t *FirstWidget;

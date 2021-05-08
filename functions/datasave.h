@@ -12,9 +12,9 @@ typedef enum {
     UsageFault_Reset = 4,
     BusFault_Reset = 5,
     NMI_Reset = 6,
+    StackOverflow_Reset = 7,
 } Saving_Reason_e;
 
 void DataSave_To_Flash(Saving_Reason_e reason);
-void DataRead_From_Flash(void);
 
 #endif //PROGRAM_FUNCTIONS_DATASAVE_H_

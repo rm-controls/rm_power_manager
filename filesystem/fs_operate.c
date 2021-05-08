@@ -13,20 +13,20 @@ File_Struct_t *CurrentFile_Structure = NULL;
 FileHead_Struct_t *LastFileHead_Structure = NULL;
 unsigned int CurrentFile_Address = 0, LastFile_Address = 0;
 
-void FileSystem_ReadItem(unsigned char itemnum) {
+void FileSystem_ReadItem(unsigned char itemnum, File_Struct_t *file) {
     unsigned int NextHeadAddr = FileSystem_Structure->FirstFileAddr;
     FileHead_Struct_t *CurrentFile_Head_Tmp = pvPortMalloc(sizeof(FileHead_Struct_t));
     for (unsigned char counter = 0; counter < itemnum; counter++) {
         W25QXX_Read((unsigned char *) CurrentFile_Head_Tmp, NextHeadAddr, sizeof(FileHead_Struct_t));
         NextHeadAddr = CurrentFile_Head_Tmp->NextFileAddr;
     }
+    W25QXX_Read((unsigned char *) file, NextHeadAddr, sizeof(File_Struct_t));
     vPortFree(CurrentFile_Head_Tmp);
 }
 
 void FileSystem_WriteIntoFlash(void) {
-    if (LastFileHead_Structure != NULL && LastFile_Address != 0) {
+    if (LastFileHead_Structure != NULL && LastFile_Address != 0)
         W25QXX_Write((unsigned char *) LastFileHead_Structure, LastFile_Address, sizeof(FileHead_Struct_t));
-    }
     W25QXX_Write((unsigned char *) CurrentFile_Structure, CurrentFile_Address, sizeof(File_Struct_t));
     W25QXX_Write((unsigned char *) FileSystem_Structure, 0x00000, sizeof(FileSystem_Struct_t));
 }
@@ -56,7 +56,12 @@ void FileSystem_FindRemainSpace(void) {
             }
         }
     } else {
-
+        FileHead_Struct_t FistFileHead_Tmp;
+        W25QXX_Read((unsigned char *) &FistFileHead_Tmp,
+                    FileSystem_Structure->FirstFileAddr,
+                    sizeof(FileHead_Struct_t));
+        FileSystem_Structure->FirstFileAddr = FistFileHead_Tmp.NextFileAddr;
+        CurrentFile_Address = FileSystem_Structure->FirstFileAddr;
     }
 }
 

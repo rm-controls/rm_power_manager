@@ -50,7 +50,6 @@ int main(void) {
     Cache_Config();
     HAL_Init();
     SystemClock_Config();
-    DataRead_From_Flash();
     xTaskCreate(InitTask, "InitTask", 2048, NULL, 1, &InitTask_Handler);
     vTaskStartScheduler();
     while (1);

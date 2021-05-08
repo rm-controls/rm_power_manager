@@ -59,5 +59,6 @@ void FileSystem_WriteIntoFlash(void);
 void FileSystem_FormatFlash(void);
 void FileSystem_CreateFiles(void);
 void FileSystem_FindRemainSpace(void);
+void FileSystem_ReadItem(unsigned char itemnum, File_Struct_t *file);
 
 #endif //PROGRAM_DEVICES_FS_OPERATE_H_

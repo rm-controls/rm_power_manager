@@ -9,10 +9,8 @@
 #define LISTBOX_COLOR_FOCUS 0x03da
 
 typedef struct LISTBOX_ITEM_TYPE_T {
-    struct LISTBOX_ITEM_TYPE_T *Previous_ListBox_Item;
     struct LISTBOX_ITEM_TYPE_T *Next_ListBox_Item;
     unsigned char ItemText[21];
-    unsigned char ItemNumber;
 } ListBox_Item_Struct_t;
 
 typedef struct LISTBOX_TYPE_T {
@@ -26,6 +24,7 @@ typedef struct LISTBOX_TYPE_T {
     unsigned char Widget_Type;
     unsigned char ItemIndex;
     unsigned char DisplayIndex;
+    unsigned char ItemNumber;
     ListBox_Item_Struct_t *FirstItem;
 } ListBox_Struct_t;
 

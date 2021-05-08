@@ -11,7 +11,6 @@ ListBox_Struct_t FileList_ListBox;
 void TurnBack_Button1_Callback(void *object, unsigned char key) {
     Form_Info_Structure.Form_Index = Main_Form_Index;
     MainForm_Init();
-    FileSystem_WriteIntoFlash();
 }
 
 void Format_Button_Callback(void *object, unsigned char key) {
@@ -19,6 +18,10 @@ void Format_Button_Callback(void *object, unsigned char key) {
     FileSystem_FindRemainSpace();
     FileSystem_Structure->FirstFileAddr = CurrentFile_Address;
     FileSystem_Structure->LastFileAddr = CurrentFile_Address;
+}
+
+void FileList_ListBox_Callback(void *object, unsigned char key) {
+
 }
 
 void LogForm_Update(void) {
@@ -56,15 +59,8 @@ void GUI_ListBox_ScanFile() {
                                CurrentFile_Tmp.Second);
             NextHeadAddr = CurrentFile_Tmp.NextFileAddr;
         }
-    }
-    GUI_ListBoxAddItem(&FileList_ListBox,
-                       "20%d/%d/%d-%02d:%02d:%02d",
-                       CurrentFile_Structure->FileHead.Year,
-                       CurrentFile_Structure->FileHead.Month,
-                       CurrentFile_Structure->FileHead.Day,
-                       CurrentFile_Structure->FileHead.Hour,
-                       CurrentFile_Structure->FileHead.Minute,
-                       CurrentFile_Structure->FileHead.Second);
+    } else
+        GUI_ListBoxAddItem(&FileList_ListBox, "No Log Item");
 }
 
 void LogForm_Init(void) {
@@ -81,6 +77,7 @@ void LogForm_Init(void) {
     FileList_ListBox.Width = 120;
     FileList_ListBox.Height = 76;
     FileList_ListBox.Text = "FileList";
+    FileList_ListBox.CallbackFunction = FileList_ListBox_Callback;
 
     FreeRTOS_FreeSize_Lable.X_Pos = 9;
     FreeRTOS_FreeSize_Lable.Y_Pos = 96;
