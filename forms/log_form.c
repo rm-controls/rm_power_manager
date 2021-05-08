@@ -60,14 +60,7 @@ void GUI_ListBox_ScanFile() {
             NextHeadAddr = CurrentFile_Tmp.NextFileAddr;
         }
     } else
-        GUI_ListBoxAddItem(&FileList_ListBox, "No Log Item1");
-    GUI_ListBoxAddItem(&FileList_ListBox, "No Log Item2");
-    GUI_ListBoxAddItem(&FileList_ListBox, "No Log Item3");
-    GUI_ListBoxAddItem(&FileList_ListBox, "No Log Item4");
-    GUI_ListBoxAddItem(&FileList_ListBox, "No Log Item5");
-    GUI_ListBoxAddItem(&FileList_ListBox, "No Log Item6");
-    GUI_ListBoxAddItem(&FileList_ListBox, "No Log Item7");
-    GUI_ListBoxAddItem(&FileList_ListBox, "No Log Item8");
+        GUI_ListBoxAddItem(&FileList_ListBox, "No Log Item");
 }
 
 void LogForm_Init(void) {

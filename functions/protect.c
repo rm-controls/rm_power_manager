@@ -25,7 +25,7 @@ void Protect_Task(void *pvParameters) {
                 FSM_Status.FSM_Mode = Halt_Mode;
         } else if (FSM_Status.FSM_Mode == Halt_Mode) {
             DataSave_To_Flash(RePowerOn_Reset);
-            Delayms(1000);
+            Delayms(500);
             SoftReset();
         }
         if (referee_time_counter >= 1000)

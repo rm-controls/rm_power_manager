@@ -12,7 +12,6 @@ SemaphoreHandle_t Calibrate_Semaphore;
 void InitTask() {
     taskENTER_CRITICAL();
 #if USE_RTC_ONCHIP == 1
-    Delayms(1000);
     RTC_Config();
 #endif
     GPIO_Config();
