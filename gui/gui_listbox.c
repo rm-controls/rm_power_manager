@@ -15,8 +15,21 @@ void GUI_InitListBox(ListBox_Struct_t *ListBox) {
     ListBox->ItemIndex = 0;
     ListBox->DisplayIndex = 0;
     ListBox->ItemNumber = 0;
-    ListBox->FirstItem = NULL;
     ListBox->Widget_Type = ListBox_Widget_Type;
+    if (ListBox->FirstItem != NULL) {
+        ListBox_Item_Struct_t *CurrentItem = ListBox->FirstItem, *TmpItem;
+        while (1) {
+            if (CurrentItem->Next_ListBox_Item != NULL) {
+                TmpItem = CurrentItem->Next_ListBox_Item;
+                vPortFree(CurrentItem);
+                CurrentItem = TmpItem;
+            } else {
+                vPortFree(CurrentItem);
+                break;
+            }
+        }
+    }
+    ListBox->FirstItem = NULL;
     GUI_DrawRectangle(ListBox->X_Pos, ListBox->Y_Pos, ListBox->Width, ListBox->Height, C_WHITE, Filled);
     GUI_DrawRectangle(ListBox->X_Pos, ListBox->Y_Pos, ListBox->Width, ListBox->Height, LISTBOX_COLOR_EDGE, UnFilled);
 }
