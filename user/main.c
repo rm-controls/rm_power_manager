@@ -35,10 +35,10 @@ void InitTask() {
     Sensor_Config();
     memset(&FSM_Status, 0x00, sizeof(FSM_Status_t));
     Calibrate_Semaphore = xSemaphoreCreateMutex();
-    xTaskCreate(Protect_Task, "ProtectTask", 512, NULL, 3, &ProtectTask_Handler);
+    xTaskCreate(Protect_Task, "ProtectTask", 1024, NULL, 3, &ProtectTask_Handler);
     xTaskCreate(PID_CalculateTask, "PIDTask", 1024, NULL, 3, &PIDTask_Handler);
-    xTaskCreate(FSM_Task, "FSMTask", 1024, NULL, 3, &FSMTask_Handler);
-    xTaskCreate(Upload_Refree, "UploadTask", 512, NULL, 2, &UploadTask_Handler);
+    xTaskCreate(FSM_Task, "FSMTask", 2048, NULL, 3, &FSMTask_Handler);
+    xTaskCreate(Upload_Refree, "UploadTask", 1024, NULL, 2, &UploadTask_Handler);
     xTaskCreate(LCD_Refresh, "LCDTask", 10240, NULL, 1, &LCDTask_Handler);
     xTaskCreate(UserTask, "UserTask", 1024, NULL, 2, &UserTask_Handler);
     taskEXIT_CRITICAL();
@@ -51,7 +51,7 @@ int main(void) {
     HAL_Init();
     SystemClock_Config();
     DataRead_From_Flash();
-    xTaskCreate(InitTask, "InitTask", 10240, NULL, 1, &InitTask_Handler);
+    xTaskCreate(InitTask, "InitTask", 2048, NULL, 1, &InitTask_Handler);
     vTaskStartScheduler();
     while (1);
 }

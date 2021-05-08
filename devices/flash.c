@@ -93,6 +93,7 @@ unsigned short W25QXX_ReadID(void) {
 
 void W25QXX_Read(unsigned char *pBuffer, unsigned int ReadAddr, unsigned short NumByteToRead) {
     unsigned short i;
+    W25QXX_WAKEUP();
     W25QXX_CS_LOW;
     FLASH_DELAY();
     SPI_ReadWriteByte(W25X_ReadData);

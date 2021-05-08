@@ -18,13 +18,14 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="The sampling current, voltage and power are limited">
+    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="The calculation functions of current, voltage and power are optimized, and the packing function is encapsulated in the unpacking callback function of the referee system">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/devices/refree.c" beforeDir="false" afterPath="$PROJECT_DIR$/devices/refree.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/devices/flash.c" beforeDir="false" afterPath="$PROJECT_DIR$/devices/flash.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/filesystem/fs_operate.c" beforeDir="false" afterPath="$PROJECT_DIR$/filesystem/fs_operate.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/filesystem/fs_operate.h" beforeDir="false" afterPath="$PROJECT_DIR$/filesystem/fs_operate.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/forms/log_form.c" beforeDir="false" afterPath="$PROJECT_DIR$/forms/log_form.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions/calculate.c" beforeDir="false" afterPath="$PROJECT_DIR$/functions/calculate.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions/report.c" beforeDir="false" afterPath="$PROJECT_DIR$/functions/report.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions/report.h" beforeDir="false" afterPath="$PROJECT_DIR$/functions/report.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/user/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/usertask.c" beforeDir="false" afterPath="$PROJECT_DIR$/user/usertask.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -209,14 +210,7 @@
       <workItem from="1619874087410" duration="11477000" />
       <workItem from="1619959288906" duration="20722000" />
       <workItem from="1620045502855" duration="6801000" />
-      <workItem from="1620228342760" duration="50202000" />
-    </task>
-    <task id="LOCAL-00003" summary="Finished Power Calculate">
-      <created>1611135123823</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1611135123823</updated>
+      <workItem from="1620228342760" duration="63379000" />
     </task>
     <task id="LOCAL-00004" summary="Initialize low-pass filter parameters, but debug RCC still aren't fixed. second problem: when UART received, all global variable were change to zero. I guess the HAL_UART_IRQHandler have problems.">
       <created>1611156267651</created>
@@ -554,7 +548,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620415278125</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="The calculation functions of current, voltage and power are optimized, and the packing function is encapsulated in the unpacking callback function of the referee system">
+      <created>1620415682914</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1620415682914</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -638,7 +639,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="The watchdog function has been added, but there is still a problem with the exception saving program. In addition, the program has been basically able to use" />
     <MESSAGE value="Add arm cortex fast single precision fast math lib" />
     <MESSAGE value="The problem of serial port is solved, and the emergency handling code is added when the referee system cannot detect, but it has not been tested" />
     <MESSAGE value="Add LCD driver and key driver to the program" />
@@ -663,12 +663,14 @@
     <MESSAGE value="Add the code of internal low-speed clock source, so that the MCU can use RTC when there is no external 32K clock" />
     <MESSAGE value="Debugging for five hours, but FatFs file system will appear after writing the file restart disappear, this situation can not be solved. I tried to modify the flash read function, and the phenomenon did not change. So now I'm going to rewrite a file system." />
     <MESSAGE value="The sampling current, voltage and power are limited" />
-    <option name="LAST_COMMIT_MESSAGE" value="The sampling current, voltage and power are limited" />
+    <MESSAGE value="The calculation functions of current, voltage and power are optimized, and the packing function is encapsulated in the unpacking callback function of the referee system" />
+    <option name="LAST_COMMIT_MESSAGE" value="The calculation functions of current, voltage and power are optimized, and the packing function is encapsulated in the unpacking callback function of the referee system" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
       <configuration name="com.jetbrains.cidr.embedded.openocd.conf.type">
-        <watch expression="buff[100]" language="ObjectiveC" />
+        <watch expression="(*FileSystem_Structure)" language="ObjectiveC" />
+        <watch expression="(*CurrentFile_Structure)" language="ObjectiveC" />
       </configuration>
     </watches-manager>
   </component>

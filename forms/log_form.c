@@ -11,10 +11,14 @@ ListBox_Struct_t FileList_ListBox;
 void TurnBack_Button1_Callback(void *object, unsigned char key) {
     Form_Info_Structure.Form_Index = Main_Form_Index;
     MainForm_Init();
+    FileSystem_WriteIntoFlash();
 }
 
 void Format_Button_Callback(void *object, unsigned char key) {
-
+    FileSystem_FormatFlash();
+    FileSystem_FindRemainSpace();
+    FileSystem_Structure->FirstFileAddr = CurrentFile_Address;
+    FileSystem_Structure->LastFileAddr = CurrentFile_Address;
 }
 
 void LogForm_Update(void) {
@@ -37,7 +41,30 @@ void LogForm_Update(void) {
 }
 
 void GUI_ListBox_ScanFile() {
-
+    if (FileSystem_Structure->FileNum != 1) {
+        FileHead_Struct_t CurrentFile_Tmp;
+        unsigned int NextHeadAddr = FileSystem_Structure->FirstFileAddr;
+        for (unsigned char counter = 0; counter < FileSystem_Structure->FileNum - 1; counter++) {
+            W25QXX_Read((unsigned char *) &CurrentFile_Tmp, NextHeadAddr, sizeof(FileHead_Struct_t));
+            GUI_ListBoxAddItem(&FileList_ListBox,
+                               "20%d/%d/%d-%02d:%02d:%02d",
+                               CurrentFile_Tmp.Year,
+                               CurrentFile_Tmp.Month,
+                               CurrentFile_Tmp.Day,
+                               CurrentFile_Tmp.Hour,
+                               CurrentFile_Tmp.Minute,
+                               CurrentFile_Tmp.Second);
+            NextHeadAddr = CurrentFile_Tmp.NextFileAddr;
+        }
+    }
+    GUI_ListBoxAddItem(&FileList_ListBox,
+                       "20%d/%d/%d-%02d:%02d:%02d",
+                       CurrentFile_Structure->FileHead.Year,
+                       CurrentFile_Structure->FileHead.Month,
+                       CurrentFile_Structure->FileHead.Day,
+                       CurrentFile_Structure->FileHead.Hour,
+                       CurrentFile_Structure->FileHead.Minute,
+                       CurrentFile_Structure->FileHead.Second);
 }
 
 void LogForm_Init(void) {
