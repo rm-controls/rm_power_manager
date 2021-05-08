@@ -12,6 +12,28 @@ void vApplicationStackOverflowHook(TaskHandle_t xTask, char *pcTaskName) {
 
 void DataSave_To_Flash(Saving_Reason_e reason) {
     unsigned char Buffer[16];
+    __HAL_RCC_WWDG1_CLK_DISABLE();
+    HAL_NVIC_DisableIRQ(WWDG_IRQn);
+
+    GUI_Clear(C_WHITE);
+    switch (reason) {
+        case RePowerOn_Reset:GUI_Printf(4, 4, C_BLACK, C_WHITE, "Repoweron Reset");
+            break;
+        case Watchdog_Reset:GUI_Printf(4, 4, C_BLACK, C_WHITE, "WatchDog Reset");
+            break;
+        case Hardfault_Reset:GUI_Printf(4, 4, C_BLACK, C_WHITE, "HardFault Reset");
+            break;
+        case UsageFault_Reset:GUI_Printf(4, 4, C_BLACK, C_WHITE, "UsageFault Reset");
+            break;
+        case BusFault_Reset:GUI_Printf(4, 4, C_BLACK, C_WHITE, "BusFault Reset");
+            break;
+        case NMI_Reset:GUI_Printf(4, 4, C_BLACK, C_WHITE, "NMI Reset");
+            break;
+        case StackOverflow_Reset:GUI_Printf(4, 4, C_BLACK, C_WHITE, "Stack Overflow Reset");
+            break;
+        default:break;
+    }
+
     Buffer[0] = (reason & 0x07) << 5;
     Buffer[0] |= (FSM_Status.Charge_Mode & 0x07) << 2;
     Buffer[0] |= FSM_Status.Typology_Mode & 0x03;
@@ -37,26 +59,5 @@ void DataSave_To_Flash(Saving_Reason_e reason) {
     for (unsigned char counter = 0; counter < 16; counter++)
         CurrentFile_Structure->ResetInfo[counter] = Buffer[counter];
     FileSystem_WriteIntoFlash();
-    GUI_Clear(C_WHITE);
-    switch (reason) {
-        case RePowerOn_Reset:GUI_Printf(4, 4, C_BLACK, C_WHITE, "Repoweron Reset");
-            break;
-        case Watchdog_Reset:GUI_Printf(4, 4, C_BLACK, C_WHITE, "WatchDog Reset");
-            break;
-        case Hardfault_Reset:GUI_Printf(4, 4, C_BLACK, C_WHITE, "HardFault Reset");
-            break;
-        case UsageFault_Reset:GUI_Printf(4, 4, C_BLACK, C_WHITE, "UsageFault Reset");
-            break;
-        case BusFault_Reset:GUI_Printf(4, 4, C_BLACK, C_WHITE, "BusFault Reset");
-            break;
-        case NMI_Reset:GUI_Printf(4, 4, C_BLACK, C_WHITE, "NMI Reset");
-            break;
-        case StackOverflow_Reset:GUI_Printf(4, 4, C_BLACK, C_WHITE, "Stack Overflow Reset");
-            break;
-        default:break;
-    }
-    for (unsigned char counter = 0; counter < 50; counter++) {
-        HAL_Delay(20);
-        HAL_WWDG_Refresh(&hwwdg1);
-    }
+    HAL_Delay(500);
 }
