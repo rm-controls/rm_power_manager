@@ -18,7 +18,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="Add critical code segment protection when saving data to flash">
+    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="Modify README.md">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
@@ -201,14 +201,7 @@
       <workItem from="1619959288906" duration="20722000" />
       <workItem from="1620045502855" duration="6801000" />
       <workItem from="1620228342760" duration="76724000" />
-      <workItem from="1620499527174" duration="1969000" />
-    </task>
-    <task id="LOCAL-00012" summary="ADC hardware seems can be used">
-      <created>1616512764379</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1616512764379</updated>
+      <workItem from="1620499527174" duration="2226000" />
     </task>
     <task id="LOCAL-00013" summary="Add .idea directory to gitignore">
       <created>1616515317603</created>
@@ -546,7 +539,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620500720722</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="Modify README.md">
+      <created>1620501592489</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1620501592489</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -630,7 +630,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Completed the main interface of the voltage and current display and image drawing part of the code" />
     <MESSAGE value="The display of current detection bias calibration status and power calibration status of referee system are added" />
     <MESSAGE value="Complete the layout of the main window interface" />
     <MESSAGE value="Complete the main window interface update program, now you can display important parameter information" />
@@ -655,7 +654,8 @@
     <MESSAGE value="The function of reset reason display is added" />
     <MESSAGE value="When saving data to flash, close the watchdog to prevent the watchdog from triggering reset" />
     <MESSAGE value="Add critical code segment protection when saving data to flash" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add critical code segment protection when saving data to flash" />
+    <MESSAGE value="Modify README.md" />
+    <option name="LAST_COMMIT_MESSAGE" value="Modify README.md" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
