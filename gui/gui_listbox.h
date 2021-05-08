@@ -8,6 +8,11 @@
 #define LISTBOX_COLOR_EDGE 0xad56
 #define LISTBOX_COLOR_FOCUS 0x03da
 
+typedef enum {
+    ListBox_Normal = 0,
+    ListBox_Focus = 1,
+} ListBox_State_e;
+
 typedef struct LISTBOX_ITEM_TYPE_T {
     struct LISTBOX_ITEM_TYPE_T *Next_ListBox_Item;
     unsigned char ItemText[21];
@@ -25,6 +30,7 @@ typedef struct LISTBOX_TYPE_T {
     unsigned char ItemIndex;
     unsigned char DisplayIndex;
     unsigned char ItemNumber;
+    unsigned char Status;
     ListBox_Item_Struct_t *FirstItem;
 } ListBox_Struct_t;
 

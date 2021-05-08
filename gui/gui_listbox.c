@@ -21,6 +21,27 @@ void GUI_InitListBox(ListBox_Struct_t *ListBox) {
     GUI_DrawRectangle(ListBox->X_Pos, ListBox->Y_Pos, ListBox->Width, ListBox->Height, LISTBOX_COLOR_EDGE, UnFilled);
 }
 
+void GUI_ListBoxDisplayItem(ListBox_Struct_t *ListBox,
+                            unsigned char *str,
+                            unsigned char index,
+                            unsigned char InvertColor) {
+    unsigned char n = 0, row = ListBox->X_Pos + 2;
+    unsigned char column = ListBox->Y_Pos + index * 12 + 2;
+    if (InvertColor == 0) {
+        while (str[n] != '\0') {
+            LCD_SendChar(row, column, str[n], C_BLACK, C_WHITE);
+            row += 6;
+            n++;
+        }
+    } else {
+        while (str[n] != '\0') {
+            LCD_SendChar(row, column, str[n], C_BLACK, TransColor(LISTBOX_COLOR_FOCUS));
+            row += 6;
+            n++;
+        }
+    }
+}
+
 ListBox_Item_Struct_t *GUI_ListBoxFindItem(ListBox_Struct_t *ListBox, unsigned char ItemIndex) {
     ListBox_Item_Struct_t *Current_ListBoxItem_Tmp = ListBox->FirstItem;
     for (unsigned char counter = 0; counter < ItemIndex; counter++)
@@ -28,41 +49,53 @@ ListBox_Item_Struct_t *GUI_ListBoxFindItem(ListBox_Struct_t *ListBox, unsigned c
     return Current_ListBoxItem_Tmp;
 }
 
+void GUI_ListBoxUpdateContents(ListBox_Struct_t *ListBox) {
+    unsigned char FirstItem_Index = ListBox->ItemIndex - ListBox->DisplayIndex;
+    ListBox_Item_Struct_t *Tmp_Item = GUI_ListBoxFindItem(ListBox, FirstItem_Index);
+    while (1) {
+        if ((FirstItem_Index - ListBox->ItemIndex + ListBox->DisplayIndex) == ListBox->DisplayIndex)
+            GUI_ListBoxDisplayItem(ListBox,
+                                   Tmp_Item->ItemText,
+                                   FirstItem_Index - ListBox->ItemIndex + ListBox->DisplayIndex,
+                                   1);
+        else
+            GUI_ListBoxDisplayItem(ListBox,
+                                   Tmp_Item->ItemText,
+                                   FirstItem_Index - ListBox->ItemIndex + ListBox->DisplayIndex,
+                                   0);
+        if (FirstItem_Index == (ListBox->ItemNumber - 1)
+            || (FirstItem_Index - ListBox->ItemIndex + ListBox->DisplayIndex)
+                == ((ListBox->Height - 4) / 12) - 1)
+            break;
+        FirstItem_Index++;
+        Tmp_Item = GUI_ListBoxFindItem(ListBox, FirstItem_Index);
+    }
+}
+
 void GUI_ListBoxUpdate(ListBox_Struct_t *ListBox, unsigned char keynum) {
     ListBox_Item_Struct_t *Current_Item = ListBox->FirstItem;
+    ListBox->Status = ListBox_Focus;
     switch (keynum) {
         case 0:
             if (ListBox->FirstItem->Next_ListBox_Item != NULL) {
                 unsigned char item_counter_tmp = 0;
                 while (Current_Item->Next_ListBox_Item != NULL) {
-                    unsigned char n = 0, row = ListBox->X_Pos + 2;
-                    unsigned char column = ListBox->Y_Pos + item_counter_tmp * 12 + 2;
-                    if ((item_counter_tmp + 1) < (ListBox->Height - 4) / 12)
-                        while (Current_Item->ItemText[n] != '\0') {
-                            LCD_SendChar(row, column, Current_Item->ItemText[n], C_BLACK, C_WHITE);
-                            row += 6;
-                            n++;
-                        }
+                    if (item_counter_tmp < (ListBox->Height - 4) / 12)
+                        GUI_ListBoxDisplayItem(ListBox, Current_Item->ItemText, item_counter_tmp, 0);
                     else
                         break;
                     Current_Item = Current_Item->Next_ListBox_Item;
                     item_counter_tmp++;
                 }
-            } else {
-                unsigned char n = 0, row = ListBox->X_Pos + 2;
-                unsigned char column = ListBox->Y_Pos + 2;
-                while (ListBox->FirstItem->ItemText[n] != '\0') {
-                    LCD_SendChar(row, column, ListBox->FirstItem->ItemText[n], C_BLACK, C_WHITE);
-                    row += 6;
-                    n++;
-                }
-            }
+            } else if (ListBox->FirstItem != NULL)
+                GUI_ListBoxDisplayItem(ListBox, ListBox->FirstItem->ItemText, 0, 0);
+            ListBox->Status = ListBox_Normal;
             break;
         case Center_Key:ListBox->CallbackFunction(ListBox, Center_Key);
             break;
         case Up_Key:
             if (ListBox->ItemIndex == 0) {
-                ListBox->ItemIndex = ListBox->ItemNumber;
+                ListBox->ItemIndex = ListBox->ItemNumber - 1;
                 ListBox->DisplayIndex = ((ListBox->Height - 4) / 12) - 1;
                 ListBox->DisplayIndex =
                     ListBox->ItemIndex < ListBox->DisplayIndex ? ListBox->ItemIndex : ListBox->DisplayIndex;
@@ -71,13 +104,18 @@ void GUI_ListBoxUpdate(ListBox_Struct_t *ListBox, unsigned char keynum) {
                 if (ListBox->DisplayIndex != 0)
                     ListBox->DisplayIndex--;
             }
-
+            GUI_ListBoxUpdateContents(ListBox);
             break;
         case Down_Key:
-            if (ListBox->ItemIndex == ListBox->ItemNumber)
+            if (ListBox->ItemIndex == (ListBox->ItemNumber - 1)) {
                 ListBox->ItemIndex = 0;
-            else
+                ListBox->DisplayIndex = 0;
+            } else {
                 ListBox->ItemIndex++;
+                if (ListBox->DisplayIndex != (((ListBox->Height - 4) / 12) - 1))
+                    ListBox->DisplayIndex++;
+            }
+            GUI_ListBoxUpdateContents(ListBox);
             break;
         default:break;
     }
@@ -85,7 +123,6 @@ void GUI_ListBoxUpdate(ListBox_Struct_t *ListBox, unsigned char keynum) {
 
 void GUI_ListBoxAddItem(ListBox_Struct_t *ListBox, const char *fmt, ...) {
     ListBox_Item_Struct_t *NewItem = pvPortMalloc(sizeof(ListBox_Item_Struct_t));
-    unsigned char n = 0, row = ListBox->X_Pos + 2, column = 0;
     va_list ap;
     memset(NewItem->ItemText, '\0', 21);
     NewItem->Next_ListBox_Item = NULL;
@@ -100,12 +137,7 @@ void GUI_ListBoxAddItem(ListBox_Struct_t *ListBox, const char *fmt, ...) {
             Current_Item = Current_Item->Next_ListBox_Item;
         Current_Item->Next_ListBox_Item = NewItem;
     }
-    column = ListBox->Y_Pos + ListBox->ItemNumber * 12 + 2;
-    if ((ListBox->ItemNumber + 1) < (ListBox->Height - 4) / 12)
-        while (NewItem->ItemText[n] != '\0') {
-            LCD_SendChar(row, column, NewItem->ItemText[n], C_BLACK, C_WHITE);
-            row += 6;
-            n++;
-        }
+    if (ListBox->ItemNumber < (ListBox->Height - 4) / 12)
+        GUI_ListBoxDisplayItem(ListBox, NewItem->ItemText, ListBox->ItemNumber, 0);
     ListBox->ItemNumber++;
 }

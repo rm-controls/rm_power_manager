@@ -10,6 +10,7 @@
 #include "log_form.h"
 #include "settings_form.h"
 #include "gui_numeric.h"
+#include "gui_listbox.h"
 
 Form_Info_t Form_Info_Structure;
 GUI_Object_Struct_t *FirstWidget;
@@ -39,6 +40,13 @@ void Form_UpdateEvent(void) {
         Current_Widget->CallbackFunction(Current_Widget, Up_Key);
     }
 
+    if (key_num.Num == 0 && key_num.Last_Num == Up_Key && Current_Widget->Widget_Type == ListBox_Widget_Type)
+        GUI_ListBoxUpdate((ListBox_Struct_t *) Current_Widget, Up_Key);
+    if (key_num.Num == 0 && key_num.Last_Num == Down_Key && Current_Widget->Widget_Type == ListBox_Widget_Type)
+        GUI_ListBoxUpdate((ListBox_Struct_t *) Current_Widget, Down_Key);
+    if (key_num.Num == 0 && key_num.Last_Num == Center_Key && Current_Widget->Widget_Type == ListBox_Widget_Type)
+        GUI_ListBoxUpdate((ListBox_Struct_t *) Current_Widget, Center_Key);
+
     if (key_num.Last_Num == 0 && key_num.Num == Center_Key && Current_Widget->Widget_Type == Button_Widget_Type)
         GUI_UpdateButton((Button_Struct_t *) Current_Widget, Button_Click);
     else if (key_num.Last_Num == Center_Key && key_num.Num == 0 && Current_Widget->Widget_Type == Button_Widget_Type) {
@@ -60,6 +68,10 @@ void Form_UpdateEvent(void) {
                 if (((Numeric_Struct_t *) Tmp_Widget)->Status != Numeric_Button_Normal && Tmp_Widget != Current_Widget)
                     GUI_UpdateNumeric((Numeric_Struct_t *) Tmp_Widget, Numeric_Button_Normal);
                 break;
+            case ListBox_Widget_Type:
+                if (((ListBox_Struct_t *) Tmp_Widget)->Status != ListBox_Normal && Tmp_Widget != Current_Widget)
+                    GUI_ListBoxUpdate((ListBox_Struct_t *) Tmp_Widget, ListBox_Normal);
+                break;
             default:break;
         }
         if (Tmp_Widget->NextObject == NULL)
@@ -74,6 +86,12 @@ void Form_UpdateEvent(void) {
     if (((Numeric_Struct_t *) Current_Widget)->Status == Numeric_Button_Normal
         && Current_Widget->Widget_Type == Numeric_Widget_Type)
         GUI_UpdateNumeric((Numeric_Struct_t *) Current_Widget, Numeric_Up_Button_Focus);
+    if (((ListBox_Struct_t *) Current_Widget)->Status == ListBox_Normal
+        && Current_Widget->Widget_Type == ListBox_Widget_Type) {
+        ((ListBox_Struct_t *) Current_Widget)->DisplayIndex = 1;
+        ((ListBox_Struct_t *) Current_Widget)->ItemIndex = 1;
+        GUI_ListBoxUpdate((ListBox_Struct_t *) Current_Widget, Up_Key);
+    }
 
     switch (Form_Info_Structure.Form_Index) {
         case Main_Form_Index:MainForm_Update();

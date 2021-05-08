@@ -18,18 +18,13 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="&#10;&#10;The problem of flash reading is solved. The flash wake-up function should be added before reading, otherwise all the data of 0x00 will be read out. The problem of accessing single or double files in file system is basically solved.">
+    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="Optimize the listbox item and display method, add the function of listbox reading the specified item and the function of file system reading the specified file.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/filesystem/fs_operate.c" beforeDir="false" afterPath="$PROJECT_DIR$/filesystem/fs_operate.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/filesystem/fs_operate.h" beforeDir="false" afterPath="$PROJECT_DIR$/filesystem/fs_operate.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forms/form_logic.h" beforeDir="false" afterPath="$PROJECT_DIR$/forms/form_logic.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/forms/form_logic.c" beforeDir="false" afterPath="$PROJECT_DIR$/forms/form_logic.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/forms/log_form.c" beforeDir="false" afterPath="$PROJECT_DIR$/forms/log_form.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/freertos/FreeRTOSConfig.h" beforeDir="false" afterPath="$PROJECT_DIR$/freertos/FreeRTOSConfig.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions/datasave.c" beforeDir="false" afterPath="$PROJECT_DIR$/functions/datasave.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions/datasave.h" beforeDir="false" afterPath="$PROJECT_DIR$/functions/datasave.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui/gui_listbox.c" beforeDir="false" afterPath="$PROJECT_DIR$/gui/gui_listbox.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui/gui_listbox.h" beforeDir="false" afterPath="$PROJECT_DIR$/gui/gui_listbox.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/user/main.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -214,14 +209,7 @@
       <workItem from="1619874087410" duration="11477000" />
       <workItem from="1619959288906" duration="20722000" />
       <workItem from="1620045502855" duration="6801000" />
-      <workItem from="1620228342760" duration="65993000" />
-    </task>
-    <task id="LOCAL-00005" summary="HAL Library is fine. When Decoding, the for loop &quot;for (Temp_Var = 0; Temp_Var &lt; Receive_Byte; Temp_Var++)&quot; using Receive_Byte as circulate condition, and when receving end of package, the index is 255, which out of range. Now decode codes are debugged.">
-      <created>1611162262656</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1611162262656</updated>
+      <workItem from="1620228342760" duration="69096000" />
     </task>
     <task id="LOCAL-00006" summary="Change PID parameter using upper computer">
       <created>1611226491425</created>
@@ -559,7 +547,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620436087705</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="Optimize the listbox item and display method, add the function of listbox reading the specified item and the function of file system reading the specified file.">
+      <created>1620438834269</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1620438834269</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -643,7 +638,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="The problem of serial port is solved, and the emergency handling code is added when the referee system cannot detect, but it has not been tested" />
     <MESSAGE value="Add LCD driver and key driver to the program" />
     <MESSAGE value="Fix the problem that the control GPIO port of LCD screen is initialized as input." />
     <MESSAGE value="Complete the drawing and testing of basic graphics (including filled / unfilled rectangle, circle, rounded rectangle and semicircle)" />
@@ -668,7 +662,8 @@
     <MESSAGE value="The sampling current, voltage and power are limited" />
     <MESSAGE value="The calculation functions of current, voltage and power are optimized, and the packing function is encapsulated in the unpacking callback function of the referee system" />
     <MESSAGE value="&#10;&#10;The problem of flash reading is solved. The flash wake-up function should be added before reading, otherwise all the data of 0x00 will be read out. The problem of accessing single or double files in file system is basically solved." />
-    <option name="LAST_COMMIT_MESSAGE" value="&#10;&#10;The problem of flash reading is solved. The flash wake-up function should be added before reading, otherwise all the data of 0x00 will be read out. The problem of accessing single or double files in file system is basically solved." />
+    <MESSAGE value="Optimize the listbox item and display method, add the function of listbox reading the specified item and the function of file system reading the specified file." />
+    <option name="LAST_COMMIT_MESSAGE" value="Optimize the listbox item and display method, add the function of listbox reading the specified item and the function of file system reading the specified file." />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

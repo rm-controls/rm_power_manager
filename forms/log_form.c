@@ -60,7 +60,14 @@ void GUI_ListBox_ScanFile() {
             NextHeadAddr = CurrentFile_Tmp.NextFileAddr;
         }
     } else
-        GUI_ListBoxAddItem(&FileList_ListBox, "No Log Item");
+        GUI_ListBoxAddItem(&FileList_ListBox, "No Log Item1");
+    GUI_ListBoxAddItem(&FileList_ListBox, "No Log Item2");
+    GUI_ListBoxAddItem(&FileList_ListBox, "No Log Item3");
+    GUI_ListBoxAddItem(&FileList_ListBox, "No Log Item4");
+    GUI_ListBoxAddItem(&FileList_ListBox, "No Log Item5");
+    GUI_ListBoxAddItem(&FileList_ListBox, "No Log Item6");
+    GUI_ListBoxAddItem(&FileList_ListBox, "No Log Item7");
+    GUI_ListBoxAddItem(&FileList_ListBox, "No Log Item8");
 }
 
 void LogForm_Init(void) {
@@ -76,6 +83,7 @@ void LogForm_Init(void) {
     FileList_ListBox.Y_Pos = 18;
     FileList_ListBox.Width = 120;
     FileList_ListBox.Height = 76;
+    FileList_ListBox.NextListBox = NULL;
     FileList_ListBox.Text = "FileList";
     FileList_ListBox.CallbackFunction = FileList_ListBox_Callback;
 
@@ -97,7 +105,7 @@ void LogForm_Init(void) {
     Format_Button.Width = 60;
     Format_Button.Height = 20;
     Format_Button.Text = "Format";
-    Format_Button.NextButton = NULL;
+    Format_Button.NextButton = &FileList_ListBox;
     Format_Button.CallbackFunction = Format_Button_Callback;
 
     GUI_Clear(C_WHITE);
