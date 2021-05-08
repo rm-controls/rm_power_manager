@@ -5,7 +5,7 @@
 #include "main.h"
 
 Button_Struct_t TurnBack_Button1, Format_Button;
-Lable_Struct_t DateTime_Lable, FreeRTOS_FreeSize_Lable;
+Lable_Struct_t DateTime_Lable;
 ListBox_Struct_t FileList_ListBox;
 
 void TurnBack_Button1_Callback(void *object, unsigned char key) {
@@ -37,10 +37,6 @@ void LogForm_Update(void) {
                      RTC_TimeStruct.Hours,
                      RTC_TimeStruct.Minutes,
                      RTC_TimeStruct.Seconds);
-    GUI_LableSetText(&FreeRTOS_FreeSize_Lable,
-                     "RTOS:%2d.%1dKB",
-                     xPortGetFreeHeapSize() / 1024,
-                     (xPortGetFreeHeapSize() % 1024) / 100);
 }
 
 void GUI_ListBox_ScanFile() {
@@ -80,11 +76,6 @@ void LogForm_Init(void) {
     FileList_ListBox.Text = "FileList";
     FileList_ListBox.CallbackFunction = FileList_ListBox_Callback;
 
-    FreeRTOS_FreeSize_Lable.X_Pos = 9;
-    FreeRTOS_FreeSize_Lable.Y_Pos = 96;
-    FreeRTOS_FreeSize_Lable.Color = C_BLACK;
-    FreeRTOS_FreeSize_Lable.Text = "RTOS:--.-KB";
-
     TurnBack_Button1.X_Pos = 2;
     TurnBack_Button1.Y_Pos = 135;
     TurnBack_Button1.Width = 60;
@@ -104,8 +95,11 @@ void LogForm_Init(void) {
     GUI_Clear(C_WHITE);
     GUI_InitListBox(&FileList_ListBox);
     GUI_InitLable(&DateTime_Lable);
-    GUI_InitLable(&FreeRTOS_FreeSize_Lable);
     GUI_InitButton(&TurnBack_Button1);
     GUI_InitButton(&Format_Button);
     GUI_ListBox_ScanFile();
+
+    GUI_Printf(4, 96, C_BLACK, C_WHITE, "OS:%2d.%1dKB", xPortGetFreeHeapSize() / 1024,
+               (xPortGetFreeHeapSize() % 1024) / 100);
+    GUI_Printf(64, 96, C_BLACK, C_WHITE, "FS:%03d/256", FileSystem_Structure->FileNum);
 }

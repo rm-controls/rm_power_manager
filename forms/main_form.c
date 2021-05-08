@@ -39,36 +39,36 @@ void MainForm_Update(void) {
                      (int) (P_Chassis * 10) - ((int) P_Chassis * 10));
 
     switch (FSM_Status.FSM_Mode) {
-        case Normal_Mode:GUI_LableSetText(&FSM_Mode_Lable, "FSM Status: Normal   ");
+        case Normal_Mode:GUI_LableSetText(&FSM_Mode_Lable, " FSM Status: Normal  ");
             break;
         case OverPower_Mode:GUI_LableSetText(&FSM_Mode_Lable, "FSM Status: OverPower");
             break;
-        case Halt_Mode:GUI_LableSetText(&FSM_Mode_Lable, "FSM Status: Halt     ");
+        case Halt_Mode:GUI_LableSetText(&FSM_Mode_Lable, "  FSM Status: Halt   ");
             break;
-        case Transition_Mode:GUI_LableSetText(&FSM_Mode_Lable, "FSM Status: Transit  ");
+        case Transition_Mode:GUI_LableSetText(&FSM_Mode_Lable, " FSM Status: Transit ");
             break;
     }
     switch (FSM_Status.Charge_Mode) {
-        case Zero_Power_Charge:GUI_LableSetText(&Charge_Mode_Lable, "Charge: ZeroPower    ");
+        case Zero_Power_Charge:GUI_LableSetText(&Charge_Mode_Lable, "  Charge: ZeroPower  ");
             break;
-        case Const_Power_Charge:GUI_LableSetText(&Charge_Mode_Lable, "Charge: ConstPower   ");
+        case Const_Power_Charge:GUI_LableSetText(&Charge_Mode_Lable, " Charge: ConstPower  ");
             break;
         case Proportional_Charge:GUI_LableSetText(&Charge_Mode_Lable, "Charge: Proportional ");
             break;
-        case Full_Power_Charge:GUI_LableSetText(&Charge_Mode_Lable, "Charge: FullPower    ");
+        case Full_Power_Charge:GUI_LableSetText(&Charge_Mode_Lable, "  Charge: FullPower  ");
             break;
-        case Remain_Power_Charge:GUI_LableSetText(&Charge_Mode_Lable, "Charge: RemainPower  ");
+        case Remain_Power_Charge:GUI_LableSetText(&Charge_Mode_Lable, " Charge: RemainPower ");
             break;
     }
-    GUI_LableSetText(&Expect_Power_Lable, "Expect Power: %3dW   ", (int) EP_Chassis);
+    GUI_LableSetText(&Expect_Power_Lable, " Expect Power: %3dW ", (int) EP_Chassis);
     switch (FSM_Status.Typology_Mode) {
         case Only_Charge:GUI_LableSetText(&Typology_Lable, "Typology: Only Charge");
             break;
-        case Only_PMOS:GUI_LableSetText(&Typology_Lable, "Typology: Only PMOS  ");
+        case Only_PMOS:GUI_LableSetText(&Typology_Lable, " Typology: Only PMOS ");
             break;
         case PMOS_With_Charge:GUI_LableSetText(&Typology_Lable, "Typology: PMOS&Charge");
             break;
-        case All_Off:GUI_LableSetText(&Typology_Lable, "Typology: All Off    ");
+        case All_Off:GUI_LableSetText(&Typology_Lable, "  Typology: All Off  ");
             break;
     }
 }
@@ -117,22 +117,22 @@ void MainForm_Init(void) {
     PChassis_Lable.Text = "---.-W";
 
     FSM_Mode_Lable.X_Pos = 2;
-    FSM_Mode_Lable.Y_Pos = 72;
+    FSM_Mode_Lable.Y_Pos = 74;
     FSM_Mode_Lable.Color = C_BLACK;
-    FSM_Mode_Lable.Text = "FSM Status: Normal";
+    FSM_Mode_Lable.Text = " FSM Status: Normal  ";
 
     Charge_Mode_Lable.X_Pos = 2;
-    Charge_Mode_Lable.Y_Pos = 86;
+    Charge_Mode_Lable.Y_Pos = 88;
     Charge_Mode_Lable.Color = C_BLACK;
-    Charge_Mode_Lable.Text = "Charge: Proportional";
+    Charge_Mode_Lable.Text = "Charge: Proportional ";
 
     Expect_Power_Lable.X_Pos = 2;
-    Expect_Power_Lable.Y_Pos = 100;
+    Expect_Power_Lable.Y_Pos = 102;
     Expect_Power_Lable.Color = C_BLACK;
-    Expect_Power_Lable.Text = "Expect Power: 30W";
+    Expect_Power_Lable.Text = "  Expect Power: 30W  ";
 
     Typology_Lable.X_Pos = 2;
-    Typology_Lable.Y_Pos = 114;
+    Typology_Lable.Y_Pos = 116;
     Typology_Lable.Color = C_BLACK;
     Typology_Lable.Text = "Typology: Charge&PMOS";
 
@@ -140,7 +140,7 @@ void MainForm_Init(void) {
     Log_Button.Y_Pos = 134;
     Log_Button.Width = 60;
     Log_Button.Height = 22;
-    Log_Button.Text = "Log";
+    Log_Button.Text = "Info";
     Log_Button.NextButton = &Settings_Button;
     Log_Button.CallbackFunction = Log_Button_Callback;
 
