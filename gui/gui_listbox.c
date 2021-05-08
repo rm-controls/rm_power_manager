@@ -46,12 +46,14 @@ void GUI_ListBoxDisplayItem(ListBox_Struct_t *ListBox,
             row += 6;
             n++;
         }
+        GUI_DrawRectangle(row, column, (20 - n) * 6 - 4, 12, C_WHITE, Filled);
     } else {
         while (str[n] != '\0') {
             LCD_SendChar(row, column, str[n], C_BLACK, TransColor(LISTBOX_COLOR_FOCUS));
             row += 6;
             n++;
         }
+        GUI_DrawRectangle(row, column, (20 - n) * 6 - 4, 12, LISTBOX_COLOR_FOCUS, Filled);
     }
 }
 
