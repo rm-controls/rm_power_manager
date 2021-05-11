@@ -20,15 +20,15 @@ unsigned char OSInfo_Printf(unsigned char row, unsigned char column, char *fmt) 
 void RefreshTaskInfo(void) {
     char *buf_source = pvPortMalloc(512), *buf = buf_source;
     vTaskList(buf);
-    OSInfo_Printf(2, 3, "Name State Prio Stack\n");
-    buf += OSInfo_Printf(14, 18, buf) + 1;
-    buf += OSInfo_Printf(14, 32, buf) + 1;
-    buf += OSInfo_Printf(14, 46, buf) + 1;
-    buf += OSInfo_Printf(14, 60, buf) + 1;
-    buf += OSInfo_Printf(14, 74, buf) + 1;
-    buf += OSInfo_Printf(14, 88, buf) + 1;
-    buf += OSInfo_Printf(14, 102, buf) + 1;
-    OSInfo_Printf(14, 116, buf);
+    OSInfo_Printf(2, 6, "Name State Prio Stack\n");
+    buf += OSInfo_Printf(14, 22, buf) + 1;
+    buf += OSInfo_Printf(14, 36, buf) + 1;
+    buf += OSInfo_Printf(14, 50, buf) + 1;
+    buf += OSInfo_Printf(14, 64, buf) + 1;
+    buf += OSInfo_Printf(14, 78, buf) + 1;
+    buf += OSInfo_Printf(14, 92, buf) + 1;
+    buf += OSInfo_Printf(14, 106, buf) + 1;
+    OSInfo_Printf(14, 120, buf);
     vPortFree(buf_source);
 }
 

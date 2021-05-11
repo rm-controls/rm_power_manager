@@ -15,6 +15,7 @@ typedef enum {
     StackOverflow_Reset = 7,
 } Saving_Reason_e;
 
+void DataSave_DisplayLastInfo(void);
 void DataSave_To_Flash(Saving_Reason_e reason);
 
 #endif //PROGRAM_FUNCTIONS_DATASAVE_H_

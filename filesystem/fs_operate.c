@@ -7,6 +7,7 @@
 #include "FreeRTOS.h"
 #include "flash.h"
 #include "rtc.h"
+#include "datasave.h"
 
 FileSystem_Struct_t *FileSystem_Structure;
 File_Struct_t *CurrentFile_Structure = NULL;
@@ -106,6 +107,7 @@ void FileSystem_Config(void) {
     if (FileSystem_Structure->FSHead != 0xA5) {
         GUI_Printf(19, 60, C_DARK_RED, C_WHITE, "Init FileSystem");
         FileSystem_FormatFlash();
+        DataSave_DisplayLastInfo();
     } else
         FileSystem_CreateFiles();
 }
