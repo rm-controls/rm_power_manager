@@ -83,38 +83,38 @@ void DataSave_DisplayLastInfo(void) {
             break;
     }
     GUI_Printf(80, 44, C_DARK_RED, C_WHITE,
-               "%-3d.%1dW", (int) Last_RefreeChassis_Power,
+               "%3d.%1dW", (int) Last_RefreeChassis_Power,
                (int) (Last_RefreeChassis_Power * 10) - ((int) Last_RefreeChassis_Power * 10));
     switch (reason) {
-        case RePowerOn_Reset:GUI_Printf(2, 60, C_RED, C_WHITE, "Repoweron Reset");
+        case RePowerOn_Reset:GUI_Printf(18, 60, C_RED, C_WHITE, "Repoweron Reset");
             break;
-        case Watchdog_Reset:GUI_Printf(2, 60, C_RED, C_WHITE, "WatchDog Reset");
+        case Watchdog_Reset:GUI_Printf(21, 60, C_RED, C_WHITE, "WatchDog Reset");
             break;
-        case Hardfault_Reset:GUI_Printf(2, 60, C_RED, C_WHITE, "HardFault Reset");
+        case Hardfault_Reset:GUI_Printf(18, 60, C_RED, C_WHITE, "HardFault Reset");
             break;
-        case UsageFault_Reset:GUI_Printf(2, 60, C_RED, C_WHITE, "UsageFault Reset");
+        case UsageFault_Reset:GUI_Printf(15, 60, C_RED, C_WHITE, "UsageFault Reset");
             break;
-        case BusFault_Reset:GUI_Printf(2, 60, C_RED, C_WHITE, "BusFault Reset");
+        case BusFault_Reset:GUI_Printf(21, 60, C_RED, C_WHITE, "BusFault Reset");
             break;
-        case NMI_Reset:GUI_Printf(2, 60, C_RED, C_WHITE, "NMI Reset");
+        case NMI_Reset:GUI_Printf(36, 60, C_RED, C_WHITE, "NMI Reset");
             break;
-        case StackOverflow_Reset:GUI_Printf(2, 60, C_RED, C_WHITE, "Stack Overflow Reset");
+        case StackOverflow_Reset:GUI_Printf(3, 60, C_RED, C_WHITE, "Stack Overflow Reset");
             break;
         default:break;
     }
-    GUI_Printf(16, 74, C_DARK_RED, C_WHITE, "LimitPower: %-3dW", Last_Power_Limit);
+    GUI_Printf(16, 74, C_DARK_RED, C_WHITE, "LimitPower: %3dW", Last_Power_Limit);
     if ((Buffer[15] & 0x80) != 0)
-        GUI_Printf(2, 88, C_DARK_RED, C_WHITE, "EN_NMOS: OFF");
+        GUI_Printf(28, 88, C_DARK_RED, C_WHITE, "EN_NMOS: OFF");
     else
-        GUI_Printf(2, 88, C_DARK_RED, C_WHITE, "EN_NMOS: ON");
+        GUI_Printf(31, 88, C_DARK_RED, C_WHITE, "EN_NMOS: ON");
     if ((Buffer[15] & 0x40) != 0)
-        GUI_Printf(2, 102, C_DARK_RED, C_WHITE, "EN_CHG: OFF");
+        GUI_Printf(31, 102, C_DARK_RED, C_WHITE, "EN_CHG: OFF");
     else
-        GUI_Printf(2, 102, C_DARK_RED, C_WHITE, "EN_CHG: ON");
+        GUI_Printf(34, 102, C_DARK_RED, C_WHITE, "EN_CHG: ON");
     if ((Buffer[15] & 0x20) != 0)
-        GUI_Printf(2, 116, C_DARK_RED, C_WHITE, "EN_BOOST: OFF");
+        GUI_Printf(25, 116, C_DARK_RED, C_WHITE, "EN_BOOST: OFF");
     else
-        GUI_Printf(2, 116, C_DARK_RED, C_WHITE, "EN_BOOST: ON");
+        GUI_Printf(28, 116, C_DARK_RED, C_WHITE, "EN_BOOST: ON");
     while (1);
 }
 
