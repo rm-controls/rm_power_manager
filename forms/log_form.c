@@ -4,7 +4,7 @@
 
 #include "main.h"
 
-Button_Struct_t TurnBack_Button1, Format_Button;
+Button_Struct_t TurnBack_Button1, Format_Button, OSInfo_Button;
 Lable_Struct_t DateTime_Lable;
 ListBox_Struct_t FileList_ListBox;
 

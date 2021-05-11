@@ -31,7 +31,6 @@
 
 /////////////// Device ///////////////
 #include "pid.h"
-#include "decrypt.h"
 #include "encrypt.h"
 #include "filter.h"
 #include "refree.h"
