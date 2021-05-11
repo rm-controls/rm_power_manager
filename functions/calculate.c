@@ -7,7 +7,6 @@
 #include "filter.h"
 #include "dac.h"
 #include "port.h"
-#include "encrypt.h"
 #include "system.h"
 #include "refree.h"
 #include "fsm.h"
@@ -16,7 +15,7 @@
 
 #define ADC_COEFFICIENT 3.0f / 4096.0f
 
-Power_Calibrate_t Capacitor_Calibratel, Capacitor_Calibrateh, Chassis_Calibrate;
+Power_Calibrate_t Capacitor_Calibratel, Capacitor_Calibrateh;
 float I_Capacitor, I_Chassis, V_Capacitor, V_Baterry, V_Chassis
 , P_Chassis, P_Capacitor, EP_Chassis, W_Capacitor;
 unsigned short I_CapOffset, I_ChaOffset;
@@ -53,7 +52,7 @@ void Calibrate_Powerh(void) {
                          (unsigned short) (273.0f * (float) referee_data_.game_robot_status_.chassis_power_limit
                              / V_Capacitor));
         HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_RESET);
-        Delayms(500);
+        Delayms(200);
         Capacitor_Calibrateh.Pd[0] = P_Capacitor;
         Capacitor_Calibrateh.Pr[0] = referee_data_.power_heat_data_.chassis_power;
         Capacitor_Calibrateh.Iw[0] = I_Capacitor;
@@ -64,7 +63,7 @@ void Calibrate_Powerh(void) {
                              * ((float) referee_data_.game_robot_status_.chassis_power_limit - 10.0f)
                              / V_Capacitor));
         HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_RESET);
-        Delayms(500);
+        Delayms(200);
         Capacitor_Calibrateh.Pd[1] = P_Capacitor;
         Capacitor_Calibrateh.Pr[1] = referee_data_.power_heat_data_.chassis_power;
         Capacitor_Calibrateh.Iw[1] = I_Capacitor;
@@ -102,7 +101,7 @@ void Calibrate_Powerl(void) {
 
 void Sensor_Config(void) {
     Capacitor_Calibratel.Rw = 0;
-    Chassis_Calibrate.Rw = 0;
+    Capacitor_Calibrateh.Rw = 0;
     HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_12B_R, 0x00);
     HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_SET);
     HAL_GPIO_WritePin(BOOST_EN_GPIO_Port, BOOST_EN_Pin, GPIO_PIN_SET);

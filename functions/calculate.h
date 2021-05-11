@@ -12,7 +12,7 @@ typedef struct {
     float Iw[2];
 } Power_Calibrate_t;
 
-extern Power_Calibrate_t Capacitor_Calibratel, Capacitor_Calibrateh, Chassis_Calibrate;
+extern Power_Calibrate_t Capacitor_Calibratel, Capacitor_Calibrateh;
 extern float I_Capacitor, I_Chassis, V_Capacitor, V_Baterry,
     V_Chassis, P_Chassis, P_Capacitor, EP_Chassis, W_Capacitor;
 extern unsigned short I_CapOffset, I_ChaOffset;

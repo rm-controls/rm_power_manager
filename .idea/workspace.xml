@@ -18,13 +18,11 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="Complete the task manager interface design, now you can display the status of the task, stack control and so on. The task name and total user stack space are adjusted to release more main stack space.">
+    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="Adjust the order of data saving function to ensure the correctness and integrity of data in RTC backup area before writing flash. When the file system is damaged, the RTC backup area data will be read automatically, and the crash data will be saved on the screen with dead loop. Adjust the display interface of task manager.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/STM32H750VBTx_FLASH.ld" beforeDir="false" afterPath="$PROJECT_DIR$/STM32H750VBTx_FLASH.ld" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/filesystem/fs_operate.c" beforeDir="false" afterPath="$PROJECT_DIR$/filesystem/fs_operate.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forms/osinfo_form.c" beforeDir="false" afterPath="$PROJECT_DIR$/forms/osinfo_form.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions/datasave.c" beforeDir="false" afterPath="$PROJECT_DIR$/functions/datasave.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions/datasave.h" beforeDir="false" afterPath="$PROJECT_DIR$/functions/datasave.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/functions/calculate.c" beforeDir="false" afterPath="$PROJECT_DIR$/functions/calculate.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/functions/calculate.h" beforeDir="false" afterPath="$PROJECT_DIR$/functions/calculate.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/functions/fsm.c" beforeDir="false" afterPath="$PROJECT_DIR$/functions/fsm.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -213,14 +211,7 @@
       <workItem from="1620499527174" duration="4411000" />
       <workItem from="1620562617273" duration="1267000" />
       <workItem from="1620750273355" duration="3135000" />
-      <workItem from="1620754102032" duration="6516000" />
-    </task>
-    <task id="LOCAL-00017" summary="Complete the model testing codes, it can test all module.">
-      <created>1617468653875</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1617468653875</updated>
+      <workItem from="1620754102032" duration="7104000" />
     </task>
     <task id="LOCAL-00018" summary="PID current loop parameter setting successful">
       <created>1617485906258</created>
@@ -558,7 +549,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620757537653</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary="Adjust the order of data saving function to ensure the correctness and integrity of data in RTC backup area before writing flash. When the file system is damaged, the RTC backup area data will be read automatically, and the crash data will be saved on the screen with dead loop. Adjust the display interface of task manager.">
+      <created>1620760795023</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1620760795023</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -642,7 +640,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Realized the switching function between forms, now you can design multiple forms to switch" />
     <MESSAGE value="Fixed the bug when the referee system data could not be received. At the same time, completed the function of drawing triangle on LCD screen, standardized the structure of callback control, so that different control callbacks are consistent. FatFs file system is also introduced to prepare for accessing flash. Deleted the useless arm fast math accelerator library." />
     <MESSAGE value="Deleted IIC software simulation function and EEPROM driver function" />
     <MESSAGE value="Add the program to check the reset reason and display, but obviously this code can not display the reset reason correctly. SPI hardware initialization program has been added, and it has not been tested whether it is normal. Fixed watchdog feeding time to avoid abnormal reset of watchdog at some time." />
@@ -667,7 +664,8 @@
     <MESSAGE value="Slightly adjust the main interface to make the layout more beautiful" />
     <MESSAGE value="The code that uart1 forwards directly to UART2 is rolled back, but it has not been tested whether the judging system can receive correctly" />
     <MESSAGE value="Complete the task manager interface design, now you can display the status of the task, stack control and so on. The task name and total user stack space are adjusted to release more main stack space." />
-    <option name="LAST_COMMIT_MESSAGE" value="Complete the task manager interface design, now you can display the status of the task, stack control and so on. The task name and total user stack space are adjusted to release more main stack space." />
+    <MESSAGE value="Adjust the order of data saving function to ensure the correctness and integrity of data in RTC backup area before writing flash. When the file system is damaged, the RTC backup area data will be read automatically, and the crash data will be saved on the screen with dead loop. Adjust the display interface of task manager." />
+    <option name="LAST_COMMIT_MESSAGE" value="Adjust the order of data saving function to ensure the correctness and integrity of data in RTC backup area before writing flash. When the file system is damaged, the RTC backup area data will be read automatically, and the crash data will be saved on the screen with dead loop. Adjust the display interface of task manager." />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
