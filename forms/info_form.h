@@ -2,8 +2,8 @@
 // Created by Lao·Zhu on 2021/5/1.
 //
 
-#ifndef PROGRAM_FORMS_LOG_FORM_H_
-#define PROGRAM_FORMS_LOG_FORM_H_
+#ifndef PROGRAM_FORMS_INFO_FORM_H_
+#define PROGRAM_FORMS_INFO_FORM_H_
 
 typedef enum {
     Switch_To_OverPower = 0,
@@ -16,4 +16,4 @@ typedef enum {
 void LogForm_Init(void);
 void LogForm_Update(void);
 
-#endif //PROGRAM_FORMS_LOG_FORM_H_
+#endif //PROGRAM_FORMS_INFO_FORM_H_

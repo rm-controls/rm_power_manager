@@ -10,7 +10,7 @@
 #include "calculate.h"
 #include "system.h"
 #include "encrypt.h"
-#include "refree.h"
+#include "referee.h"
 
 QueueHandle_t Refree_Data = NULL;
 
@@ -30,7 +30,7 @@ void Packup_Info(void) {
     Upload_Package.Data[7] = FloatToInt16(Capacitor_Percent) & 0x00ffUL;
 }
 
-void Upload_Refree(void *pvParameters) {
+void Upload_Referee(void *pvParameters) {
     unsigned char Refree_Buf[64];
     Refree_Data = xQueueCreate(4, 64);
     while (1) {

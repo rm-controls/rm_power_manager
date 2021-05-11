@@ -2,8 +2,8 @@
 // Created by Lao·Zhu on 2021/3/26.
 //
 
-#ifndef PROGRAM_DEVICES_REFREE_H_
-#define PROGRAM_DEVICES_REFREE_H_
+#ifndef PROGRAM_DEVICES_REFEREE_H_
+#define PROGRAM_DEVICES_REFEREE_H_
 
 typedef enum {
     kGameStatusCmdId = 0x0001,
@@ -342,4 +342,4 @@ extern UnpackData referee_unpack_obj;
 void Referee_init();
 void Referee_unpack(unsigned char byte);
 
-#endif //PROGRAM_DEVICES_REFREE_H_
+#endif //PROGRAM_DEVICES_REFEREE_H_

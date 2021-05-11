@@ -6,6 +6,6 @@
 #define _FUNCTIONS_REPORT_H_
 
 void Packup_Info(void);
-void Upload_Refree(void *pvParameters);
+void Upload_Referee(void *pvParameters);
 
 #endif //PROGRAM_FUNCTIONS_REPORT_H_

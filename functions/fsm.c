@@ -10,7 +10,7 @@
 #include "task.h"
 #include "semphr.h"
 #include "pid.h"
-#include "refree.h"
+#include "referee.h"
 #include "calculate.h"
 #include "string.h"
 #include "watchdog.h"

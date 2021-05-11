@@ -4,9 +4,14 @@
 
 #include "main.h"
 
-Button_Struct_t TurnBack_Button1, Format_Button, OSInfo_Button;
+Button_Struct_t TurnBack_Button1, Format_Button, OSInfo_Button, SysInfo_Button;
 Lable_Struct_t DateTime_Lable;
 ListBox_Struct_t FileList_ListBox;
+
+void SysInfo_Button_Callback(void *object, unsigned char key) {
+    Form_Info_Structure.Form_Index = SysInfo_Form_Index;
+    SysInfoForm_Init();
+}
 
 void OSInfo_Button_Callback(void *object, unsigned char key) {
     Form_Info_Structure.Form_Index = OSInfo_Form_Index;
@@ -94,8 +99,16 @@ void LogForm_Init(void) {
     Format_Button.Width = 60;
     Format_Button.Height = 20;
     Format_Button.Text = "Format";
-    Format_Button.NextButton = &TurnBack_Button1;
+    Format_Button.NextButton = &SysInfo_Button;
     Format_Button.CallbackFunction = Format_Button_Callback;
+
+    SysInfo_Button.X_Pos = 2;
+    SysInfo_Button.Y_Pos = 135;
+    SysInfo_Button.Width = 60;
+    SysInfo_Button.Height = 20;
+    SysInfo_Button.Text = "SysInfo";
+    SysInfo_Button.NextButton = &TurnBack_Button1;
+    SysInfo_Button.CallbackFunction = SysInfo_Button_Callback;
 
     TurnBack_Button1.X_Pos = 64;
     TurnBack_Button1.Y_Pos = 135;
@@ -110,6 +123,7 @@ void LogForm_Init(void) {
     GUI_InitLable(&DateTime_Lable);
     GUI_InitButton(&OSInfo_Button);
     GUI_InitButton(&Format_Button);
+    GUI_InitButton(&SysInfo_Button);
     GUI_InitButton(&TurnBack_Button1);
     GUI_ListBox_ScanFile();
 

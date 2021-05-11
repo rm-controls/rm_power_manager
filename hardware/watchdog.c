@@ -9,6 +9,7 @@
 WWDG_HandleTypeDef hwwdg1;
 
 void HAL_WWDG_EarlyWakeupCallback(WWDG_HandleTypeDef *hwwdg) {
+    HAL_WWDG_Refresh(&hwwdg1);
     DataSave_To_Flash(Watchdog_Reset);
     SoftReset();
 }

@@ -8,7 +8,7 @@
 #include "dac.h"
 #include "port.h"
 #include "system.h"
-#include "refree.h"
+#include "referee.h"
 #include "fsm.h"
 #include "pid.h"
 #include "protect.h"

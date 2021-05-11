@@ -33,7 +33,7 @@
 #include "pid.h"
 #include "encrypt.h"
 #include "filter.h"
-#include "refree.h"
+#include "referee.h"
 #include "flash.h"
 
 /////////////// Functions ///////////////
@@ -55,9 +55,10 @@
 /////////////// Forms ///////////////
 #include "form_logic.h"
 #include "main_form.h"
-#include "log_form.h"
+#include "info_form.h"
 #include "settings_form.h"
 #include "osinfo_form.h"
+#include "sysinfo_form.h"
 
 /////////////// FileSystem ///////////////
 #include "fs_operate.h"

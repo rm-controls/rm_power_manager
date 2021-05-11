@@ -140,7 +140,7 @@ void MainForm_Init(void) {
     Log_Button.Y_Pos = 134;
     Log_Button.Width = 60;
     Log_Button.Height = 22;
-    Log_Button.Text = "Info";
+    Log_Button.Text = "Log&Info";
     Log_Button.NextButton = &Settings_Button;
     Log_Button.CallbackFunction = Log_Button_Callback;
 

@@ -10,6 +10,7 @@ typedef enum {
     Log_Form_Index = 1,
     Settings_Form_Index = 2,
     OSInfo_Form_Index = 3,
+    SysInfo_Form_Index = 4,
 } Form_Index_e;
 
 typedef struct {

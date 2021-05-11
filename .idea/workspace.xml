@@ -18,11 +18,24 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="Adjust the order of data saving function to ensure the correctness and integrity of data in RTC backup area before writing flash. When the file system is damaged, the RTC backup area data will be read automatically, and the crash data will be saved on the screen with dead loop. Adjust the display interface of task manager.">
+    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="Slightly corrected the high power sampling correction time">
+      <change afterPath="$PROJECT_DIR$/forms/sysinfo_form.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/forms/sysinfo_form.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/devices/refree.c" beforeDir="false" afterPath="$PROJECT_DIR$/devices/referee.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/devices/refree.h" beforeDir="false" afterPath="$PROJECT_DIR$/devices/referee.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/forms/form_logic.c" beforeDir="false" afterPath="$PROJECT_DIR$/forms/form_logic.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/forms/form_logic.h" beforeDir="false" afterPath="$PROJECT_DIR$/forms/form_logic.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/forms/log_form.c" beforeDir="false" afterPath="$PROJECT_DIR$/forms/info_form.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/forms/log_form.h" beforeDir="false" afterPath="$PROJECT_DIR$/forms/info_form.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/forms/main_form.c" beforeDir="false" afterPath="$PROJECT_DIR$/forms/main_form.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/functions/calculate.c" beforeDir="false" afterPath="$PROJECT_DIR$/functions/calculate.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions/calculate.h" beforeDir="false" afterPath="$PROJECT_DIR$/functions/calculate.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/functions/fsm.c" beforeDir="false" afterPath="$PROJECT_DIR$/functions/fsm.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/functions/protect.c" beforeDir="false" afterPath="$PROJECT_DIR$/functions/protect.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/functions/report.c" beforeDir="false" afterPath="$PROJECT_DIR$/functions/report.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/functions/report.h" beforeDir="false" afterPath="$PROJECT_DIR$/functions/report.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/user/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/main.h" beforeDir="false" afterPath="$PROJECT_DIR$/user/main.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -211,14 +224,7 @@
       <workItem from="1620499527174" duration="4411000" />
       <workItem from="1620562617273" duration="1267000" />
       <workItem from="1620750273355" duration="3135000" />
-      <workItem from="1620754102032" duration="7104000" />
-    </task>
-    <task id="LOCAL-00018" summary="PID current loop parameter setting successful">
-      <created>1617485906258</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1617485906258</updated>
+      <workItem from="1620754102032" duration="11304000" />
     </task>
     <task id="LOCAL-00019" summary="The basic logic of docking with the host computer has been completed, waiting for joint debugging">
       <created>1617488648156</created>
@@ -556,7 +562,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620760795023</updated>
     </task>
-    <option name="localTasksCounter" value="67" />
+    <task id="LOCAL-00067" summary="Slightly corrected the high power sampling correction time">
+      <created>1620761339578</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1620761339579</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -640,7 +653,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Fixed the bug when the referee system data could not be received. At the same time, completed the function of drawing triangle on LCD screen, standardized the structure of callback control, so that different control callbacks are consistent. FatFs file system is also introduced to prepare for accessing flash. Deleted the useless arm fast math accelerator library." />
     <MESSAGE value="Deleted IIC software simulation function and EEPROM driver function" />
     <MESSAGE value="Add the program to check the reset reason and display, but obviously this code can not display the reset reason correctly. SPI hardware initialization program has been added, and it has not been tested whether it is normal. Fixed watchdog feeding time to avoid abnormal reset of watchdog at some time." />
     <MESSAGE value="After porting FatFs file system and flash driver of w25q series, we need to wait for a new board to test whether FatFs and flash are available." />
@@ -665,9 +677,19 @@
     <MESSAGE value="The code that uart1 forwards directly to UART2 is rolled back, but it has not been tested whether the judging system can receive correctly" />
     <MESSAGE value="Complete the task manager interface design, now you can display the status of the task, stack control and so on. The task name and total user stack space are adjusted to release more main stack space." />
     <MESSAGE value="Adjust the order of data saving function to ensure the correctness and integrity of data in RTC backup area before writing flash. When the file system is damaged, the RTC backup area data will be read automatically, and the crash data will be saved on the screen with dead loop. Adjust the display interface of task manager." />
-    <option name="LAST_COMMIT_MESSAGE" value="Adjust the order of data saving function to ensure the correctness and integrity of data in RTC backup area before writing flash. When the file system is damaged, the RTC backup area data will be read automatically, and the crash data will be saved on the screen with dead loop. Adjust the display interface of task manager." />
+    <MESSAGE value="Slightly corrected the high power sampling correction time" />
+    <option name="LAST_COMMIT_MESSAGE" value="Slightly corrected the high power sampling correction time" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/filesystem/fs_operate.c</url>
+          <line>31</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="com.jetbrains.cidr.embedded.openocd.conf.type">
         <watch expression="(*FileSystem_Structure)" language="ObjectiveC" />

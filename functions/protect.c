@@ -19,17 +19,19 @@ void Protect_Task(void *pvParameters) {
     xSemaphoreGive(Calibrate_Semaphore);
     while (1) {
         referee_time_counter++;
-        if (V_Baterry <= 20.0f) {
+        if (V_Baterry <= 20.0f && FSM_Status.FSM_Mode != Halt_Mode) {
             Delayms(100);
             if (V_Baterry <= 20.0f)
                 FSM_Status.FSM_Mode = Halt_Mode;
-        } else if (FSM_Status.FSM_Mode == Halt_Mode) {
+        } else if (FSM_Status.FSM_Mode == Halt_Mode && V_Baterry > 20.0f) {
             DataSave_To_Flash(RePowerOn_Reset);
             Delayms(500);
             SoftReset();
         }
-        if (referee_time_counter >= 1000)
+        if (referee_time_counter >= 1000) {
             referee_avaiflag = 0;
+            referee_time_counter = 0;
+        }
         Delayms(1);
     }
 }

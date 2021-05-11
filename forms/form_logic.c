@@ -95,5 +95,7 @@ void Form_UpdateEvent(void) {
             break;
         case OSInfo_Form_Index:OSInfoForm_Update();
             break;
+        case SysInfo_Form_Index:SysInfoForm_Update();
+            break;
     }
 }
