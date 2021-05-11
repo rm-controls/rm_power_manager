@@ -25,7 +25,7 @@ void WatchDog_Task(void *pvParameters) {
 void Watchdog_Config(void) {
     HAL_RCCEx_WWDGxSysResetConfig(RCC_WWDG1);
     __HAL_RCC_WWDG1_CLK_ENABLE();
-    HAL_NVIC_SetPriority(WWDG_IRQn, 0, 0);
+    HAL_NVIC_SetPriority(WWDG_IRQn, 1, 1);
     HAL_NVIC_EnableIRQ(WWDG_IRQn);
     hwwdg1.Instance = WWDG1;
     hwwdg1.Init.Prescaler = WWDG_PRESCALER_32;  //Twwdg=(4096×2^WDGTB×(T[5:0]+1)) /RCC_PCLK3;

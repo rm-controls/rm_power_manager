@@ -25,9 +25,9 @@ void TurnBack_Button1_Callback(void *object, unsigned char key) {
 
 void Format_Button_Callback(void *object, unsigned char key) {
     FileSystem_FormatFlash();
-    FileSystem_FindRemainSpace();
-    FileSystem_Structure->FirstFileAddr = CurrentFile_Address;
-    FileSystem_Structure->LastFileAddr = CurrentFile_Address;
+    if (CurrentFile_Structure != NULL)
+        vPortFree(CurrentFile_Structure);
+    FileSystem_CreateFiles();
 }
 
 void FileList_ListBox_Callback(void *object, unsigned char key) {

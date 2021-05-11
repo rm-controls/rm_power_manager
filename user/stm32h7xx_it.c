@@ -67,5 +67,6 @@ void USART2_IRQHandler(void) {
 }
 
 void WWDG_IRQHandler(void) {
+    HAL_WWDG_Refresh(&hwwdg1);
     HAL_WWDG_IRQHandler(&hwwdg1);
 }

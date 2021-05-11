@@ -26,6 +26,8 @@ void FileSystem_ReadItem(unsigned char itemnum, File_Struct_t *file) {
 }
 
 void FileSystem_WriteIntoFlash(void) {
+    W25QXX_WAKEUP();
+    W25QXX_Write_Enable();
     if (LastFileHead_Structure != NULL && LastFile_Address != 0)
         W25QXX_Write((unsigned char *) LastFileHead_Structure, LastFile_Address, sizeof(FileHead_Struct_t));
     W25QXX_Write((unsigned char *) CurrentFile_Structure, CurrentFile_Address, sizeof(File_Struct_t));
@@ -108,6 +110,6 @@ void FileSystem_Config(void) {
         GUI_Printf(19, 60, C_DARK_RED, C_WHITE, "Init FileSystem");
         FileSystem_FormatFlash();
         DataSave_DisplayLastInfo();
-    } else
-        FileSystem_CreateFiles();
+    }
+    FileSystem_CreateFiles();
 }

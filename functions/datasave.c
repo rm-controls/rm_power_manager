@@ -8,6 +8,7 @@ unsigned char Reset_Number = 0;
 
 void vApplicationStackOverflowHook(TaskHandle_t xTask, char *pcTaskName) {
     DataSave_To_Flash(StackOverflow_Reset);
+    SoftReset();
 }
 
 void DataSave_DisplayLastInfo(void) {
@@ -35,20 +36,20 @@ void DataSave_DisplayLastInfo(void) {
 
     GUI_Clear(C_WHITE);
     GUI_Printf(22, 2, C_DARK_RED, C_WHITE,
-               "%-2d.%1dA",
+               "%2d.%1dA",
                (int) Last_I_Capacitor,
                (int) (Last_I_Capacitor * 10) - ((int) Last_I_Capacitor * 10));
     GUI_Printf(74, 2, C_DARK_RED, C_WHITE,
-               "%-2d.%1dA", (int) Last_I_Chassis,
+               "%2d.%1dA", (int) Last_I_Chassis,
                (int) (Last_I_Chassis * 10) - ((int) Last_I_Chassis * 10));
     GUI_Printf(9, 16, C_DARK_RED, C_WHITE,
-               "%-2d.%1dV", (int) Last_V_Capacitor,
+               "%2d.%1dV", (int) Last_V_Capacitor,
                (int) (Last_V_Capacitor * 10) - ((int) Last_V_Capacitor * 10));
     GUI_Printf(48, 16, C_DARK_RED, C_WHITE,
-               "%-2d.%1dV", (int) Last_V_Chassis,
+               "%2d.%1dV", (int) Last_V_Chassis,
                (int) (Last_V_Chassis * 10) - ((int) Last_V_Chassis * 10));
     GUI_Printf(87, 16, C_DARK_RED, C_WHITE,
-               "%-2d.%1dV", (int) Last_V_Baterry,
+               "%2d.%1dV", (int) Last_V_Baterry,
                (int) (Last_V_Baterry * 10) - ((int) Last_V_Baterry * 10));
     switch (FSM_Before_Reboot.FSM_Mode) {
         case Normal_Mode:GUI_Printf(2, 30, C_DARK_RED, C_WHITE, "Normal");
@@ -120,13 +121,6 @@ void DataSave_DisplayLastInfo(void) {
 
 void DataSave_To_Flash(Saving_Reason_e reason) {
     unsigned char Buffer[16];
-    unsigned int ulOriginalBASEPRI;
-    if (reason == RePowerOn_Reset || reason == StackOverflow_Reset)
-        taskENTER_CRITICAL();
-    else
-        ulOriginalBASEPRI = taskENTER_CRITICAL_FROM_ISR();
-    __HAL_RCC_WWDG1_CLK_DISABLE();
-    HAL_NVIC_DisableIRQ(WWDG_IRQn);
 
     Buffer[0] = (reason & 0x07) << 5;
     Buffer[0] |= (FSM_Status.Charge_Mode & 0x07) << 2;
@@ -157,31 +151,8 @@ void DataSave_To_Flash(Saving_Reason_e reason) {
     HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR2, Buffer[8] | Buffer[9] << 8 | Buffer[10] << 16 | Buffer[11] << 24);
     HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR3, Buffer[12] | Buffer[13] << 8 | Buffer[14] << 16 | Buffer[15] << 24);
 
-    GUI_Clear(C_WHITE);
-    switch (reason) {
-        case RePowerOn_Reset:GUI_Printf(3, 4, C_BLACK, C_WHITE, "Repoweron Reset");
-            break;
-        case Watchdog_Reset:GUI_Printf(3, 4, C_BLACK, C_WHITE, "WatchDog Reset");
-            break;
-        case Hardfault_Reset:GUI_Printf(3, 4, C_BLACK, C_WHITE, "HardFault Reset");
-            break;
-        case UsageFault_Reset:GUI_Printf(3, 4, C_BLACK, C_WHITE, "UsageFault Reset");
-            break;
-        case BusFault_Reset:GUI_Printf(3, 4, C_BLACK, C_WHITE, "BusFault Reset");
-            break;
-        case NMI_Reset:GUI_Printf(3, 4, C_BLACK, C_WHITE, "NMI Reset");
-            break;
-        case StackOverflow_Reset:GUI_Printf(3, 4, C_BLACK, C_WHITE, "Stack Overflow Reset");
-            break;
-        default:break;
-    }
-
     for (unsigned char counter = 0; counter < 16; counter++)
         CurrentFile_Structure->ResetInfo[counter] = Buffer[counter];
     FileSystem_WriteIntoFlash();
-    HAL_Delay(500);
-    if (reason == RePowerOn_Reset || reason == StackOverflow_Reset)
-        taskEXIT_CRITICAL();
-    else
-        taskEXIT_CRITICAL_FROM_ISR(ulOriginalBASEPRI);
+
 }
