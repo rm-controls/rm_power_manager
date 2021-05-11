@@ -2,15 +2,8 @@
 // Created by Lao·Zhu on 2021/5/1.
 //
 
-#include "form_logic.h"
-#include "main_form.h"
-#include "gui_button.h"
-#include "key.h"
+#include "main.h"
 #include "stddef.h"
-#include "log_form.h"
-#include "settings_form.h"
-#include "gui_numeric.h"
-#include "gui_listbox.h"
 
 Form_Info_t Form_Info_Structure;
 GUI_Object_Struct_t *FirstWidget;
@@ -99,6 +92,8 @@ void Form_UpdateEvent(void) {
         case Log_Form_Index:LogForm_Update();
             break;
         case Settings_Form_Index:SettingsForm_Update();
+            break;
+        case OSInfo_Form_Index:OSInfoForm_Update();
             break;
     }
 }

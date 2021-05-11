@@ -8,6 +8,7 @@
 #include "task.h"
 #include "config.h"
 
+unsigned char FreeRTOS_Running_Flag = 0;
 static unsigned int Facus = 0;
 static unsigned int Facms = 0;
 TIM_HandleTypeDef htim4;
@@ -32,7 +33,7 @@ void Delayus(unsigned int xus) {
 }
 
 void Delayms(unsigned int xms) {
-    if (xTaskGetSchedulerState() == taskSCHEDULER_RUNNING) {
+    if (FreeRTOS_Running_Flag == 1) {
         if (xms >= Facms) {
             vTaskDelay(xms / Facms);
         } else {

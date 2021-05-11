@@ -15,6 +15,7 @@ typedef enum {
     Other_Reason = 7,
 } Reset_Reason_e;
 
+extern unsigned char FreeRTOS_Running_Flag;
 void SystemClock_Config(void);
 void MPU_Config(void);
 void Cache_Config(void);

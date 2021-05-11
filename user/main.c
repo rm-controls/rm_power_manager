@@ -11,6 +11,7 @@ SemaphoreHandle_t Calibrate_Semaphore;
 
 void InitTask() {
     taskENTER_CRITICAL();
+    FreeRTOS_Running_Flag = 1;
 #if USE_RTC_ONCHIP == 1
     RTC_Config();
 #endif
@@ -34,12 +35,12 @@ void InitTask() {
     Sensor_Config();
     memset(&FSM_Status, 0x00, sizeof(FSM_Status_t));
     Calibrate_Semaphore = xSemaphoreCreateMutex();
-    xTaskCreate(Protect_Task, "ProtectTask", 1024, NULL, 3, &ProtectTask_Handler);
-    xTaskCreate(PID_CalculateTask, "PIDTask", 1024, NULL, 3, &PIDTask_Handler);
-    xTaskCreate(FSM_Task, "FSMTask", 2048, NULL, 3, &FSMTask_Handler);
-    xTaskCreate(Upload_Refree, "UploadTask", 1024, NULL, 2, &UploadTask_Handler);
-    xTaskCreate(LCD_Refresh, "LCDTask", 10240, NULL, 1, &LCDTask_Handler);
-    xTaskCreate(UserTask, "UserTask", 1024, NULL, 2, &UserTask_Handler);
+    xTaskCreate(Protect_Task, "Protect", 1024, NULL, 3, &ProtectTask_Handler);
+    xTaskCreate(PID_CalculateTask, "PID", 1024, NULL, 3, &PIDTask_Handler);
+    xTaskCreate(FSM_Task, "FSM", 1024, NULL, 3, &FSMTask_Handler);
+    xTaskCreate(Upload_Refree, "Upload", 1024, NULL, 2, &UploadTask_Handler);
+    xTaskCreate(LCD_Refresh, "LCD", 1024, NULL, 1, &LCDTask_Handler);
+    xTaskCreate(UserTask, "User", 1024, NULL, 2, &UserTask_Handler);
     taskEXIT_CRITICAL();
     vTaskDelete(NULL);
 }

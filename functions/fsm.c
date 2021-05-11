@@ -37,7 +37,7 @@ void FSM_Task(void *pvParameters) {
 
     Delayms(10);
 
-    xTaskCreate(WatchDog_Task, "WatchDogTask", 128, NULL, 1, &WatchdogTask_Handler);
+    xTaskCreate(WatchDog_Task, "WatchDog", 128, NULL, 1, &WatchdogTask_Handler);
 
     while (1) {
         switch (FSM_Status.FSM_Mode) {

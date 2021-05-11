@@ -9,6 +9,7 @@ typedef enum {
     Main_Form_Index = 0,
     Log_Form_Index = 1,
     Settings_Form_Index = 2,
+    OSInfo_Form_Index = 3,
 } Form_Index_e;
 
 typedef struct {

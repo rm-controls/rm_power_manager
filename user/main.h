@@ -57,6 +57,7 @@
 #include "main_form.h"
 #include "log_form.h"
 #include "settings_form.h"
+#include "osinfo_form.h"
 
 /////////////// FileSystem ///////////////
 #include "fs_operate.h"
