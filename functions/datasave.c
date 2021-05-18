@@ -116,7 +116,6 @@ void DataSave_DisplayLastInfo(void) {
         GUI_Printf(25, 116, C_DARK_RED, C_WHITE, "EN_BOOST: OFF");
     else
         GUI_Printf(28, 116, C_DARK_RED, C_WHITE, "EN_BOOST: ON");
-    while (1);
 }
 
 void DataSave_To_Flash(Saving_Reason_e reason) {

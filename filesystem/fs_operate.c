@@ -8,6 +8,7 @@
 #include "flash.h"
 #include "rtc.h"
 #include "datasave.h"
+#include "string.h"
 
 FileSystem_Struct_t *FileSystem_Structure;
 File_Struct_t *CurrentFile_Structure = NULL;
@@ -107,9 +108,23 @@ void FileSystem_Config(void) {
     FileSystem_Structure = pvPortMalloc(sizeof(FileSystem_Struct_t));
     W25QXX_Read((unsigned char *) FileSystem_Structure, 0x00000, sizeof(FileSystem_Struct_t));
     if (FileSystem_Structure->FSHead != 0xA5) {
+        unsigned char buffer[128] = {0}, counter;
         GUI_Printf(19, 60, C_DARK_RED, C_WHITE, "Init FileSystem");
-        FileSystem_FormatFlash();
+        for (counter = 0; counter < 128; ++counter)
+            buffer[counter] = counter;
+        W25QXX_Write(buffer, 0x00, 128);
+        memset(buffer, 0x00, 128);
+        W25QXX_Read(buffer, 0x00, 128);
+        for (counter = 0; counter < 128; ++counter)
+            if (buffer[counter] != counter)
+                break;
+        if (counter == 127)
+            FileSystem_FormatFlash();
+        else
+            GUI_Printf(15, 130, C_DARK_RED, C_WHITE, "FLASH Break Dowm");
         DataSave_DisplayLastInfo();
+        if (counter == 127)
+            while (1);
     }
     FileSystem_CreateFiles();
 }

@@ -32,7 +32,6 @@ void InitTask() {
     TIM7_Config();
     Filter_Config();
     PID_ValueConfig();
-    Sensor_Config();
     memset(&FSM_Status, 0x00, sizeof(FSM_Status_t));
     Calibrate_Semaphore = xSemaphoreCreateMutex();
     xTaskCreate(Protect_Task, "Protect", 512, NULL, 3, &ProtectTask_Handler);

@@ -52,7 +52,7 @@ void Calibrate_Powerh(void) {
                          (unsigned short) (273.0f * (float) referee_data_.game_robot_status_.chassis_power_limit
                              / V_Capacitor));
         HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_RESET);
-        Delayms(200);
+        Delayms(300);
         Capacitor_Calibrateh.Pd[0] = P_Capacitor;
         Capacitor_Calibrateh.Pr[0] = referee_data_.power_heat_data_.chassis_power;
         Capacitor_Calibrateh.Iw[0] = I_Capacitor;
@@ -63,7 +63,7 @@ void Calibrate_Powerh(void) {
                              * ((float) referee_data_.game_robot_status_.chassis_power_limit - 10.0f)
                              / V_Capacitor));
         HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_RESET);
-        Delayms(200);
+        Delayms(300);
         Capacitor_Calibrateh.Pd[1] = P_Capacitor;
         Capacitor_Calibrateh.Pr[1] = referee_data_.power_heat_data_.chassis_power;
         Capacitor_Calibrateh.Iw[1] = I_Capacitor;
@@ -80,13 +80,13 @@ void Calibrate_Powerl(void) {
     if (referee_avaiflag == 1) {
         HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_12B_R, (unsigned short) (5460.0f / V_Capacitor)); //20W
         HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_RESET);
-        Delayms(500);
+        Delayms(300);
         Capacitor_Calibratel.Pd[0] = P_Capacitor;
         Capacitor_Calibratel.Pr[0] = referee_data_.power_heat_data_.chassis_power;
         Capacitor_Calibratel.Iw[0] = I_Capacitor;
         HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_12B_R, (unsigned short) (10920.0f / V_Capacitor)); //40W
         HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_RESET);
-        Delayms(500);
+        Delayms(300);
         Capacitor_Calibratel.Pd[1] = P_Capacitor;
         Capacitor_Calibratel.Pr[1] = referee_data_.power_heat_data_.chassis_power;
         Capacitor_Calibratel.Iw[1] = I_Capacitor;
@@ -106,10 +106,10 @@ void Sensor_Config(void) {
     HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_SET);
     HAL_GPIO_WritePin(BOOST_EN_GPIO_Port, BOOST_EN_Pin, GPIO_PIN_SET);
     HAL_GPIO_WritePin(EN_NMOS_GPIO_Port, EN_NMOS_Pin, GPIO_PIN_SET);
-    HAL_Delay(500);
+    Delayms(200);
     I_CapOffset = ADC_FinalResult[0];
     I_ChaOffset = ADC_FinalResult[1];
-    HAL_Delay(500);
+    Delayms(200);
 }
 
 void Calculate_Power(void) {
@@ -128,15 +128,15 @@ void Calculate_Power(void) {
     V_ChassisF.Current_Value = (float) ADC_FinalResult[4] * ADC_COEFFICIENT * 21.0f;
     V_Chassis = FirstOrder_Filter_Calculate(&V_ChassisF);
 
-    if (I_Capacitor < 0.05f || I_Capacitor > 10.0f)
+    if (I_Capacitor < 0.01f || I_Capacitor > 10.0f)
         I_Capacitor = 0;
     if (I_Chassis < 0.05f || I_Chassis > 10.0f)
         I_Chassis = 0;
-    if (V_Capacitor < 0.1f || V_Capacitor > 25.0f)
+    if (V_Capacitor < 0.01f || V_Capacitor > 25.0f)
         V_Capacitor = 0;
-    if (V_Baterry < 0.1f || V_Baterry > 35.0f)
+    if (V_Baterry < 0.01f || V_Baterry > 35.0f)
         V_Baterry = 0;
-    if (V_Chassis < 0.1f || V_Chassis > 25.0f)
+    if (V_Chassis < 0.01f || V_Chassis > 35.0f)
         V_Chassis = 0;
 
     P_ChassisF.Current_Value = I_Chassis * V_Chassis;
@@ -149,9 +149,4 @@ void Calculate_Power(void) {
         P_CapacitorF.Current_Value = V_Baterry * I_Capacitor;
         P_Capacitor = FirstOrder_Filter_Calculate(&P_CapacitorF) + I_Capacitor * I_Capacitor * Capacitor_Calibrateh.Rw;
     }
-
-    if (P_Chassis < 0.1f || P_Chassis > 250.0f)
-        P_Chassis = 0;
-    if (P_Capacitor < 0.1f || P_Capacitor > 200.0f)
-        P_Capacitor = 0;
 }
