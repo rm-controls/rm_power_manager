@@ -3,11 +3,13 @@
 //
 
 #include "spi.h"
+#include "watchdog.h"
 
 SPI_HandleTypeDef hspi1;
 
 unsigned char SPI_ReadWriteByte(unsigned char Txdata) {
     unsigned char Rxdata = 0;
+    WRITE_REG(WWDG1->CR, (hwwdg1.Init.Counter));
     HAL_SPI_TransmitReceive(&hspi1, &Txdata, &Rxdata, 1, 0xFFFFFFFFUL);
     return Rxdata;
 }

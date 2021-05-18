@@ -59,6 +59,7 @@
 #include "settings_form.h"
 #include "osinfo_form.h"
 #include "sysinfo_form.h"
+#include "logview_form.h"
 
 /////////////// FileSystem ///////////////
 #include "fs_operate.h"

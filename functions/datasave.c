@@ -121,7 +121,7 @@ void DataSave_DisplayLastInfo(void) {
 
 void DataSave_To_Flash(Saving_Reason_e reason) {
     unsigned char Buffer[16];
-
+    HAL_WWDG_Refresh(&hwwdg1);
     Buffer[0] = (reason & 0x07) << 5;
     Buffer[0] |= (FSM_Status.Charge_Mode & 0x07) << 2;
     Buffer[0] |= FSM_Status.Typology_Mode & 0x03;
@@ -144,15 +144,14 @@ void DataSave_To_Flash(Saving_Reason_e reason) {
     Buffer[15] = ((HAL_GPIO_ReadPin(EN_NMOS_GPIO_Port, EN_NMOS_Pin) & 0x01) << 7)
         | ((HAL_GPIO_ReadPin(CHG_EN_GPIO_Port, CHG_EN_Pin) & 0x01) << 6)
         | ((HAL_GPIO_ReadPin(BOOST_EN_GPIO_Port, BOOST_EN_Pin) & 0x01) << 5);
-
+    HAL_WWDG_Refresh(&hwwdg1);
     HAL_PWR_EnableBkUpAccess();
     HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR0, Buffer[0] | Buffer[1] << 8 | Buffer[2] << 16 | Buffer[3] << 24);
     HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR1, Buffer[4] | Buffer[5] << 8 | Buffer[6] << 16 | Buffer[7] << 24);
     HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR2, Buffer[8] | Buffer[9] << 8 | Buffer[10] << 16 | Buffer[11] << 24);
     HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR3, Buffer[12] | Buffer[13] << 8 | Buffer[14] << 16 | Buffer[15] << 24);
-
+    HAL_WWDG_Refresh(&hwwdg1);
     for (unsigned char counter = 0; counter < 16; counter++)
         CurrentFile_Structure->ResetInfo[counter] = Buffer[counter];
     FileSystem_WriteIntoFlash();
-
 }

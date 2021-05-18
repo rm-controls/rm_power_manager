@@ -97,5 +97,7 @@ void Form_UpdateEvent(void) {
             break;
         case SysInfo_Form_Index:SysInfoForm_Update();
             break;
+        case LogView_Form_Index:LogViewForm_Update();
+            break;
     }
 }

@@ -31,7 +31,10 @@ void Format_Button_Callback(void *object, unsigned char key) {
 }
 
 void FileList_ListBox_Callback(void *object, unsigned char key) {
-
+    if (key == Center_Key) {
+        Form_Info_Structure.Form_Index = LogView_Form_Index;
+        LogViewForm_Init(((ListBox_Struct_t *) object)->ItemIndex);
+    }
 }
 
 void LogForm_Update(void) {
@@ -49,7 +52,7 @@ void LogForm_Update(void) {
                      RTC_TimeStruct.Seconds);
 }
 
-void GUI_ListBox_ScanFile() {
+void GFileList_ListBox_ScanFile() {
     if (FileSystem_Structure->FileNum != 1) {
         FileHead_Struct_t CurrentFile_Tmp;
         unsigned int NextHeadAddr = FileSystem_Structure->FirstFileAddr;
@@ -78,6 +81,7 @@ void LogForm_Init(void) {
     DateTime_Lable.Y_Pos = 3;
     DateTime_Lable.Text = "Date Time Now";
 
+    memset(&FileList_ListBox, 0x00, sizeof(ListBox_Struct_t));
     FileList_ListBox.X_Pos = 4;
     FileList_ListBox.Y_Pos = 18;
     FileList_ListBox.Width = 120;
@@ -125,7 +129,7 @@ void LogForm_Init(void) {
     GUI_InitButton(&Format_Button);
     GUI_InitButton(&SysInfo_Button);
     GUI_InitButton(&TurnBack_Button1);
-    GUI_ListBox_ScanFile();
+    GFileList_ListBox_ScanFile();
 
     GUI_Printf(4, 96, C_BLACK, C_WHITE, "OS:%2d.%1dKB", xPortGetFreeHeapSize() / 1024,
                (xPortGetFreeHeapSize() % 1024) / 100);

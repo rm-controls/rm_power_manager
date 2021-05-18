@@ -10,6 +10,7 @@
 #include "FreeRTOS.h"
 #include "semphr.h"
 
+extern TaskHandle_t ProtectTask_Handler;
 unsigned short referee_avaiflag = 1, referee_time_counter = 0;
 extern SemaphoreHandle_t Calibrate_Semaphore;
 
@@ -24,8 +25,9 @@ void Protect_Task(void *pvParameters) {
             if (V_Baterry <= 20.0f)
                 FSM_Status.FSM_Mode = Halt_Mode;
         } else if (FSM_Status.FSM_Mode == Halt_Mode && V_Baterry > 20.0f) {
-            DataSave_To_Flash(RePowerOn_Reset);
+            vTaskPrioritySet(ProtectTask_Handler, 1);
             Delayms(500);
+            DataSave_To_Flash(RePowerOn_Reset);
             SoftReset();
         }
         if (referee_time_counter >= 1000) {
