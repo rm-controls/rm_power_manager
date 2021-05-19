@@ -11,7 +11,7 @@
 #include "semphr.h"
 
 extern TaskHandle_t ProtectTask_Handler;
-unsigned short referee_avaiflag = 1, referee_time_counter = 0;
+unsigned short referee_avaiflag = 0, referee_time_counter = 0;
 extern SemaphoreHandle_t Calibrate_Semaphore;
 
 void Protect_Task(void *pvParameters) {
