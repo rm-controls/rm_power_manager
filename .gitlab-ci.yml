@@ -11,8 +11,6 @@ prepare:
   allow_failure: false
   stage: prepare
   artifacts:
-    paths:
-      - ./
     expire_in: 10 mins
   only:
     - stm32h7
@@ -29,11 +27,11 @@ build:
   allow_failure: false
   stage: build
   artifacts:
-    paths:
-      - ./
     expire_in: 10 mins
   only:
     - stm32h7
+  dependencies:
+    - prepare
   script:
     - ls -a
     - mkdir build && cd build
@@ -47,6 +45,8 @@ deploy:
     expire_in: 1 day
   only:
     - stm32h7
+  dependencies:
+    - build
   script:
     - ls -a
     - cd ../
