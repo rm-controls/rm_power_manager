@@ -18,10 +18,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="The value of the window watchdog is modified, and the serial port detection function of the host computer to send the state machine status is added. The problem of detecting whether the flash is damaged during the initialization of the file system is fixed">
+    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="A small amount of code was rearranged">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/user/main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/usertask.c" beforeDir="false" afterPath="$PROJECT_DIR$/user/usertask.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hardware/usart.c" beforeDir="false" afterPath="$PROJECT_DIR$/hardware/usart.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,11 +89,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -220,14 +214,8 @@
       <workItem from="1621469734000" duration="1472000" />
       <workItem from="1621764004845" duration="5559000" />
       <workItem from="1621779380069" duration="618000" />
-      <workItem from="1621783533492" duration="2980000" />
-    </task>
-    <task id="LOCAL-00026" summary="The problem that the finite state machine fails when the robot is revived, the problem that the finite state machine cannot be protected when the capacitor is over-voltage, and the problem that the capacitor is charged intermittently when the finite state machine is restarted are solved.">
-      <created>1617742667327</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1617742667327</updated>
+      <workItem from="1621783533492" duration="3854000" />
+      <workItem from="1621790282137" duration="93000" />
     </task>
     <task id="LOCAL-00027" summary="The watchdog function has been added, but there is still a problem with the exception saving program. In addition, the program has been basically able to use">
       <created>1617988184795</created>
@@ -565,7 +553,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621766203454</updated>
     </task>
-    <option name="localTasksCounter" value="75" />
+    <task id="LOCAL-00075" summary="A small amount of code was rearranged">
+      <created>1621787535094</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1621787535095</updated>
+    </task>
+    <option name="localTasksCounter" value="76" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -649,7 +644,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Debugging for five hours, but FatFs file system will appear after writing the file restart disappear, this situation can not be solved. I tried to modify the flash read function, and the phenomenon did not change. So now I'm going to rewrite a file system." />
     <MESSAGE value="The sampling current, voltage and power are limited" />
     <MESSAGE value="The calculation functions of current, voltage and power are optimized, and the packing function is encapsulated in the unpacking callback function of the referee system" />
     <MESSAGE value="&#10;&#10;The problem of flash reading is solved. The flash wake-up function should be added before reading, otherwise all the data of 0x00 will be read out. The problem of accessing single or double files in file system is basically solved." />
@@ -674,7 +668,8 @@
     <MESSAGE value="Fixed the problem of automatic detection of flash to prevent the program from entering when the flash is damaged. Fixed current sensor initialization failure" />
     <MESSAGE value="The call position of sensor correction function is modified, and the detection function of referee system is modified" />
     <MESSAGE value="The value of the window watchdog is modified, and the serial port detection function of the host computer to send the state machine status is added. The problem of detecting whether the flash is damaged during the initialization of the file system is fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="The value of the window watchdog is modified, and the serial port detection function of the host computer to send the state machine status is added. The problem of detecting whether the flash is damaged during the initialization of the file system is fixed" />
+    <MESSAGE value="A small amount of code was rearranged" />
+    <option name="LAST_COMMIT_MESSAGE" value="A small amount of code was rearranged" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

@@ -46,10 +46,10 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
                     ModeBuffer = 0;
                 break;
             case 4:
-                if (aRxBuffer1[0] == 0x04) {
-                    ModeBuffer = 0;
+                if (aRxBuffer1[0] == 0x04)
                     Setting_FSM_Mode = Normal_Mode;
-                }
+                else if (aRxBuffer1[0] == 0x0C)
+                    Setting_FSM_Mode = OverPower_Mode;
                 else
                     ModeBuffer = 0;
                 break;
