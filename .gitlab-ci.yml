@@ -21,7 +21,7 @@ build:
     - rm gcc-arm-none-eabi-9-2020-q2-update-x86_64-linux.tar.bz2
     - mv gcc-arm-none-eabi-9-2020-q2-update /builds/dynamicx/rm_power_manager/gcc-arm-none-eabi
     - PATH="$PATH:/builds/dynamicx/rm_power_manager/gcc-arm-none-eabi/bin" && echo $PATH
-    - mkdir build && cd build && cmake .. -DCMAKE_BUILD_TYPE=Debug && build -j4
+    - mkdir build && cd build && cmake .. -DCMAKE_BUILD_TYPE=Debug && make -j4
     - ls
 
 deploy:
