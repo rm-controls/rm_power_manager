@@ -9,7 +9,7 @@ TaskHandle_t UploadTask_Handler;
 TaskHandle_t ProtectTask_Handler;
 SemaphoreHandle_t Calibrate_Semaphore;
 
-void InitTask() {
+void InitTask(void *pvParameters) {
     taskENTER_CRITICAL();
     FreeRTOS_Running_Flag = 1;
 #if USE_RTC_ONCHIP == 1

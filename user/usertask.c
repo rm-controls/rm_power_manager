@@ -3,7 +3,9 @@
 //
 
 #include "main.h"
+
 extern SemaphoreHandle_t Calibrate_Semaphore;
+
 void UserTask(void *pvParameters) {
     FSM_Status.uExpect_Mode = Remain_Power_Expect;
     FSM_Status.uCharge_Mode = Const_Power_Charge;
