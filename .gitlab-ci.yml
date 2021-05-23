@@ -8,8 +8,7 @@ stages:
   - deploy
 
 before_script:
-  - apt-get update && apt-get upgrade -y
-  - apt install -y cmake gcc g++ automake autoconf libtool make
+  - apk add --update cmake gcc g++ automake autoconf libtool make
 
 prepare:
   allow_failure: false
