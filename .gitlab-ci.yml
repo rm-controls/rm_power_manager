@@ -2,6 +2,9 @@ image: docker:git
 services:
   - docker:dind
 
+cache:
+  paths:
+    - gcc-arm-none-eabi/
 stages:
   - prepare
   - build
@@ -10,10 +13,6 @@ stages:
 prepare:
   allow_failure: false
   stage: prepare
-  artifacts:
-    paths:
-      - gcc-arm-none-eabi/
-    expire_in: 10 mins
   only:
     - stm32h7
   script:
@@ -28,8 +27,6 @@ build:
   allow_failure: false
   stage: build
   artifacts:
-    paths:
-      - build/
     expire_in: 10 mins
   only:
     - stm32h7
