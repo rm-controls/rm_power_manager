@@ -8,15 +8,27 @@ stages:
   - deploy
 
 prepare:
-  - allow_failure: false
-  - stage: prepare
-  - script:
+  allow_failure: false
+  stage: prepare
+  artifacts:
+    paths:
+      - ros-*deb
+    expire_in: 1 day
+  only:
+    - stm32h7
+  script:
     - ls -a
     - mkdir -p build_temp
 
 build:
   allow_failure: false
   stage: build
+  artifacts:
+    paths:
+      - ros-*deb
+    expire_in: 1 day
+  only:
+    - stm32h7
   script:
     - cd build_temp
     - ls -a
@@ -24,6 +36,12 @@ build:
 deploy:
   allow_failure: false
   stage: deploy
+  artifacts:
+    paths:
+      - ros-*deb
+    expire_in: 1 day
+  only:
+    - stm32h7
   script:
     - ls -a
     - cd ../
