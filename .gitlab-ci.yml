@@ -7,18 +7,18 @@ stages:
   - build
   - deploy
 
-before_script:
-  - apk add --update cmake gcc g++ automake autoconf libtool make wget
-  - wget https://armkeil.blob.core.windows.net/developer/Files/downloads/gnu-rm/9-2020q2/gcc-arm-none-eabi-9-2020-q2-update-x86_64-linux.tar.bz2
-
 prepare:
   allow_failure: false
   stage: prepare
   artifacts:
-    expire_in: 1 day
+    paths:
+      - ./
+    expire_in: 10 mins
   only:
     - stm32h7
   script:
+    - apk add --update cmake gcc g++ automake autoconf libtool make wget
+    - wget https://armkeil.blob.core.windows.net/developer/Files/downloads/gnu-rm/9-2020q2/gcc-arm-none-eabi-9-2020-q2-update-x86_64-linux.tar.bz2
     - tar jxf gcc-arm-none-eabi-9-2020-q2-update-x86_64-linux.tar.bz2
     - rm gcc-arm-none-eabi-9-2020-q2-update-x86_64-linux.tar.bz2
     - mv gcc-arm-none-eabi-9-2020-q2-update gcc-arm-none-eabi
@@ -29,7 +29,9 @@ build:
   allow_failure: false
   stage: build
   artifacts:
-    expire_in: 1 day
+    paths:
+      - ./
+    expire_in: 10 mins
   only:
     - stm32h7
   script:
