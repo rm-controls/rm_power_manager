@@ -1,6 +1,7 @@
 #include "usart.h"
 #include "FreeRTOS.h"
 #include "queue.h"
+#include "fsm.h"
 
 UART_HandleTypeDef huart1;
 UART_HandleTypeDef huart2;
@@ -8,6 +9,8 @@ UART_HandleTypeDef huart2;
 extern QueueHandle_t Refree_Data;
 unsigned char aRxBuffer1[1] = {0};
 unsigned char aRxBuffer2[64] = {0};
+unsigned char ModeBuffer;
+extern FSM_Mode_e Setting_FSM_Mode;
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
     if (huart->Instance == USART2) {
@@ -17,7 +20,41 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
         }
         HAL_UART_Receive_IT(&huart2, aRxBuffer2, 64);
     } else {
-        HAL_UART_Transmit(&huart2, aRxBuffer1, 1, 10);
+        switch (ModeBuffer) {
+            case 0:
+                if (aRxBuffer1[0] == 0x01)
+                    ModeBuffer = 1;
+                else
+                    ModeBuffer = 0;
+                break;
+            case 1:
+                if (aRxBuffer1[0] == 0x00)
+                    ModeBuffer = 2;
+                else
+                    ModeBuffer = 0;
+                break;
+            case 2:
+                if (aRxBuffer1[0] == 0x00)
+                    ModeBuffer = 3;
+                else
+                    ModeBuffer = 0;
+                break;
+            case 3:
+                if (aRxBuffer1[0] == 0x3A)
+                    ModeBuffer = 4;
+                else
+                    ModeBuffer = 0;
+                break;
+            case 4:
+                if (aRxBuffer1[0] == 0x04) {
+                    ModeBuffer = 0;
+                    Setting_FSM_Mode = Normal_Mode;
+                }
+                else
+                    ModeBuffer = 0;
+                break;
+            default:break;
+        }
         HAL_UART_Receive_IT(&huart1, aRxBuffer1, 1);
     }
 }
@@ -48,7 +85,7 @@ void UART2_Config(void) {
     huart2.Init.WordLength = UART_WORDLENGTH_8B;
     huart2.Init.StopBits = UART_STOPBITS_1;
     huart2.Init.Parity = UART_PARITY_NONE;
-    huart2.Init.Mode = UART_MODE_TX_RX;
+    huart2.Init.Mode = UART_MODE_RX;
     huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
     huart2.Init.OverSampling = UART_OVERSAMPLING_16;
     huart2.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
@@ -94,10 +131,9 @@ void HAL_UART_MspInit(UART_HandleTypeDef *uartHandle) {
         __HAL_RCC_USART2_CLK_ENABLE();
         __HAL_RCC_GPIOA_CLK_ENABLE();
         /**USART2 GPIO Configuration
-        PA2     ------> USART2_TX
         PA3     ------> USART2_RX
         */
-        GPIO_InitStruct.Pin = GPIO_PIN_2 | GPIO_PIN_3;
+        GPIO_InitStruct.Pin = GPIO_PIN_3;
         GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
         GPIO_InitStruct.Pull = GPIO_NOPULL;
         GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -116,7 +152,7 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef *uartHandle) {
         HAL_NVIC_DisableIRQ(USART1_IRQn);
     } else if (uartHandle->Instance == USART2) {
         __HAL_RCC_USART2_CLK_DISABLE();
-        HAL_GPIO_DeInit(GPIOA, GPIO_PIN_2 | GPIO_PIN_3);
+        HAL_GPIO_DeInit(GPIOA, GPIO_PIN_3);
         HAL_NVIC_DisableIRQ(USART2_IRQn);
     }
 }

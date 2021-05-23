@@ -24,10 +24,12 @@ void TurnBack_Button1_Callback(void *object, unsigned char key) {
 }
 
 void Format_Button_Callback(void *object, unsigned char key) {
-    FileSystem_FormatFlash();
-    if (CurrentFile_Structure != NULL)
-        vPortFree(CurrentFile_Structure);
-    FileSystem_CreateFiles();
+    if (FileSystem_Available_Flag != 0) {
+        FileSystem_FormatFlash();
+        if (CurrentFile_Structure != NULL)
+            vPortFree(CurrentFile_Structure);
+        FileSystem_CreateFiles();
+    }
 }
 
 void FileList_ListBox_Callback(void *object, unsigned char key) {
@@ -53,7 +55,7 @@ void LogForm_Update(void) {
 }
 
 void GFileList_ListBox_ScanFile() {
-    if (FileSystem_Structure->FileNum != 1) {
+    if (FileSystem_Structure->FileNum != 1 && FileSystem_Available_Flag != 0) {
         FileHead_Struct_t CurrentFile_Tmp;
         unsigned int NextHeadAddr = FileSystem_Structure->FirstFileAddr;
         for (unsigned char counter = 0; counter < FileSystem_Structure->FileNum - 1; counter++) {
@@ -68,8 +70,10 @@ void GFileList_ListBox_ScanFile() {
                                CurrentFile_Tmp.Second);
             NextHeadAddr = CurrentFile_Tmp.NextFileAddr;
         }
-    } else
+    } else if (FileSystem_Available_Flag != 0)
         GUI_ListBoxAddItem(&FileList_ListBox, "No Log Item");
+    else
+        GUI_ListBoxAddItem(&FileList_ListBox, "Flash Broken");
 }
 
 void LogForm_Init(void) {

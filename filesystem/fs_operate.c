@@ -14,6 +14,7 @@ FileSystem_Struct_t *FileSystem_Structure;
 File_Struct_t *CurrentFile_Structure = NULL;
 FileHead_Struct_t *LastFileHead_Structure = NULL;
 unsigned int CurrentFile_Address = 0, LastFile_Address = 0;
+unsigned char FileSystem_Available_Flag = 1;
 
 void FileSystem_ReadItem(unsigned char itemnum, File_Struct_t *file) {
     unsigned int NextHeadAddr = FileSystem_Structure->FirstFileAddr;
@@ -118,13 +119,15 @@ void FileSystem_Config(void) {
         for (counter = 0; counter < 128; ++counter)
             if (buffer[counter] != counter)
                 break;
-        if (counter == 127)
+        if (counter == 128)
             FileSystem_FormatFlash();
-        else
-            GUI_Printf(15, 130, C_DARK_RED, C_WHITE, "FLASH Break Dowm");
         DataSave_DisplayLastInfo();
-        if (counter == 127)
+        if (counter == 128)
             while (1);
+        else {
+            GUI_Printf(15, 130, C_DARK_RED, C_WHITE, "FLASH Break Down");
+            FileSystem_Available_Flag = 0;
+        }
     }
     FileSystem_CreateFiles();
 }

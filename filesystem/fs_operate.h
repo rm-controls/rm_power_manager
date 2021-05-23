@@ -53,6 +53,7 @@ extern FileSystem_Struct_t *FileSystem_Structure;
 extern File_Struct_t *CurrentFile_Structure;
 extern FileHead_Struct_t *LastFileHead_Structure;
 extern unsigned int CurrentFile_Address, LastFile_Address;
+extern unsigned char FileSystem_Available_Flag;
 
 void FileSystem_Config(void);
 void FileSystem_WriteIntoFlash(void);

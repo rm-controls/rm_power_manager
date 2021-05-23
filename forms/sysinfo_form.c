@@ -5,7 +5,8 @@
 #include "main.h"
 
 Button_Struct_t TurnBack_Button4;
-Lable_Struct_t Referee_Online_Lable, RwH_L_Lable;
+Lable_Struct_t Referee_Online_Lable, RwH_L_Lable, Setting_FSM_Lable;
+FSM_Mode_e Setting_FSM_Mode = Halt_Mode;
 
 void TurnBack_Button4_Callback(void *object, unsigned char key) {
     Form_Info_Structure.Form_Index = Log_Form_Index;
@@ -26,6 +27,18 @@ void SysInfoForm_Update(void) {
                      (unsigned int) (10 * (Capacitor_Calibratel.Rw - (float) ((int) Capacitor_Calibratel.Rw))),
                      (unsigned int) Capacitor_Calibrateh.Rw,
                      (unsigned int) (10 * (Capacitor_Calibrateh.Rw - (float) ((int) Capacitor_Calibrateh.Rw))));
+
+    switch (Setting_FSM_Mode) {
+        case Normal_Mode:GUI_LableSetText(&Setting_FSM_Lable, " FSM Status: Normal  ");
+            break;
+        case OverPower_Mode:GUI_LableSetText(&Setting_FSM_Lable, "FSM Status: OverPower");
+            break;
+        case Halt_Mode:GUI_LableSetText(&Setting_FSM_Lable, "  FSM Status: Halt   ");
+            break;
+        case Transition_Mode:GUI_LableSetText(&Setting_FSM_Lable, " FSM Status: Transit ");
+            break;
+        default:break;
+    }
 }
 
 void SysInfoForm_Init(void) {
@@ -42,6 +55,11 @@ void SysInfoForm_Init(void) {
     RwH_L_Lable.Color = C_BLACK;
     RwH_L_Lable.Text = "Rl:-.-R Rh:-.-R";
 
+    Setting_FSM_Lable.X_Pos = 1;
+    Setting_FSM_Lable.Y_Pos = 30;
+    Setting_FSM_Lable.Color = C_BLACK;
+    Setting_FSM_Lable.Text = "  FSM Status: Halt   ";
+
     TurnBack_Button4.X_Pos = 24;
     TurnBack_Button4.Y_Pos = 136;
     TurnBack_Button4.Width = 80;
@@ -54,4 +72,5 @@ void SysInfoForm_Init(void) {
     GUI_InitButton(&TurnBack_Button4);
     GUI_InitLable(&Referee_Online_Lable);
     GUI_InitLable(&RwH_L_Lable);
+    GUI_InitLable(&Setting_FSM_Lable);
 }
