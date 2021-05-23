@@ -10,9 +10,9 @@ build:
   artifacts:
     expire_in: 10 mins
     paths:
-      - Program.bin
-      - Program.elf
-      - Program.hex
+      - build/Program.bin
+      - build/Program.elf
+      - build/Program.hex
   only:
     - stm32h7
   script:
