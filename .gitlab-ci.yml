@@ -19,11 +19,11 @@ prepare:
   only:
     - stm32h7
   script:
-    - tar jxvf gcc-arm-none-eabi-9-2020-q2-update-x86_64-linux.tar.bz2
+    - tar jxf gcc-arm-none-eabi-9-2020-q2-update-x86_64-linux.tar.bz2
     - rm gcc-arm-none-eabi-9-2020-q2-update-x86_64-linux.tar.bz2
     - mv gcc-arm-none-eabi-9-2020-q2-update gcc-arm-none-eabi
     - cd gcc-arm-none-eabi
-    - ls -a
+    - PATH="$PATH:gcc-arm-none-eabi/bin"
 
 build:
   allow_failure: false
