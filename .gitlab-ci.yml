@@ -16,14 +16,13 @@ build:
   only:
     - stm32h7
   script:
-    - apk update && apk add --update wget cmake gcc g++ automake autoconf libtool make && apk upgrade
+    - apk update && apk add wget cmake gcc g++ automake autoconf libtool make && apk upgrade
     - wget https://armkeil.blob.core.windows.net/developer/Files/downloads/gnu-rm/9-2020q2/gcc-arm-none-eabi-9-2020-q2-update-x86_64-linux.tar.bz2
     - tar jxf gcc-arm-none-eabi-9-2020-q2-update-x86_64-linux.tar.bz2
     - rm gcc-arm-none-eabi-9-2020-q2-update-x86_64-linux.tar.bz2
     - mv gcc-arm-none-eabi-9-2020-q2-update gcc-arm-none-eabi
     - PATH="$PATH:/builds/dynamicx/rm_power_manager/gcc-arm-none-eabi/bin" && echo $PATH
-    - mkdir build && cd build
-    - cmake ..
+    - mkdir build && cd build && cmake ..
     - ls -a
 
 deploy:
