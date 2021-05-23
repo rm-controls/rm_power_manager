@@ -3,13 +3,12 @@ services:
   - docker:dind
 
 stages:
-  - prepare
   - build
   - deploy
 
-prepare:
+build:
   allow_failure: false
-  stage: prepare
+  stage: build
   artifacts:
     expire_in: 10 mins
     paths:
@@ -23,19 +22,6 @@ prepare:
     - rm gcc-arm-none-eabi-9-2020-q2-update-x86_64-linux.tar.bz2
     - mv gcc-arm-none-eabi-9-2020-q2-update gcc-arm-none-eabi
     - cd gcc-arm-none-eabi
-
-build:
-  allow_failure: false
-  stage: build
-  artifacts:
-    expire_in: 10 mins
-    paths:
-      - .industrial_ci
-  only:
-    - stm32h7
-  dependencies:
-    - prepare
-  script:
     - apk add --update cmake gcc g++ automake autoconf libtool make 
     - PATH="$PATH:gcc-arm-none-eabi/bin"
     - echo $PATH
