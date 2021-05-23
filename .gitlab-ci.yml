@@ -1,6 +1,4 @@
-image: docker:git
-services:
-  - docker:dind
+image: ubuntu:focal
 
 stages:
   - build
