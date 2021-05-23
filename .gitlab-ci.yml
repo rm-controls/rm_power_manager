@@ -11,6 +11,8 @@ prepare:
   allow_failure: false
   stage: prepare
   artifacts:
+    path:
+      - ./
     expire_in: 10 mins
   only:
     - stm32h7
@@ -27,12 +29,15 @@ build:
   allow_failure: false
   stage: build
   artifacts:
+    path:
+      - ./
     expire_in: 10 mins
   only:
     - stm32h7
   dependencies:
     - prepare
   script:
+    - echo $PATH
     - ls -a
     - mkdir build && cd build
     - cmake ..
