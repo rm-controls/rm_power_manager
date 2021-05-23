@@ -16,7 +16,6 @@ prepare:
     - stm32h7
   script:
     - ls -a
-    - mkdir -p build_temp
 
 build:
   allow_failure: false
@@ -27,7 +26,8 @@ build:
     - stm32h7
   script:
     - ls -a
-    - cd build_temp
+    - mkdir build && cd build
+    - cmake ..
     - ls -a
 
 deploy:
