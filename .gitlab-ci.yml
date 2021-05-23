@@ -1,0 +1,30 @@
+image: docker:git
+services:
+  - docker:dind
+
+stages:
+  - prepare
+  - build
+  - deploy
+
+prepare:
+  - allow_failure: false
+  - stage: prepare
+  - script:
+    - ls -a
+    - mkdir -p build_temp
+
+build:
+  allow_failure: false
+  stage: build
+  script:
+    - cd build_temp
+    - ls -a
+
+deploy:
+  allow_failure: false
+  stage: deploy
+  script:
+    - ls -a
+    - cd ../
+    - ls -a
