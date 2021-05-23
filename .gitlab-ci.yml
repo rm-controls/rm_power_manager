@@ -10,7 +10,7 @@ build:
   artifacts:
     expire_in: 10 mins
     paths:
-      - .industrial_ci
+      - CMakeCache.txt
   only:
     - stm32h7
   script:
@@ -21,8 +21,8 @@ build:
     - rm gcc-arm-none-eabi-9-2020-q2-update-x86_64-linux.tar.bz2
     - mv gcc-arm-none-eabi-9-2020-q2-update /builds/dynamicx/rm_power_manager/gcc-arm-none-eabi
     - PATH="$PATH:/builds/dynamicx/rm_power_manager/gcc-arm-none-eabi/bin" && echo $PATH
-    - mkdir build && cd build && cmake .. -DCMAKE_BUILD_TYPE=Debug
-    - ls -a
+    - mkdir build && cd build && cmake .. -DCMAKE_BUILD_TYPE=Debug && build -j4
+    - ls
 
 deploy:
   allow_failure: false
