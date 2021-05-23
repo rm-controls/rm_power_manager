@@ -26,6 +26,7 @@ build:
   only:
     - stm32h7
   script:
+    - ls -a
     - cd build_temp
     - ls -a
 
