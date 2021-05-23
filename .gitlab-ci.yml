@@ -10,7 +10,9 @@ build:
   artifacts:
     expire_in: 10 mins
     paths:
-      - CMakeCache.txt
+      - Program.bin
+      - Program.elf
+      - Program.hex
   only:
     - stm32h7
   script:
@@ -29,8 +31,6 @@ deploy:
   stage: deploy
   artifacts:
     expire_in: 10 mins
-    paths:
-      - .industrial_ci
   only:
     - stm32h7
   dependencies:
