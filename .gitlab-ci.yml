@@ -8,9 +8,8 @@ build:
   allow_failure: false
   stage: build
   artifacts:
-    expire_in: 10 mins
+    expire_in: 3 days
     paths:
-      - build/Program.bin
       - build/Program.elf
       - build/Program.hex
   only:
@@ -30,7 +29,7 @@ deploy:
   allow_failure: false
   stage: deploy
   artifacts:
-    expire_in: 10 mins
+    expire_in: 3 days
   only:
     - stm32h7
   dependencies:
