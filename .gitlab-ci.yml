@@ -2,9 +2,6 @@ image: docker:git
 services:
   - docker:dind
 
-cache:
-  paths:
-    - gcc-arm-none-eabi/
 stages:
   - prepare
   - build
@@ -13,6 +10,10 @@ stages:
 prepare:
   allow_failure: false
   stage: prepare
+  artifacts:
+    expire_in: 10 mins
+    paths:
+      - .industrial_ci
   only:
     - stm32h7
   script:
@@ -28,6 +29,8 @@ build:
   stage: build
   artifacts:
     expire_in: 10 mins
+    paths:
+      - .industrial_ci
   only:
     - stm32h7
   dependencies:
@@ -45,7 +48,9 @@ deploy:
   allow_failure: false
   stage: deploy
   artifacts:
-    expire_in: 1 day
+    expire_in: 10 mins
+    paths:
+      - .industrial_ci
   only:
     - stm32h7
   dependencies:
