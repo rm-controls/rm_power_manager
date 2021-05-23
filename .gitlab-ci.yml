@@ -11,7 +11,7 @@ prepare:
   allow_failure: false
   stage: prepare
   artifacts:
-    path:
+    paths:
       - gcc-arm-none-eabi/
     expire_in: 10 mins
   only:
@@ -28,7 +28,7 @@ build:
   allow_failure: false
   stage: build
   artifacts:
-    path:
+    paths:
       - build/
     expire_in: 10 mins
   only:
