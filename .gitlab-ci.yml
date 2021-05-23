@@ -8,7 +8,8 @@ stages:
   - deploy
 
 before_script:
-  - apk add --update cmake gcc g++ automake autoconf libtool make
+  - apk add --update cmake gcc g++ automake autoconf libtool make wget
+  - wget https://armkeil.blob.core.windows.net/developer/Files/downloads/gnu-rm/9-2020q2/gcc-arm-none-eabi-9-2020-q2-update-x86_64-linux.tar.bz2
 
 prepare:
   allow_failure: false
@@ -18,6 +19,7 @@ prepare:
   only:
     - stm32h7
   script:
+    - tar jxvf gcc-arm-none-eabi-9-2020-q2-update-x86_64-linux.tar.bz2
     - ls -a
 
 build:
