@@ -14,7 +14,7 @@ build:
   only:
     - stm32h7
   script:
-    - apt-get install cmake gcc g++ automake autoconf libtool make build-essensial
+    - apt-get update && apt-get -y upgrade && apt-get install -y cmake gcc g++ automake autoconf libtool make build-essensial
     - wget https://armkeil.blob.core.windows.net/developer/Files/downloads/gnu-rm/9-2020q2/gcc-arm-none-eabi-9-2020-q2-update-x86_64-linux.tar.bz2
     - tar jxf gcc-arm-none-eabi-9-2020-q2-update-x86_64-linux.tar.bz2
     - rm gcc-arm-none-eabi-9-2020-q2-update-x86_64-linux.tar.bz2
