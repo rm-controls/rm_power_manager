@@ -7,6 +7,10 @@ stages:
   - build
   - deploy
 
+before_script:
+  - apt-get update && apt-get upgrade -y
+  - apt install -y cmake gcc g++ automake autoconf libtool make
+
 prepare:
   allow_failure: false
   stage: prepare
@@ -15,8 +19,6 @@ prepare:
   only:
     - stm32h7
   script:
-    - apt update && apt upgrade -y
-    - apt install -y cmake gcc g++ automake autoconf libtool make
     - ls -a
 
 build:
