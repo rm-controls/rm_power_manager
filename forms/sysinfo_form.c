@@ -6,7 +6,7 @@
 
 Button_Struct_t TurnBack_Button4;
 Lable_Struct_t Referee_Online_Lable, RwH_L_Lable, Setting_FSM_Lable;
-FSM_Mode_e Setting_FSM_Mode = Halt_Mode;
+unsigned char Setting_FSM_Mode = 0;
 
 void TurnBack_Button4_Callback(void *object, unsigned char key) {
     Form_Info_Structure.Form_Index = Log_Form_Index;
@@ -29,6 +29,8 @@ void SysInfoForm_Update(void) {
                      (unsigned int) (10 * (Capacitor_Calibrateh.Rw - (float) ((int) Capacitor_Calibrateh.Rw))));
 
     switch (Setting_FSM_Mode) {
+        case 0:GUI_LableSetText(&Setting_FSM_Lable, " FSM Status: 0  ");
+            break;
         case Normal_Mode:GUI_LableSetText(&Setting_FSM_Lable, " FSM Status: Normal  ");
             break;
         case OverPower_Mode:GUI_LableSetText(&Setting_FSM_Lable, "FSM Status: OverPower");

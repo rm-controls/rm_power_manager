@@ -129,5 +129,6 @@ void FileSystem_Config(void) {
             FileSystem_Available_Flag = 0;
         }
     }
+    FileSystem_Available_Flag = 0;
     FileSystem_CreateFiles();
 }

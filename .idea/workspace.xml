@@ -18,8 +18,11 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="A small amount of code was rearranged">
+    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="Add the code to receive the data of super power mode switching">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/filesystem/fs_operate.c" beforeDir="false" afterPath="$PROJECT_DIR$/filesystem/fs_operate.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/forms/sysinfo_form.c" beforeDir="false" afterPath="$PROJECT_DIR$/forms/sysinfo_form.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/functions/protect.c" beforeDir="false" afterPath="$PROJECT_DIR$/functions/protect.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hardware/usart.c" beforeDir="false" afterPath="$PROJECT_DIR$/hardware/usart.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -48,6 +51,9 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/user/main.c" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="ProjectId" id="1nK08Y56VG8vwEskSPoxWJqaPq0" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -59,9 +65,13 @@
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
+    <property name="cidr.known.project.marker" value="true" />
+    <property name="cmake.loaded.for.project" value="true" />
+    <property name="codeWithMe.voiceChat.enabledByDefault" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/fatfs" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -70,7 +80,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.cidr.embedded.config" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.tools" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -89,12 +99,7 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="OCD Program" type="com.jetbrains.cidr.embedded.openocd.conf.type" factoryName="com.jetbrains.cidr.embedded.openocd.conf.factory" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Program" TARGET_NAME="Program.elf" CONFIG_NAME="Debug" version="1" RUN_TARGET_PROJECT_NAME="Program" RUN_TARGET_NAME="Program.elf">
+    <configuration name="OCD Program" type="com.jetbrains.cidr.embedded.openocd.conf.type" factoryName="com.jetbrains.cidr.embedded.openocd.conf.factory" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Program" TARGET_NAME="Program.elf" CONFIG_NAME="Debug" version="1" RUN_TARGET_PROJECT_NAME="Program" RUN_TARGET_NAME="Program.elf">
       <openocd version="1" gdb-port="3333" telnet-port="4444" board-config="D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\board.cfg" reset-type="INIT" download-type="ALWAYS">
         <debugger kind="GDB" isBundled="true" />
       </openocd>
@@ -215,14 +220,21 @@
       <workItem from="1621764004845" duration="5559000" />
       <workItem from="1621779380069" duration="618000" />
       <workItem from="1621783533492" duration="3854000" />
-      <workItem from="1621790282137" duration="93000" />
-    </task>
-    <task id="LOCAL-00027" summary="The watchdog function has been added, but there is still a problem with the exception saving program. In addition, the program has been basically able to use">
-      <created>1617988184795</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1617988184795</updated>
+      <workItem from="1621790282137" duration="402000" />
+      <workItem from="1621915074626" duration="563000" />
+      <workItem from="1621915665256" duration="159000" />
+      <workItem from="1621916099375" duration="28000" />
+      <workItem from="1621916142845" duration="2000" />
+      <workItem from="1621916460599" duration="8000" />
+      <workItem from="1621954370049" duration="313000" />
+      <workItem from="1621954777581" duration="44000" />
+      <workItem from="1621954846971" duration="5050000" />
+      <workItem from="1622122791540" duration="5989000" />
+      <workItem from="1622182847829" duration="1352000" />
+      <workItem from="1622303008921" duration="5035000" />
+      <workItem from="1622371710414" duration="499000" />
+      <workItem from="1622373623237" duration="994000" />
+      <workItem from="1622385885508" duration="7231000" />
     </task>
     <task id="LOCAL-00028" summary="Add arm cortex fast single precision fast math lib">
       <created>1617988801451</created>
@@ -560,19 +572,26 @@
       <option name="project" value="LOCAL" />
       <updated>1621787535095</updated>
     </task>
-    <option name="localTasksCounter" value="76" />
+    <task id="LOCAL-00076" summary="Add the code to receive the data of super power mode switching">
+      <created>1621790453241</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1621790453241</updated>
+    </task>
+    <option name="localTasksCounter" value="77" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.History.Properties">
-    <option name="COLUMN_ORDER">
+    <option name="COLUMN_ID_ORDER">
       <list>
-        <option value="0" />
-        <option value="2" />
-        <option value="3" />
-        <option value="1" />
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
       </list>
     </option>
   </component>
@@ -644,7 +663,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="The sampling current, voltage and power are limited" />
     <MESSAGE value="The calculation functions of current, voltage and power are optimized, and the packing function is encapsulated in the unpacking callback function of the referee system" />
     <MESSAGE value="&#10;&#10;The problem of flash reading is solved. The flash wake-up function should be added before reading, otherwise all the data of 0x00 will be read out. The problem of accessing single or double files in file system is basically solved." />
     <MESSAGE value="Optimize the listbox item and display method, add the function of listbox reading the specified item and the function of file system reading the specified file." />
@@ -669,7 +687,8 @@
     <MESSAGE value="The call position of sensor correction function is modified, and the detection function of referee system is modified" />
     <MESSAGE value="The value of the window watchdog is modified, and the serial port detection function of the host computer to send the state machine status is added. The problem of detecting whether the flash is damaged during the initialization of the file system is fixed" />
     <MESSAGE value="A small amount of code was rearranged" />
-    <option name="LAST_COMMIT_MESSAGE" value="A small amount of code was rearranged" />
+    <MESSAGE value="Add the code to receive the data of super power mode switching" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add the code to receive the data of super power mode switching" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

@@ -9,8 +9,9 @@ UART_HandleTypeDef huart2;
 extern QueueHandle_t Refree_Data;
 unsigned char aRxBuffer1[1] = {0};
 unsigned char aRxBuffer2[64] = {0};
-unsigned char ModeBuffer;
-extern FSM_Mode_e Setting_FSM_Mode;
+unsigned char ModeBuffer = 0;
+extern unsigned char Setting_FSM_Mode;
+unsigned char UART1_IT_Flag = 0;
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
     if (huart->Instance == USART2) {
@@ -20,42 +21,40 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
         }
         HAL_UART_Receive_IT(&huart2, aRxBuffer2, 64);
     } else {
-        switch (ModeBuffer) {
-            case 0:
-                if (aRxBuffer1[0] == 0x01)
-                    ModeBuffer = 1;
-                else
+        if (aRxBuffer1[0] == 0x01)
+            ModeBuffer = 1;
+        else {
+            switch (ModeBuffer) {
+                case 1:
+                    if (aRxBuffer1[0] == 0x00)
+                        ModeBuffer = 2;
+                    else
+                        ModeBuffer = 0;
+                    break;
+                case 2:
+                    if (aRxBuffer1[0] == 0x00)
+                        ModeBuffer = 3;
+                    else
+                        ModeBuffer = 0;
+                    break;
+                case 3:
+                    if (aRxBuffer1[0] == 0x3A || aRxBuffer1[0] == 0x38)
+                        ModeBuffer = 4;
+                    else
+                        ModeBuffer = 0;
+                    break;
+                case 4:
+                    if (aRxBuffer1[0] == 0x04)
+                        Setting_FSM_Mode = Normal_Mode;
+                    else if (aRxBuffer1[0] == 0x0C)
+                        Setting_FSM_Mode = OverPower_Mode;
                     ModeBuffer = 0;
-                break;
-            case 1:
-                if (aRxBuffer1[0] == 0x00)
-                    ModeBuffer = 2;
-                else
-                    ModeBuffer = 0;
-                break;
-            case 2:
-                if (aRxBuffer1[0] == 0x00)
-                    ModeBuffer = 3;
-                else
-                    ModeBuffer = 0;
-                break;
-            case 3:
-                if (aRxBuffer1[0] == 0x3A)
-                    ModeBuffer = 4;
-                else
-                    ModeBuffer = 0;
-                break;
-            case 4:
-                if (aRxBuffer1[0] == 0x04)
-                    Setting_FSM_Mode = Normal_Mode;
-                else if (aRxBuffer1[0] == 0x0C)
-                    Setting_FSM_Mode = OverPower_Mode;
-                else
-                    ModeBuffer = 0;
-                break;
-            default:break;
+                    break;
+                default:ModeBuffer = 0;
+                    break;
+            }
         }
-        HAL_UART_Receive_IT(&huart1, aRxBuffer1, 1);
+        UART1_IT_Flag = HAL_UART_Receive_IT(&huart1, aRxBuffer1, 1);
     }
 }
 
@@ -117,7 +116,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef *uartHandle) {
         */
         GPIO_InitStruct.Pin = GPIO_PIN_14 | GPIO_PIN_15;
         GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-        GPIO_InitStruct.Pull = GPIO_NOPULL;
+        GPIO_InitStruct.Pull = GPIO_PULLUP;
         GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
         GPIO_InitStruct.Alternate = GPIO_AF4_USART1;
         HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
