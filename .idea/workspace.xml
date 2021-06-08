@@ -18,12 +18,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="Add the code to receive the data of super power mode switching">
+    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="The problem of UART busy when receiving data in uart1 is solved by reinitialization, but I don't think this is a good solution (because the reading of the referee system is affected).">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/filesystem/fs_operate.c" beforeDir="false" afterPath="$PROJECT_DIR$/filesystem/fs_operate.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forms/sysinfo_form.c" beforeDir="false" afterPath="$PROJECT_DIR$/forms/sysinfo_form.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions/protect.c" beforeDir="false" afterPath="$PROJECT_DIR$/functions/protect.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hardware/usart.c" beforeDir="false" afterPath="$PROJECT_DIR$/hardware/usart.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/system.c" beforeDir="false" afterPath="$PROJECT_DIR$/system/system.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -234,14 +231,12 @@
       <workItem from="1622303008921" duration="5035000" />
       <workItem from="1622371710414" duration="499000" />
       <workItem from="1622373623237" duration="994000" />
-      <workItem from="1622385885508" duration="7231000" />
-    </task>
-    <task id="LOCAL-00028" summary="Add arm cortex fast single precision fast math lib">
-      <created>1617988801451</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1617988801451</updated>
+      <workItem from="1622385885508" duration="7485000" />
+      <workItem from="1622846697423" duration="724000" />
+      <workItem from="1622848954199" duration="18000" />
+      <workItem from="1623139773336" duration="24000" />
+      <workItem from="1623140175814" duration="214000" />
+      <workItem from="1623147206782" duration="962000" />
     </task>
     <task id="LOCAL-00029" summary="The problem of serial port is solved, and the emergency handling code is added when the referee system cannot detect, but it has not been tested">
       <created>1618010309570</created>
@@ -579,7 +574,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621790453241</updated>
     </task>
-    <option name="localTasksCounter" value="77" />
+    <task id="LOCAL-00077" summary="The problem of UART busy when receiving data in uart1 is solved by reinitialization, but I don't think this is a good solution (because the reading of the referee system is affected).">
+      <created>1622399371857</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1622399371857</updated>
+    </task>
+    <option name="localTasksCounter" value="78" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -663,7 +665,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="The calculation functions of current, voltage and power are optimized, and the packing function is encapsulated in the unpacking callback function of the referee system" />
     <MESSAGE value="&#10;&#10;The problem of flash reading is solved. The flash wake-up function should be added before reading, otherwise all the data of 0x00 will be read out. The problem of accessing single or double files in file system is basically solved." />
     <MESSAGE value="Optimize the listbox item and display method, add the function of listbox reading the specified item and the function of file system reading the specified file." />
     <MESSAGE value="Listbox switch control logic and switch option logic have been completed. There are still a few problems with color overlay that need to be fixed." />
@@ -688,7 +689,8 @@
     <MESSAGE value="The value of the window watchdog is modified, and the serial port detection function of the host computer to send the state machine status is added. The problem of detecting whether the flash is damaged during the initialization of the file system is fixed" />
     <MESSAGE value="A small amount of code was rearranged" />
     <MESSAGE value="Add the code to receive the data of super power mode switching" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add the code to receive the data of super power mode switching" />
+    <MESSAGE value="The problem of UART busy when receiving data in uart1 is solved by reinitialization, but I don't think this is a good solution (because the reading of the referee system is affected)." />
+    <option name="LAST_COMMIT_MESSAGE" value="The problem of UART busy when receiving data in uart1 is solved by reinitialization, but I don't think this is a good solution (because the reading of the referee system is affected)." />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

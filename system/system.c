@@ -162,6 +162,7 @@ void MPU_Config(void) {
 }
 
 void SystemClock_Config(void) {
+    unsigned char lse_avai_flag = 1;
     RCC_OscInitTypeDef RCC_OscInitStruct = {0};
     RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
 
@@ -200,7 +201,13 @@ void SystemClock_Config(void) {
     RCC_OscInitStruct.PLL.PLLRGE = RCC_PLL1VCIRANGE_2;
     RCC_OscInitStruct.PLL.PLLVCOSEL = RCC_PLL1VCOWIDE;
     RCC_OscInitStruct.PLL.PLLFRACN = 0;
-    while (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK);
+    if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK) {
+        lse_avai_flag = 0;
+        RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE | RCC_OSCILLATORTYPE_LSI;
+        RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+        RCC_OscInitStruct.LSIState = RCC_LSI_ON;
+        while ((HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK));
+    }
     RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK
         | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2
         | RCC_CLOCKTYPE_D3PCLK1 | RCC_CLOCKTYPE_D1PCLK1;
@@ -214,7 +221,8 @@ void SystemClock_Config(void) {
     while (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_4) != HAL_OK);
     HAL_RCC_EnableCSS();
 #if USE_OSC_32KHZ == 1
-    HAL_RCCEx_EnableLSECSS();
+    if (lse_avai_flag == 1)
+        HAL_RCCEx_EnableLSECSS();
 #endif
 #if USE_SPI_FLASH_FATFS == 1
     PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_CKPER;
