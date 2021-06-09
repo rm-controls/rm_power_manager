@@ -25,12 +25,14 @@
 #define LCD_SDA_Pin GPIO_PIN_12
 #define LCD_SCL_Pin GPIO_PIN_11
 #define LCD_CSB_Pin GPIO_PIN_2
+#define LCD_PWR_Pin GPIO_PIN_10
 
 #define LCD_RES_Port GPIOD
 #define LCD_A0_Port GPIOD
 #define LCD_SDA_Port GPIOC
 #define LCD_SCL_Port GPIOC
 #define LCD_CSB_Port GPIOD
+#define LCD_PWR_Port GPIOC
 
 #define CHG_EN_Pin GPIO_PIN_11
 #define CHG_EN_GPIO_Port GPIOE

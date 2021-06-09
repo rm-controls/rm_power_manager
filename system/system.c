@@ -7,6 +7,7 @@
 #include "FreeRTOS.h"
 #include "task.h"
 #include "config.h"
+#include "rtc.h"
 
 unsigned char FreeRTOS_Running_Flag = 0;
 static unsigned int Facus = 0;
@@ -162,7 +163,6 @@ void MPU_Config(void) {
 }
 
 void SystemClock_Config(void) {
-    unsigned char lse_avai_flag = 1;
     RCC_OscInitTypeDef RCC_OscInitStruct = {0};
     RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
 
@@ -181,10 +181,18 @@ void SystemClock_Config(void) {
 #endif
 
 #if USE_OSC_32KHZ == 1
-    __HAL_RCC_LSEDRIVE_CONFIG(RCC_LSEDRIVE_LOW);
-    RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE | RCC_OSCILLATORTYPE_LSE;
-    RCC_OscInitStruct.HSEState = RCC_HSE_ON;
-    RCC_OscInitStruct.LSEState = RCC_LSE_ON;
+    HAL_PWR_EnableBkUpAccess();
+    unsigned int DR32_Data = HAL_RTCEx_BKUPRead(&hrtc, RTC_BKP_DR31);
+    if (DR32_Data == 0x5a5a5a5a) {
+        RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE | RCC_OSCILLATORTYPE_LSI;
+        RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+        RCC_OscInitStruct.LSIState = RCC_LSI_ON;
+    } else {
+        __HAL_RCC_LSEDRIVE_CONFIG(RCC_LSEDRIVE_LOW);
+        RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE | RCC_OSCILLATORTYPE_LSE;
+        RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+        RCC_OscInitStruct.LSEState = RCC_LSE_ON;
+    }
 #else
     RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE | RCC_OSCILLATORTYPE_LSI;
     RCC_OscInitStruct.HSEState = RCC_HSE_ON;
@@ -202,11 +210,9 @@ void SystemClock_Config(void) {
     RCC_OscInitStruct.PLL.PLLVCOSEL = RCC_PLL1VCOWIDE;
     RCC_OscInitStruct.PLL.PLLFRACN = 0;
     if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK) {
-        lse_avai_flag = 0;
-        RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE | RCC_OSCILLATORTYPE_LSI;
-        RCC_OscInitStruct.HSEState = RCC_HSE_ON;
-        RCC_OscInitStruct.LSIState = RCC_LSI_ON;
-        while ((HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK));
+        HAL_PWR_EnableBkUpAccess();
+        HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR31, 0x5a5a5a5a);
+        SoftReset();
     }
     RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK
         | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2
@@ -221,7 +227,7 @@ void SystemClock_Config(void) {
     while (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_4) != HAL_OK);
     HAL_RCC_EnableCSS();
 #if USE_OSC_32KHZ == 1
-    if (lse_avai_flag == 1)
+    if (DR32_Data == 0x5a5a5a5a)
         HAL_RCCEx_EnableLSECSS();
 #endif
 #if USE_SPI_FLASH_FATFS == 1

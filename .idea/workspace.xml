@@ -18,9 +18,12 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="The problem of UART busy when receiving data in uart1 is solved by reinitialization, but I don't think this is a good solution (because the reading of the referee system is affected).">
+    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="The clock source initialization function is corrected to avoid the program stuck when the external low-speed clock cannot be initialized.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hardware/gpio.c" beforeDir="false" afterPath="$PROJECT_DIR$/hardware/gpio.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/system/system.c" beforeDir="false" afterPath="$PROJECT_DIR$/system/system.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/user/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/port.h" beforeDir="false" afterPath="$PROJECT_DIR$/user/port.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,6 +99,11 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="OCD Program" type="com.jetbrains.cidr.embedded.openocd.conf.type" factoryName="com.jetbrains.cidr.embedded.openocd.conf.factory" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Program" TARGET_NAME="Program.elf" CONFIG_NAME="Debug" version="1" RUN_TARGET_PROJECT_NAME="Program" RUN_TARGET_NAME="Program.elf">
       <openocd version="1" gdb-port="3333" telnet-port="4444" board-config="D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\board.cfg" reset-type="INIT" download-type="ALWAYS">
         <debugger kind="GDB" isBundled="true" />
@@ -237,13 +245,8 @@
       <workItem from="1623139773336" duration="24000" />
       <workItem from="1623140175814" duration="214000" />
       <workItem from="1623147206782" duration="962000" />
-    </task>
-    <task id="LOCAL-00029" summary="The problem of serial port is solved, and the emergency handling code is added when the referee system cannot detect, but it has not been tested">
-      <created>1618010309570</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1618010309570</updated>
+      <workItem from="1623155271380" duration="75000" />
+      <workItem from="1623227288809" duration="3594000" />
     </task>
     <task id="LOCAL-00030" summary="Add LCD driver and key driver to the program">
       <created>1619097980119</created>
@@ -581,7 +584,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622399371857</updated>
     </task>
-    <option name="localTasksCounter" value="78" />
+    <task id="LOCAL-00078" summary="The clock source initialization function is corrected to avoid the program stuck when the external low-speed clock cannot be initialized.">
+      <created>1623155305242</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1623155305243</updated>
+    </task>
+    <option name="localTasksCounter" value="79" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -665,7 +675,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="&#10;&#10;The problem of flash reading is solved. The flash wake-up function should be added before reading, otherwise all the data of 0x00 will be read out. The problem of accessing single or double files in file system is basically solved." />
     <MESSAGE value="Optimize the listbox item and display method, add the function of listbox reading the specified item and the function of file system reading the specified file." />
     <MESSAGE value="Listbox switch control logic and switch option logic have been completed. There are still a few problems with color overlay that need to be fixed." />
     <MESSAGE value="It solves the problem of memory leakage when listbox initializes items. Add the memory recovery code to recover the memory requested by the previous item before each initialization." />
@@ -690,7 +699,8 @@
     <MESSAGE value="A small amount of code was rearranged" />
     <MESSAGE value="Add the code to receive the data of super power mode switching" />
     <MESSAGE value="The problem of UART busy when receiving data in uart1 is solved by reinitialization, but I don't think this is a good solution (because the reading of the referee system is affected)." />
-    <option name="LAST_COMMIT_MESSAGE" value="The problem of UART busy when receiving data in uart1 is solved by reinitialization, but I don't think this is a good solution (because the reading of the referee system is affected)." />
+    <MESSAGE value="The clock source initialization function is corrected to avoid the program stuck when the external low-speed clock cannot be initialized." />
+    <option name="LAST_COMMIT_MESSAGE" value="The clock source initialization function is corrected to avoid the program stuck when the external low-speed clock cannot be initialized." />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

@@ -52,6 +52,12 @@ void GPIO_Config(void) {
     GPIO_Structure.Pull = GPIO_PULLUP;
     HAL_GPIO_Init(LCD_RES_Port, &GPIO_Structure);
 
+    GPIO_Structure.Pin = LCD_PWR_Pin;
+    GPIO_Structure.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+    GPIO_Structure.Mode = GPIO_MODE_OUTPUT_PP;
+    GPIO_Structure.Pull = GPIO_PULLUP;
+    HAL_GPIO_Init(LCD_PWR_Port, &GPIO_Structure);
+
     GPIO_Structure.Pin = UP_KEY_PIN;
     GPIO_Structure.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
     GPIO_Structure.Mode = GPIO_MODE_INPUT;
@@ -104,5 +110,5 @@ void GPIO_Config(void) {
     HAL_GPIO_WritePin(BOOST_EN_GPIO_Port, BOOST_EN_Pin, GPIO_PIN_SET);
     HAL_GPIO_WritePin(EN_NMOS_GPIO_Port, EN_NMOS_Pin, GPIO_PIN_SET);
     HAL_GPIO_WritePin(SPI_FLASH_CS_PORT, SPI_FLASH_CS_PIN, GPIO_PIN_SET);
-
+    HAL_GPIO_WritePin(LCD_PWR_Port, LCD_PWR_Pin, GPIO_PIN_RESET);
 }
