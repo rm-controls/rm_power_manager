@@ -16,6 +16,7 @@ extern TaskHandle_t ProtectTask_Handler;
 unsigned short referee_avaiflag = 0, referee_time_counter = 0;
 extern SemaphoreHandle_t Calibrate_Semaphore;
 extern unsigned char UART1_IT_Flag;
+unsigned char overcurrent_flag = 0;
 
 void Protect_Task(void *pvParameters) {
     Delayms(10);
@@ -27,11 +28,17 @@ void Protect_Task(void *pvParameters) {
             UART1_IT_Flag = HAL_OK;
             UART1_Config();
         }
+        if (I_Chassis >= 8.0 && FSM_Status.FSM_Mode != Halt_Mode) {
+            FSM_Status.FSM_Mode = Halt_Mode;
+            overcurrent_flag = 1;
+        }
         if (V_Baterry <= 20.0f && FSM_Status.FSM_Mode != Halt_Mode) {
             Delayms(100);
-            if (V_Baterry <= 20.0f)
+            if (V_Baterry <= 20.0f) {
+                overcurrent_flag = 0;
                 FSM_Status.FSM_Mode = Halt_Mode;
-        } else if (FSM_Status.FSM_Mode == Halt_Mode && V_Baterry > 20.0f) {
+            }
+        } else if (FSM_Status.FSM_Mode == Halt_Mode && V_Baterry > 20.0f && overcurrent_flag == 0) {
             vTaskPrioritySet(ProtectTask_Handler, 1);
             Delayms(500);
             DataSave_To_Flash(RePowerOn_Reset);

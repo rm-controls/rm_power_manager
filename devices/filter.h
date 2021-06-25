@@ -6,11 +6,13 @@
 #define _DEVICE_FILTER_H_
 
 typedef struct {
-    float Coeffecient;
-    float CufOff_Freq;
+    float CutOffFreq;
+    float SampleFreq;
+    float Coeffecient1;
+    float Coeffecient2;
     float Last_Result;
-    float Current_Value;
     float Current_Result;
+    float Current_Value;
 } FirstOrder_Filter_t;
 
 extern FirstOrder_Filter_t I_CapacitorF, I_ChassisF, V_CapacitorF, V_BaterryF, V_ChassisF, P_CapacitorF, P_ChassisF;

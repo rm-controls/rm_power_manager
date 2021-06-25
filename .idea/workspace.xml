@@ -18,12 +18,11 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="The clock source initialization function is corrected to avoid the program stuck when the external low-speed clock cannot be initialized.">
+    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="The external crystal oscillator can be used suddenly, but it is unclear what is the reason. It may be that there is a delay before initializing the external clock.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hardware/gpio.c" beforeDir="false" afterPath="$PROJECT_DIR$/hardware/gpio.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/system.c" beforeDir="false" afterPath="$PROJECT_DIR$/system/system.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/user/main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/port.h" beforeDir="false" afterPath="$PROJECT_DIR$/user/port.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/devices/filter.c" beforeDir="false" afterPath="$PROJECT_DIR$/devices/filter.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/devices/filter.h" beforeDir="false" afterPath="$PROJECT_DIR$/devices/filter.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/functions/protect.c" beforeDir="false" afterPath="$PROJECT_DIR$/functions/protect.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,11 +98,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="OCD Program" type="com.jetbrains.cidr.embedded.openocd.conf.type" factoryName="com.jetbrains.cidr.embedded.openocd.conf.factory" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Program" TARGET_NAME="Program.elf" CONFIG_NAME="Debug" version="1" RUN_TARGET_PROJECT_NAME="Program" RUN_TARGET_NAME="Program.elf">
       <openocd version="1" gdb-port="3333" telnet-port="4444" board-config="D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\board.cfg" reset-type="INIT" download-type="ALWAYS">
         <debugger kind="GDB" isBundled="true" />
@@ -246,14 +240,9 @@
       <workItem from="1623140175814" duration="214000" />
       <workItem from="1623147206782" duration="962000" />
       <workItem from="1623155271380" duration="75000" />
-      <workItem from="1623227288809" duration="3594000" />
-    </task>
-    <task id="LOCAL-00030" summary="Add LCD driver and key driver to the program">
-      <created>1619097980119</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1619097980119</updated>
+      <workItem from="1623227288809" duration="4314000" />
+      <workItem from="1624534746915" duration="19000" />
+      <workItem from="1624624395238" duration="4773000" />
     </task>
     <task id="LOCAL-00031" summary="Fix the problem that the control GPIO port of LCD screen is initialized as input.">
       <created>1619103949270</created>
@@ -591,7 +580,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623155305243</updated>
     </task>
-    <option name="localTasksCounter" value="79" />
+    <task id="LOCAL-00079" summary="The external crystal oscillator can be used suddenly, but it is unclear what is the reason. It may be that there is a delay before initializing the external clock.">
+      <created>1623231197095</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1623231197095</updated>
+    </task>
+    <option name="localTasksCounter" value="80" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -675,7 +671,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Optimize the listbox item and display method, add the function of listbox reading the specified item and the function of file system reading the specified file." />
     <MESSAGE value="Listbox switch control logic and switch option logic have been completed. There are still a few problems with color overlay that need to be fixed." />
     <MESSAGE value="It solves the problem of memory leakage when listbox initializes items. Add the memory recovery code to recover the memory requested by the previous item before each initialization." />
     <MESSAGE value="Fixed the problem of listbox item display. Now the item is fully filled when it is selected." />
@@ -700,7 +695,8 @@
     <MESSAGE value="Add the code to receive the data of super power mode switching" />
     <MESSAGE value="The problem of UART busy when receiving data in uart1 is solved by reinitialization, but I don't think this is a good solution (because the reading of the referee system is affected)." />
     <MESSAGE value="The clock source initialization function is corrected to avoid the program stuck when the external low-speed clock cannot be initialized." />
-    <option name="LAST_COMMIT_MESSAGE" value="The clock source initialization function is corrected to avoid the program stuck when the external low-speed clock cannot be initialized." />
+    <MESSAGE value="The external crystal oscillator can be used suddenly, but it is unclear what is the reason. It may be that there is a delay before initializing the external clock." />
+    <option name="LAST_COMMIT_MESSAGE" value="The external crystal oscillator can be used suddenly, but it is unclear what is the reason. It may be that there is a delay before initializing the external clock." />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
