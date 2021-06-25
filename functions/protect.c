@@ -22,6 +22,7 @@ void Protect_Task(void *pvParameters) {
     Delayms(10);
     xSemaphoreTake(Calibrate_Semaphore, 0xFFFFFFFFUL);
     xSemaphoreGive(Calibrate_Semaphore);
+    Delayms(100);
     while (1) {
         referee_time_counter++;
         if (UART1_IT_Flag != HAL_OK) {
@@ -30,9 +31,11 @@ void Protect_Task(void *pvParameters) {
         }
         if (I_Chassis >= 8.0 && FSM_Status.FSM_Mode != Halt_Mode) {
             FSM_Status.FSM_Mode = Halt_Mode;
-            overcurrent_flag = 1;
+            Delayms(10);
+            if (I_Chassis >= 8.0f)
+                overcurrent_flag = 1;
         }
-        if (V_Baterry <= 20.0f && FSM_Status.FSM_Mode != Halt_Mode) {
+        if (V_Baterry <= 20.0f) {
             Delayms(100);
             if (V_Baterry <= 20.0f) {
                 overcurrent_flag = 0;

@@ -20,24 +20,31 @@ void Calculate_Coefficient(FirstOrder_Filter_t *param) {
 void Filter_Config(void) {
     I_CapacitorF.CutOffFreq = 200.0f;
     I_CapacitorF.SampleFreq = 10000.0f;
+    Calculate_Coefficient(&I_CapacitorF);
 
     I_ChassisF.CutOffFreq = 10.0f;
     I_ChassisF.SampleFreq = 10000.0f;
+    Calculate_Coefficient(&I_ChassisF);
 
     V_CapacitorF.CutOffFreq = 200.f;
     V_CapacitorF.SampleFreq = 10000.0f;
+    Calculate_Coefficient(&V_CapacitorF);
 
     V_BaterryF.CutOffFreq = 200.0f;
     V_BaterryF.SampleFreq = 10000.0f;
+    Calculate_Coefficient(&V_BaterryF);
 
     V_ChassisF.CutOffFreq = 10.0f;
     V_ChassisF.SampleFreq = 10000.0f;
+    Calculate_Coefficient(&V_ChassisF);
 
     P_CapacitorF.CutOffFreq = 200.0f;
     P_CapacitorF.SampleFreq = 10000.0f;
+    Calculate_Coefficient(&P_CapacitorF);
 
     P_ChassisF.CutOffFreq = 10.0f;
     P_ChassisF.SampleFreq = 10000.0f;
+    Calculate_Coefficient(&P_ChassisF);
 }
 
 // 10khz

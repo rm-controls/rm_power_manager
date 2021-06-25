@@ -21,6 +21,8 @@ float I_Capacitor, I_Chassis, V_Capacitor, V_Baterry, V_Chassis
 unsigned short I_CapOffset, I_ChaOffset;
 
 void Refree_Power_Callback(void) {
+    if (referee_data_.game_robot_status_.chassis_power_limit > 150)
+        referee_data_.game_robot_status_.chassis_power_limit = 60;
     if (FSM_Status.Charge_Mode == Full_Power_Charge) {
         if (referee_data_.power_heat_data_.chassis_power_buffer <= 10)
             PID_Capacitor.User = (float) referee_data_.game_robot_status_.chassis_power_limit - 20.0f;
