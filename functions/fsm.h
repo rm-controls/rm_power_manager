@@ -29,6 +29,12 @@ typedef enum {
 } Expect_Power_e;
 
 typedef enum {
+    Normal_Optimized = 0,
+    ChargeFirst_Optimized = 1,
+    UseFirst_Optimized = 2,
+} Optimize_Mode_e;
+
+typedef enum {
     Normal_Mode = 1,
     OverPower_Mode = 2,
     Halt_Mode = 3,

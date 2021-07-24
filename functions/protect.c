@@ -11,6 +11,7 @@
 #include "semphr.h"
 #include "stm32h7xx_hal.h"
 #include "usart.h"
+#include "referee.h"
 
 extern TaskHandle_t ProtectTask_Handler;
 unsigned short referee_avaiflag = 0, referee_time_counter = 0;
@@ -29,11 +30,12 @@ void Protect_Task(void *pvParameters) {
             UART1_IT_Flag = HAL_OK;
             UART1_Config();
         }
-        if (I_Chassis >= 8.0 && FSM_Status.FSM_Mode != Halt_Mode) {
-            FSM_Status.FSM_Mode = Halt_Mode;
-            Delayms(10);
-            if (I_Chassis >= 8.0f)
+        if (I_Chassis >= 8.8f && FSM_Status.FSM_Mode != Halt_Mode) {
+            Delayms(100);
+            if (I_Chassis >= 8.8f) {
+                FSM_Status.FSM_Mode = Halt_Mode;
                 overcurrent_flag = 1;
+            }
         }
         if (V_Baterry <= 20.0f) {
             Delayms(100);
@@ -50,6 +52,8 @@ void Protect_Task(void *pvParameters) {
         if (referee_time_counter >= 1000) {
             referee_avaiflag = 0;
             referee_time_counter = 0;
+            referee_data_.game_robot_status_.chassis_power_limit = 50;
+            referee_data_.power_heat_data_.chassis_power_buffer = 60;
         }
         Delayms(1);
     }

@@ -18,11 +18,14 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="Fixed the bug of over-current detection failure. After over-current, you need to power on again to return to normal. The cut-off frequency calculation of low-pass filter is modified.">
+    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="Fixed the problem of uninitialized low-pass filter and over-current protection.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/devices/filter.c" beforeDir="false" afterPath="$PROJECT_DIR$/devices/filter.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/forms/sysinfo_form.c" beforeDir="false" afterPath="$PROJECT_DIR$/forms/sysinfo_form.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/functions/calculate.c" beforeDir="false" afterPath="$PROJECT_DIR$/functions/calculate.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/functions/fsm.c" beforeDir="false" afterPath="$PROJECT_DIR$/functions/fsm.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/functions/fsm.h" beforeDir="false" afterPath="$PROJECT_DIR$/functions/fsm.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/functions/protect.c" beforeDir="false" afterPath="$PROJECT_DIR$/functions/protect.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hardware/usart.c" beforeDir="false" afterPath="$PROJECT_DIR$/hardware/usart.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user/usertask.c" beforeDir="false" afterPath="$PROJECT_DIR$/user/usertask.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -80,7 +83,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.tools" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -243,14 +246,13 @@
       <workItem from="1623155271380" duration="75000" />
       <workItem from="1623227288809" duration="4314000" />
       <workItem from="1624534746915" duration="19000" />
-      <workItem from="1624624395238" duration="7521000" />
-    </task>
-    <task id="LOCAL-00032" summary="Complete the drawing and testing of basic graphics (including filled / unfilled rectangle, circle, rounded rectangle and semicircle)">
-      <created>1619697075739</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1619697075739</updated>
+      <workItem from="1624624395238" duration="7616000" />
+      <workItem from="1624636086385" duration="4000" />
+      <workItem from="1624695267983" duration="705000" />
+      <workItem from="1624701116190" duration="3044000" />
+      <workItem from="1626846931398" duration="2840000" />
+      <workItem from="1626941268443" duration="1270000" />
+      <workItem from="1627123109799" duration="1382000" />
     </task>
     <task id="LOCAL-00033" summary="Completed the drawing of the button control, now you can draw the normal state, focus state and press state of the button">
       <created>1619700358664</created>
@@ -588,7 +590,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624630131836</updated>
     </task>
-    <option name="localTasksCounter" value="81" />
+    <task id="LOCAL-00081" summary="Fixed the problem of uninitialized low-pass filter and over-current protection.">
+      <created>1624636030559</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1624636030559</updated>
+    </task>
+    <option name="localTasksCounter" value="82" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -672,7 +681,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="It solves the problem of memory leakage when listbox initializes items. Add the memory recovery code to recover the memory requested by the previous item before each initialization." />
     <MESSAGE value="Fixed the problem of listbox item display. Now the item is fully filled when it is selected." />
     <MESSAGE value="The function of reset reason display is added" />
     <MESSAGE value="When saving data to flash, close the watchdog to prevent the watchdog from triggering reset" />
@@ -697,7 +705,8 @@
     <MESSAGE value="The clock source initialization function is corrected to avoid the program stuck when the external low-speed clock cannot be initialized." />
     <MESSAGE value="The external crystal oscillator can be used suddenly, but it is unclear what is the reason. It may be that there is a delay before initializing the external clock." />
     <MESSAGE value="Fixed the bug of over-current detection failure. After over-current, you need to power on again to return to normal. The cut-off frequency calculation of low-pass filter is modified." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed the bug of over-current detection failure. After over-current, you need to power on again to return to normal. The cut-off frequency calculation of low-pass filter is modified." />
+    <MESSAGE value="Fixed the problem of uninitialized low-pass filter and over-current protection." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed the problem of uninitialized low-pass filter and over-current protection." />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

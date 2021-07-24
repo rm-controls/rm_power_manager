@@ -38,16 +38,18 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
                         ModeBuffer = 0;
                     break;
                 case 3:
-                    if (aRxBuffer1[0] == 0x3A || aRxBuffer1[0] == 0x38)
+                    if (aRxBuffer1[0] == 0x39 || aRxBuffer1[0] == 0x3A)
                         ModeBuffer = 4;
                     else
                         ModeBuffer = 0;
                     break;
                 case 4:
-                    if (aRxBuffer1[0] == 0x04)
-                        Setting_FSM_Mode = Normal_Mode;
-                    else if (aRxBuffer1[0] == 0x0C)
-                        Setting_FSM_Mode = OverPower_Mode;
+                    if (aRxBuffer1[0] == 0xE0)
+                        Setting_FSM_Mode = Normal_Optimized;
+                    else if (aRxBuffer1[0] == 0xC8)
+                        Setting_FSM_Mode = ChargeFirst_Optimized;
+                    else if (aRxBuffer1[0] == 0xCC)
+                        Setting_FSM_Mode = UseFirst_Optimized;
                     ModeBuffer = 0;
                     break;
                 default:ModeBuffer = 0;

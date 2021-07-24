@@ -7,18 +7,16 @@
 extern SemaphoreHandle_t Calibrate_Semaphore;
 
 void UserTask(void *pvParameters) {
-    FSM_Status.uExpect_Mode = Remain_Power_Expect;
-    FSM_Status.uCharge_Mode = Const_Power_Charge;
+    FSM_Status.uExpect_Mode = Proportional_Expect;
+    FSM_Status.uCharge_Mode = Proportional_Charge;
+    FSM_Status.P_Charge = 0.15f;
+    FSM_Status.P_Expect = 0.85f;
     FSM_Status.FSM_Mode = Normal_Mode;
     FSM_Status.Charge_Power = 20;
     FSM_Status.Max_Power = 200;
     while (1) {
         if (FSM_Status.FSM_Mode != Halt_Mode) {
-            if (V_Capacitor >= 8.7f) {
-                FSM_Status.FSM_Mode = OverPower_Mode;
-            } else if (V_Capacitor <= 7.0f) {   // Exit OverPower Mode
-                FSM_Status.FSM_Mode = Normal_Mode;
-            }
+            FSM_Status.FSM_Mode = Normal_Mode;
         }
         Delayms(1);
     }

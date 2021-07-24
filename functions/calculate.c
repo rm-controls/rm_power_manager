@@ -23,27 +23,6 @@ unsigned short I_CapOffset, I_ChaOffset;
 void Refree_Power_Callback(void) {
     if (referee_data_.game_robot_status_.chassis_power_limit > 150)
         referee_data_.game_robot_status_.chassis_power_limit = 60;
-    if (FSM_Status.Charge_Mode == Full_Power_Charge) {
-        if (referee_data_.power_heat_data_.chassis_power_buffer <= 10)
-            PID_Capacitor.User = (float) referee_data_.game_robot_status_.chassis_power_limit - 20.0f;
-        else if (referee_data_.power_heat_data_.chassis_power_buffer <= 20)
-            PID_Capacitor.User = (float) referee_data_.game_robot_status_.chassis_power_limit - 15.0f;
-        else if (referee_data_.power_heat_data_.chassis_power_buffer <= 30)
-            PID_Capacitor.User = (float) referee_data_.game_robot_status_.chassis_power_limit - 10.0f;
-        else if (referee_data_.power_heat_data_.chassis_power_buffer >= 50)
-            PID_Capacitor.User = (float) referee_data_.game_robot_status_.chassis_power_limit - 4.0f;
-    } else if (FSM_Status.Charge_Mode == Const_Power_Charge) {
-        if (referee_data_.power_heat_data_.chassis_power_buffer <= 10)
-            PID_Capacitor.User = 0;
-        else if (referee_data_.power_heat_data_.chassis_power_buffer <= 10)
-            PID_Capacitor.User = (float) FSM_Status.Charge_Power - 15.0f;
-        else if (referee_data_.power_heat_data_.chassis_power_buffer <= 20)
-            PID_Capacitor.User = (float) FSM_Status.Charge_Power - 10.0f;
-        else if (referee_data_.power_heat_data_.chassis_power_buffer <= 30)
-            PID_Capacitor.User = (float) FSM_Status.Charge_Power - 5.0f;
-        else if (referee_data_.power_heat_data_.chassis_power_buffer >= 50)
-            PID_Capacitor.User = FSM_Status.Charge_Power;
-    }
 }
 
 void Calibrate_Powerh(void) {
