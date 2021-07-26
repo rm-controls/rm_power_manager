@@ -6,7 +6,7 @@
 UART_HandleTypeDef huart1;
 UART_HandleTypeDef huart2;
 
-extern QueueHandle_t Refree_Data;
+extern QueueHandle_t Referee_Data;
 unsigned char aRxBuffer1[1] = {0};
 unsigned char aRxBuffer2[64] = {0};
 unsigned char ModeBuffer = 0;
@@ -15,9 +15,9 @@ unsigned char UART1_IT_Flag = 0;
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
     if (huart->Instance == USART2) {
-        if (Refree_Data != NULL) {
+        if (Referee_Data != NULL) {
             BaseType_t pxHigherPriorityTaskWoken;
-            xQueueSendToBackFromISR(Refree_Data, aRxBuffer2, &pxHigherPriorityTaskWoken);
+            xQueueSendToBackFromISR(Referee_Data, aRxBuffer2, &pxHigherPriorityTaskWoken);
         }
         HAL_UART_Receive_IT(&huart2, aRxBuffer2, 64);
     } else {

@@ -149,7 +149,7 @@ void Referee_getData(unsigned char *frame) {
                 referee_data_.power_heat_data_.chassis_volt / 1000;
             referee_data_.power_heat_data_.chassis_current =
                 referee_data_.power_heat_data_.chassis_current / 1000;
-            Refree_Power_Callback();
+            Referee_Power_Callback();
             break;
         case kRobotPosCmdId:memcpy(&referee_data_.game_robot_pos_, frame + index, sizeof(GameRobotPos));
             break;

@@ -20,6 +20,6 @@ void Calculate_Power(void);
 void Sensor_Config(void);
 void Calibrate_Powerl(void);
 void Calibrate_Powerh(void);
-void Refree_Power_Callback(void);
+void Referee_Power_Callback(void);
 
 #endif //_FUNCTIONS_CALCULATE_H_

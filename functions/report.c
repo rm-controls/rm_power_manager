@@ -12,7 +12,7 @@
 #include "encrypt.h"
 #include "referee.h"
 
-QueueHandle_t Refree_Data = NULL;
+QueueHandle_t Referee_Data = NULL;
 
 void Packup_Info(void) {
     W_Capacitor = 0.5f * 15 * V_Capacitor * V_Capacitor - 367.5f;
@@ -31,13 +31,13 @@ void Packup_Info(void) {
 }
 
 void Upload_Referee(void *pvParameters) {
-    unsigned char Refree_Buf[64];
-    Refree_Data = xQueueCreate(4, 64);
+    unsigned char Referee_Buf[64];
+    Referee_Data = xQueueCreate(4, 64);
     while (1) {
-        if (xQueueReceive(Refree_Data, Refree_Buf, 10) == pdTRUE) {
+        if (xQueueReceive(Referee_Data, Referee_Buf, 10) == pdTRUE) {
             for (unsigned char counter = 0; counter < 64; counter++) {
-                HAL_UART_Transmit(&huart1, &Refree_Buf[counter], 1, 0xFFFFFFFFUL);
-                Referee_unpack(Refree_Buf[counter]);
+                HAL_UART_Transmit(&huart1, &Referee_Buf[counter], 1, 0xFFFFFFFFUL);
+                Referee_unpack(Referee_Buf[counter]);
             }
         }
     }

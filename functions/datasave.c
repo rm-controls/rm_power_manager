@@ -14,7 +14,7 @@ void vApplicationStackOverflowHook(TaskHandle_t xTask, char *pcTaskName) {
 void DataSave_DisplayLastInfo(void) {
     FSM_Status_t FSM_Before_Reboot;
     float Last_I_Capacitor, Last_I_Chassis, Last_V_Capacitor;
-    float Last_V_Chassis, Last_V_Baterry, Last_RefreeChassis_Power;
+    float Last_V_Chassis, Last_V_Baterry, Last_Referee_ChassisPower;
     unsigned char Buffer[16], reason, Last_Power_Limit;
     unsigned int LongBuffer[4];
     HAL_PWR_EnableBkUpAccess();
@@ -27,7 +27,7 @@ void DataSave_DisplayLastInfo(void) {
     Last_V_Capacitor = Int16ToFloat(Buffer[6] << 8 | Buffer[7]);
     Last_V_Chassis = Int16ToFloat(Buffer[8] << 8 | Buffer[9]);
     Last_V_Baterry = Int16ToFloat(Buffer[10] << 8 | Buffer[11]);
-    Last_RefreeChassis_Power = Int16ToFloat(Buffer[13] << 8 | Buffer[14]);
+    Last_Referee_ChassisPower = Int16ToFloat(Buffer[13] << 8 | Buffer[14]);
     reason = (Buffer[0] >> 5) & 0x07;
     FSM_Before_Reboot.Charge_Mode = (Buffer[0] >> 2) & 0x07;
     FSM_Before_Reboot.Typology_Mode = Buffer[0] & 0x03;
@@ -84,8 +84,8 @@ void DataSave_DisplayLastInfo(void) {
             break;
     }
     GUI_Printf(80, 44, C_DARK_RED, C_WHITE,
-               "%3d.%1dW", (int) Last_RefreeChassis_Power,
-               (int) (Last_RefreeChassis_Power * 10) - ((int) Last_RefreeChassis_Power * 10));
+               "%3d.%1dW", (int) Last_Referee_ChassisPower,
+               (int) (Last_Referee_ChassisPower * 10) - ((int) Last_Referee_ChassisPower * 10));
     switch (reason) {
         case RePowerOn_Reset:GUI_Printf(18, 60, C_RED, C_WHITE, "Repoweron Reset");
             break;

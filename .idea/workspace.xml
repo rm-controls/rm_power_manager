@@ -18,15 +18,14 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="Fixed the problem of uninitialized low-pass filter and over-current protection.">
+    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="The code of overcurrent protection has been modified. Now the power-off protection will not be available until the overcurrent exceeds 100 milliseconds. Fixed code for cache protection. The receiving state machine of NUC communication is modified, and the received state is displayed on the LCD. Fixed the problem that the numerical value of the disconnected structure of the referee system is confused, waiting for the computer test.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forms/sysinfo_form.c" beforeDir="false" afterPath="$PROJECT_DIR$/forms/sysinfo_form.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/devices/referee.c" beforeDir="false" afterPath="$PROJECT_DIR$/devices/referee.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/functions/calculate.c" beforeDir="false" afterPath="$PROJECT_DIR$/functions/calculate.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions/fsm.c" beforeDir="false" afterPath="$PROJECT_DIR$/functions/fsm.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions/fsm.h" beforeDir="false" afterPath="$PROJECT_DIR$/functions/fsm.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions/protect.c" beforeDir="false" afterPath="$PROJECT_DIR$/functions/protect.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/functions/calculate.h" beforeDir="false" afterPath="$PROJECT_DIR$/functions/calculate.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/functions/datasave.c" beforeDir="false" afterPath="$PROJECT_DIR$/functions/datasave.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/functions/report.c" beforeDir="false" afterPath="$PROJECT_DIR$/functions/report.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hardware/usart.c" beforeDir="false" afterPath="$PROJECT_DIR$/hardware/usart.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/usertask.c" beforeDir="false" afterPath="$PROJECT_DIR$/user/usertask.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,6 +101,16 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="OCD Program" type="com.jetbrains.cidr.embedded.openocd.conf.type" factoryName="com.jetbrains.cidr.embedded.openocd.conf.factory" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Program" TARGET_NAME="Program.elf" CONFIG_NAME="Debug" version="1" RUN_TARGET_PROJECT_NAME="Program" RUN_TARGET_NAME="Program.elf">
       <openocd version="1" gdb-port="3333" telnet-port="4444" board-config="D:\Desktop\Files\RoboMaser\Circut\Power\PowerV2_Conservative\Program\board.cfg" reset-type="INIT" download-type="ALWAYS">
         <debugger kind="GDB" isBundled="true" />
@@ -252,14 +261,10 @@
       <workItem from="1624701116190" duration="3044000" />
       <workItem from="1626846931398" duration="2840000" />
       <workItem from="1626941268443" duration="1270000" />
-      <workItem from="1627123109799" duration="1382000" />
-    </task>
-    <task id="LOCAL-00033" summary="Completed the drawing of the button control, now you can draw the normal state, focus state and press state of the button">
-      <created>1619700358664</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1619700358664</updated>
+      <workItem from="1627123109799" duration="1881000" />
+      <workItem from="1627195231718" duration="71000" />
+      <workItem from="1627197853811" duration="388000" />
+      <workItem from="1627290370090" duration="2719000" />
     </task>
     <task id="LOCAL-00034" summary="Complete the LCD screen curve drawing code transplantation, but EEPROM communication is not complete, EEPROM seems to be damaged, any address does not respond.">
       <created>1619795538490</created>
@@ -597,7 +602,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624636030559</updated>
     </task>
-    <option name="localTasksCounter" value="82" />
+    <task id="LOCAL-00082" summary="The code of overcurrent protection has been modified. Now the power-off protection will not be available until the overcurrent exceeds 100 milliseconds. Fixed code for cache protection. The receiving state machine of NUC communication is modified, and the received state is displayed on the LCD. Fixed the problem that the numerical value of the disconnected structure of the referee system is confused, waiting for the computer test.">
+      <created>1627124715483</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1627124715484</updated>
+    </task>
+    <option name="localTasksCounter" value="83" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -681,7 +693,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Fixed the problem of listbox item display. Now the item is fully filled when it is selected." />
     <MESSAGE value="The function of reset reason display is added" />
     <MESSAGE value="When saving data to flash, close the watchdog to prevent the watchdog from triggering reset" />
     <MESSAGE value="Add critical code segment protection when saving data to flash" />
@@ -706,7 +717,8 @@
     <MESSAGE value="The external crystal oscillator can be used suddenly, but it is unclear what is the reason. It may be that there is a delay before initializing the external clock." />
     <MESSAGE value="Fixed the bug of over-current detection failure. After over-current, you need to power on again to return to normal. The cut-off frequency calculation of low-pass filter is modified." />
     <MESSAGE value="Fixed the problem of uninitialized low-pass filter and over-current protection." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed the problem of uninitialized low-pass filter and over-current protection." />
+    <MESSAGE value="The code of overcurrent protection has been modified. Now the power-off protection will not be available until the overcurrent exceeds 100 milliseconds. Fixed code for cache protection. The receiving state machine of NUC communication is modified, and the received state is displayed on the LCD. Fixed the problem that the numerical value of the disconnected structure of the referee system is confused, waiting for the computer test." />
+    <option name="LAST_COMMIT_MESSAGE" value="The code of overcurrent protection has been modified. Now the power-off protection will not be available until the overcurrent exceeds 100 milliseconds. Fixed code for cache protection. The receiving state machine of NUC communication is modified, and the received state is displayed on the LCD. Fixed the problem that the numerical value of the disconnected structure of the referee system is confused, waiting for the computer test." />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
