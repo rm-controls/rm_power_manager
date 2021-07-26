@@ -15,10 +15,6 @@
 QueueHandle_t Referee_Data = NULL;
 
 void Packup_Info(void) {
-    W_Capacitor = 0.5f * 15 * V_Capacitor * V_Capacitor - 367.5f;
-    if (W_Capacitor < 0)
-        W_Capacitor = 0;
-    float Capacitor_Percent = W_Capacitor / 1434.375f;
     Upload_Package.PID = 0;
     Upload_Package.Data[0] = FloatToInt16(P_Chassis) >> 8UL;
     Upload_Package.Data[1] = FloatToInt16(P_Chassis) & 0x00ffUL;

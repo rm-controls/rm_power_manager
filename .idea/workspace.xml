@@ -18,14 +18,18 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="The code of overcurrent protection has been modified. Now the power-off protection will not be available until the overcurrent exceeds 100 milliseconds. Fixed code for cache protection. The receiving state machine of NUC communication is modified, and the received state is displayed on the LCD. Fixed the problem that the numerical value of the disconnected structure of the referee system is confused, waiting for the computer test.">
+    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="Fixed the English word of referee">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/devices/referee.c" beforeDir="false" afterPath="$PROJECT_DIR$/devices/referee.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/forms/main_form.c" beforeDir="false" afterPath="$PROJECT_DIR$/forms/main_form.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/forms/sysinfo_form.h" beforeDir="false" afterPath="$PROJECT_DIR$/forms/sysinfo_form.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/functions/calculate.c" beforeDir="false" afterPath="$PROJECT_DIR$/functions/calculate.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/functions/calculate.h" beforeDir="false" afterPath="$PROJECT_DIR$/functions/calculate.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/functions/datasave.c" beforeDir="false" afterPath="$PROJECT_DIR$/functions/datasave.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/functions/fsm.c" beforeDir="false" afterPath="$PROJECT_DIR$/functions/fsm.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/functions/fsm.h" beforeDir="false" afterPath="$PROJECT_DIR$/functions/fsm.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/functions/report.c" beforeDir="false" afterPath="$PROJECT_DIR$/functions/report.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hardware/usart.c" beforeDir="false" afterPath="$PROJECT_DIR$/hardware/usart.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/usertask.c" beforeDir="false" afterPath="$PROJECT_DIR$/user/usertask.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -264,14 +268,7 @@
       <workItem from="1627123109799" duration="1881000" />
       <workItem from="1627195231718" duration="71000" />
       <workItem from="1627197853811" duration="388000" />
-      <workItem from="1627290370090" duration="2719000" />
-    </task>
-    <task id="LOCAL-00034" summary="Complete the LCD screen curve drawing code transplantation, but EEPROM communication is not complete, EEPROM seems to be damaged, any address does not respond.">
-      <created>1619795538490</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1619795538490</updated>
+      <workItem from="1627290370090" duration="6789000" />
     </task>
     <task id="LOCAL-00035" summary="Updated font library, now use smaller font">
       <created>1619806461174</created>
@@ -609,7 +606,14 @@
       <option name="project" value="LOCAL" />
       <updated>1627124715484</updated>
     </task>
-    <option name="localTasksCounter" value="83" />
+    <task id="LOCAL-00083" summary="Fixed the English word of referee">
+      <created>1627293403833</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1627293403834</updated>
+    </task>
+    <option name="localTasksCounter" value="84" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -693,7 +697,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="The function of reset reason display is added" />
     <MESSAGE value="When saving data to flash, close the watchdog to prevent the watchdog from triggering reset" />
     <MESSAGE value="Add critical code segment protection when saving data to flash" />
     <MESSAGE value="Modify README.md" />
@@ -718,7 +721,8 @@
     <MESSAGE value="Fixed the bug of over-current detection failure. After over-current, you need to power on again to return to normal. The cut-off frequency calculation of low-pass filter is modified." />
     <MESSAGE value="Fixed the problem of uninitialized low-pass filter and over-current protection." />
     <MESSAGE value="The code of overcurrent protection has been modified. Now the power-off protection will not be available until the overcurrent exceeds 100 milliseconds. Fixed code for cache protection. The receiving state machine of NUC communication is modified, and the received state is displayed on the LCD. Fixed the problem that the numerical value of the disconnected structure of the referee system is confused, waiting for the computer test." />
-    <option name="LAST_COMMIT_MESSAGE" value="The code of overcurrent protection has been modified. Now the power-off protection will not be available until the overcurrent exceeds 100 milliseconds. Fixed code for cache protection. The receiving state machine of NUC communication is modified, and the received state is displayed on the LCD. Fixed the problem that the numerical value of the disconnected structure of the referee system is confused, waiting for the computer test." />
+    <MESSAGE value="Fixed the English word of referee" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed the English word of referee" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

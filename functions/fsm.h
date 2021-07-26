@@ -7,8 +7,8 @@
 
 typedef enum {
     Only_Charge = 1,
-    Only_PMOS = 2,
-    PMOS_With_Charge = 3,
+    Only_DeliverChassis = 2,
+    Chassis_With_Charge = 3,
     All_Off = 4,
 } Topology_Mode_e;
 
@@ -38,7 +38,7 @@ typedef enum {
     Normal_Mode = 1,
     OverPower_Mode = 2,
     Halt_Mode = 3,
-    Transition_Mode = 4,
+    NoCharge_Mode = 4,
 } FSM_Mode_e;
 
 typedef struct {

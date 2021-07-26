@@ -5,6 +5,7 @@
 #ifndef PROGRAM_FORMS_SYSINFO_FORM_H_
 #define PROGRAM_FORMS_SYSINFO_FORM_H_
 
+extern unsigned char Setting_FSM_Mode;
 void SysInfoForm_Init(void);
 void SysInfoForm_Update(void);
 

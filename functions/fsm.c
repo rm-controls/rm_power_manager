@@ -46,7 +46,7 @@ void FSM_Task(void *pvParameters) {
                 if (FSM_Status.Charge_Mode != Zero_Power_Charge || V_Capacitor <= 15.0)
                     FSM_Status.Charge_Mode = FSM_Status.uCharge_Mode;
                 FSM_Status.Expect_Mode = FSM_Status.uExpect_Mode;
-                FSM_Status.Typology_Mode = PMOS_With_Charge;
+                FSM_Status.Typology_Mode = Chassis_With_Charge;
                 break;
             case OverPower_Mode:
                 if (Last_FSM_Status.FSM_Mode == Normal_Mode) {
@@ -65,11 +65,9 @@ void FSM_Task(void *pvParameters) {
                 FSM_Status.Expect_Mode = FSM_Status.uExpect_Mode;
                 FSM_Status.Typology_Mode = All_Off;
                 break;
-            case Transition_Mode:
-                if (FSM_Status.Charge_Mode != Zero_Power_Charge || V_Capacitor <= 15.0)
-                    FSM_Status.Charge_Mode = Full_Power_Charge;
-                FSM_Status.Expect_Mode = FSM_Status.uExpect_Mode;
-                FSM_Status.Typology_Mode = Only_Charge;
+            case NoCharge_Mode:FSM_Status.Charge_Mode = Zero_Power_Charge;
+                FSM_Status.Expect_Mode = Full_Power_Expect;
+                FSM_Status.Typology_Mode = Only_DeliverChassis;
                 break;
         }
         if (V_Capacitor >= 15.5f ||
@@ -147,8 +145,8 @@ void FSM_Task(void *pvParameters) {
                     Delayms(50);
                     HAL_GPIO_WritePin(EN_NMOS_GPIO_Port, EN_NMOS_Pin, GPIO_PIN_SET);
                     break;
-                case Only_PMOS:
-                case PMOS_With_Charge:HAL_GPIO_WritePin(EN_NMOS_GPIO_Port, EN_NMOS_Pin, GPIO_PIN_RESET);
+                case Only_DeliverChassis:
+                case Chassis_With_Charge:HAL_GPIO_WritePin(EN_NMOS_GPIO_Port, EN_NMOS_Pin, GPIO_PIN_RESET);
                     Delayms(50);
                     HAL_GPIO_WritePin(BOOST_EN_GPIO_Port, BOOST_EN_Pin, GPIO_PIN_SET);
                     break;

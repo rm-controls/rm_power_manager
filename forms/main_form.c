@@ -45,7 +45,7 @@ void MainForm_Update(void) {
             break;
         case Halt_Mode:GUI_LableSetText(&FSM_Mode_Lable, "  FSM Status: Halt   ");
             break;
-        case Transition_Mode:GUI_LableSetText(&FSM_Mode_Lable, " FSM Status: Transit ");
+        case NoCharge_Mode:GUI_LableSetText(&FSM_Mode_Lable, " FSM Status: Transit ");
             break;
     }
     switch (FSM_Status.Charge_Mode) {
@@ -64,9 +64,9 @@ void MainForm_Update(void) {
     switch (FSM_Status.Typology_Mode) {
         case Only_Charge:GUI_LableSetText(&Typology_Lable, "Typology: Only Charge");
             break;
-        case Only_PMOS:GUI_LableSetText(&Typology_Lable, " Typology: Only PMOS ");
+        case Only_DeliverChassis:GUI_LableSetText(&Typology_Lable, " Typology: Only PMOS ");
             break;
-        case PMOS_With_Charge:GUI_LableSetText(&Typology_Lable, "Typology: PMOS&Charge");
+        case Chassis_With_Charge:GUI_LableSetText(&Typology_Lable, "Typology: PMOS&Charge");
             break;
         case All_Off:GUI_LableSetText(&Typology_Lable, "  Typology: All Off  ");
             break;

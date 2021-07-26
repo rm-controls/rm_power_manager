@@ -2,6 +2,7 @@
 #include "FreeRTOS.h"
 #include "queue.h"
 #include "fsm.h"
+#include "sysinfo_form.h"
 
 UART_HandleTypeDef huart1;
 UART_HandleTypeDef huart2;
@@ -10,7 +11,6 @@ extern QueueHandle_t Referee_Data;
 unsigned char aRxBuffer1[1] = {0};
 unsigned char aRxBuffer2[64] = {0};
 unsigned char ModeBuffer = 0;
-extern unsigned char Setting_FSM_Mode;
 unsigned char UART1_IT_Flag = 0;
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {

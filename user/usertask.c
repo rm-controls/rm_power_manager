@@ -11,12 +11,28 @@ void UserTask(void *pvParameters) {
     FSM_Status.uCharge_Mode = Proportional_Charge;
     FSM_Status.P_Charge = 0.15f;
     FSM_Status.P_Expect = 0.85f;
-    FSM_Status.FSM_Mode = Normal_Mode;
-    FSM_Status.Charge_Power = 20;
+    FSM_Status.FSM_Mode = NoCharge_Mode;
     FSM_Status.Max_Power = 200;
     while (1) {
         if (FSM_Status.FSM_Mode != Halt_Mode) {
-            FSM_Status.FSM_Mode = Normal_Mode;
+            switch (Setting_FSM_Mode) {
+                case Normal_Optimized:FSM_Status.FSM_Mode = NoCharge_Mode;
+                    break;
+                case ChargeFirst_Optimized:
+                    if (Capacitor_Percent < 0.95f)
+                        FSM_Status.FSM_Mode = Normal_Mode;
+                    else
+                        FSM_Status.FSM_Mode = NoCharge_Mode;
+                    break;
+                case UseFirst_Optimized:
+                    if (Capacitor_Percent < 0.06f)
+                        FSM_Status.FSM_Mode = NoCharge_Mode;
+                    else
+                        FSM_Status.FSM_Mode = OverPower_Mode;
+                    break;
+                default: FSM_Status.FSM_Mode = Normal_Mode;
+                    break;
+            }
         }
         Delayms(1);
     }

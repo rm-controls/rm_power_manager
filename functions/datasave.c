@@ -58,7 +58,7 @@ void DataSave_DisplayLastInfo(void) {
             break;
         case Halt_Mode:GUI_Printf(2, 30, C_DARK_RED, C_WHITE, "Halt");
             break;
-        case Transition_Mode:GUI_Printf(2, 30, C_DARK_RED, C_WHITE, "Transit");
+        case NoCharge_Mode:GUI_Printf(2, 30, C_DARK_RED, C_WHITE, "Transit");
             break;
     }
     switch (FSM_Before_Reboot.Charge_Mode) {
@@ -76,9 +76,9 @@ void DataSave_DisplayLastInfo(void) {
     switch (FSM_Before_Reboot.Typology_Mode) {
         case Only_Charge:GUI_Printf(10, 44, C_DARK_RED, C_WHITE, "OnlyCharge");
             break;
-        case Only_PMOS:GUI_Printf(10, 44, C_DARK_RED, C_WHITE, "OnlyPMOS");
+        case Only_DeliverChassis:GUI_Printf(10, 44, C_DARK_RED, C_WHITE, "OnlyPMOS");
             break;
-        case PMOS_With_Charge:GUI_Printf(10, 44, C_DARK_RED, C_WHITE, "PMOS&Charge");
+        case Chassis_With_Charge:GUI_Printf(10, 44, C_DARK_RED, C_WHITE, "PMOS&Charge");
             break;
         case All_Off:GUI_Printf(10, 44, C_DARK_RED, C_WHITE, "AllOff");
             break;

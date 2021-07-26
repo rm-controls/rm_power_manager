@@ -14,7 +14,7 @@ typedef struct {
 
 extern Power_Calibrate_t Capacitor_Calibratel, Capacitor_Calibrateh;
 extern float I_Capacitor, I_Chassis, V_Capacitor, V_Baterry,
-    V_Chassis, P_Chassis, P_Capacitor, EP_Chassis, W_Capacitor;
+    V_Chassis, P_Chassis, P_Capacitor, EP_Chassis, W_Capacitor, Capacitor_Percent;
 extern unsigned short I_CapOffset, I_ChaOffset;
 void Calculate_Power(void);
 void Sensor_Config(void);

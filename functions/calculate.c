@@ -10,14 +10,13 @@
 #include "system.h"
 #include "referee.h"
 #include "fsm.h"
-#include "pid.h"
 #include "protect.h"
 
 #define ADC_COEFFICIENT 3.0f / 4096.0f
 
 Power_Calibrate_t Capacitor_Calibratel, Capacitor_Calibrateh;
 float I_Capacitor, I_Chassis, V_Capacitor, V_Baterry, V_Chassis
-, P_Chassis, P_Capacitor, EP_Chassis, W_Capacitor;
+, P_Chassis, P_Capacitor, EP_Chassis, W_Capacitor, Capacitor_Percent;
 unsigned short I_CapOffset, I_ChaOffset;
 
 void Referee_Power_Callback(void) {
@@ -109,6 +108,11 @@ void Calculate_Power(void) {
 
     V_ChassisF.Current_Value = (float) ADC_FinalResult[4] * ADC_COEFFICIENT * 21.0f;
     V_Chassis = FirstOrder_Filter_Calculate(&V_ChassisF);
+
+    W_Capacitor = 0.5f * 15.3f * V_Capacitor * V_Capacitor - 367.5f;
+    if (W_Capacitor < 0)
+        W_Capacitor = 0;
+    Capacitor_Percent = W_Capacitor / 1434.375f;
 
     if (I_Capacitor < 0.01f || I_Capacitor > 10.0f)
         I_Capacitor = 0;
