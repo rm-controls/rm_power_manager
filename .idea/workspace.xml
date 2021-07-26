@@ -18,18 +18,8 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="Fixed the English word of referee">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forms/main_form.c" beforeDir="false" afterPath="$PROJECT_DIR$/forms/main_form.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forms/sysinfo_form.h" beforeDir="false" afterPath="$PROJECT_DIR$/forms/sysinfo_form.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions/calculate.c" beforeDir="false" afterPath="$PROJECT_DIR$/functions/calculate.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions/calculate.h" beforeDir="false" afterPath="$PROJECT_DIR$/functions/calculate.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions/datasave.c" beforeDir="false" afterPath="$PROJECT_DIR$/functions/datasave.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions/fsm.c" beforeDir="false" afterPath="$PROJECT_DIR$/functions/fsm.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions/fsm.h" beforeDir="false" afterPath="$PROJECT_DIR$/functions/fsm.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions/report.c" beforeDir="false" afterPath="$PROJECT_DIR$/functions/report.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hardware/usart.c" beforeDir="false" afterPath="$PROJECT_DIR$/hardware/usart.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/usertask.c" beforeDir="false" afterPath="$PROJECT_DIR$/user/usertask.c" afterDir="false" />
+    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="The switching logic of the core finite state machine is greatly modified, the transition state is deleted, and a new state without charging is added. The car has not been tested yet, waiting for the test results.">
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -268,14 +258,7 @@
       <workItem from="1627123109799" duration="1881000" />
       <workItem from="1627195231718" duration="71000" />
       <workItem from="1627197853811" duration="388000" />
-      <workItem from="1627290370090" duration="6789000" />
-    </task>
-    <task id="LOCAL-00035" summary="Updated font library, now use smaller font">
-      <created>1619806461174</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1619806461174</updated>
+      <workItem from="1627290370090" duration="6966000" />
     </task>
     <task id="LOCAL-00036" summary="Completed the main interface of the voltage and current display and image drawing part of the code">
       <created>1619807457808</created>
@@ -613,7 +596,14 @@
       <option name="project" value="LOCAL" />
       <updated>1627293403834</updated>
     </task>
-    <option name="localTasksCounter" value="84" />
+    <task id="LOCAL-00084" summary="The switching logic of the core finite state machine is greatly modified, the transition state is deleted, and a new state without charging is added. The car has not been tested yet, waiting for the test results.">
+      <created>1627297712293</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1627297712293</updated>
+    </task>
+    <option name="localTasksCounter" value="85" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -697,7 +687,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="When saving data to flash, close the watchdog to prevent the watchdog from triggering reset" />
     <MESSAGE value="Add critical code segment protection when saving data to flash" />
     <MESSAGE value="Modify README.md" />
     <MESSAGE value="Modify README.md, updated version, build, and license icons" />
@@ -722,7 +711,8 @@
     <MESSAGE value="Fixed the problem of uninitialized low-pass filter and over-current protection." />
     <MESSAGE value="The code of overcurrent protection has been modified. Now the power-off protection will not be available until the overcurrent exceeds 100 milliseconds. Fixed code for cache protection. The receiving state machine of NUC communication is modified, and the received state is displayed on the LCD. Fixed the problem that the numerical value of the disconnected structure of the referee system is confused, waiting for the computer test." />
     <MESSAGE value="Fixed the English word of referee" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed the English word of referee" />
+    <MESSAGE value="The switching logic of the core finite state machine is greatly modified, the transition state is deleted, and a new state without charging is added. The car has not been tested yet, waiting for the test results." />
+    <option name="LAST_COMMIT_MESSAGE" value="The switching logic of the core finite state machine is greatly modified, the transition state is deleted, and a new state without charging is added. The car has not been tested yet, waiting for the test results." />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
