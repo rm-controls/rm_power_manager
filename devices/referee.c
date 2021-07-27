@@ -24,10 +24,10 @@ void appendCRC8CheckSum(unsigned char *pchMessage, unsigned int dwLength);
 unsigned int verifyCRC16CheckSum(unsigned char *pchMessage, unsigned int dwLength);
 unsigned short getCRC16CheckSum(unsigned char *pchMessage, unsigned int dwLength, unsigned short wCRC);
 void appendCRC16CheckSum(unsigned char *pchMessage, unsigned int dwLength);
-
 void Referee_getData(unsigned char *frame);
 
 void Referee_init() {
+    memset(&referee_data_, 0x00, sizeof(struct RefereeData));
     referee_unpack_obj.index = 0;
     referee_unpack_obj.unpack_step = kStepHeaderSof;
 }
