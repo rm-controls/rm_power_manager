@@ -42,7 +42,7 @@ void Filter_Config(void) {
     P_CapacitorF.SampleFreq = 10000.0f;
     Calculate_Coefficient(&P_CapacitorF);
 
-    P_ChassisF.CutOffFreq = 10.0f;
+    P_ChassisF.CutOffFreq = 5.0f;
     P_ChassisF.SampleFreq = 10000.0f;
     Calculate_Coefficient(&P_ChassisF);
 }
