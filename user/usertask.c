@@ -19,9 +19,9 @@ void UserTask(void *pvParameters) {
                 case Normal_Optimized:FSM_Status.FSM_Mode = NoCharge_Mode;
                     break;
                 case ChargeFirst_Optimized:
-                    if (Capacitor_Percent > 1.0f)
+                    if (Capacitor_Percent < 0.95f)
                         FSM_Status.FSM_Mode = Normal_Mode;
-                    else if (Capacitor_Percent < 0.95f)
+                    else if (Capacitor_Percent > 1.0f)
                         FSM_Status.FSM_Mode = NoCharge_Mode;
                     break;
                 case UseFirst_Optimized:
