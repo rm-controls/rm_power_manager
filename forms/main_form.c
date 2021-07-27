@@ -43,9 +43,13 @@ void MainForm_Update(void) {
             break;
         case OverPower_Mode:GUI_LableSetText(&FSM_Mode_Lable, "FSM Status: OverPower");
             break;
-        case Halt_Mode:GUI_LableSetText(&FSM_Mode_Lable, "  FSM Status: Halt   ");
+        case Halt_Mode:
+            if (overcurrent_flag == 1)
+                GUI_LableSetText(&FSM_Mode_Lable, " FSM Status: Halt OVC ");
+            else
+                GUI_LableSetText(&FSM_Mode_Lable, " FSM Status: Halt DRP ");
             break;
-        case NoCharge_Mode:GUI_LableSetText(&FSM_Mode_Lable, " FSM Status: Transit ");
+        case NoCharge_Mode:GUI_LableSetText(&FSM_Mode_Lable, "FSM Status: OnlyChass");
             break;
     }
     switch (FSM_Status.Charge_Mode) {
@@ -64,7 +68,7 @@ void MainForm_Update(void) {
     switch (FSM_Status.Typology_Mode) {
         case Only_Charge:GUI_LableSetText(&Typology_Lable, "Typology: Only Charge");
             break;
-        case Only_DeliverChassis:GUI_LableSetText(&Typology_Lable, " Typology: Only PMOS ");
+        case Only_DeliverChassis:GUI_LableSetText(&Typology_Lable, "Typology: OnlyChassis");
             break;
         case Chassis_With_Charge:GUI_LableSetText(&Typology_Lable, "Typology: PMOS&Charge");
             break;

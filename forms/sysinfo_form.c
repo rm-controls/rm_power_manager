@@ -6,6 +6,8 @@
 
 Button_Struct_t TurnBack_Button4;
 Lable_Struct_t Referee_Online_Lable, RwH_L_Lable, Setting_FSM_Lable;
+Lable_Struct_t Referee_GameStatus_Lable;
+
 unsigned char Setting_FSM_Mode = 0;
 
 void TurnBack_Button4_Callback(void *object, unsigned char key) {
@@ -37,6 +39,11 @@ void SysInfoForm_Update(void) {
             break;
         default:break;
     }
+
+    switch (referee_data_.game_status_.game_progress) {
+        case 1:break;
+        default:break;
+    }
 }
 
 void SysInfoForm_Init(void) {
@@ -58,6 +65,11 @@ void SysInfoForm_Init(void) {
     Setting_FSM_Lable.Color = C_BLACK;
     Setting_FSM_Lable.Text = "   Optimize: None    ";
 
+    Referee_GameStatus_Lable.X_Pos = 1;
+    Referee_GameStatus_Lable.Y_Pos = 44;
+    Referee_GameStatus_Lable.Color = C_BLACK;
+    Referee_GameStatus_Lable.Text = "  GameStatus: 3min   ";
+
     TurnBack_Button4.X_Pos = 24;
     TurnBack_Button4.Y_Pos = 136;
     TurnBack_Button4.Width = 80;
@@ -71,4 +83,5 @@ void SysInfoForm_Init(void) {
     GUI_InitLable(&Referee_Online_Lable);
     GUI_InitLable(&RwH_L_Lable);
     GUI_InitLable(&Setting_FSM_Lable);
+    GUI_InitLable(&Referee_GameStatus_Lable);
 }

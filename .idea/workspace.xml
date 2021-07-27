@@ -18,9 +18,12 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="Modified the cmakelists file so that it no longer generates. Bin files at compile time. The reason is that the total size of the generated bin file can reach 400MB, which is very bloated.">
+    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="Change the readme file and add the switching mode of the core state machine and various states to readme.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/forms/main_form.c" beforeDir="false" afterPath="$PROJECT_DIR$/forms/main_form.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/forms/sysinfo_form.c" beforeDir="false" afterPath="$PROJECT_DIR$/forms/sysinfo_form.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/functions/protect.h" beforeDir="false" afterPath="$PROJECT_DIR$/functions/protect.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/usertask.c" beforeDir="false" afterPath="$PROJECT_DIR$/user/usertask.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,11 +99,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -259,14 +257,8 @@
       <workItem from="1627123109799" duration="1881000" />
       <workItem from="1627195231718" duration="71000" />
       <workItem from="1627197853811" duration="388000" />
-      <workItem from="1627290370090" duration="8295000" />
-    </task>
-    <task id="LOCAL-00037" summary="The display of current detection bias calibration status and power calibration status of referee system are added">
-      <created>1619808304395</created>
-      <option name="number" value="00037" />
-      <option name="presentableId" value="LOCAL-00037" />
-      <option name="project" value="LOCAL" />
-      <updated>1619808304395</updated>
+      <workItem from="1627290370090" duration="8700000" />
+      <workItem from="1627352710649" duration="2599000" />
     </task>
     <task id="LOCAL-00038" summary="Complete the layout of the main window interface">
       <created>1619809028022</created>
@@ -604,7 +596,14 @@
       <option name="project" value="LOCAL" />
       <updated>1627297903070</updated>
     </task>
-    <option name="localTasksCounter" value="86" />
+    <task id="LOCAL-00086" summary="Change the readme file and add the switching mode of the core state machine and various states to readme.">
+      <created>1627299192487</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1627299192487</updated>
+    </task>
+    <option name="localTasksCounter" value="87" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -688,7 +687,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Modify README.md" />
     <MESSAGE value="Modify README.md, updated version, build, and license icons" />
     <MESSAGE value="Slightly adjust the main interface to make the layout more beautiful" />
     <MESSAGE value="The code that uart1 forwards directly to UART2 is rolled back, but it has not been tested whether the judging system can receive correctly" />
@@ -713,7 +711,8 @@
     <MESSAGE value="Fixed the English word of referee" />
     <MESSAGE value="The switching logic of the core finite state machine is greatly modified, the transition state is deleted, and a new state without charging is added. The car has not been tested yet, waiting for the test results." />
     <MESSAGE value="Modified the cmakelists file so that it no longer generates. Bin files at compile time. The reason is that the total size of the generated bin file can reach 400MB, which is very bloated." />
-    <option name="LAST_COMMIT_MESSAGE" value="Modified the cmakelists file so that it no longer generates. Bin files at compile time. The reason is that the total size of the generated bin file can reach 400MB, which is very bloated." />
+    <MESSAGE value="Change the readme file and add the switching mode of the core state machine and various states to readme." />
+    <option name="LAST_COMMIT_MESSAGE" value="Change the readme file and add the switching mode of the core state machine and various states to readme." />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
