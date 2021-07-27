@@ -29,8 +29,7 @@ void Calibrate_Powerh(void) {
         HAL_DAC_SetValue(&hdac1,
                          DAC_CHANNEL_1,
                          DAC_ALIGN_12B_R,
-                         (unsigned short) (273.0f * (float) referee_data_.game_robot_status_.chassis_power_limit
-                             / V_Capacitor));
+                         (unsigned short) (27300.0f / V_Capacitor));     //100W
         HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_RESET);
         Delayms(300);
         Capacitor_Calibrateh.Pd[0] = P_Capacitor;
@@ -39,9 +38,7 @@ void Calibrate_Powerh(void) {
         HAL_DAC_SetValue(&hdac1,
                          DAC_CHANNEL_1,
                          DAC_ALIGN_12B_R,
-                         (unsigned short) (273.0f
-                             * ((float) referee_data_.game_robot_status_.chassis_power_limit - 10.0f)
-                             / V_Capacitor));
+                         (unsigned short) (32760.0f / V_Capacitor));    //120W
         HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_RESET);
         Delayms(300);
         Capacitor_Calibrateh.Pd[1] = P_Capacitor;

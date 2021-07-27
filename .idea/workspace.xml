@@ -18,8 +18,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="Some terms related to UI interface have been modified. The charging mode is rewritten as hysteresis comparator to prevent critical oscillation.">
-      <change beforePath="$PROJECT_DIR$/user/usertask.c" beforeDir="false" afterPath="$PROJECT_DIR$/user/usertask.c" afterDir="false" />
+    <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="Corrected the problem of upper and lower limits of hysteresis comparator">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/functions/calculate.c" beforeDir="false" afterPath="$PROJECT_DIR$/functions/calculate.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -254,14 +255,7 @@
       <workItem from="1627195231718" duration="71000" />
       <workItem from="1627197853811" duration="388000" />
       <workItem from="1627290370090" duration="8700000" />
-      <workItem from="1627352710649" duration="2747000" />
-    </task>
-    <task id="LOCAL-00039" summary="Complete the main window interface update program, now you can display important parameter information">
-      <created>1619810345463</created>
-      <option name="number" value="00039" />
-      <option name="presentableId" value="LOCAL-00039" />
-      <option name="project" value="LOCAL" />
-      <updated>1619810345463</updated>
+      <workItem from="1627352710649" duration="3096000" />
     </task>
     <task id="LOCAL-00040" summary="Simple completion of the button press callback function, but also consider the situation of other buttons pressed">
       <created>1619813170483</created>
@@ -599,7 +593,14 @@
       <option name="project" value="LOCAL" />
       <updated>1627355953226</updated>
     </task>
-    <option name="localTasksCounter" value="88" />
+    <task id="LOCAL-00088" summary="Corrected the problem of upper and lower limits of hysteresis comparator">
+      <created>1627356025142</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1627356025142</updated>
+    </task>
+    <option name="localTasksCounter" value="89" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -683,7 +684,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Slightly adjust the main interface to make the layout more beautiful" />
     <MESSAGE value="The code that uart1 forwards directly to UART2 is rolled back, but it has not been tested whether the judging system can receive correctly" />
     <MESSAGE value="Complete the task manager interface design, now you can display the status of the task, stack control and so on. The task name and total user stack space are adjusted to release more main stack space." />
     <MESSAGE value="Adjust the order of data saving function to ensure the correctness and integrity of data in RTC backup area before writing flash. When the file system is damaged, the RTC backup area data will be read automatically, and the crash data will be saved on the screen with dead loop. Adjust the display interface of task manager." />
@@ -708,7 +708,8 @@
     <MESSAGE value="Modified the cmakelists file so that it no longer generates. Bin files at compile time. The reason is that the total size of the generated bin file can reach 400MB, which is very bloated." />
     <MESSAGE value="Change the readme file and add the switching mode of the core state machine and various states to readme." />
     <MESSAGE value="Some terms related to UI interface have been modified. The charging mode is rewritten as hysteresis comparator to prevent critical oscillation." />
-    <option name="LAST_COMMIT_MESSAGE" value="Some terms related to UI interface have been modified. The charging mode is rewritten as hysteresis comparator to prevent critical oscillation." />
+    <MESSAGE value="Corrected the problem of upper and lower limits of hysteresis comparator" />
+    <option name="LAST_COMMIT_MESSAGE" value="Corrected the problem of upper and lower limits of hysteresis comparator" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
