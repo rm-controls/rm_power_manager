@@ -50,3 +50,20 @@ needed, so that the robot can obtain better mobility.
    switched to the non charging mode, and all power will be supplied to the chassis.
 3. Normal: Under this optimization scheme, the capacitor bank is not charged, and all power will be given to the
    chassis.
+
+### Program Flow Chart
+
+```flow
+st=>start: Start
+sub1=>operation: Initialize clock and peripherals
+sub2=>operation: Initialize FreeRTOS
+sub3=>operation: Enter the fast charge calibration mode
+cond1=>condition: Is the referee system connected
+cond2=>condition: Determine whether it is at the preparation time
+
+st->sub1->sub2->cond1
+cond1(yes)->cond2
+cond1(no,right)->io1(right)
+cond2(yes)->sub3
+cond2(no)->io1
+```
