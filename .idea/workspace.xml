@@ -20,7 +20,6 @@
   <component name="ChangeListManager">
     <list default="true" id="f6c6cc04-6080-4c32-9604-8e44d502fd7e" name="Default Changelist" comment="Added the referee system structure initialization code and the function of game state display.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -690,7 +689,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Complete the task manager interface design, now you can display the status of the task, stack control and so on. The task name and total user stack space are adjusted to release more main stack space." />
     <MESSAGE value="Adjust the order of data saving function to ensure the correctness and integrity of data in RTC backup area before writing flash. When the file system is damaged, the RTC backup area data will be read automatically, and the crash data will be saved on the screen with dead loop. Adjust the display interface of task manager." />
     <MESSAGE value="Slightly corrected the high power sampling correction time" />
     <MESSAGE value="Fixed the problem that the data could not be saved because the watchdog was not fed before reset. Added the Sysinfo window to show whether the referee system is connected. Fixed the problem that the run cycle of protect function changed to 10Hz in halt mode. Now it is found that the flash file system will cause a file system error when writing flash. Try to correct this error.Some function names and variable names of the referee system are renamed" />
