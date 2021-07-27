@@ -1,7 +1,6 @@
 # rm_power_manager
 
-![Version](https://img.shields.io/badge/Version-1.4.7-brightgreen.svg)&nbsp;&nbsp;![Build](https://img.shields.io/badge/Build-Passed-success.svg)&nbsp;&nbsp;[![License](https://img.shields.io/badge/License-BSD3.0-blue.svg)](
-LICENSE)
+![Version](https://img.shields.io/badge/Version-1.4.8-brightgreen.svg)&nbsp;&nbsp;![Build](https://img.shields.io/badge/Build-Passed-success.svg)&nbsp;&nbsp;![License](https://img.shields.io/badge/License-BSD3.0-blue.svg)
 ***
 
 ### Breif Introduction
