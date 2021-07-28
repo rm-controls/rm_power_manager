@@ -59,7 +59,7 @@ void FSM_Task(void *pvParameters) {
                 if (FSM_Status.Charge_Mode != Zero_Power_Charge || V_Capacitor <= 15.0)
                     FSM_Status.Charge_Mode = Full_Power_Charge;
                 FSM_Status.Expect_Mode = OverPower_Expect;
-                FSM_Status.Typology_Mode = Only_Charge;
+                FSM_Status.Typology_Mode = Charge_With_Boost;
                 break;
             case Halt_Mode:FSM_Status.Charge_Mode = Zero_Power_Charge;
                 FSM_Status.Expect_Mode = FSM_Status.uExpect_Mode;
@@ -68,6 +68,10 @@ void FSM_Task(void *pvParameters) {
             case NoCharge_Mode:FSM_Status.Charge_Mode = Zero_Power_Charge;
                 FSM_Status.Expect_Mode = Full_Power_Expect;
                 FSM_Status.Typology_Mode = Only_DeliverChassis;
+                break;
+            case SucapTest_Mode:FSM_Status.Charge_Mode = Full_Power_Charge;
+                FSM_Status.Expect_Mode = Zero_Power_Expect;
+                FSM_Status.Typology_Mode = Only_Charge;
                 break;
         }
         if (V_Capacitor >= 15.5f ||
@@ -138,10 +142,12 @@ void FSM_Task(void *pvParameters) {
                 break;
             case OverPower_Expect:EP_Chassis = FSM_Status.Max_Power;
                 break;
+            case Zero_Power_Expect:EP_Chassis = 0;
+                break;
         }
         if (Last_FSM_Status.Typology_Mode != FSM_Status.Typology_Mode) {
             switch (FSM_Status.Typology_Mode) {
-                case Only_Charge:HAL_GPIO_WritePin(BOOST_EN_GPIO_Port, BOOST_EN_Pin, GPIO_PIN_RESET);
+                case Charge_With_Boost:HAL_GPIO_WritePin(BOOST_EN_GPIO_Port, BOOST_EN_Pin, GPIO_PIN_RESET);
                     Delayms(50);
                     HAL_GPIO_WritePin(EN_NMOS_GPIO_Port, EN_NMOS_Pin, GPIO_PIN_SET);
                     break;
@@ -149,6 +155,10 @@ void FSM_Task(void *pvParameters) {
                 case Chassis_With_Charge:HAL_GPIO_WritePin(EN_NMOS_GPIO_Port, EN_NMOS_Pin, GPIO_PIN_RESET);
                     Delayms(50);
                     HAL_GPIO_WritePin(BOOST_EN_GPIO_Port, BOOST_EN_Pin, GPIO_PIN_SET);
+                    break;
+                case Only_Charge:HAL_GPIO_WritePin(BOOST_EN_GPIO_Port, BOOST_EN_Pin, GPIO_PIN_SET);
+                    Delayms(50);
+                    HAL_GPIO_WritePin(EN_NMOS_GPIO_Port, EN_NMOS_Pin, GPIO_PIN_SET);
                     break;
                 case All_Off:HAL_GPIO_WritePin(BOOST_EN_GPIO_Port, BOOST_EN_Pin, GPIO_PIN_SET);
                     HAL_GPIO_WritePin(EN_NMOS_GPIO_Port, EN_NMOS_Pin, GPIO_PIN_SET);

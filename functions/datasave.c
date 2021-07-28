@@ -74,7 +74,7 @@ void DataSave_DisplayLastInfo(void) {
             break;
     }
     switch (FSM_Before_Reboot.Typology_Mode) {
-        case Only_Charge:GUI_Printf(10, 44, C_DARK_RED, C_WHITE, "OnlyCharge");
+        case Charge_With_Boost:GUI_Printf(10, 44, C_DARK_RED, C_WHITE, "OnlyCharge");
             break;
         case Only_DeliverChassis:GUI_Printf(10, 44, C_DARK_RED, C_WHITE, "OnlyPMOS");
             break;

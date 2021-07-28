@@ -45,11 +45,15 @@ void MainForm_Update(void) {
             break;
         case Halt_Mode:
             if (overcurrent_flag == 1)
-                GUI_LableSetText(&FSM_Mode_Lable, " FSM Status: Halt OVC ");
+                GUI_LableSetText(&FSM_Mode_Lable, " FSM Status:Halt OVC ");
+            else if (Setting_FSM_Mode == SucapTest_Optimized)
+                GUI_LableSetText(&FSM_Mode_Lable, "FSM Status:Halt SuCap");
             else
-                GUI_LableSetText(&FSM_Mode_Lable, " FSM Status: Halt DRP ");
+                GUI_LableSetText(&FSM_Mode_Lable, " FSM Status:Halt DRP ");
             break;
         case NoCharge_Mode:GUI_LableSetText(&FSM_Mode_Lable, "FSM Status: OnlyChass");
+            break;
+        case SucapTest_Mode:GUI_LableSetText(&FSM_Mode_Lable, "FSM Status:SuCap Test");
             break;
     }
     switch (FSM_Status.Charge_Mode) {
@@ -66,11 +70,13 @@ void MainForm_Update(void) {
     }
     GUI_LableSetText(&Expect_Power_Lable, " Expect Power: %3dW ", (int) EP_Chassis);
     switch (FSM_Status.Typology_Mode) {
-        case Only_Charge:GUI_LableSetText(&Typology_Lable, "Typology: Only Charge");
+        case Charge_With_Boost:GUI_LableSetText(&Typology_Lable, "Typology: ChargeBoost");
             break;
         case Only_DeliverChassis:GUI_LableSetText(&Typology_Lable, "Typology: OnlyChassis");
             break;
         case Chassis_With_Charge:GUI_LableSetText(&Typology_Lable, "Typology: PMOS&Charge");
+            break;
+        case Only_Charge:GUI_LableSetText(&Typology_Lable, "Typology: Only Charge");
             break;
         case All_Off:GUI_LableSetText(&Typology_Lable, "  Typology: All Off  ");
             break;

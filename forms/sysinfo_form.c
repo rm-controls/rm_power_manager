@@ -31,40 +31,31 @@ void SysInfoForm_Update(void) {
                      (unsigned int) (10 * (Capacitor_Calibrateh.Rw - (float) ((int) Capacitor_Calibrateh.Rw))));
 
     switch (Setting_FSM_Mode) {
-        case Normal_Optimized:
-            GUI_LableSetText(&Setting_FSM_Lable, "  Optimize:  Normal  ");
+        case Normal_Optimized:GUI_LableSetText(&Setting_FSM_Lable, "  Optimize:  Normal  ");
             break;
-        case ChargeFirst_Optimized:
-            GUI_LableSetText(&Setting_FSM_Lable, "Optimize:Charge First");
+        case ChargeFirst_Optimized:GUI_LableSetText(&Setting_FSM_Lable, "Optimize:Charge First");
             break;
-        case UseFirst_Optimized:
-            GUI_LableSetText(&Setting_FSM_Lable, " Optimize: Use First ");
+        case UseFirst_Optimized:GUI_LableSetText(&Setting_FSM_Lable, " Optimize: Use First ");
             break;
-        default:
+        case SucapTest_Optimized:GUI_LableSetText(&Setting_FSM_Lable, " Optimize: SucapTest ");
             break;
+        default:break;
     }
 
     switch (referee_data_.game_status_.game_progress) {
-        case 0:
-            GUI_LableSetText(&Referee_GameStatus_Lable, " GameStatus: NoStart ");
+        case 0:GUI_LableSetText(&Referee_GameStatus_Lable, " GameStatus: NoStart ");
             break;
-        case 1:
-            GUI_LableSetText(&Referee_GameStatus_Lable, " GameStatus: Prepare ");
+        case 1:GUI_LableSetText(&Referee_GameStatus_Lable, " GameStatus: Prepare ");
             break;
-        case 2:
-            GUI_LableSetText(&Referee_GameStatus_Lable, "GameStatus: SelfCheck");
+        case 2:GUI_LableSetText(&Referee_GameStatus_Lable, "GameStatus: SelfCheck");
             break;
-        case 3:
-            GUI_LableSetText(&Referee_GameStatus_Lable, "GameStatus: CountDown");
+        case 3:GUI_LableSetText(&Referee_GameStatus_Lable, "GameStatus: CountDown");
             break;
-        case 4:
-            GUI_LableSetText(&Referee_GameStatus_Lable, "GameStatus: Fighting ");
+        case 4:GUI_LableSetText(&Referee_GameStatus_Lable, "GameStatus: Fighting ");
             break;
-        case 5:
-            GUI_LableSetText(&Referee_GameStatus_Lable, " GameStatus: Sumarry ");
+        case 5:GUI_LableSetText(&Referee_GameStatus_Lable, " GameStatus: Sumarry ");
             break;
-        default:
-            GUI_LableSetText(&Referee_GameStatus_Lable, "   GameStatus: NAN   ");
+        default:GUI_LableSetText(&Referee_GameStatus_Lable, "   GameStatus: NAN   ");
             break;
     }
 }

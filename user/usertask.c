@@ -30,6 +30,16 @@ void UserTask(void *pvParameters) {
                     else
                         FSM_Status.FSM_Mode = OverPower_Mode;
                     break;
+                case SucapTest_Optimized:FSM_Status.FSM_Mode = SucapTest_Mode;
+                    while (Setting_FSM_Mode == SucapTest_Optimized) {
+                        if (Capacitor_Percent > 0.95f) {
+                            FSM_Status.FSM_Mode = Halt_Mode;
+                            break;
+                        }
+                    }
+                    while (Setting_FSM_Mode == SucapTest_Optimized);
+                    FSM_Status.FSM_Mode = NoCharge_Mode;
+                    break;
                 default: FSM_Status.FSM_Mode = Normal_Mode;
                     break;
             }
