@@ -70,7 +70,7 @@ void MainForm_Update(void) {
     }
     GUI_LableSetText(&Expect_Power_Lable, " Expect Power: %3dW ", (int) EP_Chassis);
     switch (FSM_Status.Typology_Mode) {
-        case Charge_With_Boost:GUI_LableSetText(&Typology_Lable, "Typology: ChargeBoost");
+        case Boost_With_Charge:GUI_LableSetText(&Typology_Lable, "Typology: ChargeBoost");
             break;
         case Only_DeliverChassis:GUI_LableSetText(&Typology_Lable, "Typology: OnlyChassis");
             break;

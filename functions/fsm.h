@@ -6,7 +6,7 @@
 #define PROGRAM_FUNCTIONS_FSM_H_
 
 typedef enum {
-    Charge_With_Boost = 1,
+    Boost_With_Charge = 1,
     Only_DeliverChassis = 2,
     Chassis_With_Charge = 3,
     Only_Charge = 4,
@@ -24,8 +24,8 @@ typedef enum {
 typedef enum {
     Const_Power_Expect = 1,
     Proportional_Expect = 2,
-    Full_Power_Expect = 3,
-    Remain_Power_Expect = 4,
+    FullPower_Expect = 3,
+    RemainPower_Expect = 4,
     OverPower_Expect = 5,
     Zero_Power_Expect = 6,
 } Expect_Power_e;

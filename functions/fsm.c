@@ -43,33 +43,28 @@ void FSM_Task(void *pvParameters) {
     while (1) {
         switch (FSM_Status.FSM_Mode) {
             case Normal_Mode:
-                if (FSM_Status.Charge_Mode != Zero_Power_Charge || V_Capacitor <= 15.0)
+                if (FSM_Status.Charge_Mode != Zero_Power_Charge || V_Capacitor <= 15.3f)
                     FSM_Status.Charge_Mode = FSM_Status.uCharge_Mode;
                 FSM_Status.Expect_Mode = FSM_Status.uExpect_Mode;
                 FSM_Status.Typology_Mode = Chassis_With_Charge;
                 break;
             case OverPower_Mode:
-                if (Last_FSM_Status.FSM_Mode == Normal_Mode) {
-                    vTaskSuspend(PIDTask_Handler);
-                    vTaskSuspend(ProtectTask_Handler);
-                    Calibrate_Powerh();
-                    vTaskResume(PIDTask_Handler);
-                    vTaskResume(ProtectTask_Handler);
-                }
-                if (FSM_Status.Charge_Mode != Zero_Power_Charge || V_Capacitor <= 15.0)
+                if (FSM_Status.Charge_Mode != Zero_Power_Charge || V_Capacitor <= 15.3f)
                     FSM_Status.Charge_Mode = Full_Power_Charge;
                 FSM_Status.Expect_Mode = OverPower_Expect;
-                FSM_Status.Typology_Mode = Charge_With_Boost;
+                FSM_Status.Typology_Mode = Boost_With_Charge;
                 break;
             case Halt_Mode:FSM_Status.Charge_Mode = Zero_Power_Charge;
-                FSM_Status.Expect_Mode = FSM_Status.uExpect_Mode;
+                FSM_Status.Expect_Mode = Zero_Power_Expect;
                 FSM_Status.Typology_Mode = All_Off;
                 break;
             case NoCharge_Mode:FSM_Status.Charge_Mode = Zero_Power_Charge;
-                FSM_Status.Expect_Mode = Full_Power_Expect;
+                FSM_Status.Expect_Mode = FullPower_Expect;
                 FSM_Status.Typology_Mode = Only_DeliverChassis;
                 break;
-            case SucapTest_Mode:FSM_Status.Charge_Mode = Full_Power_Charge;
+            case SucapTest_Mode:
+                if (FSM_Status.Charge_Mode != Zero_Power_Charge || V_Capacitor <= 15.3f)
+                    FSM_Status.Charge_Mode = Full_Power_Charge;
                 FSM_Status.Expect_Mode = Zero_Power_Expect;
                 FSM_Status.Typology_Mode = Only_Charge;
                 break;
@@ -98,10 +93,10 @@ void FSM_Task(void *pvParameters) {
                     PID_Capacitor.User = 0;
                 else if (referee_data_.power_heat_data_.chassis_power_buffer <= 20)
                     PID_Capacitor.User = (float) (referee_data_.game_robot_status_.chassis_power_limit)
-                        * FSM_Status.P_Charge * 0.5f;
+                        * FSM_Status.P_Charge * 0.8f;
                 else if (referee_data_.power_heat_data_.chassis_power_buffer <= 30)
                     PID_Capacitor.User = (float) (referee_data_.game_robot_status_.chassis_power_limit)
-                        * FSM_Status.P_Charge * 0.7f;
+                        * FSM_Status.P_Charge * 0.9f;
                 else if (referee_data_.power_heat_data_.chassis_power_buffer >= 50)
                     PID_Capacitor.User = (float) (referee_data_.game_robot_status_.chassis_power_limit)
                         * FSM_Status.P_Charge;
@@ -134,9 +129,9 @@ void FSM_Task(void *pvParameters) {
                 EP_Chassis = (float) referee_data_.game_robot_status_.chassis_power_limit
                     * FSM_Status.P_Expect;
                 break;
-            case Full_Power_Expect:EP_Chassis = (float) referee_data_.game_robot_status_.chassis_power_limit;
+            case FullPower_Expect:EP_Chassis = (float) referee_data_.game_robot_status_.chassis_power_limit;
                 break;
-            case Remain_Power_Expect:
+            case RemainPower_Expect:
                 EP_Chassis = (float) (referee_data_.game_robot_status_.chassis_power_limit
                     - FSM_Status.Charge_Power);
                 break;
@@ -147,7 +142,7 @@ void FSM_Task(void *pvParameters) {
         }
         if (Last_FSM_Status.Typology_Mode != FSM_Status.Typology_Mode) {
             switch (FSM_Status.Typology_Mode) {
-                case Charge_With_Boost:HAL_GPIO_WritePin(BOOST_EN_GPIO_Port, BOOST_EN_Pin, GPIO_PIN_RESET);
+                case Boost_With_Charge:HAL_GPIO_WritePin(BOOST_EN_GPIO_Port, BOOST_EN_Pin, GPIO_PIN_RESET);
                     Delayms(50);
                     HAL_GPIO_WritePin(EN_NMOS_GPIO_Port, EN_NMOS_Pin, GPIO_PIN_SET);
                     break;
@@ -156,10 +151,7 @@ void FSM_Task(void *pvParameters) {
                     Delayms(50);
                     HAL_GPIO_WritePin(BOOST_EN_GPIO_Port, BOOST_EN_Pin, GPIO_PIN_SET);
                     break;
-                case Only_Charge:HAL_GPIO_WritePin(BOOST_EN_GPIO_Port, BOOST_EN_Pin, GPIO_PIN_SET);
-                    Delayms(50);
-                    HAL_GPIO_WritePin(EN_NMOS_GPIO_Port, EN_NMOS_Pin, GPIO_PIN_SET);
-                    break;
+                case Only_Charge:
                 case All_Off:HAL_GPIO_WritePin(BOOST_EN_GPIO_Port, BOOST_EN_Pin, GPIO_PIN_SET);
                     HAL_GPIO_WritePin(EN_NMOS_GPIO_Port, EN_NMOS_Pin, GPIO_PIN_SET);
                     break;
