@@ -1,6 +1,11 @@
 # rm_power_manager
 
 ![Version](https://img.shields.io/badge/Version-1.4.8-brightgreen.svg)&nbsp;&nbsp;![Build](https://img.shields.io/badge/Build-Passed-success.svg)&nbsp;&nbsp;![License](https://img.shields.io/badge/License-BSD3.0-blue.svg)
+
+**Author: Yanzhen Zhu <br/>
+Affiliation: DynamicX <br/>
+Maintainer:YanzhenZhu, acme.zhuyanzhen@gmail.com**
+
 ***
 
 ### Breif Introduction
@@ -32,7 +37,9 @@ needed, so that the robot can obtain better mobility.
    about 200W in a short time.
 3. NoCharge Mode: All power is supplied directly to the chassis through the high side switch. Due to the direct supply
    chassis, the energy loss of this mode is the smallest.
-4. Halt Mode: Turn off the capacitor charging module, turn off the capacitor boost module and turn off the high side
+4. SucapTest Mode:Turn off all outputs to the chassis and charge the capacitor bank with full power. This status is only
+   used during recording.
+5. Halt Mode: Turn off the capacitor charging module, turn off the capacitor boost module and turn off the high side
    switch. At this time, the input, output and capacitor bank are completely disconnected for the mode of robot death or
    overload protection.
 
@@ -50,20 +57,5 @@ needed, so that the robot can obtain better mobility.
    switched to the non charging mode, and all power will be supplied to the chassis.
 3. Normal: Under this optimization scheme, the capacitor bank is not charged, and all power will be given to the
    chassis.
-
-### Program Flow Chart
-
-```flow
-st=>start: Start
-sub1=>operation: Initialize clock and peripherals
-sub2=>operation: Initialize FreeRTOS
-sub3=>operation: Enter the fast charge calibration mode
-cond1=>condition: Is the referee system connected
-cond2=>condition: Determine whether it is at the preparation time
-
-st->sub1->sub2->cond1
-cond1(yes)->cond2
-cond1(no,right)->io1(right)
-cond2(yes)->sub3
-cond2(no)->io1
-```
+4. Sucap Test:Charge the supercapacitor with full power and enter the halt mode after it is fully charged until NUC
+   sends information and switches to other modes.
