@@ -1,6 +1,6 @@
 # rm_power_manager
 
-![Version](https://img.shields.io/badge/Version-1.4.8-brightgreen.svg)&nbsp;&nbsp;![Build](https://img.shields.io/badge/Build-Passed-success.svg)&nbsp;&nbsp;![License](https://img.shields.io/badge/License-BSD3.0-blue.svg)
+![Version](https://img.shields.io/badge/Version-1.5.2-brightgreen.svg)&nbsp;&nbsp;![Build](https://img.shields.io/badge/Build-Passed-success.svg)&nbsp;&nbsp;![License](https://img.shields.io/badge/License-BSD3.0-blue.svg)
 
 **Author: Yanzhen Zhu <br/>
 Affiliation: DynamicX <br/>
@@ -16,14 +16,16 @@ competition rules allow the use of super capacitor, the main function of the mod
 charge the super capacitor, so that the super capacitor can generate more than 200W power to the robot chassis when
 needed, so that the robot can obtain better mobility.
 
+**Keywords:** Power manager, Over Power, RoboMaster
+
 ***
 
 ### Develop Environment
 
-+ IDE: CLion 2020.3 - CL203.7717.62
-+ Compiler: gcc-arm-none-eabi 9-2020-q2-update
-+ Debugger: OpenOCD 0.10.0 (2020-07-19)
-+ MCU: STM32H750VBT6 &nbsp;&nbsp; 128K Flash &nbsp;&nbsp; 1M RAM
++ IDE: CLion 2021.1.3 - CL211.7628.27
++ Compiler: gcc-arm-none-eabi 10-2020-q4-major
++ Debugger: OpenOCD 0.11.0 (2021-06-25)
++ MCU: STM32H750VBT6 with 128KB Flash & 1MB RAM
 
 ***
 
@@ -49,13 +51,20 @@ needed, so that the robot can obtain better mobility.
 
 &nbsp;&nbsp;There are three optimization schemes for different scenarios:
 
-1. Charge priority: When the power of the capacitor bank is not full, charge the capacitor bank with 15% limited power,
+1. Charge priority: When the power of the capacitor bank is not full, charge the capacitor bank with 15% limited power.
    at this time, only 85% of the limited power of the chassis can be used. When the power of the capacitor bank exceeds
    95%, it will switch to the non charging mode, and all power will be supplied to the chassis.
-2. discharge priority: When the power of the capacitor bank is greater than 10%, the state machine works in the super
-   power state, and the output power can reach 200W. When the power of the capacitor bank is less than 10%, it will be
+2. Use priority: When the power of the capacitor bank is greater than 10%, the state machine works in the super power
+   state, and the output power can reach 200W. When the power of the capacitor bank is less than 10%, it will be
    switched to the non charging mode, and all power will be supplied to the chassis.
 3. Normal: Under this optimization scheme, the capacitor bank is not charged, and all power will be given to the
    chassis.
-4. Sucap Test:Charge the supercapacitor with full power and enter the halt mode after it is fully charged until NUC
+4. Sucap Test: Charge the super capacitor with full power and enter the halt mode after it is fully charged until NUC
    sends information and switches to other modes.
+
+***
+
+### Bugs & Feature Requests
+
+Please report bugs and request features using
+the [Issue Tracker](http://frp.acmetech.top:7070/dynamicx/rm_power_manager/-/issues)
