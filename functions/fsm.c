@@ -43,13 +43,13 @@ void FSM_Task(void *pvParameters) {
     while (1) {
         switch (FSM_Status.FSM_Mode) {
             case Normal_Mode:
-                if (FSM_Status.Charge_Mode != Zero_Power_Charge || V_Capacitor <= 15.3f)
+                if (FSM_Status.Charge_Mode != Zero_Power_Charge || V_Capacitor <= 15.2f)
                     FSM_Status.Charge_Mode = FSM_Status.uCharge_Mode;
                 FSM_Status.Expect_Mode = FSM_Status.uExpect_Mode;
                 FSM_Status.Typology_Mode = Chassis_With_Charge;
                 break;
             case OverPower_Mode:
-                if (FSM_Status.Charge_Mode != Zero_Power_Charge || V_Capacitor <= 15.3f)
+                if (FSM_Status.Charge_Mode != Zero_Power_Charge || V_Capacitor <= 15.2f)
                     FSM_Status.Charge_Mode = Full_Power_Charge;
                 FSM_Status.Expect_Mode = OverPower_Expect;
                 FSM_Status.Typology_Mode = Boost_With_Charge;
@@ -63,13 +63,13 @@ void FSM_Task(void *pvParameters) {
                 FSM_Status.Typology_Mode = Only_DeliverChassis;
                 break;
             case SucapTest_Mode:
-                if (FSM_Status.Charge_Mode != Zero_Power_Charge || V_Capacitor <= 15.3f)
+                if (FSM_Status.Charge_Mode != Zero_Power_Charge || V_Capacitor <= 15.2f)
                     FSM_Status.Charge_Mode = Full_Power_Charge;
                 FSM_Status.Expect_Mode = ZeroPower_Expect;
                 FSM_Status.Typology_Mode = Only_Charge;
                 break;
         }
-        if (V_Capacitor >= 15.5f ||
+        if (V_Capacitor > 15.5f ||
             (referee_data_.power_heat_data_.chassis_power_buffer <= 5 && referee_avaiflag == 1))
             FSM_Status.Charge_Mode = Zero_Power_Charge;
         switch (FSM_Status.Charge_Mode) {
