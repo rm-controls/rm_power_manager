@@ -31,7 +31,7 @@ void UserTask(void *pvParameters) {
                         FSM_Status.FSM_Mode = OverPower_Mode;
                     break;
                 case SucapTest_Optimized:FSM_Status.FSM_Mode = SucapTest_Mode;
-                    while (Capacitor_Percent < 0.9f && Setting_OptiSchemes == SucapTest_Optimized)
+                    while (Capacitor_Percent < 0.95f && Setting_OptiSchemes == SucapTest_Optimized)
                         Delayms(1);
                     FSM_Status.FSM_Mode = Halt_Mode;
                     while (Setting_OptiSchemes == SucapTest_Optimized)
