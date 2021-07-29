@@ -12,6 +12,7 @@
 #include "stm32h7xx_hal.h"
 #include "usart.h"
 #include "referee.h"
+#include "sysinfo_form.h"
 
 extern TaskHandle_t ProtectTask_Handler;
 unsigned short referee_avaiflag = 0, referee_time_counter = 0;
@@ -43,11 +44,15 @@ void Protect_Task(void *pvParameters) {
                 overcurrent_flag = 0;
                 FSM_Status.FSM_Mode = Halt_Mode;
             }
-        } else if (FSM_Status.FSM_Mode == Halt_Mode && V_Baterry > 20.0f && overcurrent_flag == 0) {
-            vTaskPrioritySet(ProtectTask_Handler, 1);
-            Delayms(500);
-            DataSave_To_Flash(RePowerOn_Reset);
-            SoftReset();
+        } else if (FSM_Status.FSM_Mode == Halt_Mode && V_Baterry > 20.0f && overcurrent_flag == 0
+            && Setting_FSM_Mode != SucapTest_Mode) {
+            Delayms(100);
+            if (Setting_FSM_Mode != SucapTest_Mode && FSM_Status.FSM_Mode == Halt_Mode) {
+                vTaskPrioritySet(ProtectTask_Handler, 1);
+                Delayms(100);
+                DataSave_To_Flash(RePowerOn_Reset);
+                SoftReset();
+            }
         }
         if (referee_time_counter >= 1000) {
             referee_avaiflag = 0;
