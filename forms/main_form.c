@@ -46,7 +46,7 @@ void MainForm_Update(void) {
         case Halt_Mode:
             if (overcurrent_flag == 1)
                 GUI_LableSetText(&FSM_Mode_Lable, " FSM Status:Halt OVC ");
-            else if (Setting_FSM_Mode == SucapTest_Optimized)
+            else if (Setting_OptiSchemes == SucapTest_Optimized)
                 GUI_LableSetText(&FSM_Mode_Lable, "FSM Status:Halt SuCap");
             else
                 GUI_LableSetText(&FSM_Mode_Lable, " FSM Status:Halt DRP ");

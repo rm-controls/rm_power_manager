@@ -45,9 +45,9 @@ void Protect_Task(void *pvParameters) {
                 FSM_Status.FSM_Mode = Halt_Mode;
             }
         } else if (FSM_Status.FSM_Mode == Halt_Mode && V_Baterry > 20.0f && overcurrent_flag == 0
-            && Setting_FSM_Mode != SucapTest_Mode) {
+            && Setting_OptiSchemes != SucapTest_Optimized) {
             Delayms(100);
-            if (Setting_FSM_Mode != SucapTest_Mode && FSM_Status.FSM_Mode == Halt_Mode) {
+            if (Setting_OptiSchemes != SucapTest_Optimized && FSM_Status.FSM_Mode == Halt_Mode) {
                 vTaskPrioritySet(ProtectTask_Handler, 1);
                 Delayms(100);
                 DataSave_To_Flash(RePowerOn_Reset);

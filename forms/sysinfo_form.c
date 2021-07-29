@@ -8,7 +8,7 @@ Button_Struct_t TurnBack_Button4;
 Lable_Struct_t Referee_Online_Lable, RwH_L_Lable, Setting_FSM_Lable;
 Lable_Struct_t Referee_GameStatus_Lable;
 
-unsigned char Setting_FSM_Mode = 0;
+unsigned char Setting_OptiSchemes = 0;
 
 void TurnBack_Button4_Callback(void *object, unsigned char key) {
     Form_Info_Structure.Form_Index = Log_Form_Index;
@@ -30,7 +30,7 @@ void SysInfoForm_Update(void) {
                      (unsigned int) Capacitor_Calibrateh.Rw,
                      (unsigned int) (10 * (Capacitor_Calibrateh.Rw - (float) ((int) Capacitor_Calibrateh.Rw))));
 
-    switch (Setting_FSM_Mode) {
+    switch (Setting_OptiSchemes) {
         case Normal_Optimized:GUI_LableSetText(&Setting_FSM_Lable, "  Optimize:  Normal  ");
             break;
         case ChargeFirst_Optimized:GUI_LableSetText(&Setting_FSM_Lable, "Optimize:Charge First");
