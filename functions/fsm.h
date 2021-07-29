@@ -27,7 +27,7 @@ typedef enum {
     FullPower_Expect = 3,
     RemainPower_Expect = 4,
     OverPower_Expect = 5,
-    Zero_Power_Expect = 6,
+    ZeroPower_Expect = 6,
 } Expect_Power_e;
 
 typedef enum {

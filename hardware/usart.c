@@ -50,7 +50,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
                         Setting_FSM_Mode = ChargeFirst_Optimized;
                     else if (aRxBuffer1[0] == 0xCC)
                         Setting_FSM_Mode = UseFirst_Optimized;
-                    else if (aRxBuffer1[0] == 0x14)
+                    else if (aRxBuffer1[0] == 0xD4)
                         Setting_FSM_Mode = SucapTest_Optimized;
                     ModeBuffer = 0;
                     break;

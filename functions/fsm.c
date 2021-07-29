@@ -55,7 +55,7 @@ void FSM_Task(void *pvParameters) {
                 FSM_Status.Typology_Mode = Boost_With_Charge;
                 break;
             case Halt_Mode:FSM_Status.Charge_Mode = Zero_Power_Charge;
-                FSM_Status.Expect_Mode = Zero_Power_Expect;
+                FSM_Status.Expect_Mode = ZeroPower_Expect;
                 FSM_Status.Typology_Mode = All_Off;
                 break;
             case NoCharge_Mode:FSM_Status.Charge_Mode = Zero_Power_Charge;
@@ -65,7 +65,7 @@ void FSM_Task(void *pvParameters) {
             case SucapTest_Mode:
                 if (FSM_Status.Charge_Mode != Zero_Power_Charge || V_Capacitor <= 15.3f)
                     FSM_Status.Charge_Mode = Full_Power_Charge;
-                FSM_Status.Expect_Mode = Zero_Power_Expect;
+                FSM_Status.Expect_Mode = ZeroPower_Expect;
                 FSM_Status.Typology_Mode = Only_Charge;
                 break;
         }
@@ -137,7 +137,7 @@ void FSM_Task(void *pvParameters) {
                 break;
             case OverPower_Expect:EP_Chassis = FSM_Status.Max_Power;
                 break;
-            case Zero_Power_Expect:EP_Chassis = 0;
+            case ZeroPower_Expect:EP_Chassis = 0;
                 break;
         }
         if (Last_FSM_Status.Typology_Mode != FSM_Status.Typology_Mode) {

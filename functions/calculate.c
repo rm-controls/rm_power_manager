@@ -20,7 +20,7 @@ float I_Capacitor, I_Chassis, V_Capacitor, V_Baterry, V_Chassis
 unsigned short I_CapOffset, I_ChaOffset;
 
 void Referee_Power_Callback(void) {
-    if (referee_data_.game_robot_status_.chassis_power_limit > 150)
+    if (referee_data_.game_robot_status_.chassis_power_limit > 200)
         referee_data_.game_robot_status_.chassis_power_limit = 60;
 }
 
