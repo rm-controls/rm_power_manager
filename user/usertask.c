@@ -24,7 +24,7 @@ void UserTask(void *pvParameters) {
                 FSM_Status.FSM_Mode = NoCharge_Mode;
                 xSemaphoreTake(Calibrate_Semaphore, 0xFFFFFFFFUL);
                 GUI_Clear(C_WHITE);
-                GUI_Printf(22, 74, C_DARK_GREEN, C_WHITE, "Calibrating...");
+                GUI_Printf(22, 74, C_DARK_BLUE, C_WHITE, "Calibrating...");
                 ComplexPower_Calibrate();
                 xSemaphoreGive(Calibrate_Semaphore);
                 complex_calibrate_flag = 1;
@@ -73,7 +73,6 @@ void LCD_Refresh(void *pvParameters) {
     MainForm_Init();
     while (1) {
         xSemaphoreTake(Calibrate_Semaphore, 0xFFFFFFFFUL);
-        xSemaphoreGive(Calibrate_Semaphore);
         Form_UpdateEvent();
         running_timer_counter++;
         if (running_timer_counter == 20)
@@ -82,6 +81,7 @@ void LCD_Refresh(void *pvParameters) {
             running_timer_counter = 0;
             GUI_DrawCircle(123, 5, 4, C_DARK_GREEN, Filled);
         }
+        xSemaphoreGive(Calibrate_Semaphore);
         Delayms(50);
     }
 }

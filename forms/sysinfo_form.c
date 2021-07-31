@@ -5,7 +5,7 @@
 #include "main.h"
 
 Button_Struct_t TurnBack_Button4;
-Lable_Struct_t Referee_Online_Lable, RwH_L_Lable, Setting_FSM_Lable;
+Lable_Struct_t Referee_Online_Lable, X2_Coefficient_Lable, Setting_FSM_Lable;
 Lable_Struct_t Referee_GameStatus_Lable;
 
 unsigned char Setting_OptiSchemes = 0;
@@ -23,7 +23,7 @@ void SysInfoForm_Update(void) {
         Referee_Online_Lable.Color = TransColor(C_DARK_RED);
         GUI_LableSetText(&Referee_Online_Lable, "Referee Offline");
     }
-    GUI_LableSetText(&RwH_L_Lable,
+    GUI_LableSetText(&X2_Coefficient_Lable,
                      "%d.%dx^2 + %d.%dx + %d.%d",
                      (unsigned int) Capacitor_Calibrate.coefficient[0],
                      (unsigned int) (10
@@ -74,10 +74,10 @@ void SysInfoForm_Init(void) {
     Referee_Online_Lable.Color = C_DARK_RED;
     Referee_Online_Lable.Text = "Referee Offline";
 
-    RwH_L_Lable.X_Pos = 6;
-    RwH_L_Lable.Y_Pos = 16;
-    RwH_L_Lable.Color = C_BLACK;
-    RwH_L_Lable.Text = "-.-x^2 + -.-x + -.-";
+    X2_Coefficient_Lable.X_Pos = 6;
+    X2_Coefficient_Lable.Y_Pos = 16;
+    X2_Coefficient_Lable.Color = C_BLACK;
+    X2_Coefficient_Lable.Text = "-.------- -.-------";
 
     Setting_FSM_Lable.X_Pos = 1;
     Setting_FSM_Lable.Y_Pos = 30;
@@ -100,7 +100,7 @@ void SysInfoForm_Init(void) {
     GUI_Clear(C_WHITE);
     GUI_InitButton(&TurnBack_Button4);
     GUI_InitLable(&Referee_Online_Lable);
-    GUI_InitLable(&RwH_L_Lable);
+    GUI_InitLable(&X2_Coefficient_Lable);
     GUI_InitLable(&Setting_FSM_Lable);
     GUI_InitLable(&Referee_GameStatus_Lable);
 }
