@@ -50,22 +50,22 @@ void ComplexPower_Calibrate(void) {
 }
 
 void SimplePower_Calibrate(void) {
-    Delayms(300);
+    Delayms(100);
     if (referee_avaiflag == 1) {
         float x[4], y[4], xy_sum = 0, x_ave, y_ave, x2_sum = 0, x_sum = 0, y_sum = 0;
         HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_RESET);
         for (unsigned char counter = 0; counter < 4; counter++) {
-            float sample_local_cum = 0, sample_referee_sum = 0;
+            float sample_local_sum = 0, sample_referee_sum = 0;
             HAL_DAC_SetValue(&hdac1,
                              DAC_CHANNEL_1,
                              DAC_ALIGN_12B_R,
                              (unsigned short) (2730.0f * (float) (counter + 1) / V_Capacitor));     //20 ~ 40W
             for (unsigned char counterf = 0; counterf < 10; counterf++) {
                 Delayms(100);
-                sample_local_cum += P_Capacitor;
+                sample_local_sum += P_Capacitor;
                 sample_referee_sum += referee_data_.power_heat_data_.chassis_power;
             }
-            x[counter] = sample_local_cum / 10.0f;
+            x[counter] = sample_local_sum / 10.0f;
             y[counter] = sample_referee_sum / 10.0f;
         }
         for (int counter = 0; counter < 4; ++counter) {
@@ -81,22 +81,28 @@ void SimplePower_Calibrate(void) {
         Capacitor_Calibrate.coefficient[2] = y_ave - Capacitor_Calibrate.coefficient[1] * x_ave;
     } else {
         Capacitor_Calibrate.coefficient[0] = 0;
-        Capacitor_Calibrate.coefficient[1] = 1;
+        Capacitor_Calibrate.coefficient[1] = 1.0f;
         Capacitor_Calibrate.coefficient[2] = 0;
     }
 }
 
 void Sensor_Config(void) {
+    unsigned long capoffset_sum = 0, chaoffset_sum = 0;
     Capacitor_Calibrate.coefficient[0] = 0;
-    Capacitor_Calibrate.coefficient[1] = 1;
+    Capacitor_Calibrate.coefficient[1] = 1.0f;
     Capacitor_Calibrate.coefficient[2] = 0;
     HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_12B_R, 0x00);
     HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_SET);
     HAL_GPIO_WritePin(BOOST_EN_GPIO_Port, BOOST_EN_Pin, GPIO_PIN_SET);
     HAL_GPIO_WritePin(EN_NMOS_GPIO_Port, EN_NMOS_Pin, GPIO_PIN_SET);
     Delayms(200);
-    I_CapOffset = ADC_FinalResult[0];
-    I_ChaOffset = ADC_FinalResult[1];
+    for (unsigned char counter = 0; counter < 10; counter++) {
+        capoffset_sum += ADC_FinalResult[0];
+        chaoffset_sum += ADC_FinalResult[1];
+        Delayms(20);
+    }
+    I_CapOffset = capoffset_sum / 10;
+    I_ChaOffset = chaoffset_sum / 10;
     Delayms(200);
 }
 
