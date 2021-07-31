@@ -2,6 +2,7 @@
 // Created by Lao·Zhu on 2021/4/5.
 //
 
+#include "rtc.h"
 #include "fsm.h"
 #include "system.h"
 #include "stm32h7xx_hal.h"
@@ -34,12 +35,20 @@ void FSM_Task(void *pvParameters) {
     HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_SET);
     HAL_GPIO_WritePin(EN_NMOS_GPIO_Port, EN_NMOS_Pin, GPIO_PIN_SET);
     HAL_GPIO_WritePin(BOOST_EN_GPIO_Port, BOOST_EN_Pin, GPIO_PIN_SET);
+    HAL_PWR_EnableBkUpAccess();
+    if (HAL_RTCEx_BKUPRead(&hrtc, RTC_BKP_DR7) == 0xA5A5A5A5UL) {
+        *(uint32_t *) (&Capacitor_Calibrate.coefficient[0]) = HAL_RTCEx_BKUPRead(&hrtc, RTC_BKP_DR4);
+        *(uint32_t *) (&Capacitor_Calibrate.coefficient[1]) = HAL_RTCEx_BKUPRead(&hrtc, RTC_BKP_DR5);
+        *(uint32_t *) (&Capacitor_Calibrate.coefficient[2]) = HAL_RTCEx_BKUPRead(&hrtc, RTC_BKP_DR6);
+    }
+    if (Verify_CalibrateCoefficient() == 1) {
+        Capacitor_Calibrate.coefficient[0] = 0;
+        Capacitor_Calibrate.coefficient[1] = 1;
+        Capacitor_Calibrate.coefficient[2] = 0;
+    }
     xSemaphoreGive(Calibrate_Semaphore);
-
     Delayms(10);
-
     xTaskCreate(WatchDog_Task, "WatchDog", 128, NULL, 1, &WatchdogTask_Handler);
-
     while (1) {
         switch (FSM_Status.FSM_Mode) {
             case Normal_Mode:

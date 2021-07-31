@@ -13,6 +13,7 @@ extern Power_Calibrate_t Capacitor_Calibrate;
 extern float I_Capacitor, I_Chassis, V_Capacitor, V_Baterry,
     V_Chassis, P_Chassis, P_Capacitor, EP_Chassis, W_Capacitor, Capacitor_Percent;
 extern unsigned short I_CapOffset, I_ChaOffset;
+unsigned char Verify_CalibrateCoefficient(void);
 void Calculate_Power(void);
 void Sensor_Config(void);
 void SimplePower_Calibrate(void);

@@ -27,6 +27,18 @@ void Referee_Power_Callback(void) {
         referee_data_.game_robot_status_.chassis_power_limit = 60;
 }
 
+unsigned char Verify_CalibrateCoefficient(void) {
+    for (unsigned char counter = 10; counter < 120; counter += 10) {
+        float verify_p =
+            ((float) counter * Capacitor_Calibrate.coefficient[0] + Capacitor_Calibrate.coefficient[1])
+                * (float) counter + Capacitor_Calibrate.coefficient[2];
+        float error = verify_p - (float) counter;
+        if (error > 30.0f || error < -30.0f)
+            return 1;
+    }
+    return 0;
+}
+
 void ComplexPower_Calibrate(void) {
     vTaskSuspend(PIDTask_Handler);
     vTaskSuspend(FSMTask_Handler);
