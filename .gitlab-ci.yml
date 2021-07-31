@@ -2,7 +2,7 @@ image: ubuntu:focal
 
 stages:
   - build
-  - deploy
+  - generate
 
 build:
   allow_failure: false
@@ -27,7 +27,7 @@ build:
 
 generate:
   allow_failure: true
-  stage: deploy
+  stage: generate
   artifacts:
     expire_in: 3 days
   only:
