@@ -25,32 +25,45 @@ void Referee_Power_Callback(void) {
 
 void ComplexPower_Calibrate(void) {
     if (referee_avaiflag == 1) {
-        float x[10], y[10], x_sum = 0, y_sum = 0;
+        float x[13], y[13], x_sum = 0, y_sum = 0, x2_sum = 0, x3_sum = 0, x4_sum = 0, xy_sum = 0, x2y_sum = 0;
         HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_RESET);
-        for (unsigned char counter = 0; counter < 10; counter++) {
+        for (unsigned char counter = 0; counter < 13; counter++) {
             HAL_DAC_SetValue(&hdac1,
                              DAC_CHANNEL_1,
                              DAC_ALIGN_12B_R,
-                             (unsigned short) (2730.0f * (float) (counter + 3) / V_Capacitor));     //30 ~ 120W
-            for (unsigned char counterf = 0; counterf < 10; counterf++) {
-                Delayms(100);
+                             (unsigned short) (2730.0f * (float) (counter + 1) / V_Capacitor));     //10 ~ 130W
+            for (unsigned char counterf = 0; counterf < 6; counterf++) {
+                Delayms(50);
                 x_sum += P_Capacitor;
                 y_sum += referee_data_.power_heat_data_.chassis_power;
             }
-            x[counter] = x_sum / 10.0f;
-            y[counter] = y_sum / 10.0f;
+            x[counter] = x_sum / 6.0f;
+            y[counter] = y_sum / 6.0f;
+            x2_sum += (x[counter] * x[counter]);
+            x3_sum += (x[counter] * x[counter] * x[counter]);
+            x4_sum += (x[counter] * x[counter] * x[counter] * x[counter]);
+            xy_sum += (x[counter] * y[counter]);
+            x2y_sum += (x[counter] * x[counter] * y[counter]);
         }
-
+        HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_SET);
+        for (int counter = 0; counter < 2000; ++counter) {
+            Capacitor_Calibrate.coefficient[0] =
+                (x2y_sum - x3_sum * Capacitor_Calibrate.coefficient[1] - x2_sum * Capacitor_Calibrate.coefficient[2])
+                    / x4_sum;
+            Capacitor_Calibrate.coefficient[1] =
+                (xy_sum - x_sum * Capacitor_Calibrate.coefficient[2] - x3_sum * Capacitor_Calibrate.coefficient[0])
+                    / x2_sum;
+            Capacitor_Calibrate.coefficient[2] =
+                (y_sum - x2_sum * Capacitor_Calibrate.coefficient[0] - x_sum * Capacitor_Calibrate.coefficient[1]) / 13;
+        }
     } else {
         Capacitor_Calibrate.coefficient[0] = 0;
         Capacitor_Calibrate.coefficient[1] = 1;
         Capacitor_Calibrate.coefficient[2] = 0;
     }
-    HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_SET);
 }
 
 void SimplePower_Calibrate(void) {
-    Delayms(100);
     if (referee_avaiflag == 1) {
         float x[4], y[4], xy_sum = 0, x_ave, y_ave, x2_sum = 0, x_sum = 0, y_sum = 0;
         HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_RESET);
@@ -59,15 +72,16 @@ void SimplePower_Calibrate(void) {
             HAL_DAC_SetValue(&hdac1,
                              DAC_CHANNEL_1,
                              DAC_ALIGN_12B_R,
-                             (unsigned short) (2730.0f * (float) (counter + 1) / V_Capacitor));     //20 ~ 40W
-            for (unsigned char counterf = 0; counterf < 10; counterf++) {
-                Delayms(100);
+                             (unsigned short) (2730.0f * (float) (counter + 1) / V_Capacitor));     //10 ~ 40W
+            for (unsigned char counterf = 0; counterf < 5; counterf++) {
+                Delayms(50);
                 sample_local_sum += P_Capacitor;
                 sample_referee_sum += referee_data_.power_heat_data_.chassis_power;
             }
-            x[counter] = sample_local_sum / 10.0f;
-            y[counter] = sample_referee_sum / 10.0f;
+            x[counter] = sample_local_sum / 5.0f;
+            y[counter] = sample_referee_sum / 5.0f;
         }
+        HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_SET);
         for (int counter = 0; counter < 4; ++counter) {
             xy_sum += (x[counter] * y[counter]);
             x2_sum += (x[counter] * x[counter]);
@@ -147,4 +161,6 @@ void Calculate_Power(void) {
     P_Capacitor =
         (tmp_capacitor_power * Capacitor_Calibrate.coefficient[0] + Capacitor_Calibrate.coefficient[1])
             * tmp_capacitor_power + Capacitor_Calibrate.coefficient[2];
+    if (P_Capacitor < 0)
+        P_Capacitor = 0;
 }
