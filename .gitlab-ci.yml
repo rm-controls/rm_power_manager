@@ -26,7 +26,7 @@ build:
     - ls
 
 generate:
-  allow_failure: false
+  allow_failure: true
   stage: deploy
   artifacts:
     expire_in: 3 days
