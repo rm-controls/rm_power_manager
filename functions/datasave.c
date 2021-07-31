@@ -152,5 +152,8 @@ void DataSave_To_Flash(Saving_Reason_e reason) {
     HAL_WWDG_Refresh(&hwwdg1);
     for (unsigned char counter = 0; counter < 16; counter++)
         CurrentFile_Structure->ResetInfo[counter] = Buffer[counter];
-    FileSystem_WriteIntoFlash();
+# if USE_SPI_FLASH_FATFS == 1
+    if (FileSystem_Available_Flag == 1)
+        FileSystem_WriteIntoFlash();
+#endif
 }

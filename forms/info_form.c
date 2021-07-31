@@ -55,6 +55,7 @@ void LogForm_Update(void) {
 }
 
 void GFileList_ListBox_ScanFile() {
+# if USE_SPI_FLASH_FATFS == 1
     if (FileSystem_Structure->FileNum != 1 && FileSystem_Available_Flag != 0) {
         FileHead_Struct_t CurrentFile_Tmp;
         unsigned int NextHeadAddr = FileSystem_Structure->FirstFileAddr;
@@ -74,6 +75,9 @@ void GFileList_ListBox_ScanFile() {
         GUI_ListBoxAddItem(&FileList_ListBox, "No Log Item");
     else
         GUI_ListBoxAddItem(&FileList_ListBox, "Flash Broken");
+#else
+    GUI_ListBoxAddItem(&FileList_ListBox, "No Flash Use");
+#endif
 }
 
 void LogForm_Init(void) {

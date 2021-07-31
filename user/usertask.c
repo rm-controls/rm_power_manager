@@ -15,6 +15,13 @@ void UserTask(void *pvParameters) {
     FSM_Status.Max_Power = 200;
     while (1) {
         if (FSM_Status.FSM_Mode != Halt_Mode) {
+//            if (referee_data_.game_status_.game_progress == 1) {
+//                FSM_Status.FSM_Mode = OverPower_Mode;
+//                while (referee_data_.game_status_.game_progress == 1
+//                    && V_Capacitor > 13.0f)        // wait until capacitor voltage is above 13V
+//                    Delayms(1);
+//                ComplexPower_Calibrate();
+//            } else {
             switch (Setting_OptiSchemes) {
                 case Normal_Optimized:FSM_Status.FSM_Mode = NoCharge_Mode;
                     break;
@@ -41,6 +48,7 @@ void UserTask(void *pvParameters) {
                 default: FSM_Status.FSM_Mode = Normal_Mode;
                     break;
             }
+//            }
         }
         Delayms(1);
     }

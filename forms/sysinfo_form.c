@@ -24,11 +24,16 @@ void SysInfoForm_Update(void) {
         GUI_LableSetText(&Referee_Online_Lable, "Referee Offline");
     }
     GUI_LableSetText(&RwH_L_Lable,
-                     "Rl:%d.%dR Rh:%d.%dR",
-                     (unsigned int) Capacitor_Calibratel.Rw,
-                     (unsigned int) (10 * (Capacitor_Calibratel.Rw - (float) ((int) Capacitor_Calibratel.Rw))),
-                     (unsigned int) Capacitor_Calibrateh.Rw,
-                     (unsigned int) (10 * (Capacitor_Calibrateh.Rw - (float) ((int) Capacitor_Calibrateh.Rw))));
+                     "%d.%dx^2 + %d.%dx + %d.%d",
+                     (unsigned int) Capacitor_Calibrate.coefficient[0],
+                     (unsigned int) (10
+                         * (Capacitor_Calibrate.coefficient[0] - (float) ((int) Capacitor_Calibrate.coefficient[0]))),
+                     (unsigned int) Capacitor_Calibrate.coefficient[1],
+                     (unsigned int) (10
+                         * (Capacitor_Calibrate.coefficient[1] - (float) ((int) Capacitor_Calibrate.coefficient[1]))),
+                     (unsigned int) Capacitor_Calibrate.coefficient[2],
+                     (unsigned int) (10
+                         * (Capacitor_Calibrate.coefficient[2] - (float) ((int) Capacitor_Calibrate.coefficient[2]))));
 
     switch (Setting_OptiSchemes) {
         case Normal_Optimized:GUI_LableSetText(&Setting_FSM_Lable, "  Optimize:  Normal  ");
@@ -69,10 +74,10 @@ void SysInfoForm_Init(void) {
     Referee_Online_Lable.Color = C_DARK_RED;
     Referee_Online_Lable.Text = "Referee Offline";
 
-    RwH_L_Lable.X_Pos = 19;
+    RwH_L_Lable.X_Pos = 6;
     RwH_L_Lable.Y_Pos = 16;
     RwH_L_Lable.Color = C_BLACK;
-    RwH_L_Lable.Text = "Rl:-.-R Rh:-.-R";
+    RwH_L_Lable.Text = "-.-x^2 + -.-x + -.-";
 
     Setting_FSM_Lable.X_Pos = 1;
     Setting_FSM_Lable.Y_Pos = 30;
