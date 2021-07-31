@@ -6,7 +6,7 @@
 
 Button_Struct_t TurnBack_Button4;
 Lable_Struct_t Referee_Online_Lable, X2_Coefficient_Lable, Setting_FSM_Lable;
-Lable_Struct_t Referee_GameStatus_Lable;
+Lable_Struct_t Referee_GameStatus_Lable, X_Coefficient_Lable;
 
 unsigned char Setting_OptiSchemes = 0;
 
@@ -24,15 +24,17 @@ void SysInfoForm_Update(void) {
         GUI_LableSetText(&Referee_Online_Lable, "Referee Offline");
     }
     GUI_LableSetText(&X2_Coefficient_Lable,
-                     "%d.%dx^2 + %d.%dx + %d.%d",
+                     "%d.%d %d.%d",
                      (unsigned int) Capacitor_Calibrate.coefficient[0],
-                     (unsigned int) (10
+                     (unsigned int) (10000000
                          * (Capacitor_Calibrate.coefficient[0] - (float) ((int) Capacitor_Calibrate.coefficient[0]))),
                      (unsigned int) Capacitor_Calibrate.coefficient[1],
-                     (unsigned int) (10
-                         * (Capacitor_Calibrate.coefficient[1] - (float) ((int) Capacitor_Calibrate.coefficient[1]))),
+                     (unsigned int) (10000000
+                         * (Capacitor_Calibrate.coefficient[1] - (float) ((int) Capacitor_Calibrate.coefficient[1]))));
+    GUI_LableSetText(&X_Coefficient_Lable,
+                     "%d.%d %d.%d",
                      (unsigned int) Capacitor_Calibrate.coefficient[2],
-                     (unsigned int) (10
+                     (unsigned int) (10000000
                          * (Capacitor_Calibrate.coefficient[2] - (float) ((int) Capacitor_Calibrate.coefficient[2]))));
 
     switch (Setting_OptiSchemes) {
@@ -79,13 +81,18 @@ void SysInfoForm_Init(void) {
     X2_Coefficient_Lable.Color = C_BLACK;
     X2_Coefficient_Lable.Text = "-.------- -.-------";
 
+    X_Coefficient_Lable.X_Pos = 33;
+    X_Coefficient_Lable.Y_Pos = 30;
+    X_Coefficient_Lable.Color = C_BLACK;
+    X_Coefficient_Lable.Text = "--.-------";
+
     Setting_FSM_Lable.X_Pos = 1;
-    Setting_FSM_Lable.Y_Pos = 30;
+    Setting_FSM_Lable.Y_Pos = 44;
     Setting_FSM_Lable.Color = C_BLACK;
     Setting_FSM_Lable.Text = "   Optimize: None    ";
 
     Referee_GameStatus_Lable.X_Pos = 1;
-    Referee_GameStatus_Lable.Y_Pos = 44;
+    Referee_GameStatus_Lable.Y_Pos = 58;
     Referee_GameStatus_Lable.Color = C_BLACK;
     Referee_GameStatus_Lable.Text = "   GameStatus: NAN   ";
 

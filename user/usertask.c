@@ -19,7 +19,7 @@ void UserTask(void *pvParameters) {
             if (referee_data_.game_status_.game_progress == 1 && complex_calibrate_flag == 0) {
                 FSM_Status.FSM_Mode = OverPower_Mode;
                 while (referee_data_.game_status_.game_progress == 1
-                    && V_Capacitor > 12.0f)        // wait until capacitor voltage is above 12V
+                    && V_Capacitor > 10.0f)        // wait until capacitor voltage is above 12V
                     Delayms(1);
                 FSM_Status.FSM_Mode = NoCharge_Mode;
                 xSemaphoreTake(Calibrate_Semaphore, 0xFFFFFFFFUL);
