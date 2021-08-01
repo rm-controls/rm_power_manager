@@ -22,7 +22,7 @@ void Filter_Config(void) {
     I_CapacitorF.SampleFreq = 10000.0f;
     Calculate_Coefficient(&I_CapacitorF);
 
-    I_ChassisF.CutOffFreq = 10.0f;
+    I_ChassisF.CutOffFreq = 5.0f;
     I_ChassisF.SampleFreq = 10000.0f;
     Calculate_Coefficient(&I_ChassisF);
 
@@ -34,7 +34,7 @@ void Filter_Config(void) {
     V_BaterryF.SampleFreq = 10000.0f;
     Calculate_Coefficient(&V_BaterryF);
 
-    V_ChassisF.CutOffFreq = 10.0f;
+    V_ChassisF.CutOffFreq = 5.0f;
     V_ChassisF.SampleFreq = 10000.0f;
     Calculate_Coefficient(&V_ChassisF);
 

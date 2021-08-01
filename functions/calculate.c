@@ -40,7 +40,7 @@ unsigned char Verify_CalibrateCoefficient(void) {
     return 0;
 }
 
-void ComplexPower_Calibrate(void) {              //Least square fitting of quadratic function
+void ComplexPower_Calibrate(void) {              // Least square fitting of quadratic function
     vTaskSuspend(PIDTask_Handler);
     vTaskSuspend(FSMTask_Handler);
     Capacitor_Calibrate.coefficient[0] = 0;
@@ -156,7 +156,6 @@ void Sensor_Config(void) {
 }
 
 void Calculate_Power(void) {
-    float tmp_capacitor_power = 0;
     I_CapacitorF.Current_Value = (float) (ADC_FinalResult[0] - I_CapOffset) * ADC_COEFFICIENT * 20.0f;
     I_Capacitor = FirstOrder_Filter_Calculate(&I_CapacitorF);
 
@@ -192,7 +191,7 @@ void Calculate_Power(void) {
     P_Chassis = FirstOrder_Filter_Calculate(&P_ChassisF);
 
     P_CapacitorF.Current_Value = V_Baterry * I_Capacitor;
-    tmp_capacitor_power = FirstOrder_Filter_Calculate(&P_CapacitorF);
+    float tmp_capacitor_power = FirstOrder_Filter_Calculate(&P_CapacitorF);
     P_Capacitor =
         (tmp_capacitor_power * Capacitor_Calibrate.coefficient[0] + Capacitor_Calibrate.coefficient[1])
             * tmp_capacitor_power + Capacitor_Calibrate.coefficient[2];
