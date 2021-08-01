@@ -24,14 +24,14 @@ void SysInfoForm_Update(void) {
         GUI_LableSetText(&Referee_Online_Lable, "Referee Offline");
     }
     GUI_LableSetText(&X2_Coefficient_Lable,
-                     "%d.%d %d.%d",
+                     "%d.%07d %d.%07d",
                      (unsigned int) Capacitor_Calibrate.coefficient[0],
                      (unsigned int) (10000000
                          * (Capacitor_Calibrate.coefficient[0] - (float) ((int) Capacitor_Calibrate.coefficient[0]))),
                      (unsigned int) Capacitor_Calibrate.coefficient[1],
                      (unsigned int) (10000000
                          * (Capacitor_Calibrate.coefficient[1] - (float) ((int) Capacitor_Calibrate.coefficient[1]))));
-    GUI_LableSetText(&X_Coefficient_Lable, "%d.%d", (unsigned int) Capacitor_Calibrate.coefficient[2],
+    GUI_LableSetText(&X_Coefficient_Lable, "%02d.%07d", (unsigned int) Capacitor_Calibrate.coefficient[2],
                      (unsigned int) (10000000
                          * (Capacitor_Calibrate.coefficient[2] - (float) ((int) Capacitor_Calibrate.coefficient[2]))));
 
@@ -77,12 +77,12 @@ void SysInfoForm_Init(void) {
     X2_Coefficient_Lable.X_Pos = 6;
     X2_Coefficient_Lable.Y_Pos = 16;
     X2_Coefficient_Lable.Color = C_BLACK;
-    X2_Coefficient_Lable.Text = "-.- -.-";
+    X2_Coefficient_Lable.Text = "-.------- -.-------";
 
     X_Coefficient_Lable.X_Pos = 33;
     X_Coefficient_Lable.Y_Pos = 30;
     X_Coefficient_Lable.Color = C_BLACK;
-    X_Coefficient_Lable.Text = "-.-";
+    X_Coefficient_Lable.Text = "--.-------";
 
     Setting_FSM_Lable.X_Pos = 1;
     Setting_FSM_Lable.Y_Pos = 44;
