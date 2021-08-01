@@ -6,8 +6,12 @@ DMA_HandleTypeDef hdma_adc1;
 __attribute__((section(".adc_ram")))volatile unsigned short ADC_Result[6];
 unsigned short ADC_Buffer[6][10], ADC_FinalResult[6], Buf_Counter = 0;
 
-int compare_int(const void *a, const void *b) {
-    return (*(int *) a) - (*(int *) b);
+int Compare_UShort(const void *a, const void *b) {
+    if (*(unsigned short *) a < *(unsigned short *) b)
+        return -1;
+    else if (*(unsigned short *) a > *(unsigned short *) b)
+        return 1;
+    return 0;
 }
 
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
@@ -17,13 +21,12 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
     if (Buf_Counter == 10) {
         unsigned long Tmp_Buffer[6] = {0, 0, 0, 0, 0, 0};
         Buf_Counter = 0;
-        for (unsigned char counter = 0; counter < 6; counter++)
-            qsort((void *) ADC_Buffer[counter], 10, sizeof(ADC_Buffer[0][0]), compare_int);
-        for (unsigned char counter1 = 0; counter1 < 6; counter1++)
+        for (unsigned char counter1 = 0; counter1 < 6; counter1++) {
+            qsort((void *) ADC_Buffer[counter1], 10, sizeof(ADC_Buffer[0][0]), Compare_UShort);
             for (unsigned char counter2 = 0; counter2 < 4; counter2++)
                 Tmp_Buffer[counter1] += (unsigned long) ADC_Buffer[counter1][counter2 + 3];
-        for (unsigned char counter = 0; counter < 6; counter++)
-            ADC_FinalResult[counter] = Tmp_Buffer[counter] / 4;
+            ADC_FinalResult[counter1] = Tmp_Buffer[counter1] / 4;
+        }
     }
 }
 

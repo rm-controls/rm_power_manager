@@ -2,6 +2,7 @@
 // Created by Lao·Zhu on 2021/2/4.
 //
 
+#include "stdlib.h"
 #include "calculate.h"
 #include "adc.h"
 #include "filter.h"
@@ -39,11 +40,11 @@ unsigned char Verify_CalibrateCoefficient(void) {
     return 0;
 }
 
-void ComplexPower_Calibrate(void) {
+void ComplexPower_Calibrate(void) {              //Least square fitting of quadratic function
     vTaskSuspend(PIDTask_Handler);
     vTaskSuspend(FSMTask_Handler);
     Capacitor_Calibrate.coefficient[0] = 0;
-    Capacitor_Calibrate.coefficient[1] = 1;
+    Capacitor_Calibrate.coefficient[1] = 1.0f;
     Capacitor_Calibrate.coefficient[2] = 0;
     HAL_GPIO_WritePin(BOOST_EN_GPIO_Port, BOOST_EN_Pin, GPIO_PIN_SET);
     HAL_GPIO_WritePin(EN_NMOS_GPIO_Port, EN_NMOS_Pin, GPIO_PIN_RESET);
@@ -85,14 +86,14 @@ void ComplexPower_Calibrate(void) {
         }
     } else {
         Capacitor_Calibrate.coefficient[0] = 0;
-        Capacitor_Calibrate.coefficient[1] = 1;
+        Capacitor_Calibrate.coefficient[1] = 1.0f;
         Capacitor_Calibrate.coefficient[2] = 0;
     }
     vTaskResume(PIDTask_Handler);
     vTaskResume(FSMTask_Handler);
 }
 
-void SimplePower_Calibrate(void) {
+void SimplePower_Calibrate(void) {              // Least square fitting of first order function
     if (referee_avaiflag == 1) {
         float x[4], y[4], xy_sum = 0, x_ave, y_ave, x2_sum = 0, x_sum = 0, y_sum = 0;
         HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_RESET);
@@ -109,16 +110,14 @@ void SimplePower_Calibrate(void) {
             }
             x[counter] = sample_local_sum / 5.0f;
             y[counter] = sample_referee_sum / 5.0f;
-        }
-        HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_SET);
-        for (int counter = 0; counter < 4; ++counter) {
             xy_sum += (x[counter] * y[counter]);
             x2_sum += (x[counter] * x[counter]);
             x_sum += x[counter];
             y_sum += y[counter];
         }
-        x_ave = x_sum / 4;
-        y_ave = y_sum / 4;
+        HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_SET);
+        x_ave = x_sum / 4.0f;
+        y_ave = y_sum / 4.0f;
         Capacitor_Calibrate.coefficient[0] = 0;
         Capacitor_Calibrate.coefficient[1] = (xy_sum - 4 * x_ave * y_ave) / (x2_sum - 4 * x_ave * x_ave);
         Capacitor_Calibrate.coefficient[2] = y_ave - Capacitor_Calibrate.coefficient[1] * x_ave;
@@ -131,6 +130,7 @@ void SimplePower_Calibrate(void) {
 
 void Sensor_Config(void) {
     unsigned long capoffset_sum = 0, chaoffset_sum = 0;
+    unsigned short ADCCap_Buffer[20], ADCCha_Buffer[20];
     Capacitor_Calibrate.coefficient[0] = 0;
     Capacitor_Calibrate.coefficient[1] = 1.0f;
     Capacitor_Calibrate.coefficient[2] = 0;
@@ -139,10 +139,16 @@ void Sensor_Config(void) {
     HAL_GPIO_WritePin(BOOST_EN_GPIO_Port, BOOST_EN_Pin, GPIO_PIN_SET);
     HAL_GPIO_WritePin(EN_NMOS_GPIO_Port, EN_NMOS_Pin, GPIO_PIN_SET);
     Delayms(200);
-    for (unsigned char counter = 0; counter < 10; counter++) {
-        capoffset_sum += ADC_FinalResult[0];
-        chaoffset_sum += ADC_FinalResult[1];
+    for (unsigned char counter = 0; counter < 20; counter++) {
+        ADCCap_Buffer[counter] = ADC_FinalResult[0];
+        ADCCha_Buffer[counter] = ADC_FinalResult[1];
         Delayms(20);
+    }
+    qsort(ADCCap_Buffer, 20, sizeof(ADCCap_Buffer[0]), Compare_UShort);
+    qsort(ADCCha_Buffer, 20, sizeof(ADCCha_Buffer[0]), Compare_UShort);
+    for (unsigned char counter = 0; counter < 10; counter++) {
+        capoffset_sum += ADCCap_Buffer[5 + counter];
+        chaoffset_sum += ADCCha_Buffer[5 + counter];
     }
     I_CapOffset = capoffset_sum / 10;
     I_ChaOffset = chaoffset_sum / 10;
@@ -166,10 +172,10 @@ void Calculate_Power(void) {
     V_ChassisF.Current_Value = (float) ADC_FinalResult[4] * ADC_COEFFICIENT * 21.0f;
     V_Chassis = FirstOrder_Filter_Calculate(&V_ChassisF);
 
-    W_Capacitor = 0.5f * 15.3f * V_Capacitor * V_Capacitor - 367.5f;
+    W_Capacitor = 7.5f * V_Capacitor * V_Capacitor - 367.5f;        // Set 7V as 0% energy
     if (W_Capacitor < 0)
         W_Capacitor = 0;
-    Capacitor_Percent = W_Capacitor / 1434.375f;
+    Capacitor_Percent = W_Capacitor / 1434.375f;                    // Set 15.5f as 100% energy
 
     if (I_Capacitor < 0.01f || I_Capacitor > 10.0f)
         I_Capacitor = 0;

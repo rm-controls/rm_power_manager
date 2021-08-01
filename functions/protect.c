@@ -59,6 +59,7 @@ void Protect_Task(void *pvParameters) {
             referee_time_counter = 0;
             referee_data_.game_robot_status_.chassis_power_limit = 50;
             referee_data_.power_heat_data_.chassis_power_buffer = 60;
+            referee_data_.game_status_.game_progress = 0;
         }
         Delayms(1);
     }
