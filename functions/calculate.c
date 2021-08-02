@@ -47,7 +47,7 @@ void ComplexPower_Calibrate(void) {              // Least square fitting of quad
     Capacitor_Calibrate.coefficient[1] = 1.0f;
     Capacitor_Calibrate.coefficient[2] = 0;
     HAL_GPIO_WritePin(BOOST_EN_GPIO_Port, BOOST_EN_Pin, GPIO_PIN_SET);
-    HAL_GPIO_WritePin(EN_NMOS_GPIO_Port, EN_NMOS_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(EN_NMOS_GPIO_Port, EN_NMOS_Pin, GPIO_PIN_SET);
     if (referee_avaiflag == 1) {
         float x[13], y[13], x_sum = 0, y_sum = 0, x2_sum = 0, x3_sum = 0, x4_sum = 0, xy_sum = 0, x2y_sum = 0;
         HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_RESET);
@@ -72,6 +72,7 @@ void ComplexPower_Calibrate(void) {              // Least square fitting of quad
             xy_sum += (x[counter] * y[counter]);
             x2y_sum += (x[counter] * x[counter] * y[counter]);
         }
+        HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_12B_R, 0);
         HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_SET);
         Capacitor_Calibrate.coefficient[1] = 0;
         for (int counter = 0; counter < 2000; ++counter) {
