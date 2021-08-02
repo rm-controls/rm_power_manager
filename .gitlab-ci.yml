@@ -10,8 +10,8 @@ build:
   artifacts:
     expire_in: 3 days
     paths:
-      - build/Program.elf
-      - build/Program.hex
+      - build/rm_power_manager.elf
+      - build/rm_power_manager.hex
   only:
     - stm32h7
   script:
