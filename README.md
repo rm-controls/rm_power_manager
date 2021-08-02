@@ -2,8 +2,8 @@
 
 ![Version](https://img.shields.io/badge/Version-1.5.2-brightgreen.svg)&nbsp;&nbsp;![Build](https://img.shields.io/badge/Build-Passed-success.svg)&nbsp;&nbsp;![License](https://img.shields.io/badge/License-BSD3.0-blue.svg)
 
-**Author: Yanzhen Zhu <br/>
-Affiliation: DynamicX <br/>
+**Author: Yanzhen Zhu <br>
+Affiliation: DynamicX <br>
 Maintainer:YanzhenZhu, acme.zhuyanzhen@gmail.com**
 
 ***
@@ -22,7 +22,7 @@ needed, so that the robot can obtain better mobility.
 
 ### Develop Environment
 
-+ IDE: CLion 2021.1.3 - CL211.7628.27
++ IDE: CLion 2021.2 - CL212.4746.93
 + Compiler: gcc-arm-none-eabi 10-2020-q4-major
 + Debugger: OpenOCD 0.11.0 (2021-06-25)
 + MCU: STM32H750VBT6 with 128KB Flash & 1MB RAM
@@ -39,8 +39,8 @@ needed, so that the robot can obtain better mobility.
    about 200W in a short time.
 3. NoCharge Mode: All power is supplied directly to the chassis through the high side switch. Due to the direct supply
    chassis, the energy loss of this mode is the smallest.
-4. SucapTest Mode:Turn off all outputs to the chassis and charge the capacitor bank with full power. This status is only
-   used during recording.
+4. SucapTest Mode: Turn off all outputs to the chassis and charge the capacitor bank with full power. This status is
+   only used during recording.
 5. Halt Mode: Turn off the capacitor charging module, turn off the capacitor boost module and turn off the high side
    switch. At this time, the input, output and capacitor bank are completely disconnected for the mode of robot death or
    overload protection.
@@ -61,6 +61,18 @@ needed, so that the robot can obtain better mobility.
    chassis.
 4. Sucap Test: Charge the super capacitor with full power and enter the halt mode after it is fully charged until NUC
    sends information and switches to other modes.
+
+***
+
+### Power Calibrate Introduction
+
+&nbsp;&nbsp;&nbsp;&nbsp;Since the measured power of the referee system (hereinafter referred to as "actual power") is
+inconsistent with the measured power of the power management (hereinafter referred to as "measured power"), the power
+management will correct the power at the initial stage of power on. The power correction scheme uses polynomial to fit
+the function between the actual power and the measured power. <br>
+&nbsp;&nbsp;&nbsp;&nbsp;There are two fitting methods: simple fitting and complex fitting, both of which are fitted by
+the least square method. Simple fitting samples are taken in the range of 10 ~ 40W and fitted with a primary function.
+The complex fitting is sampled in the range of 10 ~ 130W and fitted with quadratic function.
 
 ***
 
