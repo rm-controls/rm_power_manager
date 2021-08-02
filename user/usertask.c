@@ -16,7 +16,8 @@ void UserTask(void *pvParameters) {
     FSM_Status.Max_Power = 200;
     while (1) {
         if (FSM_Status.FSM_Mode != Halt_Mode) {
-            if (referee_data_.game_status_.game_progress == 1 && complex_calibrate_flag == 0) {
+            if (referee_data_.game_status_.game_progress == 1 && complex_calibrate_flag == 0
+                && fighting_flag == 0) {   // if power manager is just plugged on
                 HAL_PWR_EnableBkUpAccess();
                 HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR7, 0xFFFFFFFFUL);
 
@@ -43,6 +44,13 @@ void UserTask(void *pvParameters) {
                 while (referee_data_.game_status_.game_progress == 1 && Capacitor_Percent < 0.95f)
                     Delayms(1);                     // wait for capacitor power to reach more than 95%
 
+            } else if (fighting_flag == 1
+                && referee_data_.game_status_.game_progress == 1) {   // if the robots is fought and re-preparing
+                fighting_flag = 0;                      // clear fighting flag
+                FSM_Status.FSM_Mode = OverPower_Mode;   // running into quick charge mode
+                while (referee_data_.game_status_.game_progress == 1
+                    && Capacitor_Percent > 0.95f)        // wait for capacitor power to reach more than 95%
+                    Delayms(1);
             } else {
                 switch (Setting_OptiSchemes) {
                     case Normal_Optimized:FSM_Status.FSM_Mode = NoCharge_Mode;

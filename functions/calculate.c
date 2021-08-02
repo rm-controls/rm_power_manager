@@ -48,48 +48,53 @@ void ComplexPower_Calibrate(void) {              // Least square fitting of quad
     Capacitor_Calibrate.coefficient[2] = 0;
     HAL_GPIO_WritePin(BOOST_EN_GPIO_Port, BOOST_EN_Pin, GPIO_PIN_SET);
     HAL_GPIO_WritePin(EN_NMOS_GPIO_Port, EN_NMOS_Pin, GPIO_PIN_SET);
-    if (referee_avaiflag == 1) {
-        float x[13], y[13], x_sum = 0, y_sum = 0, x2_sum = 0, x3_sum = 0, x4_sum = 0, xy_sum = 0, x2y_sum = 0;
-        HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_RESET);
-        for (unsigned char counter = 0; counter < 13; counter++) {
-            float sample_xsum = 0, sample_ysum = 0;
-            HAL_DAC_SetValue(&hdac1,
-                             DAC_CHANNEL_1,
-                             DAC_ALIGN_12B_R,
-                             (unsigned short) (2730.0f * (float) (counter + 1) / V_Capacitor));     //10 ~ 130W
-            for (unsigned char counterf = 0; counterf < 10; counterf++) {
-                Delayms(60);
-                sample_xsum += P_Capacitor;
-                sample_ysum += referee_data_.power_heat_data_.chassis_power;
+    if (V_Capacitor <= 13.15f) {
+        if (referee_avaiflag == 1) {
+            float x[13], y[13], x_sum = 0, y_sum = 0, x2_sum = 0, x3_sum = 0, x4_sum = 0, xy_sum = 0, x2y_sum = 0;
+            HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_RESET);
+            for (unsigned char counter = 0; counter < 13; counter++) {
+                float sample_xsum = 0, sample_ysum = 0;
+                HAL_DAC_SetValue(&hdac1,
+                                 DAC_CHANNEL_1,
+                                 DAC_ALIGN_12B_R,
+                                 (unsigned short) (2730.0f * (float) (counter + 1) / V_Capacitor));     //10 ~ 130W
+                for (unsigned char counterf = 0; counterf < 10; counterf++) {
+                    Delayms(60);
+                    sample_xsum += P_Capacitor;
+                    sample_ysum += referee_data_.power_heat_data_.chassis_power;
+                }
+                x[counter] = sample_xsum / 10.0f;
+                y[counter] = sample_ysum / 10.0f;
+                x_sum += x[counter];
+                y_sum += y[counter];
+                x2_sum += (x[counter] * x[counter]);
+                x3_sum += (x[counter] * x[counter] * x[counter]);
+                x4_sum += (x[counter] * x[counter] * x[counter] * x[counter]);
+                xy_sum += (x[counter] * y[counter]);
+                x2y_sum += (x[counter] * x[counter] * y[counter]);
             }
-            x[counter] = sample_xsum / 10.0f;
-            y[counter] = sample_ysum / 10.0f;
-            x_sum += x[counter];
-            y_sum += y[counter];
-            x2_sum += (x[counter] * x[counter]);
-            x3_sum += (x[counter] * x[counter] * x[counter]);
-            x4_sum += (x[counter] * x[counter] * x[counter] * x[counter]);
-            xy_sum += (x[counter] * y[counter]);
-            x2y_sum += (x[counter] * x[counter] * y[counter]);
+            HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_12B_R, 0);
+            HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_SET);
+            Capacitor_Calibrate.coefficient[1] = 0;
+            for (int counter = 0; counter < 2000; ++counter) {
+                Capacitor_Calibrate.coefficient[0] =
+                    (x2y_sum - x3_sum * Capacitor_Calibrate.coefficient[1]
+                        - x2_sum * Capacitor_Calibrate.coefficient[2])
+                        / x4_sum;
+                Capacitor_Calibrate.coefficient[1] =
+                    (xy_sum - x_sum * Capacitor_Calibrate.coefficient[2] - x3_sum * Capacitor_Calibrate.coefficient[0])
+                        / x2_sum;
+                Capacitor_Calibrate.coefficient[2] =
+                    (y_sum - x2_sum * Capacitor_Calibrate.coefficient[0] - x_sum * Capacitor_Calibrate.coefficient[1])
+                        / 13;
+            }
+        } else {
+            Capacitor_Calibrate.coefficient[0] = 0;
+            Capacitor_Calibrate.coefficient[1] = 1.0f;
+            Capacitor_Calibrate.coefficient[2] = 0;
         }
-        HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_12B_R, 0);
-        HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_SET);
-        Capacitor_Calibrate.coefficient[1] = 0;
-        for (int counter = 0; counter < 2000; ++counter) {
-            Capacitor_Calibrate.coefficient[0] =
-                (x2y_sum - x3_sum * Capacitor_Calibrate.coefficient[1] - x2_sum * Capacitor_Calibrate.coefficient[2])
-                    / x4_sum;
-            Capacitor_Calibrate.coefficient[1] =
-                (xy_sum - x_sum * Capacitor_Calibrate.coefficient[2] - x3_sum * Capacitor_Calibrate.coefficient[0])
-                    / x2_sum;
-            Capacitor_Calibrate.coefficient[2] =
-                (y_sum - x2_sum * Capacitor_Calibrate.coefficient[0] - x_sum * Capacitor_Calibrate.coefficient[1]) / 13;
-        }
-    } else {
-        Capacitor_Calibrate.coefficient[0] = 0;
-        Capacitor_Calibrate.coefficient[1] = 1.0f;
-        Capacitor_Calibrate.coefficient[2] = 0;
-    }
+    } else
+        SimplePower_Calibrate();
     vTaskResume(PIDTask_Handler);
     vTaskResume(FSMTask_Handler);
 }
