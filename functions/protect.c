@@ -20,7 +20,6 @@ unsigned short referee_avaiflag = 0, referee_time_counter = 0;
 extern SemaphoreHandle_t Calibrate_Semaphore;
 extern unsigned char UART1_IT_Flag;
 unsigned char overcurrent_flag = 0;
-unsigned char fighting_flag = 0;
 
 void Protect_Task(void *pvParameters) {
     Delayms(10);
@@ -29,8 +28,6 @@ void Protect_Task(void *pvParameters) {
     Delayms(100);
     while (1) {
         referee_time_counter++;
-        if (complex_calibrate_flag == 1 && referee_data_.game_status_.game_progress == 4 && fighting_flag == 0)
-            fighting_flag = 1;
         if (UART1_IT_Flag != HAL_OK) {
             UART1_IT_Flag = HAL_OK;
             UART1_Config();

@@ -13,7 +13,7 @@ build:
       - build/rm_power_manager.elf
       - build/rm_power_manager.hex
   only:
-    - stm32h7
+    - h7_no_calibrate
   script:
     - export DEBIAN_FRONTEND=noninteractive
     - apt-get update && apt-get -y upgrade && apt-get install -y cmake gcc g++ automake autoconf libtool make build-essential wget
@@ -31,7 +31,7 @@ generate:
   artifacts:
     expire_in: 3 days
   only:
-    - stm32h7
+    - h7_no_calibrate
   dependencies:
     - build
   script:

@@ -32,21 +32,14 @@ void FSM_Task(void *pvParameters) {
     HAL_GPIO_WritePin(EN_NMOS_GPIO_Port, EN_NMOS_Pin, GPIO_PIN_SET);
     HAL_GPIO_WritePin(BOOST_EN_GPIO_Port, BOOST_EN_Pin, GPIO_PIN_SET);
     Sensor_Config();
+    SimplePower_Calibrate();
     HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_SET);
     HAL_GPIO_WritePin(EN_NMOS_GPIO_Port, EN_NMOS_Pin, GPIO_PIN_SET);
     HAL_GPIO_WritePin(BOOST_EN_GPIO_Port, BOOST_EN_Pin, GPIO_PIN_SET);
 
-    HAL_PWR_EnableBkUpAccess();
-    if (HAL_RTCEx_BKUPRead(&hrtc, RTC_BKP_DR7) == 0xA5A5A5A5UL) {
-        *(uint32_t *) (&Capacitor_Calibrate.coefficient[0]) = HAL_RTCEx_BKUPRead(&hrtc, RTC_BKP_DR4);
-        *(uint32_t *) (&Capacitor_Calibrate.coefficient[1]) = HAL_RTCEx_BKUPRead(&hrtc, RTC_BKP_DR5);
-        *(uint32_t *) (&Capacitor_Calibrate.coefficient[2]) = HAL_RTCEx_BKUPRead(&hrtc, RTC_BKP_DR6);
-    } else
-        SimplePower_Calibrate();
-
     if (Verify_CalibrateCoefficient() == 1) {
         Capacitor_Calibrate.coefficient[0] = 0;
-        Capacitor_Calibrate.coefficient[1] = 1;
+        Capacitor_Calibrate.coefficient[1] = 1.0f;
         Capacitor_Calibrate.coefficient[2] = 0;
     }
 
