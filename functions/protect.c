@@ -32,9 +32,9 @@ void Protect_Task(void *pvParameters) {
             UART1_IT_Flag = HAL_OK;
             UART1_Config();
         }
-        if (I_Chassis >= 8.8f && FSM_Status.FSM_Mode != Halt_Mode) {
-            Delayms(100);
-            if (I_Chassis >= 8.8f) {
+        if (I_Chassis >= 10.0f && FSM_Status.FSM_Mode != Halt_Mode) {
+            Delayms(200);
+            if (I_Chassis >= 10.0f) {
                 FSM_Status.FSM_Mode = Halt_Mode;
                 overcurrent_flag = 1;
             }

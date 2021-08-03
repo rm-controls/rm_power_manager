@@ -19,7 +19,7 @@ void UserTask(void *pvParameters) {
                 case Normal_Optimized:FSM_Status.FSM_Mode = NoCharge_Mode;
                     break;
                 case ChargeFirst_Optimized:
-                    if (Capacitor_Percent < 0.93f)
+                    if (Capacitor_Percent < 0.95f)
                         FSM_Status.FSM_Mode = Normal_Mode;
                     else if (Capacitor_Percent > 0.99f)
                         FSM_Status.FSM_Mode = NoCharge_Mode;
@@ -30,13 +30,16 @@ void UserTask(void *pvParameters) {
                     else
                         FSM_Status.FSM_Mode = OverPower_Mode;
                     break;
-                case SucapTest_Optimized:FSM_Status.FSM_Mode = SucapTest_Mode;
-                    while (Capacitor_Percent < 0.95f && Setting_OptiSchemes == SucapTest_Optimized)
-                        Delayms(1);
-                    FSM_Status.FSM_Mode = Halt_Mode;
-                    while (Setting_OptiSchemes == SucapTest_Optimized)
-                        Delayms(1);
-                    FSM_Status.FSM_Mode = NoCharge_Mode;
+                case SucapTest_Optimized:
+                    if (referee_data_.game_status_.game_progress != 4) {
+                        FSM_Status.FSM_Mode = SucapTest_Mode;
+                        while (Capacitor_Percent < 0.95f && Setting_OptiSchemes == SucapTest_Optimized)
+                            Delayms(1);
+                        FSM_Status.FSM_Mode = Halt_Mode;
+                        while (Setting_OptiSchemes == SucapTest_Optimized)
+                            Delayms(1);
+                        FSM_Status.FSM_Mode = NoCharge_Mode;
+                    }
                     break;
                 default: FSM_Status.FSM_Mode = Normal_Mode;
                     break;
