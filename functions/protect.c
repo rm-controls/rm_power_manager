@@ -20,6 +20,8 @@ unsigned short referee_avaiflag = 0, referee_time_counter = 0;
 extern SemaphoreHandle_t Calibrate_Semaphore;
 extern unsigned char UART1_IT_Flag;
 unsigned char overcurrent_flag = 0;
+unsigned char overcurrent_counter_flag = 0;
+unsigned short overcurrent_counter = 0;
 
 void Protect_Task(void *pvParameters) {
     Delayms(10);
@@ -32,16 +34,26 @@ void Protect_Task(void *pvParameters) {
             UART1_IT_Flag = HAL_OK;
             UART1_Config();
         }
-        if (I_Chassis >= 10.0f && FSM_Status.FSM_Mode != Halt_Mode) {
+        if (I_Chassis >= 9.0f && FSM_Status.FSM_Mode != Halt_Mode) {
             Delayms(200);
-            if (I_Chassis >= 10.0f) {
+            if (I_Chassis >= 9.0f) {
                 FSM_Status.FSM_Mode = Halt_Mode;
                 overcurrent_flag = 1;
+                overcurrent_counter_flag = 1;
             }
         }
-        if (V_Baterry <= 20.0f) {
+        if (overcurrent_counter_flag == 1 && overcurrent_flag == 1) {
+            overcurrent_counter++;
+            if (overcurrent_counter == 1000) {
+                FSM_Status.FSM_Mode = NoCharge_Mode;
+                overcurrent_counter = 0;
+                overcurrent_counter_flag = 0;
+                overcurrent_flag = 0;
+            }
+        }
+        if (V_Baterry <= 18.0f) {
             Delayms(100);
-            if (V_Baterry <= 20.0f) {
+            if (V_Baterry <= 18.0f) {
                 overcurrent_flag = 0;
                 FSM_Status.FSM_Mode = Halt_Mode;
             }
