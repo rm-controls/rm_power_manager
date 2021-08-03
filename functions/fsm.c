@@ -84,9 +84,7 @@ void FSM_Task(void *pvParameters) {
                 HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_SET);
                 break;
             case Const_Power_Charge:
-                if (referee_data_.power_heat_data_.chassis_power_buffer <= 5)
-                    PID_Capacitor.User = 0;
-                else if (referee_data_.power_heat_data_.chassis_power_buffer <= 20)
+                if (referee_data_.power_heat_data_.chassis_power_buffer <= 20)
                     PID_Capacitor.User = (float) FSM_Status.Charge_Power - 10.0f;
                 else if (referee_data_.power_heat_data_.chassis_power_buffer <= 30)
                     PID_Capacitor.User = (float) FSM_Status.Charge_Power - 5.0f;
@@ -96,9 +94,7 @@ void FSM_Task(void *pvParameters) {
                 HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_RESET);
                 break;
             case Proportional_Charge:
-                if (referee_data_.power_heat_data_.chassis_power_buffer <= 5)
-                    PID_Capacitor.User = 0;
-                else if (referee_data_.power_heat_data_.chassis_power_buffer <= 10)
+                if (referee_data_.power_heat_data_.chassis_power_buffer <= 10)
                     PID_Capacitor.User = (float) (referee_data_.game_robot_status_.chassis_power_limit)
                         * FSM_Status.P_Charge * 0.7f;
                 else if (referee_data_.power_heat_data_.chassis_power_buffer <= 20)
@@ -114,9 +110,7 @@ void FSM_Task(void *pvParameters) {
                 HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_RESET);
                 break;
             case Full_Power_Charge:
-                if (referee_data_.power_heat_data_.chassis_power_buffer <= 5)
-                    PID_Capacitor.User = 0;
-                else if (referee_data_.power_heat_data_.chassis_power_buffer <= 10)
+                if (referee_data_.power_heat_data_.chassis_power_buffer <= 10)
                     PID_Capacitor.User = (float) referee_data_.game_robot_status_.chassis_power_limit - 15.0f;
                 else if (referee_data_.power_heat_data_.chassis_power_buffer <= 20)
                     PID_Capacitor.User = (float) referee_data_.game_robot_status_.chassis_power_limit - 10.0f;
