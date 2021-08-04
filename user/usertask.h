@@ -5,7 +5,6 @@
 #ifndef _USER_USERTASK_H_
 #define _USER_USERTASK_H_
 
-extern unsigned char complex_calibrate_flag;
 void UserTask(void *pvParameters);
 void LCD_Refresh(void *pvParameters);
 
