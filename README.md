@@ -72,7 +72,11 @@ management will correct the power at the initial stage of power on. The power co
 the function between the actual power and the measured power. <br>
 &nbsp;&nbsp;&nbsp;&nbsp;There are two fitting methods: simple fitting and complex fitting, both of which are fitted by
 the least square method. Simple fitting samples are taken in the range of 10 ~ 40W and fitted with a primary function.
-The complex fitting is sampled in the range of 10 ~ 130W and fitted with quadratic function.
+The complex fitting is sampled in the range of 10 ~ 130W and fitted with quadratic function. 
+
+$$
+\sum_{i=0}N\int_{a}{b}g(t,i)\text{d}t
+$$
 
 ***
 
