@@ -73,10 +73,35 @@ the function between the actual power and the measured power. <br>
 &nbsp;&nbsp;&nbsp;&nbsp;There are two fitting methods: simple fitting and complex fitting, both of which are fitted by
 the least square method. Simple fitting samples are taken in the range of 10 ~ 40W and fitted with a primary function.
 The complex fitting is sampled in the range of 10 ~ 130W and fitted with quadratic function. 
+$$
+Least\,square\,first\,order\,linear\,fitting:\,\,
+\begin{cases}
+\hat b=\frac{\sum_{i=0}^{n}x_iy_i-n\overline{x}\overline{y}}{\sum_{i=0}^{n}x_i^2-n\overline{x}^2}\\
+\hat a=\overline{y}-\hat b\overline{x}\\
+y=\hat ax+\hat b
+\end{cases}
+$$
 
+For fitting conic by least square method, according to the definition of least square method:
 $$
-\sum_{i=0}N\int_{a}{b}g(t,i)\text{d}t
+Q=\sum_{i=1}^{n}(b_0+b_1x+b_2x^2+\cdots+b_nx^n-y_i)^2\\
+\frac{\partial Q}{\partial b_0}=2\sum_{i=1}^{n}[(b_0+b_1x_i+b_2x_i^2)-y_i]=0\\
+\frac{\partial Q}{\partial b_1}=2\sum_{i=1}^{n}[(b_0+b_1x_i+b_2x_i^2)-y_i]x_i=0\\
+\frac{\partial Q}{\partial b_2}=2\sum_{i=1}^{n}[(b_0+b_1x_i+b_2x_i^2)-y_i]x_i^2=0
 $$
+
+You can write a recurrence formula:
+$$
+Fitting\,quadratic\,curve\,by\,least\,square\,method:
+\begin{cases}
+b_0=\frac{\sum_{i=1}^{n}y_i-b_1\sum_{i=1}^{n}x_i-b_2\sum_{i=1}^{n}x_i^2}{n}\\
+b_1=\frac{\sum_{i=1}^{n}y_ix_i-b_0\sum_{i=1}^{n}x_i-b_2\sum_{i=1}^{n}x_i^3}{\sum_{i=1}^{n}x_i^2}\\
+b_2=\frac{\sum_{i=1}^{n}y_ix_i^2-b_0\sum_{i=1}^{n}x_i-b_1\sum_{i=1}^{n}x_i^3}{\sum_{i=1}^{n}x_i^4}\\
+y=b_2x^2+b_1x+b_0
+\end{cases}
+$$
+
+
 
 ***
 
