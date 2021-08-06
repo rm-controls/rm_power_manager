@@ -72,36 +72,17 @@ management will correct the power at the initial stage of power on. The power co
 the function between the actual power and the measured power. <br>
 &nbsp;&nbsp;&nbsp;&nbsp;There are two fitting methods: simple fitting and complex fitting, both of which are fitted by
 the least square method. Simple fitting samples are taken in the range of 10 ~ 40W and fitted with a primary function.
-The complex fitting is sampled in the range of 10 ~ 130W and fitted with quadratic function. 
-$$
-Least\,square\,first\,order\,linear\,fitting:\,\,
-\begin{cases}
-\hat b=\frac{\sum_{i=0}^{n}x_iy_i-n\overline{x}\overline{y}}{\sum_{i=0}^{n}x_i^2-n\overline{x}^2}\\
-\hat a=\overline{y}-\hat b\overline{x}\\
-y=\hat ax+\hat b
-\end{cases}
-$$
+The complex fitting is sampled in the range of 10 ~ 130W and fitted with quadratic function.
+
+![first_order](https://img.vim-cn.com/78/b08d35677f388e790643f049a84b0b1ff1f271.png)
 
 For fitting conic by least square method, according to the definition of least square method:
-$$
-Q=\sum_{i=1}^{n}(b_0+b_1x+b_2x^2+\cdots+b_nx^n-y_i)^2\\
-\frac{\partial Q}{\partial b_0}=2\sum_{i=1}^{n}[(b_0+b_1x_i+b_2x_i^2)-y_i]=0\\
-\frac{\partial Q}{\partial b_1}=2\sum_{i=1}^{n}[(b_0+b_1x_i+b_2x_i^2)-y_i]x_i=0\\
-\frac{\partial Q}{\partial b_2}=2\sum_{i=1}^{n}[(b_0+b_1x_i+b_2x_i^2)-y_i]x_i^2=0
-$$
+
+![second_order](https://img.vim-cn.com/07/46080d03c772f4d125b8271e4a8f99af80a79e.png)
 
 You can write a recurrence formula:
-$$
-Fitting\,quadratic\,curve\,by\,least\,square\,method:
-\begin{cases}
-b_0=\frac{\sum_{i=1}^{n}y_i-b_1\sum_{i=1}^{n}x_i-b_2\sum_{i=1}^{n}x_i^2}{n}\\
-b_1=\frac{\sum_{i=1}^{n}y_ix_i-b_0\sum_{i=1}^{n}x_i-b_2\sum_{i=1}^{n}x_i^3}{\sum_{i=1}^{n}x_i^2}\\
-b_2=\frac{\sum_{i=1}^{n}y_ix_i^2-b_0\sum_{i=1}^{n}x_i-b_1\sum_{i=1}^{n}x_i^3}{\sum_{i=1}^{n}x_i^4}\\
-y=b_2x^2+b_1x+b_0
-\end{cases}
-$$
 
-
+![recurrence_formula](https://img.vim-cn.com/61/94356f58f5c590a8c38f12e4c88acc165d19ac.png )
 
 ***
 

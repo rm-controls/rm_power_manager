@@ -55,4 +55,5 @@ dkms.conf
 out
 gen
 cmake-build-debug
+.idea
 .idea/workspace.xml
