@@ -15,26 +15,28 @@
 QueueHandle_t Referee_Data = NULL;
 
 void Packup_Info(void) {
-    Upload_Package.PID = 0;
-    Upload_Package.Data[0] = FloatToInt16(P_Chassis) >> 8UL;
-    Upload_Package.Data[1] = FloatToInt16(P_Chassis) & 0x00ffUL;
-    Upload_Package.Data[2] = FloatToInt16(EP_Chassis) >> 8UL;
-    Upload_Package.Data[3] = FloatToInt16(EP_Chassis) & 0x00ffUL;
-    Upload_Package.Data[4] = FloatToInt16(V_Chassis) >> 8UL;
-    Upload_Package.Data[5] = FloatToInt16(V_Chassis) & 0x00ffUL;
-    Upload_Package.Data[6] = FloatToInt16(Capacitor_Percent) >> 8UL;
-    Upload_Package.Data[7] = FloatToInt16(Capacitor_Percent) & 0x00ffUL;
+  Upload_Package.PID = 0;
+  Upload_Package.Data[0] = FloatToInt16(P_Chassis) >> 8UL;
+  Upload_Package.Data[1] = FloatToInt16(P_Chassis) & 0x00ffUL;
+  Upload_Package.Data[2] = FloatToInt16(EP_Chassis) >> 8UL;
+  Upload_Package.Data[3] = FloatToInt16(EP_Chassis) & 0x00ffUL;
+  Upload_Package.Data[4] = FloatToInt16(V_Chassis) >> 8UL;
+  Upload_Package.Data[5] = FloatToInt16(V_Chassis) & 0x00ffUL;
+  Upload_Package.Data[6] = FloatToInt16(Capacitor_Percent) >> 8UL;
+  Upload_Package.Data[7] = FloatToInt16(Capacitor_Percent) & 0x00ffUL;
 }
 
 void Upload_Referee(void *pvParameters) {
-    unsigned char Referee_Buf[64];
-    Referee_Data = xQueueCreate(4, 64);
-    while (1) {
-        if (xQueueReceive(Referee_Data, Referee_Buf, 10) == pdTRUE) {
-            for (unsigned char counter = 0; counter < 64; counter++) {
-                HAL_UART_Transmit(&huart1, &Referee_Buf[counter], 1, 0xFFFFFFFFUL);
-                Referee_unpack(Referee_Buf[counter]);
-            }
-        }
+  unsigned char Referee_Buf[64];
+  Referee_Data = xQueueCreate(4, 64);
+  while (1) {
+    if (xQueueReceive(Referee_Data, Referee_Buf, 10) == pdTRUE) {
+      for (unsigned char counter = 0; counter < 64; counter++) {
+        HAL_UART_Transmit(&huart1, &Referee_Buf[counter], 1, 0xFFFFFFFFUL);
+        Referee_unpack(Referee_Buf[counter]);
+      }
     }
+    Packup_Info();
+    DTP_Transmit(&Upload_Package);
+  }
 }

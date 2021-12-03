@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Program.iml" filepath="$PROJECT_DIR$/.idea/Program.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/rm_power_manager.iml" filepath="$PROJECT_DIR$/.idea/rm_power_manager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/rm_power_manager2.iml" filepath="$PROJECT_DIR$/.idea/rm_power_manager2.iml" />
     </modules>
   </component>
 </project>
