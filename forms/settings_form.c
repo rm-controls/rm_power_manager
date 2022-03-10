@@ -51,6 +51,8 @@ void SettingsForm_Update(void) {
 void SettingsForm_Init(void) {
   GUI_Clear(C_WHITE);
 
+  FirstWidget = (GUI_Object_Struct_t *) &Normal_Botton;
+
   Normal_Botton.X_Pos = 2;
   Normal_Botton.Y_Pos = 2;
   Normal_Botton.Width = 80;
