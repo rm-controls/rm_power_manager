@@ -6,13 +6,16 @@
 
 static Button_Struct_t TurnBack_Button2;
 static Button_Struct_t Normal_Botton, ChargeFirst_Botton, UseFrist_Botton,
-    SucapTest_Botton;//To switch Setting_OptiSchemes
+    SucapTest_Botton; // To switch Setting_OptiSchemes
 static Numeric_Struct_t RTCYear_Numeric, RTCMonth_Numeric, RTCDate_Numeric;
 static Numeric_Struct_t RTCHour_Numeric, RTCMinute_Numeric, RTCSecond_Numeric;
 static Lable_Struct_t RTCDate_Lable, RTCTime_Lable;
 
+extern uint8_t debug_flag;
+
 void TurnBack_Button2_Callback(void *object, unsigned char key) {
   Form_Info_Structure.Form_Index = Main_Form_Index;
+  debug_flag = 0;
   MainForm_Init();
 }
 
@@ -40,18 +43,14 @@ void SucapTest_Botton_Callback(void *object, unsigned char key) {
   MainForm_Init();
 }
 
-void RTCYear_Numeric_Callback(void *object, unsigned char key) {
+void RTCYear_Numeric_Callback(void *object, unsigned char key) {}
 
-}
-
-void SettingsForm_Update(void) {
-
-}
+void SettingsForm_Update(void) {}
 
 void SettingsForm_Init(void) {
   GUI_Clear(C_WHITE);
 
-  FirstWidget = (GUI_Object_Struct_t *) &Normal_Botton;
+  FirstWidget = (GUI_Object_Struct_t *)&Normal_Botton;
 
   Normal_Botton.X_Pos = 2;
   Normal_Botton.Y_Pos = 2;
@@ -89,7 +88,7 @@ void SettingsForm_Init(void) {
   TurnBack_Button2.Y_Pos = 134;
   TurnBack_Button2.Width = 80;
   TurnBack_Button2.Height = 22;
-  TurnBack_Button2.Text = "TurnBack";
+  TurnBack_Button2.Text = "ExitDebug";
   TurnBack_Button2.NextButton = NULL;
   TurnBack_Button2.CallbackFunction = TurnBack_Button2_Callback;
 
