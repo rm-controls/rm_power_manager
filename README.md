@@ -74,15 +74,15 @@ the function between the actual power and the measured power. <br>
 the least square method. Simple fitting samples are taken in the range of 10 ~ 40W and fitted with a primary function.
 The complex fitting is sampled in the range of 10 ~ 130W and fitted with quadratic function.
 
-![first_order](https://img.vim-cn.com/78/b08d35677f388e790643f049a84b0b1ff1f271.png)
+![first_order](image/first_order_fitting.png)
 
 For fitting conic by least square method, according to the definition of least square method:
 
-![second_order](https://img.vim-cn.com/07/46080d03c772f4d125b8271e4a8f99af80a79e.png)
+![second_order](image/second_order_fitting.png)
 
 You can write a recurrence formula:
 
-![recurrence_formula](https://img.vim-cn.com/61/94356f58f5c590a8c38f12e4c88acc165d19ac.png )
+![recurrence_formula](image/second_order_recurrence_formula.png )
 
 ***
 
