@@ -13,7 +13,7 @@ void UserTask(void *pvParameters) {
   FSM_Status.uCharge_Mode = Proportional_Charge;
   FSM_Status.P_Charge = 0.15f;
   FSM_Status.P_Expect = 0.85f;
-  FSM_Status.Max_Power = 200;
+  FSM_Status.Max_Power = 380;
   debug_flag = 0;
   while (1) {
     if (FSM_Status.FSM_Mode != Halt_Mode) {
