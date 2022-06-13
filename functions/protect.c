@@ -18,6 +18,7 @@
 extern TaskHandle_t ProtectTask_Handler;
 unsigned short referee_avaiflag = 0, referee_time_counter = 0;
 extern SemaphoreHandle_t Calibrate_Semaphore;
+extern FSM_Status_t Last_FSM_Status;
 extern unsigned char UART1_IT_Flag;
 unsigned char overcurrent_flag = 0;
 unsigned char overcurrent_counter_flag = 0;
@@ -28,15 +29,25 @@ void Protect_Task(void *pvParameters) {
     xSemaphoreTake(Calibrate_Semaphore, 0xFFFFFFFFUL);
     xSemaphoreGive(Calibrate_Semaphore);
     Delayms(100);
+    float I_boost_max = (float) (FSM_Status.Max_Power) / 24.0f;
     while (1) {
         referee_time_counter++;
         if (UART1_IT_Flag != HAL_OK) {
             UART1_IT_Flag = HAL_OK;
             UART1_Config();
         }
-        if (I_Chassis >= 9.0f && FSM_Status.FSM_Mode != Halt_Mode) {
+
+        if ((FSM_Status.FSM_Mode == Normal_Mode || FSM_Status.FSM_Mode == NoCharge_Mode)
+            && I_Chassis >= 9.0f) {
             Delayms(200);
             if (I_Chassis >= 9.0f) {
+                FSM_Status.FSM_Mode = Halt_Mode;
+                overcurrent_flag = 1;
+                overcurrent_counter_flag = 1;
+            }
+        } else if (FSM_Status.FSM_Mode == OverPower_Mode && I_Chassis >= I_boost_max) {
+            Delayms(200);
+            if (I_Chassis >= I_boost_max) {
                 FSM_Status.FSM_Mode = Halt_Mode;
                 overcurrent_flag = 1;
                 overcurrent_counter_flag = 1;
@@ -58,7 +69,7 @@ void Protect_Task(void *pvParameters) {
                 FSM_Status.FSM_Mode = Halt_Mode;
             }
         } else if (FSM_Status.FSM_Mode == Halt_Mode && V_Baterry > 20.0f && overcurrent_flag == 0
-            && Setting_OptiSchemes != SucapTest_Optimized) {
+                   && Setting_OptiSchemes != SucapTest_Optimized) {
             Delayms(100);
             if (Setting_OptiSchemes != SucapTest_Optimized && FSM_Status.FSM_Mode == Halt_Mode) {
                 vTaskPrioritySet(ProtectTask_Handler, 1);
@@ -66,6 +77,9 @@ void Protect_Task(void *pvParameters) {
                 DataSave_To_Flash(RePowerOn_Reset);
                 SoftReset();
             }
+        }
+        if (Last_FSM_Status.FSM_Mode == OverPower_Mode && Capacitor_Percent < 0.08f) {
+            FSM_Status.FSM_Mode = Normal_Mode;
         }
         if (referee_time_counter >= 1000) {
             referee_avaiflag = 0;
