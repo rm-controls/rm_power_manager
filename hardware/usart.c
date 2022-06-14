@@ -7,8 +7,6 @@
 #include "queue.h"
 #include "fsm.h"
 #include "sysinfo_form.h"
-#include "system.h"
-#include "datasave.h"
 
 UART_HandleTypeDef huart1;
 UART_HandleTypeDef huart2;
@@ -58,14 +56,9 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
                         Setting_OptiSchemes = UseFirst_Optimized;
                     else if (aRxBuffer1[0] == 0xD4)
                         Setting_OptiSchemes = SucapTest_Optimized;
-                    else if (aRxBuffer1[0] == 0xC4) {
-                        DataSave_To_Flash(Watchdog_Reset);
-                        SoftReset();
-                    }
                     ModeBuffer = 0;
                     break;
-                default:
-                    ModeBuffer = 0;
+                default:ModeBuffer = 0;
                     break;
             }
         }

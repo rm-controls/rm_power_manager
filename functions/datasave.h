@@ -13,11 +13,9 @@ typedef enum {
     BusFault_Reset = 5,
     NMI_Reset = 6,
     StackOverflow_Reset = 7,
-    NUC_Soft_Reset = 8
 } Saving_Reason_e;
 
 void DataSave_DisplayLastInfo(void);
-
 void DataSave_To_Flash(Saving_Reason_e reason);
 
 #endif //PROGRAM_FUNCTIONS_DATASAVE_H_
