@@ -31,7 +31,7 @@ void Referee_Power_Callback(void) {
 unsigned char Verify_CalibrateCoefficient(void) {
     for (unsigned char counter = 10; counter < 120; counter += 10) {
         float verify_p =
-                ((float) counter * Capacitor_Calibrate.coefficient[0] + Capacitor_Calibrate.coefficient[1])
+            ((float) counter * Capacitor_Calibrate.coefficient[0] + Capacitor_Calibrate.coefficient[1])
                 * (float) counter + Capacitor_Calibrate.coefficient[2];
         float error = verify_p - (float) counter;
         if (error > 30.0f || error < -30.0f)
@@ -78,16 +78,14 @@ void ComplexPower_Calibrate(void) {              // Least square fitting of quad
             Capacitor_Calibrate.coefficient[1] = 0;
             for (int counter = 0; counter < 2000; ++counter) {
                 Capacitor_Calibrate.coefficient[0] =
-                        (x2y_sum - x3_sum * Capacitor_Calibrate.coefficient[1]
-                         - x2_sum * Capacitor_Calibrate.coefficient[2])
+                    (x2y_sum - x3_sum * Capacitor_Calibrate.coefficient[1]
+                        - x2_sum * Capacitor_Calibrate.coefficient[2])
                         / x4_sum;
                 Capacitor_Calibrate.coefficient[1] =
-                        (xy_sum - x_sum * Capacitor_Calibrate.coefficient[2] -
-                         x3_sum * Capacitor_Calibrate.coefficient[0])
+                    (xy_sum - x_sum * Capacitor_Calibrate.coefficient[2] - x3_sum * Capacitor_Calibrate.coefficient[0])
                         / x2_sum;
                 Capacitor_Calibrate.coefficient[2] =
-                        (y_sum - x2_sum * Capacitor_Calibrate.coefficient[0] -
-                         x_sum * Capacitor_Calibrate.coefficient[1])
+                    (y_sum - x2_sum * Capacitor_Calibrate.coefficient[0] - x_sum * Capacitor_Calibrate.coefficient[1])
                         / 13;
             }
         } else {
@@ -179,14 +177,14 @@ void Calculate_Power(void) {
     V_ChassisF.Current_Value = (float) ADC_FinalResult[4] * ADC_COEFFICIENT * 21.0f;
     V_Chassis = FirstOrder_Filter_Calculate(&V_ChassisF);
 
-    W_Capacitor = 7.5f * V_Capacitor * V_Capacitor - 421.875f;        // Set 7.5V as 0% energy
+    W_Capacitor = 7.5f * V_Capacitor * V_Capacitor - 367.5f;        // Set 7V as 0% energy
     if (W_Capacitor < 0)
         W_Capacitor = 0;
     Capacitor_Percent = W_Capacitor / 1434.375f;                    // Set 15.5f as 100% energy
 
-    if (I_Capacitor < 0.01f || I_Capacitor > 18.0f)
+    if (I_Capacitor < 0.01f || I_Capacitor > 10.0f)
         I_Capacitor = 0;
-    if (I_Chassis < 0.05f || I_Chassis > 18.0f)
+    if (I_Chassis < 0.05f || I_Chassis > 10.0f)
         I_Chassis = 0;
     if (V_Capacitor < 0.01f || V_Capacitor > 25.0f)
         V_Capacitor = 0;
@@ -201,7 +199,7 @@ void Calculate_Power(void) {
     P_CapacitorF.Current_Value = V_Baterry * I_Capacitor;
     float tmp_capacitor_power = FirstOrder_Filter_Calculate(&P_CapacitorF);
     P_Capacitor =
-            (tmp_capacitor_power * Capacitor_Calibrate.coefficient[0] + Capacitor_Calibrate.coefficient[1])
+        (tmp_capacitor_power * Capacitor_Calibrate.coefficient[0] + Capacitor_Calibrate.coefficient[1])
             * tmp_capacitor_power + Capacitor_Calibrate.coefficient[2];
     if (P_Capacitor < 0)
         P_Capacitor = 0;
