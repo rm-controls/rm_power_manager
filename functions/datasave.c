@@ -52,56 +52,79 @@ void DataSave_DisplayLastInfo(void) {
                "%2d.%1dV", (int) Last_V_Baterry,
                (int) (Last_V_Baterry * 10) - ((int) Last_V_Baterry * 10));
     switch (FSM_Before_Reboot.FSM_Mode) {
-        case Normal_Mode:GUI_Printf(2, 30, C_DARK_RED, C_WHITE, "Normal");
+        case Normal_Mode:
+            GUI_Printf(2, 30, C_DARK_RED, C_WHITE, "Normal");
             break;
-        case OverPower_Mode:GUI_Printf(2, 30, C_DARK_RED, C_WHITE, "OverPower");
+        case OverPower_Mode:
+            GUI_Printf(2, 30, C_DARK_RED, C_WHITE, "OverPower");
             break;
-        case Halt_Mode:GUI_Printf(2, 30, C_DARK_RED, C_WHITE, "Halt");
+        case Halt_Mode:
+            GUI_Printf(2, 30, C_DARK_RED, C_WHITE, "Halt");
             break;
-        case NoCharge_Mode:GUI_Printf(2, 30, C_DARK_RED, C_WHITE, "Transit");
+        case NoCharge_Mode:
+            GUI_Printf(2, 30, C_DARK_RED, C_WHITE, "Transit");
             break;
     }
     switch (FSM_Before_Reboot.Charge_Mode) {
-        case Zero_Power_Charge:GUI_Printf(60, 30, C_DARK_RED, C_WHITE, "ZeroPower");
+        case Zero_Power_Charge:
+            GUI_Printf(60, 30, C_DARK_RED, C_WHITE, "ZeroPower");
             break;
-        case Const_Power_Charge:GUI_Printf(60, 30, C_DARK_RED, C_WHITE, "ConstPower");
+        case Const_Power_Charge:
+            GUI_Printf(60, 30, C_DARK_RED, C_WHITE, "ConstPower");
             break;
-        case Proportional_Charge:GUI_Printf(60, 30, C_DARK_RED, C_WHITE, "Proportional");
+        case Proportional_Charge:
+            GUI_Printf(60, 30, C_DARK_RED, C_WHITE, "Proportional");
             break;
-        case Full_Power_Charge:GUI_Printf(60, 30, C_DARK_RED, C_WHITE, "FullPower");
+        case Full_Power_Charge:
+            GUI_Printf(60, 30, C_DARK_RED, C_WHITE, "FullPower");
             break;
-        case Remain_Power_Charge:GUI_Printf(60, 30, C_DARK_RED, C_WHITE, "RemainPower");
+        case Remain_Power_Charge:
+            GUI_Printf(60, 30, C_DARK_RED, C_WHITE, "RemainPower");
             break;
     }
     switch (FSM_Before_Reboot.Typology_Mode) {
-        case Boost_With_Charge:GUI_Printf(10, 44, C_DARK_RED, C_WHITE, "OnlyCharge");
+        case Boost_With_Charge:
+            GUI_Printf(10, 44, C_DARK_RED, C_WHITE, "OnlyCharge");
             break;
-        case Only_DeliverChassis:GUI_Printf(10, 44, C_DARK_RED, C_WHITE, "OnlyPMOS");
+        case Only_DeliverChassis:
+            GUI_Printf(10, 44, C_DARK_RED, C_WHITE, "OnlyPMOS");
             break;
-        case Chassis_With_Charge:GUI_Printf(10, 44, C_DARK_RED, C_WHITE, "PMOS&Charge");
+        case Chassis_With_Charge:
+            GUI_Printf(10, 44, C_DARK_RED, C_WHITE, "PMOS&Charge");
             break;
-        case All_Off:GUI_Printf(10, 44, C_DARK_RED, C_WHITE, "AllOff");
+        case All_Off:
+            GUI_Printf(10, 44, C_DARK_RED, C_WHITE, "AllOff");
             break;
     }
     GUI_Printf(80, 44, C_DARK_RED, C_WHITE,
                "%3d.%1dW", (int) Last_Referee_ChassisPower,
                (int) (Last_Referee_ChassisPower * 10) - ((int) Last_Referee_ChassisPower * 10));
     switch (reason) {
-        case RePowerOn_Reset:GUI_Printf(18, 60, C_RED, C_WHITE, "Repoweron Reset");
+        case RePowerOn_Reset:
+            GUI_Printf(18, 60, C_RED, C_WHITE, "Repoweron Reset");
             break;
-        case Watchdog_Reset:GUI_Printf(21, 60, C_RED, C_WHITE, "WatchDog Reset");
+        case Watchdog_Reset:
+            GUI_Printf(21, 60, C_RED, C_WHITE, "WatchDog Reset");
             break;
-        case Hardfault_Reset:GUI_Printf(18, 60, C_RED, C_WHITE, "HardFault Reset");
+        case Hardfault_Reset:
+            GUI_Printf(18, 60, C_RED, C_WHITE, "HardFault Reset");
             break;
-        case UsageFault_Reset:GUI_Printf(15, 60, C_RED, C_WHITE, "UsageFault Reset");
+        case UsageFault_Reset:
+            GUI_Printf(15, 60, C_RED, C_WHITE, "UsageFault Reset");
             break;
-        case BusFault_Reset:GUI_Printf(21, 60, C_RED, C_WHITE, "BusFault Reset");
+        case BusFault_Reset:
+            GUI_Printf(21, 60, C_RED, C_WHITE, "BusFault Reset");
             break;
-        case NMI_Reset:GUI_Printf(36, 60, C_RED, C_WHITE, "NMI Reset");
+        case NMI_Reset:
+            GUI_Printf(36, 60, C_RED, C_WHITE, "NMI Reset");
             break;
-        case StackOverflow_Reset:GUI_Printf(3, 60, C_RED, C_WHITE, "Stack Overflow Reset");
+        case StackOverflow_Reset:
+            GUI_Printf(3, 60, C_RED, C_WHITE, "Stack Overflow Reset");
             break;
-        default:break;
+        case NUC_Soft_Reset:
+            GUI_Printf(12, 60, C_RED, C_WHITE, "NUC Soft Reset");
+        default:
+            break;
     }
     GUI_Printf(16, 74, C_DARK_RED, C_WHITE, "LimitPower: %3dW", Last_Power_Limit);
     if ((Buffer[15] & 0x80) != 0)
@@ -141,8 +164,8 @@ void DataSave_To_Flash(Saving_Reason_e reason) {
     Buffer[13] = FloatToInt16(referee_data_.power_heat_data_.chassis_power) >> 8;
     Buffer[14] = FloatToInt16(referee_data_.power_heat_data_.chassis_power) & 0x00ff;
     Buffer[15] = ((HAL_GPIO_ReadPin(EN_NMOS_GPIO_Port, EN_NMOS_Pin) & 0x01) << 7)
-        | ((HAL_GPIO_ReadPin(CHG_EN_GPIO_Port, CHG_EN_Pin) & 0x01) << 6)
-        | ((HAL_GPIO_ReadPin(BOOST_EN_GPIO_Port, BOOST_EN_Pin) & 0x01) << 5);
+                 | ((HAL_GPIO_ReadPin(CHG_EN_GPIO_Port, CHG_EN_Pin) & 0x01) << 6)
+                 | ((HAL_GPIO_ReadPin(BOOST_EN_GPIO_Port, BOOST_EN_Pin) & 0x01) << 5);
     HAL_WWDG_Refresh(&hwwdg1);
     HAL_PWR_EnableBkUpAccess();
     HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR0, Buffer[0] | Buffer[1] << 8 | Buffer[2] << 16 | Buffer[3] << 24);
