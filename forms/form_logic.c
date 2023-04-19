@@ -65,7 +65,8 @@ void Form_UpdateEvent(void) {
                 if (((ListBox_Struct_t *) Tmp_Widget)->Status != ListBox_Normal && Tmp_Widget != Current_Widget)
                     GUI_ListBoxUpdate((ListBox_Struct_t *) Tmp_Widget, ListBox_Normal);
                 break;
-            default:break;
+            default:
+                break;
         }
         if (Tmp_Widget->NextObject == NULL)
             break;
@@ -87,17 +88,25 @@ void Form_UpdateEvent(void) {
     }
 
     switch (Form_Info_Structure.Form_Index) {
-        case Main_Form_Index:MainForm_Update();
+        case Main_Form_Index:
+            MainForm_Update();
             break;
-        case Log_Form_Index:LogForm_Update();
+        case Log_Form_Index:
+            LogForm_Update();
             break;
-        case Settings_Form_Index:SettingsForm_Update();
+        case Settings_Form_Index:
+            SettingsForm_Update();
             break;
-        case OSInfo_Form_Index:OSInfoForm_Update();
+        case OSInfo_Form_Index:
+            OSInfoForm_Update();
             break;
-        case SysInfo_Form_Index:SysInfoForm_Update();
+        case SysInfo_Form_Index:
+            SysInfoForm_Update();
             break;
-        case LogView_Form_Index:LogViewForm_Update();
+        case LogView_Form_Index:
+            LogViewForm_Update();
+        case UartDebuger_Index:
+            UartDebugerForm_Update();
             break;
     }
 }

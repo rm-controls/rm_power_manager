@@ -12,6 +12,7 @@ typedef enum {
     OSInfo_Form_Index = 3,
     SysInfo_Form_Index = 4,
     LogView_Form_Index = 5,
+    UartDebuger_Index = 6,
 } Form_Index_e;
 
 typedef struct {
@@ -26,7 +27,9 @@ typedef struct GUI_OBJECT_TYPE_T {
     unsigned char Height;
     const char *Text;
     void *NextObject;
+
     void (*CallbackFunction)(void *Object, unsigned char Key);
+
     unsigned char Widget_Type;
 } GUI_Object_Struct_t;
 
@@ -38,6 +41,7 @@ typedef enum {
 
 extern GUI_Object_Struct_t *FirstWidget;
 extern Form_Info_t Form_Info_Structure;
+
 void Form_UpdateEvent(void);
 
 #endif //PROGRAM_FORMS_FORM_LOGIC_H_

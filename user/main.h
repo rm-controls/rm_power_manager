@@ -64,7 +64,7 @@
 #include "osinfo_form.h"
 #include "sysinfo_form.h"
 #include "logview_form.h"
-
+#include "uart_debuger_form.h"
 /////////////// FileSystem ///////////////
 #include "fs_operate.h"
 
