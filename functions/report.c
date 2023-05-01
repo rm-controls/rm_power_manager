@@ -31,13 +31,12 @@ void Upload_Referee(void *pvParameters) {
     Referee_Data = xQueueCreate(4, 128);
     while (1) {
         if (xQueueReceive(Referee_Data, Referee_Buf, 10) == pdTRUE) {
-
+            Packup_Info();
+            DTP_Transmit(&Upload_Package);
             for (unsigned char counter = 0; counter < 128; counter++) {
                 HAL_UART_Transmit(&huart1, &Referee_Buf[counter], 1, 0xFFFFFFFFUL);
                 Referee_unpack(Referee_Buf[counter]);
             }
         }
-        Packup_Info();
-        DTP_Transmit(&Upload_Package);
     }
 }

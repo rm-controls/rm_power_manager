@@ -74,6 +74,40 @@ void USART2_IRQHandler(void) {
     if (__HAL_UART_GET_FLAG(&huart2, HAL_UART_ERROR_ORE) != RESET) {
         __HAL_UART_CLEAR_FLAG(&huart2, HAL_UART_ERROR_ORE);
     }
+    if (__HAL_UART_GET_FLAG(&huart2, HAL_UART_ERROR_DMA) != RESET) {
+        __HAL_UART_CLEAR_FLAG(&huart2, HAL_UART_ERROR_DMA);
+    }
+    if (__HAL_UART_GET_FLAG(&huart2, HAL_UART_ERROR_FE) != RESET) {
+        __HAL_UART_CLEAR_FLAG(&huart2, HAL_UART_ERROR_FE);
+    }
+    if (__HAL_UART_GET_FLAG(&huart2, HAL_UART_ERROR_NE) != RESET) {
+        __HAL_UART_CLEAR_FLAG(&huart2, HAL_UART_ERROR_NE);
+    }
+    if (__HAL_UART_GET_FLAG(&huart2, HAL_UART_ERROR_PE) != RESET) {
+        __HAL_UART_CLEAR_FLAG(&huart2, HAL_UART_ERROR_PE);
+    }
+    if (__HAL_UART_GET_FLAG(&huart2, HAL_UART_ERROR_RTO) != RESET) {
+        __HAL_UART_CLEAR_FLAG(&huart2, HAL_UART_ERROR_RTO);
+    }
+
+    if (__HAL_UART_GET_FLAG(&huart1, HAL_UART_ERROR_ORE) != RESET) {
+        __HAL_UART_CLEAR_FLAG(&huart1, HAL_UART_ERROR_ORE);
+    }
+    if (__HAL_UART_GET_FLAG(&huart1, HAL_UART_ERROR_DMA) != RESET) {
+        __HAL_UART_CLEAR_FLAG(&huart1, HAL_UART_ERROR_DMA);
+    }
+    if (__HAL_UART_GET_FLAG(&huart1, HAL_UART_ERROR_FE) != RESET) {
+        __HAL_UART_CLEAR_FLAG(&huart1, HAL_UART_ERROR_FE);
+    }
+    if (__HAL_UART_GET_FLAG(&huart1, HAL_UART_ERROR_NE) != RESET) {
+        __HAL_UART_CLEAR_FLAG(&huart1, HAL_UART_ERROR_NE);
+    }
+    if (__HAL_UART_GET_FLAG(&huart1, HAL_UART_ERROR_PE) != RESET) {
+        __HAL_UART_CLEAR_FLAG(&huart1, HAL_UART_ERROR_PE);
+    }
+    if (__HAL_UART_GET_FLAG(&huart1, HAL_UART_ERROR_RTO) != RESET) {
+        __HAL_UART_CLEAR_FLAG(&huart1, HAL_UART_ERROR_RTO);
+    }
     HAL_UART_IRQHandler(&huart2);
 }
 

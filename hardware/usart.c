@@ -25,19 +25,11 @@ unsigned char ModeBuffer = 0;
 unsigned char UART1_IT_Flag = 0;
 unsigned char fff = 0;
 
-//void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart) {
-////    fff = HAL_UART_GetError(&huart2);
-//
-////    if (huart->Instance == USART2) {
-//////        fff = 1;
-////        __HAL_UNLOCK(huart);
-//////        HAL_UART_ERROR_DMA
-////        HAL_UART_Receive_IT(&huart2, aRxBuffer2, 128);
-////    } else {
-////        __HAL_UNLOCK(huart);
-////        UART1_IT_Flag = HAL_UART_Receive_IT(&huart1, aRxBuffer1, 1);
-////    }
-//}
+void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart) {
+    fff = HAL_UART_GetError(&huart2);
+    if (HAL_UART_GetError(huart) & HAL_UART_ERROR_ORE)
+        __HAL_UART_FLUSH_DRREGISTER(huart);
+}
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
     if (huart->Instance == USART2) {
