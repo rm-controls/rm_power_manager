@@ -27,12 +27,12 @@ void Packup_Info(void) {
 }
 
 void Upload_Referee(void *pvParameters) {
-    unsigned char Referee_Buf[64];
-    Referee_Data = xQueueCreate(4, 64);
+    unsigned char Referee_Buf[128];
+    Referee_Data = xQueueCreate(4, 128);
     while (1) {
         if (xQueueReceive(Referee_Data, Referee_Buf, 10) == pdTRUE) {
 
-            for (unsigned char counter = 0; counter < 64; counter++) {
+            for (unsigned char counter = 0; counter < 128; counter++) {
                 HAL_UART_Transmit(&huart1, &Referee_Buf[counter], 1, 0xFFFFFFFFUL);
                 Referee_unpack(Referee_Buf[counter]);
             }

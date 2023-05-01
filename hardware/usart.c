@@ -20,16 +20,19 @@ unsigned char nuc_data;
 
 extern QueueHandle_t Referee_Data;
 unsigned char aRxBuffer1[1] = {0};
-unsigned char aRxBuffer2[64] = {0};
+unsigned char aRxBuffer2[128] = {0};
 unsigned char ModeBuffer = 0;
 unsigned char UART1_IT_Flag = 0;
 unsigned char fff = 0;
 
 //void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart) {
-////    fff = 1;
+////    fff = HAL_UART_GetError(&huart2);
+//
 ////    if (huart->Instance == USART2) {
+//////        fff = 1;
 ////        __HAL_UNLOCK(huart);
-////        HAL_UART_Receive_IT(&huart2, aRxBuffer2, 64);
+//////        HAL_UART_ERROR_DMA
+////        HAL_UART_Receive_IT(&huart2, aRxBuffer2, 128);
 ////    } else {
 ////        __HAL_UNLOCK(huart);
 ////        UART1_IT_Flag = HAL_UART_Receive_IT(&huart1, aRxBuffer1, 1);
@@ -43,7 +46,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
             xQueueSendToBackFromISR(Referee_Data, aRxBuffer2,
                                     &pxHigherPriorityTaskWoken);
         }
-        HAL_UART_Receive_IT(&huart2, aRxBuffer2, 64);
+        HAL_UART_Receive_IT(&huart2, aRxBuffer2, 128);
     } else {
         if (aRxBuffer1[0] == 0x01)
             ModeBuffer = 1;
@@ -134,7 +137,7 @@ void UART2_Config(void) {
            HAL_OK);
     while (HAL_UARTEx_DisableFifoMode(&huart2) != HAL_OK);
     __HAL_UART_ENABLE_IT(&huart2, UART_IT_RXNE);
-    HAL_UART_Receive_IT(&huart2, aRxBuffer2, 64);
+    HAL_UART_Receive_IT(&huart2, aRxBuffer2, 128);
 }
 
 void HAL_UART_MspInit(UART_HandleTypeDef *uartHandle) {

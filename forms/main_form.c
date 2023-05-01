@@ -44,11 +44,11 @@ void MainForm_Update(void) {
                      (int) (V_Baterry * 10) - ((int) V_Baterry * 10));
     GUI_LableSetText(&PCapacitor_Lable, "%3d.%1dW", (int) P_Capacitor,
                      (int) (P_Capacitor * 10) - ((int) P_Capacitor * 10));
-    if (fff == 0) {
-        GUI_LableSetText(&PChassis_Lable, "%3d.%1dW", (int) P_Chassis,
+    if (fff == HAL_UART_ERROR_ORE) {
+        GUI_LableSetText(&PChassis_Lable, "%3d.%1dF", (int) P_Chassis,
                          (int) (P_Chassis * 10) - ((int) P_Chassis * 10));
     } else {
-        GUI_LableSetText(&PChassis_Lable, "%3d.%1dF", (int) P_Chassis,
+        GUI_LableSetText(&PChassis_Lable, "%3d.%1dW", (int) P_Chassis,
                          (int) (P_Chassis * 10) - ((int) P_Chassis * 10));
     }
 
