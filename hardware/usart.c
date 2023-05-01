@@ -23,6 +23,18 @@ unsigned char aRxBuffer1[1] = {0};
 unsigned char aRxBuffer2[64] = {0};
 unsigned char ModeBuffer = 0;
 unsigned char UART1_IT_Flag = 0;
+unsigned char fff = 0;
+
+//void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart) {
+////    fff = 1;
+////    if (huart->Instance == USART2) {
+////        __HAL_UNLOCK(huart);
+////        HAL_UART_Receive_IT(&huart2, aRxBuffer2, 64);
+////    } else {
+////        __HAL_UNLOCK(huart);
+////        UART1_IT_Flag = HAL_UART_Receive_IT(&huart1, aRxBuffer1, 1);
+////    }
+//}
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
     if (huart->Instance == USART2) {
@@ -113,6 +125,8 @@ void UART2_Config(void) {
     huart2.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
     huart2.Init.ClockPrescaler = UART_PRESCALER_DIV1;
     huart2.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
+//    huart2.AdvancedInit.OverrunDisable = UART_ADVFEATURE_OVERRUN_DISABLE;
+
     while (HAL_UART_Init(&huart2) != HAL_OK);
     while (HAL_UARTEx_SetTxFifoThreshold(&huart2, UART_TXFIFO_THRESHOLD_1_8) !=
            HAL_OK);

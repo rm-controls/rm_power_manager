@@ -21,6 +21,9 @@
 #include "encrypt.h"
 
 
+#include "report.h"
+#include "encrypt.h"
+
 extern TaskHandle_t PIDTask_Handler;
 FSM_Status_t FSM_Status, Last_FSM_Status;
 extern SemaphoreHandle_t Calibrate_Semaphore;
@@ -180,7 +183,6 @@ void FSM_Task(void *pvParameters) {
         Last_FSM_Status.Typology_Mode = FSM_Status.Typology_Mode;
         Last_FSM_Status.FSM_Mode = FSM_Status.FSM_Mode;
         Delayms(5);
-        Packup_Info();
-        DTP_Transmit(&Upload_Package);
+
     }
 }
