@@ -1,21 +1,20 @@
-//
-// Created by Lao·Zhu on 2021/1/21.
-//
-
-#ifndef __STM32H7xx_IT_H
-#define __STM32H7xx_IT_H
+#ifndef POWER_MANAGER_SYSTEM_USER_STM32H7xx_IT_H_
+#define POWER_MANAGER_SYSTEM_USER_STM32H7xx_IT_H_
 
 void NMI_Handler(void);
 void HardFault_Handler(void);
 void MemManage_Handler(void);
 void BusFault_Handler(void);
 void UsageFault_Handler(void);
+void SVC_Handler(void);
 void DebugMon_Handler(void);
+void PendSV_Handler(void);
+void SysTick_Handler(void);
 void DMA1_Stream0_IRQHandler(void);
-void ADC_IRQHandler(void);
-void TIM4_IRQHandler(void);
-void USART1_IRQHandler(void);
-void USART2_IRQHandler(void);
-void WWDG_IRQHandler(void);
+void DMA1_Stream1_IRQHandler(void);
+void DMA1_Stream2_IRQHandler(void);
+void SPI3_IRQHandler(void);
+void TIM6_DAC_IRQHandler(void);
+void DMA2_Stream0_IRQHandler(void);
 
-#endif /* __STM32H7xx_IT_H */
+#endif /* POWER_MANAGER_SYSTEM_USER_STM32H7xx_IT_H_ */

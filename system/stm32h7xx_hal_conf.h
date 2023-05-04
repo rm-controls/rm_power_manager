@@ -1,3 +1,4 @@
+/* USER CODE BEGIN Header */
 /**
   ******************************************************************************
   * @file    stm32h7xx_hal_conf.h
@@ -6,17 +7,16 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2017 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
-
+/* USER CODE END Header */
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef STM32H7xx_HAL_CONF_H
 #define STM32H7xx_HAL_CONF_H
@@ -40,12 +40,13 @@ extern "C" {
 /* #define HAL_CEC_MODULE_ENABLED   */
 /* #define HAL_COMP_MODULE_ENABLED   */
 /* #define HAL_CORDIC_MODULE_ENABLED   */
-#define HAL_CRC_MODULE_ENABLED
+/* #define HAL_CRC_MODULE_ENABLED   */
 /* #define HAL_CRYP_MODULE_ENABLED   */
 #define HAL_DAC_MODULE_ENABLED
 /* #define HAL_DCMI_MODULE_ENABLED   */
 /* #define HAL_DMA2D_MODULE_ENABLED   */
 /* #define HAL_ETH_MODULE_ENABLED   */
+/* #define HAL_ETH_LEGACY_MODULE_ENABLED   */
 /* #define HAL_NAND_MODULE_ENABLED   */
 /* #define HAL_NOR_MODULE_ENABLED   */
 /* #define HAL_OTFDEC_MODULE_ENABLED   */
@@ -65,8 +66,9 @@ extern "C" {
 /* #define HAL_LPTIM_MODULE_ENABLED   */
 /* #define HAL_LTDC_MODULE_ENABLED   */
 /* #define HAL_QSPI_MODULE_ENABLED   */
+#define HAL_RAMECC_MODULE_ENABLED
 /* #define HAL_RNG_MODULE_ENABLED   */
-#define HAL_RTC_MODULE_ENABLED
+/* #define HAL_RTC_MODULE_ENABLED   */
 /* #define HAL_SAI_MODULE_ENABLED   */
 /* #define HAL_SD_MODULE_ENABLED   */
 /* #define HAL_MMC_MODULE_ENABLED   */
@@ -78,7 +80,7 @@ extern "C" {
 /* #define HAL_USART_MODULE_ENABLED   */
 /* #define HAL_IRDA_MODULE_ENABLED   */
 /* #define HAL_SMARTCARD_MODULE_ENABLED   */
-#define HAL_WWDG_MODULE_ENABLED
+/* #define HAL_WWDG_MODULE_ENABLED   */
 /* #define HAL_PCD_MODULE_ENABLED   */
 /* #define HAL_HCD_MODULE_ENABLED   */
 /* #define HAL_DFSDM_MODULE_ENABLED   */
@@ -219,8 +221,8 @@ extern "C" {
 #define  USE_HAL_WWDG_REGISTER_CALLBACKS    0U /* WWDG register callback disabled    */
 
 /* ########################### Ethernet Configuration ######################### */
-#define ETH_TX_DESC_CNT         4  /* number of Ethernet Tx DMA descriptors */
-#define ETH_RX_DESC_CNT         4  /* number of Ethernet Rx DMA descriptors */
+#define ETH_TX_DESC_CNT         4U  /* number of Ethernet Tx DMA descriptors */
+#define ETH_RX_DESC_CNT         4U  /* number of Ethernet Rx DMA descriptors */
 
 #define ETH_MAC_ADDR0    (0x02UL)
 #define ETH_MAC_ADDR1    (0x00UL)
@@ -284,6 +286,10 @@ extern "C" {
 #ifdef HAL_ETH_MODULE_ENABLED
 #include "stm32h7xx_hal_eth.h"
 #endif /* HAL_ETH_MODULE_ENABLED */
+
+#ifdef HAL_ETH_LEGACY_MODULE_ENABLED
+#include "stm32h7xx_hal_eth_legacy.h"
+#endif /* HAL_ETH_LEGACY_MODULE_ENABLED */
 
 #ifdef HAL_EXTI_MODULE_ENABLED
 #include "stm32h7xx_hal_exti.h"
@@ -507,5 +513,3 @@ extern "C" {
 #endif
 
 #endif /* STM32H7xx_HAL_CONF_H */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

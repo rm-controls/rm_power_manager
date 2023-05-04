@@ -54,6 +54,7 @@ dkms.conf
 *.iml
 out
 gen
+build
 cmake-build-debug
 .idea
 .idea/workspace.xml

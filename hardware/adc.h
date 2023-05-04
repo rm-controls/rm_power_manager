@@ -1,15 +1,12 @@
-//
-// Created by Lao·Zhu on 2021/1/21.
-//
-
-#ifndef __ADC_H__
-#define __ADC_H__
+#ifndef POWER_MANAGER_HARDWARE_ADC_H_
+#define POWER_MANAGER_HARDWARE_ADC_H_
 
 #include "stm32h7xx_hal.h"
+#include "system.h"
 
 extern ADC_HandleTypeDef hadc1;
-extern unsigned short ADC_FinalResult[6];
-int Compare_UShort(const void *a, const void *b);
-void ADC_Config(void);
 
-#endif /* __ADC_H__ */
+void adc_config(void);
+
+#endif /* POWER_MANAGER_HARDWARE_ADC_H_ */
+

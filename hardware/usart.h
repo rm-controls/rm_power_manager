@@ -1,16 +1,13 @@
-//
-// Created by Lao·Zhu on 2021/1/21.
-//
-
-#ifndef __USART_H__
-#define __USART_H__
+#ifndef POWER_MANAGER_HARDWARE_USART_H_
+#define POWER_MANAGER_HARDWARE_USART_H_
 
 #include "stm32h7xx_hal.h"
+#include "system.h"
 
 extern UART_HandleTypeDef huart1;
 extern UART_HandleTypeDef huart2;
 
-void UART1_Config(void);
-void UART2_Config(void);
+void usart1_config(void);
+void usart2_config(void);
 
-#endif /* __USART_H__ */
+#endif /* POWER_MANAGER_HARDWARE_USART_H_ */

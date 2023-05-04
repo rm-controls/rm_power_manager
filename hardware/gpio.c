@@ -1,60 +1,20 @@
-//
-// Created by Lao·Zhu on 2021/2/7.
-//
-
 #include "gpio.h"
-#include "port.h"
+
 /** Configure pins
      PH0-OSC_IN (PH0)   ------> RCC_OSC_IN
      PH1-OSC_OUT (PH1)   ------> RCC_OSC_OUT
      PA13 (JTMS/SWDIO)   ------> DEBUG_JTMS-SWDIO
      PA14 (JTCK/SWCLK)   ------> DEBUG_JTCK-SWCLK
 */
-void GPIO_Config(void) {
+
+void gpio_config(void) {
     GPIO_InitTypeDef GPIO_Structure;
 
-    __HAL_RCC_GPIOA_CLK_ENABLE();
-    __HAL_RCC_GPIOB_CLK_ENABLE();
-    __HAL_RCC_GPIOC_CLK_ENABLE();
-    __HAL_RCC_GPIOD_CLK_ENABLE();
-    __HAL_RCC_GPIOE_CLK_ENABLE();
+    /* GPIO Ports Clock Enable */
     __HAL_RCC_GPIOH_CLK_ENABLE();
-
-    GPIO_Structure.Pin = SPI_FLASH_CS_PIN;
-    GPIO_Structure.Mode = GPIO_MODE_OUTPUT_PP;
-    GPIO_Structure.Pull = GPIO_NOPULL;
-    GPIO_Structure.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-    HAL_GPIO_Init(SPI_FLASH_CS_PORT, &GPIO_Structure);
-
-    GPIO_Structure.Pin = LCD_A0_Pin;
-    GPIO_Structure.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-    GPIO_Structure.Mode = GPIO_MODE_OUTPUT_PP;
-    GPIO_Structure.Pull = GPIO_PULLUP;
-    HAL_GPIO_Init(LCD_A0_Port, &GPIO_Structure);
-
-    GPIO_Structure.Pin = LCD_CSB_Pin;
-    GPIO_Structure.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-    GPIO_Structure.Mode = GPIO_MODE_OUTPUT_PP;
-    GPIO_Structure.Pull = GPIO_PULLUP;
-    HAL_GPIO_Init(LCD_CSB_Port, &GPIO_Structure);
-
-    GPIO_Structure.Pin = LCD_SDA_Pin;
-    GPIO_Structure.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-    GPIO_Structure.Mode = GPIO_MODE_OUTPUT_PP;
-    GPIO_Structure.Pull = GPIO_PULLUP;
-    HAL_GPIO_Init(LCD_SDA_Port, &GPIO_Structure);
-
-    GPIO_Structure.Pin = LCD_SCL_Pin;
-    GPIO_Structure.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-    GPIO_Structure.Mode = GPIO_MODE_OUTPUT_PP;
-    GPIO_Structure.Pull = GPIO_PULLUP;
-    HAL_GPIO_Init(LCD_SCL_Port, &GPIO_Structure);
-
-    GPIO_Structure.Pin = LCD_RES_Pin;
-    GPIO_Structure.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-    GPIO_Structure.Mode = GPIO_MODE_OUTPUT_PP;
-    GPIO_Structure.Pull = GPIO_PULLUP;
-    HAL_GPIO_Init(LCD_RES_Port, &GPIO_Structure);
+    __HAL_RCC_GPIOA_CLK_ENABLE();
+    __HAL_RCC_GPIOC_CLK_ENABLE();
+    __HAL_RCC_GPIOB_CLK_ENABLE();
 
     GPIO_Structure.Pin = LCD_PWR_Pin;
     GPIO_Structure.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
@@ -113,6 +73,5 @@ void GPIO_Config(void) {
     HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_SET);
     HAL_GPIO_WritePin(BOOST_EN_GPIO_Port, BOOST_EN_Pin, GPIO_PIN_SET);
     HAL_GPIO_WritePin(EN_NMOS_GPIO_Port, EN_NMOS_Pin, GPIO_PIN_SET);
-    HAL_GPIO_WritePin(SPI_FLASH_CS_PORT, SPI_FLASH_CS_PIN, GPIO_PIN_SET);
     HAL_GPIO_WritePin(LCD_PWR_Port, LCD_PWR_Pin, GPIO_PIN_RESET);
 }

@@ -4,7 +4,9 @@
     <option name="actions">
       <set>
         <option value="activate" />
+        <option value="activateOnShortcut" />
         <option value="activateOnBatch" />
+        <option value="noActionIfCompileErrors" />
         <option value="organizeImports" />
         <option value="reformat" />
         <option value="rearrange" />

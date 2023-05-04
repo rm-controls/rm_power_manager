@@ -42,7 +42,7 @@ FreeRTOS/Source/tasks.c for limitations. */
 #define configMAX_CO_ROUTINE_PRIORITIES ( 2 )
 
 /* Software timer definitions. */
-#define configUSE_TIMERS                0
+#define configUSE_TIMERS                1
 #define configTIMER_TASK_PRIORITY        ( configMAX_PRIORITIES - 1 )
 #define configTIMER_QUEUE_LENGTH        5
 #define configTIMER_TASK_STACK_DEPTH    ( configMINIMAL_STACK_SIZE * 2 )
@@ -57,7 +57,7 @@ to exclude the API function. */
 #define INCLUDE_vTaskDelayUntil            1
 #define INCLUDE_vTaskDelay                1
 #define INCLUDE_eTaskGetState            1
-#define INCLUDE_xTimerPendFunctionCall    0
+#define INCLUDE_xTimerPendFunctionCall    1
 
 /* Cortex-M specific definitions. */
 #ifdef __NVIC_PRIO_BITS

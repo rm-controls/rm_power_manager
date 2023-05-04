@@ -1,12 +1,14 @@
-//
-// Created by Lao·Zhu on 2021/1/21.
-//
-
-#ifndef __DMA_H__
-#define __DMA_H__
+#ifndef POWER_MANAGER_HARDWARE_DMA_H_
+#define POWER_MANAGER_HARDWARE_DMA_H_
 
 #include "stm32h7xx_hal.h"
+#include "system.h"
 
-void DMA_Config(void);
+extern MDMA_HandleTypeDef hmdma_referee;
+extern unsigned char power_manager_status_send_flag, mdma_status_flag;
 
-#endif /* __DMA_H__ */
+void dma_config(void);
+void mdma_transmit_buffer(const unsigned char *source, int length);
+
+#endif /* POWER_MANAGER_HARDWARE_DMA_H_ */
+

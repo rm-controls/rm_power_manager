@@ -1,14 +1,12 @@
-//
-// Created by Lao·Zhu on 2021/1/21.
-//
-
-#ifndef __DAC_H__
-#define __DAC_H__
+#ifndef POWER_MANAGER_HARDWARE_DAC_H_
+#define POWER_MANAGER_HARDWARE_DAC_H_
 
 #include "stm32h7xx_hal.h"
+#include "system.h"
 
 extern DAC_HandleTypeDef hdac1;
 
-void DAC_Config(void);
+void dac_config(void);
 
-#endif /* __DAC_H__ */
+#endif /* POWER_MANAGER_HARDWARE_DAC_H_ */
+

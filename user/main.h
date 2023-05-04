@@ -1,71 +1,36 @@
-//
-// Created by Lao·Zhu on 2021/1/21.
-//
+#ifndef POWER_MANAGER_SYSTEM_USER_MAIN_H_
+#define POWER_MANAGER_SYSTEM_USER_MAIN_H_
 
-#ifndef __MAIN_H
-#define __MAIN_H
-
-/////////////// System ///////////////
+/////////////////////////// System ///////////////////////////
 #include "stm32h7xx_hal.h"
-#include "port.h"
 #include "system.h"
-#include "config.h"
-#include "usertask.h"
-#include "string.h"
+#include "stdlib.h"
 #include "stdio.h"
+#include "string.h"
 
-/////////////// FreeRTOS ///////////////
+/////////////////////////// FreeRTOS ///////////////////////////
 #include "FreeRTOS.h"
 #include "task.h"
-#include "queue.h"
-#include "semphr.h"
+#include "event_groups.h"
 
-/////////////// Hardware ///////////////
+/////////////////////////// Hardware ///////////////////////////
 #include "adc.h"
 #include "dac.h"
 #include "dma.h"
+#include "iwdg.h"
+#include "ramecc.h"
+#include "spi.h"
 #include "usart.h"
 #include "gpio.h"
-#include "timer.h"
-#include "watchdog.h"
-#include "key.h"
-#include "lcd.h"
-#include "spi.h"
-#include "rtc.h"
+#include "logic.h"
 
-/////////////// Device ///////////////
-#include "pid.h"
-#include "encrypt.h"
-#include "filter.h"
+/////////////////////////// Algorithm ///////////////////////////
+#include "power.h"
 #include "referee.h"
-#include "flash.h"
+#include "filter.h"
+#include "verify.h"
 
-/////////////// Functions ///////////////
-#include "calculate.h"
-#include "report.h"
-#include "fsm.h"
-#include "protect.h"
-#include "datasave.h"
+/////////////////////////// Tasks ///////////////////////////
+#include "interrupt.h"
 
-/////////////// GUI ///////////////
-#include "gui_base.h"
-#include "color.h"
-#include "gui_button.h"
-#include "gui_chart.h"
-#include "gui_lable.h"
-#include "gui_numeric.h"
-#include "gui_listbox.h"
-
-/////////////// Forms ///////////////
-#include "form_logic.h"
-#include "main_form.h"
-#include "info_form.h"
-#include "settings_form.h"
-#include "osinfo_form.h"
-#include "sysinfo_form.h"
-#include "logview_form.h"
-#include "uart_debuger_form.h"
-/////////////// FileSystem ///////////////
-#include "fs_operate.h"
-
-#endif /* __MAIN_H */
+#endif /* POWER_MANAGER_SYSTEM_USER_MAIN_H_ */
