@@ -32,6 +32,7 @@ void BusFault_Handler(void) {
     SoftReset();
     while (1);
 }
+
 void UsageFault_Handler(void) {
     DataSave_To_Flash(UsageFault_Reset);
     SoftReset();
@@ -49,12 +50,15 @@ void DMA1_Stream0_IRQHandler(void) {
 void ADC_IRQHandler(void) {
     HAL_ADC_IRQHandler(&hadc1);
 }
+
 void TIM4_IRQHandler(void) {
     HAL_TIM_IRQHandler(&htim4);
 }
+
 void TIM7_IRQHandler(void) {
     HAL_TIM_IRQHandler(&htim7);
 }
+
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
     if (htim->Instance == TIM4)
         HAL_IncTick();
@@ -67,6 +71,43 @@ void USART1_IRQHandler(void) {
 }
 
 void USART2_IRQHandler(void) {
+    if (__HAL_UART_GET_FLAG(&huart2, HAL_UART_ERROR_ORE) != RESET) {
+        __HAL_UART_CLEAR_FLAG(&huart2, HAL_UART_ERROR_ORE);
+    }
+    if (__HAL_UART_GET_FLAG(&huart2, HAL_UART_ERROR_DMA) != RESET) {
+        __HAL_UART_CLEAR_FLAG(&huart2, HAL_UART_ERROR_DMA);
+    }
+    if (__HAL_UART_GET_FLAG(&huart2, HAL_UART_ERROR_FE) != RESET) {
+        __HAL_UART_CLEAR_FLAG(&huart2, HAL_UART_ERROR_FE);
+    }
+    if (__HAL_UART_GET_FLAG(&huart2, HAL_UART_ERROR_NE) != RESET) {
+        __HAL_UART_CLEAR_FLAG(&huart2, HAL_UART_ERROR_NE);
+    }
+    if (__HAL_UART_GET_FLAG(&huart2, HAL_UART_ERROR_PE) != RESET) {
+        __HAL_UART_CLEAR_FLAG(&huart2, HAL_UART_ERROR_PE);
+    }
+    if (__HAL_UART_GET_FLAG(&huart2, HAL_UART_ERROR_RTO) != RESET) {
+        __HAL_UART_CLEAR_FLAG(&huart2, HAL_UART_ERROR_RTO);
+    }
+
+    if (__HAL_UART_GET_FLAG(&huart1, HAL_UART_ERROR_ORE) != RESET) {
+        __HAL_UART_CLEAR_FLAG(&huart1, HAL_UART_ERROR_ORE);
+    }
+    if (__HAL_UART_GET_FLAG(&huart1, HAL_UART_ERROR_DMA) != RESET) {
+        __HAL_UART_CLEAR_FLAG(&huart1, HAL_UART_ERROR_DMA);
+    }
+    if (__HAL_UART_GET_FLAG(&huart1, HAL_UART_ERROR_FE) != RESET) {
+        __HAL_UART_CLEAR_FLAG(&huart1, HAL_UART_ERROR_FE);
+    }
+    if (__HAL_UART_GET_FLAG(&huart1, HAL_UART_ERROR_NE) != RESET) {
+        __HAL_UART_CLEAR_FLAG(&huart1, HAL_UART_ERROR_NE);
+    }
+    if (__HAL_UART_GET_FLAG(&huart1, HAL_UART_ERROR_PE) != RESET) {
+        __HAL_UART_CLEAR_FLAG(&huart1, HAL_UART_ERROR_PE);
+    }
+    if (__HAL_UART_GET_FLAG(&huart1, HAL_UART_ERROR_RTO) != RESET) {
+        __HAL_UART_CLEAR_FLAG(&huart1, HAL_UART_ERROR_RTO);
+    }
     HAL_UART_IRQHandler(&huart2);
 }
 

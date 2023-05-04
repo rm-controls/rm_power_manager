@@ -17,6 +17,13 @@
 #include "watchdog.h"
 #include "protect.h"
 
+#include "report.h"
+#include "encrypt.h"
+
+
+#include "report.h"
+#include "encrypt.h"
+
 extern TaskHandle_t PIDTask_Handler;
 FSM_Status_t FSM_Status, Last_FSM_Status;
 extern SemaphoreHandle_t Calibrate_Semaphore;
@@ -61,11 +68,13 @@ void FSM_Task(void *pvParameters) {
                 FSM_Status.Expect_Mode = OverPower_Expect;
                 FSM_Status.Typology_Mode = Boost_With_Charge;
                 break;
-            case Halt_Mode:FSM_Status.Charge_Mode = Zero_Power_Charge;
+            case Halt_Mode:
+                FSM_Status.Charge_Mode = Zero_Power_Charge;
                 FSM_Status.Expect_Mode = ZeroPower_Expect;
                 FSM_Status.Typology_Mode = All_Off;
                 break;
-            case NoCharge_Mode:FSM_Status.Charge_Mode = Zero_Power_Charge;
+            case NoCharge_Mode:
+                FSM_Status.Charge_Mode = Zero_Power_Charge;
                 FSM_Status.Expect_Mode = FullPower_Expect;
                 FSM_Status.Typology_Mode = Only_DeliverChassis;
                 break;
@@ -80,7 +89,8 @@ void FSM_Task(void *pvParameters) {
             (referee_data_.power_heat_data_.chassis_power_buffer <= 5 && referee_avaiflag == 1))
             FSM_Status.Charge_Mode = Zero_Power_Charge;
         switch (FSM_Status.Charge_Mode) {
-            case Zero_Power_Charge:vTaskSuspend(PIDTask_Handler);
+            case Zero_Power_Charge:
+                vTaskSuspend(PIDTask_Handler);
                 HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_SET);
                 break;
             case Const_Power_Charge:
@@ -96,16 +106,16 @@ void FSM_Task(void *pvParameters) {
             case Proportional_Charge:
                 if (referee_data_.power_heat_data_.chassis_power_buffer <= 10)
                     PID_Capacitor.User = (float) (referee_data_.game_robot_status_.chassis_power_limit)
-                        * FSM_Status.P_Charge * 0.7f;
+                                         * FSM_Status.P_Charge * 0.7f;
                 else if (referee_data_.power_heat_data_.chassis_power_buffer <= 20)
                     PID_Capacitor.User = (float) (referee_data_.game_robot_status_.chassis_power_limit)
-                        * FSM_Status.P_Charge * 0.8f;
+                                         * FSM_Status.P_Charge * 0.8f;
                 else if (referee_data_.power_heat_data_.chassis_power_buffer <= 30)
                     PID_Capacitor.User = (float) (referee_data_.game_robot_status_.chassis_power_limit)
-                        * FSM_Status.P_Charge * 0.9f;
+                                         * FSM_Status.P_Charge * 0.9f;
                 else if (referee_data_.power_heat_data_.chassis_power_buffer >= 50)
                     PID_Capacitor.User = (float) (referee_data_.game_robot_status_.chassis_power_limit)
-                        * FSM_Status.P_Charge;
+                                         * FSM_Status.P_Charge;
                 vTaskResume(PIDTask_Handler);
                 HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_RESET);
                 break;
@@ -123,42 +133,49 @@ void FSM_Task(void *pvParameters) {
                 break;
             case Remain_Power_Charge:
                 PID_Capacitor.User = (float) (referee_data_.game_robot_status_.chassis_power_limit
-                    - FSM_Status.Expect_Power);
+                                              - FSM_Status.Expect_Power);
                 vTaskResume(PIDTask_Handler);
                 HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_RESET);
                 break;
         }
         switch (FSM_Status.Expect_Mode) {
-            case Const_Power_Expect:EP_Chassis = FSM_Status.Expect_Power;
+            case Const_Power_Expect:
+                EP_Chassis = FSM_Status.Expect_Power;
                 break;
             case Proportional_Expect:
                 EP_Chassis = (float) referee_data_.game_robot_status_.chassis_power_limit
-                    * FSM_Status.P_Expect;
+                             * FSM_Status.P_Expect;
                 break;
-            case FullPower_Expect:EP_Chassis = (float) referee_data_.game_robot_status_.chassis_power_limit;
+            case FullPower_Expect:
+                EP_Chassis = (float) referee_data_.game_robot_status_.chassis_power_limit;
                 break;
             case RemainPower_Expect:
                 EP_Chassis = (float) (referee_data_.game_robot_status_.chassis_power_limit
-                    - FSM_Status.Charge_Power);
+                                      - FSM_Status.Charge_Power);
                 break;
-            case OverPower_Expect:EP_Chassis = FSM_Status.Max_Power;
+            case OverPower_Expect:
+                EP_Chassis = FSM_Status.Max_Power;
                 break;
-            case ZeroPower_Expect:EP_Chassis = 0;
+            case ZeroPower_Expect:
+                EP_Chassis = 0;
                 break;
         }
         if (Last_FSM_Status.Typology_Mode != FSM_Status.Typology_Mode) {
             switch (FSM_Status.Typology_Mode) {
-                case Boost_With_Charge:HAL_GPIO_WritePin(BOOST_EN_GPIO_Port, BOOST_EN_Pin, GPIO_PIN_RESET);
+                case Boost_With_Charge:
+                    HAL_GPIO_WritePin(BOOST_EN_GPIO_Port, BOOST_EN_Pin, GPIO_PIN_RESET);
                     Delayms(50);
                     HAL_GPIO_WritePin(EN_NMOS_GPIO_Port, EN_NMOS_Pin, GPIO_PIN_SET);
                     break;
                 case Only_DeliverChassis:
-                case Chassis_With_Charge:HAL_GPIO_WritePin(EN_NMOS_GPIO_Port, EN_NMOS_Pin, GPIO_PIN_RESET);
+                case Chassis_With_Charge:
+                    HAL_GPIO_WritePin(EN_NMOS_GPIO_Port, EN_NMOS_Pin, GPIO_PIN_RESET);
                     Delayms(50);
                     HAL_GPIO_WritePin(BOOST_EN_GPIO_Port, BOOST_EN_Pin, GPIO_PIN_SET);
                     break;
                 case Only_Charge:
-                case All_Off:HAL_GPIO_WritePin(BOOST_EN_GPIO_Port, BOOST_EN_Pin, GPIO_PIN_SET);
+                case All_Off:
+                    HAL_GPIO_WritePin(BOOST_EN_GPIO_Port, BOOST_EN_Pin, GPIO_PIN_SET);
                     HAL_GPIO_WritePin(EN_NMOS_GPIO_Port, EN_NMOS_Pin, GPIO_PIN_SET);
                     break;
             }
@@ -166,5 +183,6 @@ void FSM_Task(void *pvParameters) {
         Last_FSM_Status.Typology_Mode = FSM_Status.Typology_Mode;
         Last_FSM_Status.FSM_Mode = FSM_Status.FSM_Mode;
         Delayms(5);
+
     }
 }
