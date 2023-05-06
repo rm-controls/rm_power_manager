@@ -6,18 +6,16 @@
 #define POWER_MANAGER_ALGORITHM_REFEREE_H_
 
 typedef struct {
-  unsigned char dummy_byte;
-  unsigned char package_sequence;
-  unsigned short data_length;
-} referee_package_header_t;
+  float chassis_power;
+  unsigned short chassis_power_buffer;
+  unsigned short chassis_power_limit;
+  float chassis_current;
+  float chassis_voltage;
+  unsigned long long timestamp;
+  unsigned char game_progress;
+} referee_info_t;
 
-typedef struct {
-  referee_package_header_t header;
-  unsigned short cmd_id;
-  unsigned short data_counter;
-  unsigned char data[127];
-  unsigned char crc16_low;
-} referee_package_t;
+extern referee_info_t referee_info;
 
 void referee_process_buffer(const unsigned char *buffer);
 
