@@ -73,6 +73,11 @@ static struct PowerHeatData_t {
   uint16_t shooter_id1_42mm_cooling_heat;
 } power_heat_data;
 
+static unsigned int last_time_tick = 0;
+unsigned int referee_available(void) {
+    return ((HAL_GetTick() - last_time_tick) < 1000);
+}
+
 void referee_process_buffer(const unsigned char *buffer) {
     int frame_header_position = -1;
     unsigned short crc16_expected;
@@ -162,4 +167,5 @@ static void referee_process_struct(referee_package_t *package) {
             break;
         default:break;
     }
+    last_time_tick = HAL_GetTick();
 }

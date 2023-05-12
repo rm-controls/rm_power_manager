@@ -8,6 +8,7 @@
 #include "logic.h"
 #include "verify.h"
 #include "filter.h"
+#include "referee.h"
 #include "dma.h"
 
 #define ADC_COEFFICIENT (3.0f / 4096.0f)
@@ -93,4 +94,35 @@ void calibrate_params_config(void) {
     }
     calibrate_params.charge_current_offset = capoffset_sum / 10;
     calibrate_params.chassis_current_offset = chaoffset_sum / 10;
+}
+
+void calibrate_referee_config(void) {              // Least square fitting of first order function
+    if (referee_available() == 1) {
+        float x[4], y[4], xy_sum = 0, x_ave, y_ave, x2_sum = 0, x_sum = 0, y_sum = 0;
+        charge_switch_only();
+        for (unsigned char counter = 0; counter < 4; counter++) {
+            float sample_local_sum = 0, sample_referee_sum = 0;
+            dac_set_output((unsigned short) (2730.0f * (float) (counter + 1)
+                / power_info.capacitor_voltage));       //10 ~ 40W
+            for (unsigned char counterf = 0; counterf < 5; counterf++) {
+                delayms(50);
+                sample_local_sum += power_info.charge_power;
+                sample_referee_sum += referee_info.chassis_power;
+            }
+            x[counter] = sample_local_sum / 5.0f;
+            y[counter] = sample_referee_sum / 5.0f;
+            xy_sum += (x[counter] * y[counter]);
+            x2_sum += (x[counter] * x[counter]);
+            x_sum += x[counter];
+            y_sum += y[counter];
+        }
+        close_all_switches();
+        x_ave = x_sum / 4.0f;
+        y_ave = y_sum / 4.0f;
+        calibrate_params.current_k = (xy_sum - 4 * x_ave * y_ave) / (x2_sum - 4 * x_ave * x_ave);
+        calibrate_params.current_b = y_ave - calibrate_params.current_k * x_ave;
+    } else {
+        calibrate_params.current_k = 1.0f;
+        calibrate_params.current_b = 0;
+    }
 }

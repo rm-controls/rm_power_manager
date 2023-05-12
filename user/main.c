@@ -22,6 +22,7 @@ void initialize_task(void *parameters) {
     dac_config();
     spi3_config();
     calibrate_params_config();
+    calibrate_referee_config();
 
     BaseType_t xReturned = xTaskCreate((TaskFunction_t) user_task,
                                        (const char *) "UserTask",
