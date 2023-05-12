@@ -32,8 +32,13 @@ void USART2_IRQHandler(void) { HAL_UART_IRQHandler(&huart2); }
 void MDMA_IRQHandler(void) { HAL_MDMA_IRQHandler(&hmdma_referee); }
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
-    if (htim->Instance == TIM6)
+    if (htim->Instance == TIM6) {
         HAL_IncTick();
+        if (pid_calculate_enable_flag == 1) {
+            unsigned short dac_value = pid_calculate(power_info.charge_power);
+            dac_set_output(dac_value);
+        }
+    }
 }
 
 __attribute__((section(".dma_ram")))volatile unsigned char uart2_receive_buffer1[UART_DMA_BUFFER_SIZE] = {0};
