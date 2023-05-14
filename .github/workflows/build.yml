@@ -31,12 +31,12 @@ jobs:
       - name: Configure CMake
         run: |
           export compiler_path=$(pwd)/gcc-arm-none-eabi/bin
-          PATH=$PATH:$compiler_path && echo $PATH
-          mkdir build -p && cd build && cmake ../program
+          PATH=$PATH:$compiler_path
+          mkdir build -p && cd build && cmake ..
       - name: Build Hex
         run: |
           export compiler_path=$(pwd)/gcc-arm-none-eabi/bin
-          PATH=$PATH:$compiler_path && echo $PATH
+          PATH=$PATH:$compiler_path
           cd build && cmake --build . --target power_manager.elf -- -j $(nproc) && ls
       - name: Upload Hex
         uses: actions/upload-artifact@v2
