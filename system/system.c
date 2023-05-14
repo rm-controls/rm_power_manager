@@ -163,6 +163,10 @@ void system_config(void) {
         error_handler(__FILE__, __LINE__);
     }
 
+    __HAL_RCC_D2SRAM1_CLK_ENABLE();
+    __HAL_RCC_D2SRAM2_CLK_ENABLE();
+    __HAL_RCC_D2SRAM3_CLK_ENABLE();
+
     factor_us = HAL_RCC_GetSysClockFreq() / 1000000;
     unsigned int Reload = HAL_RCC_GetSysClockFreq() / 1000000;
     Reload *= 1000000 / 1000;

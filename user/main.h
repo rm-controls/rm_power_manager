@@ -36,6 +36,6 @@
 /////////////////////////// Tasks ///////////////////////////
 #include "interrupt.h"
 #include "fsm.h"
-#include "routine.h"
+#include "protect.h"
 
 #endif /* POWER_MANAGER_SYSTEM_USER_MAIN_H_ */

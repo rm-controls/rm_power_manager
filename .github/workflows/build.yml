@@ -1,6 +1,11 @@
 name: Compile Firmware
 
 on:
+  schedule:
+    - cron: '0 0 1,11,20,29 * *'
+  push:
+    branches:
+      - master
   workflow_dispatch:
 
 env:
@@ -21,7 +26,7 @@ jobs:
         run: |
           tar jxf gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
           ls
-          mv gcc-arm-none-eabi-10-2020-q4-major ./gcc-arm-none-eabi
+          mv gcc-arm-none-eabi-10.3-2021.10 ./gcc-arm-none-eabi
           rm gcc-arm-none-eabi-10-2020-q4-major-x86_64-linux.tar.bz2
       - name: Configure CMake
         run: |
