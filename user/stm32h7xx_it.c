@@ -7,11 +7,11 @@ extern DMA_HandleTypeDef hdma_usart2_rx;
 extern DMA_HandleTypeDef hdma_usart1_tx;
 extern TIM_HandleTypeDef htim6;
 
-void NMI_Handler(void) { error_handler(__func__, __LINE__); }
-void HardFault_Handler(void) { error_handler(__func__, __LINE__); }
-void MemManage_Handler(void) { error_handler(__func__, __LINE__); }
-void BusFault_Handler(void) { error_handler(__func__, __LINE__); }
-void UsageFault_Handler(void) { error_handler(__func__, __LINE__); }
+void NMI_Handler(void) { error_handler(__FILE__, __LINE__); }
+void HardFault_Handler(void) { error_handler(__FILE__, __LINE__); }
+void MemManage_Handler(void) { error_handler(__FILE__, __LINE__); }
+void BusFault_Handler(void) { error_handler(__FILE__, __LINE__); }
+void UsageFault_Handler(void) { error_handler(__FILE__, __LINE__); }
 
 void DMA1_Stream0_IRQHandler(void) { HAL_DMA_IRQHandler(&hdma_usart2_rx); }
 void DMA1_Stream1_IRQHandler(void) { HAL_DMA_IRQHandler(&hdma_adc1); }
@@ -89,7 +89,6 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
 }
 
 extern volatile unsigned char uart1_transmit_buffer[UART_DMA_BUFFER_SIZE * 2];
-extern volatile unsigned char power_manager_status_buffer[UART_DMA_BUFFER_SIZE];
 extern const unsigned int k_power_manager_status_buffer_length;
 extern EventGroupHandle_t interrupt_event;
 void HAL_MDMA_BlockTransferCpltCallback(MDMA_HandleTypeDef *hmdma) {

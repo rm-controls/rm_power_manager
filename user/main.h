@@ -7,6 +7,7 @@
 #include "stdlib.h"
 #include "stdio.h"
 #include "string.h"
+#include "utils.h"
 
 /////////////////////////// FreeRTOS ///////////////////////////
 #include "FreeRTOS.h"
@@ -23,14 +24,18 @@
 #include "usart.h"
 #include "gpio.h"
 #include "logic.h"
+#include "rtc.h"
 
 /////////////////////////// Algorithm ///////////////////////////
 #include "power.h"
 #include "referee.h"
 #include "filter.h"
 #include "verify.h"
+#include "pid.h"
 
 /////////////////////////// Tasks ///////////////////////////
 #include "interrupt.h"
+#include "fsm.h"
+#include "routine.h"
 
 #endif /* POWER_MANAGER_SYSTEM_USER_MAIN_H_ */

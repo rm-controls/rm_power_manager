@@ -27,12 +27,12 @@ void adc_config(void) {
     hadc1.Init.LeftBitShift = ADC_LEFTBITSHIFT_NONE;
     hadc1.Init.OversamplingMode = DISABLE;
     if (HAL_ADC_Init(&hadc1) != HAL_OK) {
-        error_handler(__func__, __LINE__);
+        error_handler(__FILE__, __LINE__);
     }
 
     multimode.Mode = ADC_MODE_INDEPENDENT;
     if (HAL_ADCEx_MultiModeConfigChannel(&hadc1, &multimode) != HAL_OK)
-        error_handler(__func__, __LINE__);
+        error_handler(__FILE__, __LINE__);
 
     sConfig.Channel = ADC_CHANNEL_3;
     sConfig.Rank = ADC_REGULAR_RANK_1;
@@ -42,41 +42,41 @@ void adc_config(void) {
     sConfig.Offset = 0;
     sConfig.OffsetSignedSaturation = DISABLE;
     if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK) {
-        error_handler(__func__, __LINE__);
+        error_handler(__FILE__, __LINE__);
     }
 
     sConfig.Channel = ADC_CHANNEL_7;
     sConfig.Rank = ADC_REGULAR_RANK_2;
     if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK) {
-        error_handler(__func__, __LINE__);
+        error_handler(__FILE__, __LINE__);
     }
 
     sConfig.Channel = ADC_CHANNEL_4;
     sConfig.Rank = ADC_REGULAR_RANK_3;
     if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK) {
-        error_handler(__func__, __LINE__);
+        error_handler(__FILE__, __LINE__);
     }
 
     sConfig.Channel = ADC_CHANNEL_8;
     sConfig.Rank = ADC_REGULAR_RANK_4;
     if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK) {
-        error_handler(__func__, __LINE__);
+        error_handler(__FILE__, __LINE__);
     }
 
     sConfig.Channel = ADC_CHANNEL_9;
     sConfig.Rank = ADC_REGULAR_RANK_5;
     if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK) {
-        error_handler(__func__, __LINE__);
+        error_handler(__FILE__, __LINE__);
     }
 
     sConfig.Channel = ADC_CHANNEL_5;
     sConfig.Rank = ADC_REGULAR_RANK_6;
     if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK) {
-        error_handler(__func__, __LINE__);
+        error_handler(__FILE__, __LINE__);
     }
 
     if (HAL_ADCEx_Calibration_Start(&hadc1, ADC_CALIB_OFFSET, ADC_SINGLE_ENDED) != HAL_OK)
-        error_handler(__func__, __LINE__);
+        error_handler(__FILE__, __LINE__);
 
     HAL_ADC_Start_DMA(&hadc1, (uint32_t *) &adc_dma_result, 6);
 }
@@ -123,7 +123,7 @@ void HAL_ADC_MspInit(ADC_HandleTypeDef *adcHandle) {
         hdma_adc1.Init.Priority = DMA_PRIORITY_HIGH;
         hdma_adc1.Init.FIFOMode = DMA_FIFOMODE_DISABLE;
         if (HAL_DMA_Init(&hdma_adc1) != HAL_OK) {
-            error_handler(__func__, __LINE__);
+            error_handler(__FILE__, __LINE__);
         }
 
         __HAL_LINKDMA(adcHandle, DMA_Handle, hdma_adc1);

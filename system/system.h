@@ -15,6 +15,7 @@ void freertos_not_running(void);
 void delayms(unsigned int xms);
 void delayus(unsigned int xus);
 
-void error_handler(const char *func, unsigned int line);
+void error_handler(const char *file, unsigned int line);
+void error_check(void);
 
 #endif //POWER_MANAGER_SYSTEM_SYSTEM_H_

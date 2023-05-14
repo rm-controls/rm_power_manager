@@ -8,5 +8,5 @@ void iwdg_config(void) {
     hiwdg1.Init.Window = 4095;
     hiwdg1.Init.Reload = 4095;
     if (HAL_IWDG_Init(&hiwdg1) != HAL_OK)
-        error_handler(__func__, __LINE__);
+        error_handler(__FILE__, __LINE__);
 }

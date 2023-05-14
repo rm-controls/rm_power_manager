@@ -37,23 +37,22 @@ void rtc_config(void) {
     hrtc.Init.OutPutType = RTC_OUTPUT_TYPE_OPENDRAIN;
     hrtc.Init.OutPutRemap = RTC_OUTPUT_REMAP_NONE;
     if (HAL_RTC_Init(&hrtc) != HAL_OK)
-        error_handler(__func__, __LINE__);
-
-//    if (HAL_RTCEx_BKUPRead(&hrtc, RTC_BKP_DR31) != 0X5A5A) {
-//        RTC_Set_Time(18, 28, 5);
-//        RTC_Set_Date(21, 5, 23, 7);
-//        HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR31, 0X5A5A);
-//    }
+        error_handler(__FILE__, __LINE__);
+    HAL_PWR_EnableBkUpAccess();
 }
 
 void HAL_RTC_MspInit(RTC_HandleTypeDef *rtcHandle) {
     RCC_PeriphCLKInitTypeDef PeriphClkInitStruct = {0};
     if (rtcHandle->Instance == RTC) {
+        HAL_PWREx_EnableBkUpReg();
+
         __HAL_RCC_RTC_CLK_ENABLE();
+        __HAL_RCC_BKPRAM_CLK_ENABLE();
 
         PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_RTC;
-        PeriphClkInitStruct.RTCClockSelection = RCC_RTCCLKSOURCE_LSI;
-        while (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK);
+        PeriphClkInitStruct.RTCClockSelection = RCC_RTCCLKSOURCE_HSE_DIV50;
+        if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
+            error_handler(__FILE__, __LINE__);
 
         __HAL_RCC_RTC_ENABLE();
     }

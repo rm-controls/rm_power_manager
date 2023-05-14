@@ -60,7 +60,7 @@ void spi3_config(void) {
     hspi3.Init.MasterKeepIOState = SPI_MASTER_KEEP_IO_STATE_DISABLE;
     hspi3.Init.IOSwap = SPI_IO_SWAP_DISABLE;
     if (HAL_SPI_Init(&hspi3) != HAL_OK) {
-        error_handler(__func__, __LINE__);
+        error_handler(__FILE__, __LINE__);
     }
     /* USER CODE BEGIN SPI3_Init 2 */
 
@@ -112,7 +112,7 @@ void HAL_SPI_MspInit(SPI_HandleTypeDef *spiHandle) {
         hdma_spi3_tx.Init.Priority = DMA_PRIORITY_LOW;
         hdma_spi3_tx.Init.FIFOMode = DMA_FIFOMODE_DISABLE;
         if (HAL_DMA_Init(&hdma_spi3_tx) != HAL_OK) {
-            error_handler(__func__, __LINE__);
+            error_handler(__FILE__, __LINE__);
         }
 
         __HAL_LINKDMA(spiHandle, hdmatx, hdma_spi3_tx);

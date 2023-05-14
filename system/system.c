@@ -6,6 +6,8 @@
 #include "stm32h7xx_hal.h"
 #include "FreeRTOS.h"
 #include "task.h"
+#include "rtc.h"
+#include "usart.h"
 
 TIM_HandleTypeDef htim6;
 static unsigned int factor_us = 0;
@@ -127,7 +129,7 @@ void system_config(void) {
     RCC_OscInitStruct.PLL.PLLVCOSEL = RCC_PLL1VCOWIDE;
     RCC_OscInitStruct.PLL.PLLFRACN = 0;
     if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK) {
-        error_handler(__func__, __LINE__);
+        error_handler(__FILE__, __LINE__);
     }
 
     RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK
@@ -142,7 +144,7 @@ void system_config(void) {
     RCC_ClkInitStruct.APB4CLKDivider = RCC_APB4_DIV2;
 
     if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_4) != HAL_OK) {
-        error_handler(__func__, __LINE__);
+        error_handler(__FILE__, __LINE__);
     }
 
     RCC_PeriphCLKInitTypeDef PeriphClkInitStruct = {0};
@@ -158,7 +160,7 @@ void system_config(void) {
     PeriphClkInitStruct.Spi123ClockSelection = RCC_SPI123CLKSOURCE_PLL2;
     PeriphClkInitStruct.AdcClockSelection = RCC_ADCCLKSOURCE_PLL2;
     if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK) {
-        error_handler(__func__, __LINE__);
+        error_handler(__FILE__, __LINE__);
     }
 
     factor_us = HAL_RCC_GetSysClockFreq() / 1000000;
@@ -210,9 +212,17 @@ void vApplicationStackOverflowHook(TaskHandle_t xTask, char *pcTaskName) {
 
 }
 
-void error_handler(const char *func, unsigned int line) {
+void error_handler(const char *file, unsigned int line) {
     __disable_irq();
+    HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR0, 0X5A5A0000);
+    HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR1, line);
     while (1) {
 
+    }
+}
+
+void error_check(void) {
+    if (HAL_RTCEx_BKUPRead(&hrtc, RTC_BKP_DR0) == 0X5A5A0000) {
+        usart1_send_error_package(0x00, "  ");
     }
 }

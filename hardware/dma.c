@@ -38,7 +38,7 @@ void dma_config(void) {
     hmdma_referee.Init.SourceBlockAddressOffset = 0;
     hmdma_referee.Init.DestBlockAddressOffset = 0;
     if (HAL_MDMA_Init(&hmdma_referee) != HAL_OK)
-        error_handler(__func__, __LINE__);
+        error_handler(__FILE__, __LINE__);
 
     HAL_MDMA_RegisterCallback(&hmdma_referee, HAL_MDMA_XFER_BLOCKCPLT_CB_ID, HAL_MDMA_BlockTransferCpltCallback);
 
