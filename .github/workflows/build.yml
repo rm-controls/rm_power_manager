@@ -27,7 +27,7 @@ jobs:
           tar jxf gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
           ls
           mv gcc-arm-none-eabi-10.3-2021.10 ./gcc-arm-none-eabi
-          rm gcc-arm-none-eabi-10-2020-q4-major-x86_64-linux.tar.bz2
+          rm gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
       - name: Configure CMake
         run: |
           PATH="$PATH:/home/runner/work/rm_power_manager/rm_power_manager/gcc-arm-none-eabi/bin" && echo $PATH 
