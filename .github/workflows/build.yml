@@ -30,11 +30,13 @@ jobs:
           rm gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
       - name: Configure CMake
         run: |
-          PATH="$PATH:/home/runner/work/rm_power_manager/rm_power_manager/gcc-arm-none-eabi/bin" && echo $PATH 
+          export compiler_path=$(pwd)/gcc-arm-none-eabi/bin
+          PATH=$PATH:$compiler_path && echo $PATH
           mkdir build -p && cd build && cmake ../program
       - name: Build Hex
         run: |
-          PATH="$PATH:/home/runner/work/rm_power_manager/rm_power_manager/gcc-arm-none-eabi/bin" && echo $PATH 
+          export compiler_path=$(pwd)/gcc-arm-none-eabi/bin
+          PATH=$PATH:$compiler_path && echo $PATH
           cd build && cmake --build . --target power_manager.elf -- -j $(nproc) && ls
       - name: Upload Hex
         uses: actions/upload-artifact@v2
