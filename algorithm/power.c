@@ -68,7 +68,8 @@ void update_powerinfo(const unsigned short *adc_result) {
     power_info.chassis_voltage = (power_info.chassis_voltage > 35.0f) ? 0 : power_info.chassis_voltage;
 
     power_info.charge_power = get_filter_result(&charge_power_filter,
-                                                power_info.capacitor_voltage * power_info.charge_current);
+                                                power_info.battery_voltage * power_info.charge_current);
+    power_info.charge_power = power_info.charge_power * calibrate_params.current_k + calibrate_params.current_b;
     power_info.chassis_power = get_filter_result(&chassis_power_filter,
                                                  power_info.chassis_current * power_info.chassis_voltage);
 }
@@ -104,13 +105,13 @@ void calibrate_referee_config(void) {              // Least square fitting of fi
             float sample_local_sum = 0, sample_referee_sum = 0;
             dac_set_output((unsigned short) (2730.0f * (float) (counter + 1)
                 / power_info.capacitor_voltage));       //10 ~ 40W
-            for (unsigned char counterf = 0; counterf < 5; counterf++) {
-                delayms(50);
+            for (unsigned char counterf = 0; counterf < 2; counterf++) {
+                delayms(200);
                 sample_local_sum += power_info.charge_power;
                 sample_referee_sum += referee_info.chassis_power;
             }
-            x[counter] = sample_local_sum / 5.0f;
-            y[counter] = sample_referee_sum / 5.0f;
+            x[counter] = sample_local_sum / 2.0f;
+            y[counter] = sample_referee_sum / 2.0f;
             xy_sum += (x[counter] * y[counter]);
             x2_sum += (x[counter] * x[counter]);
             x_sum += x[counter];
@@ -122,6 +123,11 @@ void calibrate_referee_config(void) {              // Least square fitting of fi
         calibrate_params.current_k = (xy_sum - 4 * x_ave * y_ave) / (x2_sum - 4 * x_ave * x_ave);
         calibrate_params.current_b = y_ave - calibrate_params.current_k * x_ave;
     } else {
+        calibrate_params.current_k = 1.2f;
+        calibrate_params.current_b = 0;
+    }
+
+    if (calibrate_params.current_k > 1.3f || calibrate_params.current_k < 0.9f) {
         calibrate_params.current_k = 1.2f;
         calibrate_params.current_b = 0;
     }

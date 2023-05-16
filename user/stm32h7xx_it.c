@@ -7,6 +7,8 @@ extern DMA_HandleTypeDef hdma_usart2_rx;
 extern DMA_HandleTypeDef hdma_usart1_tx;
 extern TIM_HandleTypeDef htim6;
 
+extern EventGroupHandle_t interrupt_event;
+
 void NMI_Handler(void) { SYSFAULT_HANDLE(); }
 void HardFault_Handler(void) { error_handler(__FILE__, __LINE__); }
 void MemManage_Handler(void) { error_handler(__FILE__, __LINE__); }
@@ -41,22 +43,13 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
     }
 }
 
-__attribute__((section(".dma_ram")))volatile unsigned char uart2_receive_buffer1[UART_DMA_BUFFER_SIZE] = {0};
-__attribute__((section(".dma_ram")))volatile unsigned char uart2_receive_buffer2[UART_DMA_BUFFER_SIZE] = {0};
-static unsigned char uart2_receive_buffer = 1;
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
-    if (huart->Instance == USART2) {
-        switch (uart2_receive_buffer) {
-            case 1:HAL_UART_Receive_DMA(&huart2, (unsigned char *) uart2_receive_buffer2, UART_DMA_BUFFER_SIZE);
-                referee_process_buffer((unsigned char *) uart2_receive_buffer1);
-                uart2_receive_buffer = 2;
-                break;
-            default:
-            case 2:HAL_UART_Receive_DMA(&huart2, (unsigned char *) uart2_receive_buffer1, UART_DMA_BUFFER_SIZE);
-                referee_process_buffer((unsigned char *) uart2_receive_buffer2);
-                uart2_receive_buffer = 1;
-                break;
-        }
+    if (huart->Instance == USART2 && interrupt_event != NULL) {
+        BaseType_t higher_priority_task_woken = pdFALSE, result;
+        result = xEventGroupSetBitsFromISR(interrupt_event, 0x04,
+                                           &higher_priority_task_woken);
+        if (result != pdFAIL)
+            portYIELD_FROM_ISR(higher_priority_task_woken);
     }
 }
 
@@ -90,7 +83,6 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
 
 extern volatile unsigned char uart1_transmit_buffer[UART_DMA_BUFFER_SIZE * 2];
 extern const unsigned int k_power_manager_status_buffer_length;
-extern EventGroupHandle_t interrupt_event;
 void HAL_MDMA_BlockTransferCpltCallback(MDMA_HandleTypeDef *hmdma) {
     BaseType_t higher_priority_task_woken = pdFALSE, result;
     switch (mdma_status_flag) {

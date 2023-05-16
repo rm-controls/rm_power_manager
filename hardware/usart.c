@@ -64,8 +64,6 @@ void usart2_config(void) {
         error_handler(__FILE__, __LINE__);
     if (HAL_UARTEx_DisableFifoMode(&huart2) != HAL_OK)
         error_handler(__FILE__, __LINE__);
-
-    HAL_UART_Receive_DMA(&huart2, (unsigned char *) uart2_receive_buffer1, 128);
 }
 
 void HAL_UART_MspInit(UART_HandleTypeDef *uartHandle) {
@@ -140,6 +138,9 @@ void HAL_UART_MspInit(UART_HandleTypeDef *uartHandle) {
         if (HAL_DMA_Init(&hdma_usart2_rx) != HAL_OK)
             error_handler(__FILE__, __LINE__);
         __HAL_LINKDMA(uartHandle, hdmarx, hdma_usart2_rx);
+
+        HAL_NVIC_SetPriority(USART2_IRQn, 1, 0);
+        HAL_NVIC_EnableIRQ(USART2_IRQn);
     }
 }
 

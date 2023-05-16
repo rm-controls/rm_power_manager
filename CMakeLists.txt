@@ -25,23 +25,17 @@ add_link_options(-mfloat-abi=hard -mfpu=fpv4-sp-d16)
 add_compile_options(-mcpu=cortex-m7 -mthumb -mthumb-interwork)
 add_compile_options(-ffunction-sections -fdata-sections -fno-common -fmessage-length=0)
 
-# uncomment to mitigate c++17 absolute addresses warnings
-#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-register")
-
 # Enable assembler files preprocessing
 add_compile_options($<$<COMPILE_LANGUAGE:ASM>:-x$<SEMICOLON>assembler-with-cpp>)
 
 add_compile_options(-Ofast)
 
 include_directories(library/include library/include/Legacy system user hardware system/cmsis freertos
-        algorithm algorithm/math tasks)
+        algorithm tasks)
 add_definitions(-DUSE_HAL_DRIVER -DSTM32H750xx) # -DDEBUG
 
 file(GLOB_RECURSE SOURCES "hardware/*.c" "user/*.c" "system/*.c" "system/startup.s" "library/source/*.c"
         "freertos/*.c" "algorithm/*.c" "tasks/*.c")
-
-link_directories(${CMAKE_SOURCE_DIR}/algorithm/math)
-link_libraries(libarm_cortexM7lfdp_math.a)
 
 set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/system/stm32h750vb.ld)
 

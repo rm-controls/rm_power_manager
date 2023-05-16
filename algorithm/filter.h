@@ -5,8 +5,6 @@
 #ifndef POWER_MANAGER_ALGORITHM_FILTER_H_
 #define POWER_MANAGER_ALGORITHM_FILTER_H_
 
-#include "arm_math.h"
-
 typedef struct {
   float alpha;
   float beta;

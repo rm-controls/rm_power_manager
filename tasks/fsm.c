@@ -35,7 +35,7 @@ void fsm_task(void *parameters) {
     delayms(100);
     calibrate_referee_config();
     pid_config();
-    main_fsm.mode = normal_mode;
+    main_fsm.mode = charge_mode;
     while (1) {
         switch (main_fsm.mode) {
             case charge_mode:main_fsm.typology = charge_with_boost;
@@ -59,15 +59,15 @@ void fsm_task(void *parameters) {
 
         if (main_fsm.typology == charge_with_boost) {
             charge_with_boost_switches(last_typology == pass_through);
-            if (power_info.capacitor_voltage > 15.8f)
+            if (power_info.capacitor_voltage > 15.7f)
                 pid_set_expect(0);
             else {
                 if (referee_info.chassis_power_buffer < 10)
-                    pid_set_expect((float) (referee_info.chassis_power_limit - 10));
-                else if (referee_info.chassis_power_buffer < 30)
+                    pid_set_expect((float) (referee_info.chassis_power_limit - 5));
+                else if (referee_info.chassis_power_buffer < 20)
                     pid_set_expect((float) (referee_info.chassis_power_limit));
                 else
-                    pid_set_expect((float) (referee_info.chassis_power_limit + 10));
+                    pid_set_expect((float) (referee_info.chassis_power_limit + 5));
             }
         } else if (last_typology != main_fsm.typology) {
             switch (main_fsm.typology) {

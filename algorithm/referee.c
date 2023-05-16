@@ -24,7 +24,7 @@ typedef struct {
 
 static unsigned char referee_process_status = 0, referee_header_buffer[5] = {0xA5, [1 ... 4]=0};
 static referee_package_t current_package = {0};
-referee_info_t referee_info;
+volatile referee_info_t referee_info;
 
 static void referee_process_struct(referee_package_t *package);
 
@@ -75,7 +75,7 @@ static struct PowerHeatData_t {
 
 static unsigned int last_time_tick = 0;
 unsigned int referee_available(void) {
-    return ((HAL_GetTick() - last_time_tick) < 1000);
+    return ((HAL_GetTick() - last_time_tick) < 100);
 }
 
 void referee_process_buffer(const unsigned char *buffer) {

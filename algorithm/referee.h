@@ -15,7 +15,7 @@ typedef struct {
   unsigned char game_progress;
 } referee_info_t;
 
-extern referee_info_t referee_info;
+extern volatile referee_info_t referee_info;
 
 unsigned int referee_available(void);
 void referee_process_buffer(const unsigned char *buffer);

@@ -5,6 +5,8 @@
 #include "main.h"
 #include "protect.h"
 
+extern volatile unsigned char uart2_receive_buffer1[UART_DMA_BUFFER_SIZE];
+
 void protect_task(void *parameters) {
     (void) parameters;
     static unsigned int cycle_counter = 0, overpower_flag = 0;
@@ -25,6 +27,9 @@ void protect_task(void *parameters) {
         else if (power_info.chassis_power > 220.0f && overpower_flag == 1) {
             fsm_set_mode(all_off_mode);
         }
+
+        if (referee_available() == 0)
+            HAL_UART_Receive_DMA(&huart2, (unsigned char *) uart2_receive_buffer1, UART_DMA_BUFFER_SIZE);
 
         delayms(PROTECT_TASK_PERIOD);
     }
