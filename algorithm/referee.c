@@ -112,8 +112,8 @@ void referee_process_buffer(const unsigned char *buffer) {
             case 6:current_package.cmd_id |= (buffer[counter] << 8);
                 current_package.data_counter = 0;
                 referee_process_status = 7;
-                if (current_package.cmd_id != k_game_robot_status_cmd ||
-                    current_package.cmd_id != k_game_status_cmd ||
+                if (current_package.cmd_id != k_game_robot_status_cmd &&
+                    current_package.cmd_id != k_game_status_cmd &&
                     current_package.cmd_id != k_power_heat_data_cmd)
                     referee_process_status = 10;
                 break;

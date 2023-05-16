@@ -4,21 +4,28 @@
 
 #include "filter.h"
 
-// 4 order fir filter, 200Hz Fpass, 300Hz Fstop
-const float filter_coefficient[5] = {-0.034569785f, 0.308319211f, 0.6030071378f,
-                                     0.308319211f, -0.034569785f};
-fir_filter_t chassis_power_filter, charge_power_filter, capacitor_voltage_filter;
+#define FILTER_SAMPLE_RATE  1000.0f
+#define FILTER_CUTOFF_FREQ  200.0f
+
+lowpass_filter_t chassis_power_filter, charge_power_filter, capacitor_voltage_filter;
 
 void filter_config(void) {
-    arm_fir_init_f32(&(chassis_power_filter.header), 5, filter_coefficient,
-                     chassis_power_filter.filter_state, 1);
-    arm_fir_init_f32(&(charge_power_filter.header), 5, filter_coefficient,
-                     charge_power_filter.filter_state, 1);
-    arm_fir_init_f32(&(capacitor_voltage_filter.header), 5, filter_coefficient,
-                     capacitor_voltage_filter.filter_state, 1);
+    float RC = 1.0f / (2.0f * 3.14159265359f * FILTER_CUTOFF_FREQ);
+    float alpha = 1.0f / (1.0f + RC * FILTER_SAMPLE_RATE);
+    float beta = 1.0f - alpha;
+    chassis_power_filter.prev_value = 0;
+    chassis_power_filter.alpha = alpha;
+    chassis_power_filter.beta = beta;
+    charge_power_filter.prev_value = 0;
+    charge_power_filter.alpha = alpha;
+    charge_power_filter.beta = beta;
+    capacitor_voltage_filter.prev_value = 0;
+    capacitor_voltage_filter.alpha = alpha;
+    capacitor_voltage_filter.beta = beta;
 }
 
-float get_filter_result(fir_filter_t *filter, float value) {
-    arm_fir_f32(&(filter->header), &value, &filter->result, 1);
-    return filter->result;
+float get_filter_result(lowpass_filter_t *filter, float value) {
+    float result = filter->alpha * value + filter->beta * filter->prev_value;
+    filter->prev_value = result;
+    return result;
 }

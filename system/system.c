@@ -8,6 +8,7 @@
 #include "task.h"
 #include "rtc.h"
 #include "usart.h"
+#include "string.h"
 
 TIM_HandleTypeDef htim6;
 static unsigned int factor_us = 0;
@@ -212,20 +213,78 @@ void delayms(unsigned int xms) {
         vTaskDelay(xms);
 }
 
-void vApplicationStackOverflowHook(TaskHandle_t xTask, char *pcTaskName) {
+static reset_reason_e get_reset_reason(void) {
+    if (__HAL_RCC_GET_FLAG(RCC_FLAG_PORRST) != RESET) {
+        __HAL_RCC_CLEAR_RESET_FLAGS();
+        return power_on_reset;
+    } else if (__HAL_RCC_GET_FLAG(RCC_FLAG_PINRST) != RESET) {
+        __HAL_RCC_CLEAR_RESET_FLAGS();
+        return rst_pin_reset;
+    } else if (__HAL_RCC_GET_FLAG(RCC_FLAG_SFTRST) != RESET) {
+        __HAL_RCC_CLEAR_RESET_FLAGS();
+        return software_reset;
+    } else if (__HAL_RCC_GET_FLAG(RCC_FLAG_IWDG1RST) != RESET) {
+        __HAL_RCC_CLEAR_RESET_FLAGS();
+        return iwdg_reset;
+    } else if (__HAL_RCC_GET_FLAG(RCC_FLAG_WWDG1RST) != RESET) {
+        __HAL_RCC_CLEAR_RESET_FLAGS();
+        return wwdg_reset;
+    } else if (__HAL_RCC_GET_FLAG(RCC_FLAG_LPWR1RST) != RESET
+        || __HAL_RCC_GET_FLAG(RCC_FLAG_LPWR2RST) != RESET) {
+        __HAL_RCC_CLEAR_RESET_FLAGS();
+        return lowpower_reset;
+    } else {
+        __HAL_RCC_CLEAR_RESET_FLAGS();
+        return other_reset;
+    }
+}
 
+void soft_reset(void) {
+    __set_FAULTMASK(1);
+    NVIC_SystemReset();
+}
+
+void vApplicationStackOverflowHook(TaskHandle_t xTask, char *pcTaskName) {
+    (void) xTask;
+
+}
+
+void sys_fault_handler(unsigned int *hardfault_args) {
+    unsigned int stacked_r0 = ((unsigned long) hardfault_args[0]);
+    unsigned int stacked_r1 = ((unsigned long) hardfault_args[1]);
+    unsigned int stacked_r2 = ((unsigned long) hardfault_args[2]);
+    unsigned int stacked_r3 = ((unsigned long) hardfault_args[3]);
+    unsigned int stacked_r12 = ((unsigned long) hardfault_args[4]);
+    unsigned int stacked_lr = ((unsigned long) hardfault_args[5]);
+    unsigned int stacked_pc = ((unsigned long) hardfault_args[6]);
+    unsigned int stacked_psr = ((unsigned long) hardfault_args[7]);
+    __disable_irq();
+    HAL_PWR_EnableBkUpAccess();
+    HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR0, 0X5A5A0001);
+    HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR1, stacked_r0);
+    HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR2, stacked_r1);
+    HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR3, stacked_r2);
+    HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR4, stacked_r3);
+    HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR5, stacked_r12);
+    HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR6, stacked_lr);
+    HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR7, stacked_pc);
+    HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR8, stacked_psr);
+    soft_reset();
 }
 
 void error_handler(const char *file, unsigned int line) {
     __disable_irq();
+    HAL_PWR_EnableBkUpAccess();
     HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR0, 0X5A5A0000);
     HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR1, line);
-    while (1) {
-
-    }
+    for (unsigned char counter = 0; counter < (unsigned char) strlen(file); counter++)
+        HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR0, 0X5A5A0000);
+    soft_reset();
 }
 
 void error_check(void) {
+    reset_reason_e reset_reason = get_reset_reason();
+    HAL_PWR_EnableBkUpAccess();
     if (HAL_RTCEx_BKUPRead(&hrtc, RTC_BKP_DR0) == 0X5A5A0000) {
         usart1_send_error_package(0x00, "  ");
     }

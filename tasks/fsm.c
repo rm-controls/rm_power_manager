@@ -32,6 +32,8 @@ void fsm_set_mode(mode_target_t target_mode) {
 void fsm_task(void *parameters) {
     (void) parameters;
     static enum typology_e last_typology = refresh_typology;
+    delayms(100);
+    calibrate_referee_config();
     pid_config();
     main_fsm.mode = normal_mode;
     while (1) {

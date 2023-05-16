@@ -15,6 +15,8 @@ void gpio_config(void) {
     __HAL_RCC_GPIOA_CLK_ENABLE();
     __HAL_RCC_GPIOC_CLK_ENABLE();
     __HAL_RCC_GPIOB_CLK_ENABLE();
+    __HAL_RCC_GPIOD_CLK_ENABLE();
+    __HAL_RCC_GPIOE_CLK_ENABLE();
 
     GPIO_Structure.Pin = LCD_PWR_Pin;
     GPIO_Structure.Speed = GPIO_SPEED_FREQ_VERY_HIGH;

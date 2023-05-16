@@ -77,7 +77,7 @@ extern unsigned short adc_result[6];
 void calibrate_params_config(void) {
     unsigned long capoffset_sum = 0, chaoffset_sum = 0;
     unsigned short adc_cap_buffer[20], adc_cha_buffer[20];
-    calibrate_params.current_k = 1;
+    calibrate_params.current_k = 1.0f;
     calibrate_params.current_b = 0;
     close_all_switches();
     delayms(200);
@@ -122,7 +122,7 @@ void calibrate_referee_config(void) {              // Least square fitting of fi
         calibrate_params.current_k = (xy_sum - 4 * x_ave * y_ave) / (x2_sum - 4 * x_ave * x_ave);
         calibrate_params.current_b = y_ave - calibrate_params.current_k * x_ave;
     } else {
-        calibrate_params.current_k = 1.0f;
+        calibrate_params.current_k = 1.2f;
         calibrate_params.current_b = 0;
     }
 }

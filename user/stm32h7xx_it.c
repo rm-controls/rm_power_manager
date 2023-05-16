@@ -7,7 +7,7 @@ extern DMA_HandleTypeDef hdma_usart2_rx;
 extern DMA_HandleTypeDef hdma_usart1_tx;
 extern TIM_HandleTypeDef htim6;
 
-void NMI_Handler(void) { error_handler(__FILE__, __LINE__); }
+void NMI_Handler(void) { SYSFAULT_HANDLE(); }
 void HardFault_Handler(void) { error_handler(__FILE__, __LINE__); }
 void MemManage_Handler(void) { error_handler(__FILE__, __LINE__); }
 void BusFault_Handler(void) { error_handler(__FILE__, __LINE__); }
