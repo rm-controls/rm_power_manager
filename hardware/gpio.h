@@ -26,6 +26,11 @@
 #define LCD_PWR_Pin GPIO_PIN_10
 #define LCD_PWR_Port GPIOC
 
+#define LCD_RES_Pin GPIO_PIN_0
+#define LCD_RES_Port GPIOD
+
+#define LCD_A0_Pin GPIO_PIN_1
+#define LCD_A0_Port GPIOD
 
 //////////////////// Others ////////////////////
 #define CHG_EN_Pin GPIO_PIN_11

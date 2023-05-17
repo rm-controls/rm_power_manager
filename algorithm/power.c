@@ -106,7 +106,7 @@ void calibrate_referee_config(void) {              // Least square fitting of fi
             dac_set_output((unsigned short) (2730.0f * (float) (counter + 1)
                 / power_info.capacitor_voltage));       //10 ~ 40W
             for (unsigned char counterf = 0; counterf < 2; counterf++) {
-                delayms(200);
+                delayms(125);
                 sample_local_sum += power_info.charge_power;
                 sample_referee_sum += referee_info.chassis_power;
             }
