@@ -30,6 +30,8 @@ void interrupt_handle_task(void *parameters) {
         EventBits_t received_bits = xEventGroupWaitBits(interrupt_event, 0xFFFFFFUL,
                                                         pdTRUE, pdFALSE, portMAX_DELAY);
         if ((received_bits & 0x01) != 0) {
+            hmdma_referee.State = HAL_MDMA_STATE_READY;
+            hmdma_referee.Lock = HAL_UNLOCKED;
             HAL_MDMA_Start_IT(&hmdma_referee,
                               (unsigned int) power_manager_status_buffer,
                               (unsigned int) &uart1_transmit_buffer[last_mdma_transfer_pos],
@@ -37,6 +39,8 @@ void interrupt_handle_task(void *parameters) {
                               1);
             mdma_status_flag = 2;
         } else if ((received_bits & 0x02) != 0) {
+            hmdma_referee.State = HAL_MDMA_STATE_READY;
+            hmdma_referee.Lock = HAL_UNLOCKED;
             HAL_MDMA_Start_IT(&hmdma_referee,
                               (unsigned int) &last_mdma_transfer_buf[last_mdma_transfer_pos],
                               (unsigned int) &uart1_transmit_buffer[last_mdma_transfer_pos

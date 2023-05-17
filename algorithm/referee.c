@@ -75,7 +75,7 @@ static struct PowerHeatData_t {
 
 static unsigned int last_time_tick = 0;
 unsigned int referee_available(void) {
-    return ((HAL_GetTick() - last_time_tick) < 100);
+    return ((HAL_GetTick() - last_time_tick) < 200);
 }
 
 void referee_process_buffer(const unsigned char *buffer) {
