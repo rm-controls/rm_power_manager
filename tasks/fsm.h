@@ -12,6 +12,19 @@ typedef enum {
   all_off_mode = 3
 } mode_target_t;
 
+enum typology_e {
+  pass_through = 0,
+  charge_with_boost = 1,
+  switches_all_off = 2,
+  refresh_typology = 3
+};
+
+typedef struct {
+  mode_target_t mode;
+  enum typology_e typology;
+} fsm_t;
+
+extern fsm_t main_fsm;
 extern TaskHandle_t fsm_task_handler;
 
 void fsm_set_mode(mode_target_t target_mode);

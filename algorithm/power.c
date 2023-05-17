@@ -17,7 +17,7 @@ volatile unsigned char power_manager_status_buffer[UART_DMA_BUFFER_SIZE] =
     {0xA5, 0x0A, 0x00, 0x00, 0xA9, 0x01, 0x83, [7 ... (UART_DMA_BUFFER_SIZE - 1)]=0x00};
 const unsigned int k_power_manager_status_buffer_length = 19;
 
-static calibrate_params_t calibrate_params;
+calibrate_params_t calibrate_params;
 power_info_t power_info;
 
 void pack_powerinfo_buffer() {

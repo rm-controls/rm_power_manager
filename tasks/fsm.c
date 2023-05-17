@@ -5,19 +5,8 @@
 #include "main.h"
 #include "fsm.h"
 
-enum typology_e {
-  pass_through = 0,
-  charge_with_boost = 1,
-  switches_all_off = 2,
-  refresh_typology = 3
-};
-
-static struct fsm_t {
-  mode_target_t mode;
-  enum typology_e typology;
-} main_fsm;
-
 TaskHandle_t fsm_task_handler;
+fsm_t main_fsm;
 
 void fsm_set_mode(mode_target_t target_mode) {
     if (target_mode == all_off_mode) {
@@ -35,7 +24,7 @@ void fsm_task(void *parameters) {
     delayms(100);
     calibrate_referee_config();
     pid_config();
-    main_fsm.mode = charge_mode;
+    main_fsm.mode = normal_mode;
     while (1) {
         switch (main_fsm.mode) {
             case charge_mode:main_fsm.typology = charge_with_boost;

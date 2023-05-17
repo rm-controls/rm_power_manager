@@ -10,6 +10,18 @@
 
 __attribute__((section(".dma_ram")))volatile unsigned char lcd_frame_buffer[128 * 160 * 2] = {0};
 
+unsigned short gui_trans_color(unsigned short color) {
+    unsigned int Result;
+    unsigned int Temp_Red, Temp_Blue, Temp_Green;
+    Temp_Red = color >> 11U;
+    Temp_Blue = color & 0x001fU;
+    Temp_Green = (color & 0x07ffU) >> 5U;
+    Result = Temp_Red;
+    Result |= Temp_Green << 5U;
+    Result |= Temp_Blue << 11U;
+    return Result;
+}
+
 void gui_putchar(unsigned char x,
                  unsigned char line,
                  unsigned char value,

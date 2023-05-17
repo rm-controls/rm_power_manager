@@ -24,6 +24,7 @@ typedef struct {
   float current_b;
 } calibrate_params_t;
 
+extern calibrate_params_t calibrate_params;
 extern power_info_t power_info;
 
 void pack_powerinfo_buffer();

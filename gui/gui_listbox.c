@@ -49,7 +49,7 @@ void GUI_ListBoxDisplayItem(ListBox_Struct_t *ListBox,
         gui_draw_rectangle(row, column, (20 - n) * 6 - 4, 12, C_WHITE, Filled);
     } else {
         while (str[n] != '\0') {
-            gui_putchar(row, column, str[n], C_BLACK, TransColor(LISTBOX_COLOR_FOCUS));
+            gui_putchar(row, column, str[n], C_BLACK, LISTBOX_COLOR_FOCUS);
             row += 6;
             n++;
         }

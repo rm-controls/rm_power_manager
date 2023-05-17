@@ -13,8 +13,7 @@ void GUI_InitChart(Chart_Struct_t *Chart) {
             gui_draw_point(Chart->X_Pos + counter / 2, Chart->Y_Pos + counter, C_BLACK);
         for (unsigned char counter = 0; counter < 6; counter++)
             gui_draw_point(Chart->X_Pos + Chart->Width - counter,
-                           Chart->Y_Pos + Chart->Height - counter / 2,
-                           C_BLACK);
+                           Chart->Y_Pos + Chart->Height - counter / 2, C_BLACK);
         gui_draw_hline(Chart->X_Pos, Chart->Y_Pos + Chart->Height, Chart->Width, C_BLACK);
         gui_draw_vline(Chart->X_Pos, Chart->Y_Pos, Chart->Height, C_BLACK);
     }

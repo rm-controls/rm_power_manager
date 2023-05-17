@@ -9,7 +9,7 @@
 #include "stdio.h"
 
 void GUI_InitLable(Lable_Struct_t *lable) {
-    lable->Color = TransColor(lable->Color);
+    lable->Color = lable->Color;
     char n = 0, row = lable->X_Pos;
     while (lable->Text[n] != '\0') {
         gui_putchar(row, lable->Y_Pos, lable->Text[n], lable->Color, C_WHITE);
