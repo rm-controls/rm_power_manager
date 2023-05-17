@@ -24,6 +24,18 @@ void gpio_config(void) {
     GPIO_Structure.Pull = GPIO_PULLUP;
     HAL_GPIO_Init(LCD_PWR_Port, &GPIO_Structure);
 
+    GPIO_Structure.Pin = LCD_RES_Pin;
+    GPIO_Structure.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+    GPIO_Structure.Mode = GPIO_MODE_OUTPUT_PP;
+    GPIO_Structure.Pull = GPIO_PULLUP;
+    HAL_GPIO_Init(LCD_RES_Port, &GPIO_Structure);
+
+    GPIO_Structure.Pin = LCD_A0_Pin;
+    GPIO_Structure.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+    GPIO_Structure.Mode = GPIO_MODE_OUTPUT_PP;
+    GPIO_Structure.Pull = GPIO_PULLUP;
+    HAL_GPIO_Init(LCD_A0_Port, &GPIO_Structure);
+
     GPIO_Structure.Pin = UP_KEY_PIN;
     GPIO_Structure.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
     GPIO_Structure.Mode = GPIO_MODE_INPUT;

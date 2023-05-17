@@ -28,6 +28,7 @@
 
 /////////////////////////// GUI ///////////////////////////
 #include "lcd.h"
+#include "gui_base.h"
 
 /////////////////////////// Algorithm ///////////////////////////
 #include "power.h"
@@ -40,5 +41,6 @@
 #include "interrupt.h"
 #include "fsm.h"
 #include "protect.h"
+#include "gui.h"
 
 #endif /* POWER_MANAGER_SYSTEM_USER_MAIN_H_ */
