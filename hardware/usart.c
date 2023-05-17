@@ -11,16 +11,17 @@ DMA_HandleTypeDef hdma_usart1_rx;
 extern volatile unsigned char uart2_receive_buffer1[128];
 
 static unsigned char error_package_buffer[41] =
-    {0xA5, 0x20, 0x00, 0x00, 0xA9, 0x02, 0x83, [7 ... 40]=0x00};
-void usart1_send_error_package(unsigned char error_code, char *str) {
-    error_package_buffer[7] = error_code;
+    {0xA5, 0x20, 0x00, 0x00, 0x00, 0x02, 0x83, [7 ... 40]=0x00};
+void usart1_send_error_package(unsigned char error_code, unsigned char length, char *str) {
+    error_package_buffer[1] = length;
+    error_package_buffer[5] = error_code;
     error_package_buffer[4] = get_crc8_value(error_package_buffer, 4);
-    strcpy((char *) &error_package_buffer[8], str);
-    unsigned short crc16_val = get_crc16_value((unsigned char *) error_package_buffer, 0x8302,
+    memcpy(&error_package_buffer[7], str, length);
+    unsigned short crc16_val = get_crc16_value((unsigned char *) error_package_buffer, 0x8300 | error_code,
                                                (unsigned char *) &error_package_buffer[7], 32);
-    error_package_buffer[39] = crc16_val & 0x00FF;
-    error_package_buffer[40] = (crc16_val >> 8) & 0x00FF;
-    HAL_UART_Transmit(&huart1, error_package_buffer, 41, 0xFFFFFFFFUL);
+    error_package_buffer[length + 7] = crc16_val & 0x00FF;
+    error_package_buffer[length + 8] = (crc16_val >> 8) & 0x00FF;
+    HAL_UART_Transmit(&huart1, error_package_buffer, length + 9, 0xFFFFFFFFUL);
 }
 
 void usart1_config(void) {

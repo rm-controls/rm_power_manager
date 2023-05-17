@@ -2,14 +2,7 @@
 // Created by LaoZhu on 2023/4/10.
 //
 
-#include "power.h"
-#include "system.h"
-#include "stdlib.h"
-#include "logic.h"
-#include "verify.h"
-#include "filter.h"
-#include "referee.h"
-#include "dma.h"
+#include "main.h"
 
 #define ADC_COEFFICIENT (3.0f / 4096.0f)
 
@@ -33,6 +26,8 @@ void pack_powerinfo_buffer() {
     power_manager_status_buffer[12] = (charge_power & 0x00FF);
     power_manager_status_buffer[13] = ((remain_power >> 8) & 0x00FF);
     power_manager_status_buffer[14] = (remain_power & 0x00FF);
+    power_manager_status_buffer[15] = pid_get_expect();
+    power_manager_status_buffer[16] = ((main_fsm.mode & 0x0F) << 4) | (main_fsm.typology & 0x0F);
     unsigned short crc16_val = get_crc16_value((unsigned char *) power_manager_status_buffer, 0x8301,
                                                (unsigned char *) &power_manager_status_buffer[7], 10);
     power_manager_status_buffer[17] = crc16_val & 0x00FF;

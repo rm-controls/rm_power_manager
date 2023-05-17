@@ -42,6 +42,7 @@
 #include "filter.h"
 #include "verify.h"
 #include "pid.h"
+#include "nuc_api.h"
 
 /////////////////////////// Tasks ///////////////////////////
 #include "interrupt.h"

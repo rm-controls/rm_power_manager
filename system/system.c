@@ -246,7 +246,14 @@ void soft_reset(void) {
 
 void vApplicationStackOverflowHook(TaskHandle_t xTask, char *pcTaskName) {
     (void) xTask;
-
+    __disable_irq();
+    HAL_PWR_EnableBkUpAccess();
+    for (unsigned char counter = 0; counter < 32; counter++)
+        HAL_RTCEx_BKUPWrite(&hrtc, counter, 0x00000000);
+    HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR0, 0X5A5A0003);
+    for (unsigned char counter = 1; counter < 32; counter++)
+        HAL_RTCEx_BKUPWrite(&hrtc, counter, *pcTaskName++);
+    soft_reset();
 }
 
 void sys_fault_handler(unsigned int *hardfault_args) {
@@ -260,7 +267,9 @@ void sys_fault_handler(unsigned int *hardfault_args) {
     unsigned int stacked_psr = ((unsigned long) hardfault_args[7]);
     __disable_irq();
     HAL_PWR_EnableBkUpAccess();
-    HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR0, 0X5A5A0001);
+    for (unsigned char counter = 0; counter < 32; counter++)
+        HAL_RTCEx_BKUPWrite(&hrtc, counter, 0x00000000);
+    HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR0, 0X5A5A0002);
     HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR1, stacked_r0);
     HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR2, stacked_r1);
     HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR3, stacked_r2);
@@ -273,19 +282,34 @@ void sys_fault_handler(unsigned int *hardfault_args) {
 }
 
 void error_handler(const char *file, unsigned int line) {
+    unsigned char copy_counter = 2;
     __disable_irq();
     HAL_PWR_EnableBkUpAccess();
-    HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR0, 0X5A5A0000);
+    for (unsigned char counter = 0; counter < 32; counter++)
+        HAL_RTCEx_BKUPWrite(&hrtc, counter, 0x00000000);
+    HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR0, 0X5A5A0001);
     HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR1, line);
-    for (unsigned char counter = 0; counter < (unsigned char) strlen(file); counter++)
-        HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR0, 0X5A5A0000);
+    char *last_space = strrchr(file, '\\');  // 查找最后一个空格
+    if (last_space == NULL) {
+        last_space = strrchr(file, '/');
+        if (last_space == NULL)
+            last_space = (char *) file;
+    }
+    last_space++;
+    while (*last_space != '\0') {
+        HAL_RTCEx_BKUPWrite(&hrtc, copy_counter, *last_space++);
+        copy_counter++;
+        if (copy_counter >= 31)
+            break;
+    }
     soft_reset();
 }
 
 void error_check(void) {
     reset_reason_e reset_reason = get_reset_reason();
     HAL_PWR_EnableBkUpAccess();
-    if (HAL_RTCEx_BKUPRead(&hrtc, RTC_BKP_DR0) == 0X5A5A0000) {
-        usart1_send_error_package(0x00, "  ");
+    if (HAL_RTCEx_BKUPRead(&hrtc, RTC_BKP_DR0) == 0X5A5A0001) {
+        usart1_send_error_package(0x02, 32, "  ");
     }
+    HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR0, 0X5A5A5A5A);
 }

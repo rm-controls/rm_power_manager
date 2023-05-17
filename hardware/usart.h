@@ -7,7 +7,7 @@
 extern UART_HandleTypeDef huart1;
 extern UART_HandleTypeDef huart2;
 
-void usart1_send_error_package(unsigned char error_code, char *str);
+void usart1_send_error_package(unsigned char error_code, unsigned char length, char *str);
 
 void usart1_config(void);
 void usart2_config(void);

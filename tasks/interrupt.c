@@ -63,12 +63,12 @@ void interrupt_handle_task(void *parameters) {
         if ((received_bits & 0x08) != 0) {
             switch (uart1_receive_buffer) {
                 case 1:HAL_UART_Receive_DMA(&huart1, (unsigned char *) uart1_receive_buffer2, UART_DMA_BUFFER_SIZE);
-//                    referee_process_buffer((unsigned char *) uart2_receive_buffer1);
+                    nuc_receive_callback((unsigned char *) uart1_receive_buffer1);
                     uart1_receive_buffer = 2;
                     break;
                 default:
                 case 2:HAL_UART_Receive_DMA(&huart1, (unsigned char *) uart1_receive_buffer1, UART_DMA_BUFFER_SIZE);
-//                    referee_process_buffer((unsigned char *) uart2_receive_buffer2);
+                    nuc_receive_callback((unsigned char *) uart1_receive_buffer2);
                     uart1_receive_buffer = 1;
                     break;
             }
