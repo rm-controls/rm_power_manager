@@ -5,6 +5,7 @@ extern DMA_HandleTypeDef hdma_adc1;
 extern DMA_HandleTypeDef hdma_spi3_tx;
 extern DMA_HandleTypeDef hdma_usart2_rx;
 extern DMA_HandleTypeDef hdma_usart1_tx;
+extern DMA_HandleTypeDef hdma_usart1_rx;
 extern TIM_HandleTypeDef htim6;
 
 extern EventGroupHandle_t interrupt_event;
@@ -18,6 +19,7 @@ void UsageFault_Handler(void) { error_handler(__FILE__, __LINE__); }
 void DMA1_Stream0_IRQHandler(void) { HAL_DMA_IRQHandler(&hdma_usart2_rx); }
 void DMA1_Stream1_IRQHandler(void) { HAL_DMA_IRQHandler(&hdma_adc1); }
 void DMA1_Stream2_IRQHandler(void) { HAL_DMA_IRQHandler(&hdma_usart1_tx); }
+void DMA1_Stream3_IRQHandler(void) { HAL_DMA_IRQHandler(&hdma_usart1_rx); }
 void DMA2_Stream0_IRQHandler(void) { HAL_DMA_IRQHandler(&hdma_spi3_tx); }
 
 void SPI3_IRQHandler(void) { HAL_SPI_IRQHandler(&hspi3); }
@@ -47,6 +49,12 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
     if (huart->Instance == USART2 && interrupt_event != NULL) {
         BaseType_t higher_priority_task_woken = pdFALSE, result;
         result = xEventGroupSetBitsFromISR(interrupt_event, 0x04,
+                                           &higher_priority_task_woken);
+        if (result != pdFAIL)
+            portYIELD_FROM_ISR(higher_priority_task_woken);
+    } else if (huart->Instance == USART1 && interrupt_event != NULL) {
+        BaseType_t higher_priority_task_woken = pdFALSE, result;
+        result = xEventGroupSetBitsFromISR(interrupt_event, 0x08,
                                            &higher_priority_task_woken);
         if (result != pdFAIL)
             portYIELD_FROM_ISR(higher_priority_task_woken);

@@ -46,6 +46,7 @@ void MainForm_Update(void) {
         case boost_mode:GUI_LableSetText(&FSM_Mode_Lable, "   FSM Mode: Boost   ");
             break;
         case normal_mode:GUI_LableSetText(&FSM_Mode_Lable, "  FSM Mode: Normal   ");
+            break;
         case all_off_mode:GUI_LableSetText(&FSM_Mode_Lable, "  FSM Mode: All off  ");
             break;
     }
@@ -109,12 +110,12 @@ void MainForm_Init(void) {
     FSM_Mode_Lable.X_Pos = 2;
     FSM_Mode_Lable.Y_Pos = 74;
     FSM_Mode_Lable.Color = C_BLACK;
-    FSM_Mode_Lable.Text = " FSM Status: Normal  ";
+    FSM_Mode_Lable.Text = "  FSM Mode: Normal   ";
 
     Charge_Mode_Lable.X_Pos = 2;
     Charge_Mode_Lable.Y_Pos = 88;
     Charge_Mode_Lable.Color = C_BLACK;
-    Charge_Mode_Lable.Text = "Charge: Proportional ";
+    Charge_Mode_Lable.Text = "Typology: Passthrough";
 
     Expect_Power_Lable.X_Pos = 2;
     Expect_Power_Lable.Y_Pos = 102;

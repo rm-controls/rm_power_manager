@@ -28,8 +28,8 @@ void protect_task(void *parameters) {
             fsm_set_mode(all_off_mode);
         }
 
-        if (referee_available() == 0)
-            HAL_UART_Receive_DMA(&huart2, (unsigned char *) uart2_receive_buffer1, UART_DMA_BUFFER_SIZE);
+//        if (referee_available() == 0)
+//            HAL_UART_Receive_DMA(&huart2, (unsigned char *) uart2_receive_buffer1, UART_DMA_BUFFER_SIZE);
 
         delayms(PROTECT_TASK_PERIOD);
     }

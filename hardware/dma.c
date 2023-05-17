@@ -19,6 +19,9 @@ void dma_config(void) {
     HAL_NVIC_SetPriority(DMA1_Stream2_IRQn, 3, 0);
     HAL_NVIC_EnableIRQ(DMA1_Stream2_IRQn);
 
+    HAL_NVIC_SetPriority(DMA1_Stream3_IRQn, 3, 0);
+    HAL_NVIC_EnableIRQ(DMA1_Stream3_IRQn);
+
     HAL_NVIC_SetPriority(DMA2_Stream0_IRQn, 4, 0);
     HAL_NVIC_EnableIRQ(DMA2_Stream0_IRQn);
 

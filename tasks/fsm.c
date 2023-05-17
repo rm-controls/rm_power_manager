@@ -12,6 +12,7 @@ void fsm_set_mode(mode_target_t target_mode) {
     if (target_mode == all_off_mode) {
         vTaskSuspend(fsm_task_handler);
         power_info.expect_chassis_power = 0;
+        main_fsm.typology = switches_all_off;
         pid_set_expect(0);
         close_all_switches();
     } else
