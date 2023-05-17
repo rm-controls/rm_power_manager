@@ -7,9 +7,11 @@
 
 extern volatile unsigned char uart2_receive_buffer1[UART_DMA_BUFFER_SIZE];
 
+protect_item_t protect_info = {0};
+
 void protect_task(void *parameters) {
     (void) parameters;
-    static unsigned int cycle_counter = 0, overpower_flag = 0;
+    static unsigned int cycle_counter = 0;
     while (1) {
         cycle_counter = cycle_counter + 1;
 
@@ -22,10 +24,24 @@ void protect_task(void *parameters) {
         }
 
         /* Over power detect and protect. */
-        if (power_info.chassis_power > 220.0f && overpower_flag == 0)
-            overpower_flag = 1;
-        else if (power_info.chassis_power > 220.0f && overpower_flag == 1) {
+        if (power_info.chassis_power > 220.0f && protect_info.over_current_flag == 0)
+            protect_info.over_current_flag = 1;
+        else if (power_info.chassis_power > 220.0f && protect_info.over_current_flag == 1) {
+            protect_info.over_current_flag = 2;
             fsm_set_mode(all_off_mode);
+        }
+
+        if (power_info.battery_voltage < 18.0f && protect_info.under_voltage_flag == 0)
+            protect_info.under_voltage_flag = 1;
+        else if (power_info.battery_voltage < 18.0f && protect_info.under_voltage_flag == 1) {
+            protect_info.under_voltage_flag = 2;
+            fsm_set_mode(all_off_mode);
+        } else if (power_info.battery_voltage >= 20.0f && protect_info.under_voltage_flag == 2) {
+            HAL_PWR_EnableBkUpAccess();
+            HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR0, 0X83838383);
+            HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR1, *((unsigned int *) &calibrate_params.current_k));
+            HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR2, *((unsigned int *) &calibrate_params.current_b));
+            soft_reset();
         }
 
 //        if (referee_available() == 0)

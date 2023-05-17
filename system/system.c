@@ -251,12 +251,12 @@ void vApplicationStackOverflowHook(TaskHandle_t xTask, char *pcTaskName) {
     for (unsigned char counter = 0; counter < 32; counter++)
         HAL_RTCEx_BKUPWrite(&hrtc, counter, 0x00000000);
     HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR0, 0X5A5A0003);
-    for (unsigned char counter = 1; counter < 32; counter++)
+    for (unsigned int counter = 1; counter < (strlen(pcTaskName) + 1); counter++)
         HAL_RTCEx_BKUPWrite(&hrtc, counter, *pcTaskName++);
     soft_reset();
 }
 
-void sys_fault_handler(unsigned int *hardfault_args) {
+void sys_fault_handler(const unsigned int *hardfault_args) {
     unsigned int stacked_r0 = ((unsigned long) hardfault_args[0]);
     unsigned int stacked_r1 = ((unsigned long) hardfault_args[1]);
     unsigned int stacked_r2 = ((unsigned long) hardfault_args[2]);
@@ -305,11 +305,35 @@ void error_handler(const char *file, unsigned int line) {
     soft_reset();
 }
 
+static char error_info_str[32] = {0};
 void error_check(void) {
     reset_reason_e reset_reason = get_reset_reason();
     HAL_PWR_EnableBkUpAccess();
     if (HAL_RTCEx_BKUPRead(&hrtc, RTC_BKP_DR0) == 0X5A5A0001) {
-        usart1_send_error_package(0x02, 32, "  ");
+        for (unsigned char counter = 2; counter < 32; counter++)
+            error_info_str[counter - 1] = HAL_RTCEx_BKUPRead(&hrtc, counter) & 0x000000FF;
+        error_info_str[0] = HAL_RTCEx_BKUPRead(&hrtc, RTC_BKP_DR1) % 0x000000FF;
+        usart1_send_error_package(0x02, 32, error_info_str);
+    } else if (HAL_RTCEx_BKUPRead(&hrtc, RTC_BKP_DR0) == 0X5A5A0002) {
+        for (unsigned char counter = 1; counter < 9; counter++) {
+            unsigned int current_reg = HAL_RTCEx_BKUPRead(&hrtc, counter);
+            error_info_str[(counter - 1) * 4] = ((current_reg >> 24) & 0x000000FF);
+            error_info_str[(counter - 1) * 4 + 1] = ((current_reg >> 16) & 0x000000FF);
+            error_info_str[(counter - 1) * 4 + 2] = ((current_reg >> 8) & 0x000000FF);
+            error_info_str[(counter - 1) * 4 + 3] = (current_reg & 0x000000FF);
+            usart1_send_error_package(0x03, 32, error_info_str);
+        }
+    } else if (HAL_RTCEx_BKUPRead(&hrtc, RTC_BKP_DR0) == 0X5A5A0003) {
+        for (unsigned char counter = 1; counter < 32; counter++)
+            error_info_str[counter - 1] = HAL_RTCEx_BKUPRead(&hrtc, counter) & 0x000000FF;
+        usart1_send_error_package(0x04, 32, error_info_str);
+    } else {
+        if (reset_reason != power_on_reset && reset_reason != rst_pin_reset &&
+            HAL_RTCEx_BKUPRead(&hrtc, RTC_BKP_DR0) != 0X83838383) {
+            error_info_str[0] = reset_reason;
+            error_info_str[1] = 0;
+            usart1_send_error_package(0x05, 2, error_info_str);
+        }
     }
     HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR0, 0X5A5A5A5A);
 }

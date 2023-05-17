@@ -93,6 +93,15 @@ void calibrate_params_config(void) {
 }
 
 void calibrate_referee_config(void) {              // Least square fitting of first order function
+    HAL_PWR_EnableBkUpAccess();
+    if (HAL_RTCEx_BKUPRead(&hrtc, RTC_BKP_DR0) == 0x83838383) {
+        unsigned int param_k = HAL_RTCEx_BKUPRead(&hrtc, RTC_BKP_DR1);
+        unsigned int param_b = HAL_RTCEx_BKUPRead(&hrtc, RTC_BKP_DR2);
+        calibrate_params.current_k = *((float *) &param_k);
+        calibrate_params.current_b = *((float *) &param_b);
+        return;
+    }
+
     if (referee_available() == 1) {
         float x[4], y[4], xy_sum = 0, x_ave, y_ave, x2_sum = 0, x_sum = 0, y_sum = 0;
         charge_switch_only();

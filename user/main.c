@@ -5,13 +5,13 @@ void initialize_task(void *parameters) {
     BaseType_t xReturned;
     taskENTER_CRITICAL();
     rtc_config();
-    error_check();
     filter_config();
     gpio_config();
     dma_config();
     ramecc_config();
     usart1_config();
     usart2_config();
+    error_check();
 //    iwdg_config();
     adc_config();
     dac_config();

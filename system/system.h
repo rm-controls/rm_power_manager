@@ -34,7 +34,7 @@ void delayus(unsigned int xus);
 
 void soft_reset(void);
 
-void sys_fault_handler(unsigned int *hardfault_args);
+void sys_fault_handler(const unsigned int *hardfault_args);
 void error_handler(const char *file, unsigned int line);
 void error_check(void);
 
