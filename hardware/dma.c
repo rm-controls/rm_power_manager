@@ -57,6 +57,8 @@ void mdma_transmit_buffer(const unsigned char *source, int length) {
         last_mdma_transfer_buf = (unsigned char *) source;
         last_mdma_transfer_pos = length;
         mdma_status_flag = 1;
+        hmdma_referee.State = HAL_MDMA_STATE_READY;
+        hmdma_referee.Lock = HAL_UNLOCKED;
         HAL_MDMA_Start_IT(&hmdma_referee,
                           (unsigned int) source,
                           (unsigned int) uart1_transmit_buffer,
@@ -64,6 +66,8 @@ void mdma_transmit_buffer(const unsigned char *source, int length) {
                           1);
     } else {
         mdma_status_flag = 0;
+        hmdma_referee.State = HAL_MDMA_STATE_READY;
+        hmdma_referee.Lock = HAL_UNLOCKED;
         HAL_MDMA_Start_IT(&hmdma_referee,
                           (unsigned int) source,
                           (unsigned int) uart1_transmit_buffer,

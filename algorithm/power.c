@@ -51,7 +51,7 @@ void update_powerinfo(const unsigned short *adc_result) {
 
     float capacitor_energy = 7.5f * power_info.capacitor_voltage * power_info.capacitor_voltage - 367.5f;
     capacitor_energy = ((capacitor_energy < 0) ? 0 : capacitor_energy);
-    power_info.capacitor_percent = capacitor_energy / 1434.375f;                    // Set 15.5V as 100%, 7V as 0%
+    power_info.capacitor_percent = capacitor_energy * 1000.0f / 1434.375f;      // Set 15.5V as 100%, 7V as 0%
     power_info.capacitor_percent = (power_info.capacitor_percent > 100.0f) ? 100.0f : power_info.capacitor_percent;
 
     power_info.charge_current =
