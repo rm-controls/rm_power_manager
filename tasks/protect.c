@@ -19,9 +19,12 @@ void protect_task(void *parameters) {
         /* RTC time calibrate. */
         if ((cycle_counter % ((RTC_TIME_CALIBRATE_PERIOD * 1000) / PROTECT_TASK_PERIOD)) == 0) {
             static datetime_t current_datetime = {0};
+            if (referee_info.timestamp == 0)
+                referee_info.timestamp = 1684674413;
             utc_second_to_date_time(referee_info.timestamp, &current_datetime);
             rtc_set_date(current_datetime.year - 2000, current_datetime.month, current_datetime.day, 1);
             rtc_set_time(current_datetime.hour, current_datetime.minute, current_datetime.second);
+            referee_info.timestamp = 0;
         }
 
         /* Over power detect and protect. */

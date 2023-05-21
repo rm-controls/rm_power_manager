@@ -15,7 +15,7 @@ jobs:
   build:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 1
       - name: Configure Software
@@ -37,7 +37,7 @@ jobs:
         run: |
           export compiler_path=$(pwd)/gcc-arm-none-eabi/bin
           PATH=$PATH:$compiler_path
-          cd build && cmake --build . --target power_manager.elf -- -j $(nproc) && ls
+          cd build && cmake --build . --target power_manager.elf -- -j $(nproc)
       - name: Upload Hex
         uses: actions/upload-artifact@v2
         with:

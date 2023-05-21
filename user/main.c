@@ -11,13 +11,13 @@ void initialize_task(void *parameters) {
     usart1_config();
     usart2_config();
     error_check();
-//    iwdg_config();
     adc_config();
     dac_config();
     spi3_config();
     lcd_config();
     lcd_scan_mode(4);
     calibrate_params_config();
+    iwdg_config();
 
     xReturned = xTaskCreate((TaskFunction_t) gui_task,
                             (const char *) "GUITask",
