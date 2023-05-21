@@ -9,7 +9,8 @@ typedef enum {
   charge_mode = 0,
   boost_mode = 1,
   normal_mode = 2,
-  all_off_mode = 3
+  all_off_mode = 3,
+  refresh_mode = 4
 } mode_target_t;
 
 enum typology_e {

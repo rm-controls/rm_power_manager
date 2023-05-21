@@ -6,8 +6,8 @@
 
 #define ADC_COEFFICIENT (3.0f / 4096.0f)
 
-volatile unsigned char power_manager_status_buffer[UART_DMA_BUFFER_SIZE] =
-    {0xA5, 0x0A, 0x00, 0x00, 0xA9, 0x01, 0x83, [7 ... (UART_DMA_BUFFER_SIZE - 1)]=0x00};
+volatile unsigned char power_manager_status_buffer[19] =
+    {0xA5, 0x0A, 0x00, 0x00, 0xA9, 0x01, 0x83, [7 ... 18]=0x00};
 const unsigned int k_power_manager_status_buffer_length = 19;
 
 calibrate_params_t calibrate_params;
@@ -51,13 +51,13 @@ void update_powerinfo(const unsigned short *adc_result) {
 
     float capacitor_energy = 7.5f * power_info.capacitor_voltage * power_info.capacitor_voltage - 367.5f;
     capacitor_energy = ((capacitor_energy < 0) ? 0 : capacitor_energy);
-    power_info.capacitor_percent = capacitor_energy * 1000.0f / 1434.375f;      // Set 15.5V as 100%, 7V as 0%
+    power_info.capacitor_percent = capacitor_energy * 100.0f / 1434.375f;      // Set 15.5V as 100%, 7V as 0%
     power_info.capacitor_percent = (power_info.capacitor_percent > 100.0f) ? 100.0f : power_info.capacitor_percent;
 
     power_info.charge_current =
-        (power_info.charge_current < 0.01f || power_info.charge_current > 15.0f) ? 0 : power_info.charge_current;
+        (power_info.charge_current < 0.01f || power_info.charge_current > 20.0f) ? 0 : power_info.charge_current;
     power_info.chassis_current =
-        (power_info.chassis_current < 0.01f || power_info.chassis_current > 15.0f) ? 0 : power_info.chassis_current;
+        (power_info.chassis_current < 0.01f || power_info.chassis_current > 20.0f) ? 0 : power_info.chassis_current;
     power_info.battery_voltage = (power_info.battery_voltage > 35.0f) ? 0 : power_info.battery_voltage;
     power_info.capacitor_voltage = (power_info.capacitor_voltage > 25.0f) ? 0 : power_info.capacitor_voltage;
     power_info.chassis_voltage = (power_info.chassis_voltage > 35.0f) ? 0 : power_info.chassis_voltage;
@@ -67,6 +67,8 @@ void update_powerinfo(const unsigned short *adc_result) {
     power_info.charge_power = power_info.charge_power * calibrate_params.current_k + calibrate_params.current_b;
     power_info.chassis_power = get_filter_result(&chassis_power_filter,
                                                  power_info.chassis_current * power_info.chassis_voltage);
+
+    power_info.charge_power = power_info.charge_power < 0 ? 0 : power_info.charge_power;
 }
 
 extern unsigned short adc_result[6];
@@ -105,6 +107,8 @@ void calibrate_referee_config(void) {              // Least square fitting of fi
     if (referee_available() == 1) {
         float x[4], y[4], xy_sum = 0, x_ave, y_ave, x2_sum = 0, x_sum = 0, y_sum = 0;
         charge_switch_only();
+        calibrate_params.current_k = 1.0f;
+        calibrate_params.current_b = 0;
         for (unsigned char counter = 0; counter < 4; counter++) {
             float sample_local_sum = 0, sample_referee_sum = 0;
             dac_set_output((unsigned short) (2730.0f * (float) (counter + 1)

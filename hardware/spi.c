@@ -71,7 +71,7 @@ void HAL_SPI_MspInit(SPI_HandleTypeDef *spiHandle) {
         __HAL_LINKDMA(spiHandle, hdmatx, hdma_spi3_tx);
 
         /* SPI3 interrupt Init */
-        HAL_NVIC_SetPriority(SPI3_IRQn, 4, 0);
+        HAL_NVIC_SetPriority(SPI3_IRQn, SPI_GLOBAL_PRIORITY, 0);
         HAL_NVIC_EnableIRQ(SPI3_IRQn);
     }
 }

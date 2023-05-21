@@ -89,12 +89,12 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
     }
 }
 
-extern volatile unsigned char uart1_transmit_buffer[UART_DMA_BUFFER_SIZE * 2];
+extern volatile unsigned char uart1_transmit_buffer[REFEREE_DMA_BUFFER_SIZE * 2];
 extern const unsigned int k_power_manager_status_buffer_length;
 void HAL_MDMA_BlockTransferCpltCallback(MDMA_HandleTypeDef *hmdma) {
     BaseType_t higher_priority_task_woken = pdFALSE, result;
     switch (mdma_status_flag) {
-        case 0:HAL_UART_Transmit_DMA(&huart1, (unsigned char *) uart1_transmit_buffer, UART_DMA_BUFFER_SIZE);
+        case 0:HAL_UART_Transmit_DMA(&huart1, (unsigned char *) uart1_transmit_buffer, REFEREE_DMA_BUFFER_SIZE);
             break;
         case 1:
             result = xEventGroupSetBitsFromISR(interrupt_event, 0x01,
@@ -111,7 +111,7 @@ void HAL_MDMA_BlockTransferCpltCallback(MDMA_HandleTypeDef *hmdma) {
         case 3:
             HAL_UART_Transmit_DMA(&huart1,
                                   (unsigned char *) uart1_transmit_buffer,
-                                  UART_DMA_BUFFER_SIZE + k_power_manager_status_buffer_length);
+                                  REFEREE_DMA_BUFFER_SIZE + k_power_manager_status_buffer_length);
             break;
         default:break;
     }

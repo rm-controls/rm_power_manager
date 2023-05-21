@@ -3,7 +3,6 @@
 void initialize_task(void *parameters) {
     (void) parameters;
     BaseType_t xReturned;
-    taskENTER_CRITICAL();
     rtc_config();
     filter_config();
     gpio_config();
@@ -18,7 +17,6 @@ void initialize_task(void *parameters) {
     spi3_config();
     lcd_config();
     lcd_scan_mode(4);
-    gui_clear_screen(C_WHITE);
     calibrate_params_config();
 
     xReturned = xTaskCreate((TaskFunction_t) gui_task,
@@ -57,7 +55,6 @@ void initialize_task(void *parameters) {
     if (xReturned != pdPASS)
         error_handler(__FILE__, __LINE__);
 
-    taskEXIT_CRITICAL();
     vTaskDelete(NULL);
 }
 

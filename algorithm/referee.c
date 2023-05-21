@@ -81,7 +81,7 @@ unsigned int referee_available(void) {
 void referee_process_buffer(const unsigned char *buffer) {
     int frame_header_position = -1;
     unsigned short crc16_expected;
-    for (int counter = 0; counter < UART_DMA_BUFFER_SIZE; ++counter) {
+    for (int counter = 0; counter < REFEREE_DMA_BUFFER_SIZE; ++counter) {
         switch (referee_process_status) {
             case 0:if (buffer[counter] == 0xA5) referee_process_status = 1;
                 break;

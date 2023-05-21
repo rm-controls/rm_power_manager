@@ -100,7 +100,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef *uartHandle) {
         hdma_usart1_tx.Init.PeriphDataAlignment = DMA_PDATAALIGN_BYTE;
         hdma_usart1_tx.Init.MemDataAlignment = DMA_MDATAALIGN_BYTE;
         hdma_usart1_tx.Init.Mode = DMA_NORMAL;
-        hdma_usart1_tx.Init.Priority = DMA_PRIORITY_MEDIUM;
+        hdma_usart1_tx.Init.Priority = DMA_PRIORITY_LOW;
         hdma_usart1_tx.Init.FIFOMode = DMA_FIFOMODE_DISABLE;
         if (HAL_DMA_Init(&hdma_usart1_tx) != HAL_OK)
             error_handler(__FILE__, __LINE__);
@@ -115,13 +115,13 @@ void HAL_UART_MspInit(UART_HandleTypeDef *uartHandle) {
         hdma_usart1_rx.Init.PeriphDataAlignment = DMA_PDATAALIGN_BYTE;
         hdma_usart1_rx.Init.MemDataAlignment = DMA_MDATAALIGN_BYTE;
         hdma_usart1_rx.Init.Mode = DMA_NORMAL;
-        hdma_usart1_rx.Init.Priority = DMA_PRIORITY_VERY_HIGH;
+        hdma_usart1_rx.Init.Priority = DMA_PRIORITY_MEDIUM;
         hdma_usart1_rx.Init.FIFOMode = DMA_FIFOMODE_DISABLE;
         if (HAL_DMA_Init(&hdma_usart1_rx) != HAL_OK)
             error_handler(__FILE__, __LINE__);
         __HAL_LINKDMA(uartHandle, hdmarx, hdma_usart1_rx);
 
-        HAL_NVIC_SetPriority(USART1_IRQn, 1, 0);
+        HAL_NVIC_SetPriority(USART1_IRQn, UART1_GLOBAL_PRIORITY, 0);
         HAL_NVIC_EnableIRQ(USART1_IRQn);
     } else if (uartHandle->Instance == USART2) {
         PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_USART2;
@@ -156,7 +156,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef *uartHandle) {
             error_handler(__FILE__, __LINE__);
         __HAL_LINKDMA(uartHandle, hdmarx, hdma_usart2_rx);
 
-        HAL_NVIC_SetPriority(USART2_IRQn, 1, 0);
+        HAL_NVIC_SetPriority(USART2_IRQn, UART2_GLOBAL_PRIORITY, 0);
         HAL_NVIC_EnableIRQ(USART2_IRQn);
     }
 }

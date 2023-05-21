@@ -9,23 +9,23 @@ EventGroupHandle_t interrupt_event = NULL;
 
 extern unsigned char *last_mdma_transfer_buf;
 extern unsigned int last_mdma_transfer_pos;
-extern volatile unsigned char uart1_transmit_buffer[UART_DMA_BUFFER_SIZE * 2];
-extern volatile unsigned char power_manager_status_buffer[UART_DMA_BUFFER_SIZE];
+extern volatile unsigned char uart1_transmit_buffer[REFEREE_DMA_BUFFER_SIZE * 2];
+extern volatile unsigned char power_manager_status_buffer[REFEREE_DMA_BUFFER_SIZE];
 extern const unsigned int k_power_manager_status_buffer_length;
 
-__attribute__((section(".dma_ram")))volatile unsigned char uart2_receive_buffer1[UART_DMA_BUFFER_SIZE] = {0};
-__attribute__((section(".dma_ram")))volatile unsigned char uart2_receive_buffer2[UART_DMA_BUFFER_SIZE] = {0};
+__attribute__((section(".dma_ram")))volatile unsigned char uart2_receive_buffer1[REFEREE_DMA_BUFFER_SIZE] = {0};
+__attribute__((section(".dma_ram")))volatile unsigned char uart2_receive_buffer2[REFEREE_DMA_BUFFER_SIZE] = {0};
 static unsigned char uart2_receive_buffer = 1;
 
-__attribute__((section(".dma_ram")))volatile unsigned char uart1_receive_buffer1[UART_DMA_BUFFER_SIZE] = {0};
-__attribute__((section(".dma_ram")))volatile unsigned char uart1_receive_buffer2[UART_DMA_BUFFER_SIZE] = {0};
+__attribute__((section(".dma_ram")))volatile unsigned char uart1_receive_buffer1[NUC_DMA_BUFFER_SIZE] = {0};
+__attribute__((section(".dma_ram")))volatile unsigned char uart1_receive_buffer2[NUC_DMA_BUFFER_SIZE] = {0};
 static unsigned char uart1_receive_buffer = 1;
 
 void interrupt_handle_task(void *parameters) {
     (void) parameters;
     interrupt_event = xEventGroupCreate();
-    HAL_UART_Receive_DMA(&huart2, (unsigned char *) uart2_receive_buffer1, UART_DMA_BUFFER_SIZE);
-    HAL_UART_Receive_DMA(&huart1, (unsigned char *) uart1_receive_buffer1, UART_DMA_BUFFER_SIZE);
+    HAL_UART_Receive_DMA(&huart2, (unsigned char *) uart2_receive_buffer1, REFEREE_DMA_BUFFER_SIZE);
+    HAL_UART_Receive_DMA(&huart1, (unsigned char *) uart1_receive_buffer1, NUC_DMA_BUFFER_SIZE);
     while (1) {
         EventBits_t received_bits = xEventGroupWaitBits(interrupt_event, 0xFFFFFFUL,
                                                         pdTRUE, pdFALSE, portMAX_DELAY);
@@ -52,12 +52,12 @@ void interrupt_handle_task(void *parameters) {
 
         if ((received_bits & 0x04) != 0) {
             switch (uart2_receive_buffer) {
-                case 1:HAL_UART_Receive_DMA(&huart2, (unsigned char *) uart2_receive_buffer2, UART_DMA_BUFFER_SIZE);
+                case 1:HAL_UART_Receive_DMA(&huart2, (unsigned char *) uart2_receive_buffer2, REFEREE_DMA_BUFFER_SIZE);
                     referee_process_buffer((unsigned char *) uart2_receive_buffer1);
                     uart2_receive_buffer = 2;
                     break;
                 default:
-                case 2:HAL_UART_Receive_DMA(&huart2, (unsigned char *) uart2_receive_buffer1, UART_DMA_BUFFER_SIZE);
+                case 2:HAL_UART_Receive_DMA(&huart2, (unsigned char *) uart2_receive_buffer1, REFEREE_DMA_BUFFER_SIZE);
                     referee_process_buffer((unsigned char *) uart2_receive_buffer2);
                     uart2_receive_buffer = 1;
                     break;
@@ -66,12 +66,12 @@ void interrupt_handle_task(void *parameters) {
 
         if ((received_bits & 0x08) != 0) {
             switch (uart1_receive_buffer) {
-                case 1:HAL_UART_Receive_DMA(&huart1, (unsigned char *) uart1_receive_buffer2, UART_DMA_BUFFER_SIZE);
+                case 1:HAL_UART_Receive_DMA(&huart1, (unsigned char *) uart1_receive_buffer2, NUC_DMA_BUFFER_SIZE);
                     nuc_receive_callback((unsigned char *) uart1_receive_buffer1);
                     uart1_receive_buffer = 2;
                     break;
                 default:
-                case 2:HAL_UART_Receive_DMA(&huart1, (unsigned char *) uart1_receive_buffer1, UART_DMA_BUFFER_SIZE);
+                case 2:HAL_UART_Receive_DMA(&huart1, (unsigned char *) uart1_receive_buffer1, NUC_DMA_BUFFER_SIZE);
                     nuc_receive_callback((unsigned char *) uart1_receive_buffer2);
                     uart1_receive_buffer = 1;
                     break;

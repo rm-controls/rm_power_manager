@@ -10,19 +10,19 @@ void dma_config(void) {
     __HAL_RCC_DMA2_CLK_ENABLE();
     __HAL_RCC_MDMA_CLK_ENABLE();
 
-    HAL_NVIC_SetPriority(DMA1_Stream0_IRQn, 1, 0);
+    HAL_NVIC_SetPriority(DMA1_Stream0_IRQn, UART2_RX_DMA_PRIORITY, 0);
     HAL_NVIC_EnableIRQ(DMA1_Stream0_IRQn);
 
-    HAL_NVIC_SetPriority(DMA1_Stream1_IRQn, 2, 0);
+    HAL_NVIC_SetPriority(DMA1_Stream1_IRQn, ADC_DMA_PRIORITY, 0);
     HAL_NVIC_EnableIRQ(DMA1_Stream1_IRQn);
 
-    HAL_NVIC_SetPriority(DMA1_Stream2_IRQn, 3, 0);
+    HAL_NVIC_SetPriority(DMA1_Stream2_IRQn, UART1_TX_DMA_PRIORITY, 0);
     HAL_NVIC_EnableIRQ(DMA1_Stream2_IRQn);
 
-    HAL_NVIC_SetPriority(DMA1_Stream3_IRQn, 3, 0);
+    HAL_NVIC_SetPriority(DMA1_Stream3_IRQn, UART1_RX_DMA_PRIORITY, 0);
     HAL_NVIC_EnableIRQ(DMA1_Stream3_IRQn);
 
-    HAL_NVIC_SetPriority(DMA2_Stream0_IRQn, 4, 0);
+    HAL_NVIC_SetPriority(DMA2_Stream0_IRQn, SPI_DMA_PRIORITY, 0);
     HAL_NVIC_EnableIRQ(DMA2_Stream0_IRQn);
 
     hmdma_referee.Instance = MDMA_Channel0;
@@ -37,7 +37,7 @@ void dma_config(void) {
     hmdma_referee.Init.DataAlignment = MDMA_DATAALIGN_PACKENABLE;
     hmdma_referee.Init.SourceBurst = MDMA_SOURCE_BURST_16BEATS;
     hmdma_referee.Init.DestBurst = MDMA_DEST_BURST_16BEATS;
-    hmdma_referee.Init.BufferTransferLength = UART_DMA_BUFFER_SIZE;
+    hmdma_referee.Init.BufferTransferLength = REFEREE_DMA_BUFFER_SIZE;
     hmdma_referee.Init.SourceBlockAddressOffset = 0;
     hmdma_referee.Init.DestBlockAddressOffset = 0;
     if (HAL_MDMA_Init(&hmdma_referee) != HAL_OK)
@@ -45,11 +45,11 @@ void dma_config(void) {
 
     HAL_MDMA_RegisterCallback(&hmdma_referee, HAL_MDMA_XFER_BLOCKCPLT_CB_ID, HAL_MDMA_BlockTransferCpltCallback);
 
-    HAL_NVIC_SetPriority(MDMA_IRQn, 4, 0);
+    HAL_NVIC_SetPriority(MDMA_IRQn, MDMA_PRIORITY, 0);
     HAL_NVIC_EnableIRQ(MDMA_IRQn);
 }
 
-__attribute__((section(".dma_ram")))volatile unsigned char uart1_transmit_buffer[UART_DMA_BUFFER_SIZE * 2] = {0};
+__attribute__((section(".dma_ram")))volatile unsigned char uart1_transmit_buffer[REFEREE_DMA_BUFFER_SIZE * 2] = {0};
 unsigned char power_manager_status_send_flag = 0, mdma_status_flag = 0, *last_mdma_transfer_buf;
 unsigned int last_mdma_transfer_pos = 0;
 void mdma_transmit_buffer(const unsigned char *source, int length) {
@@ -71,7 +71,7 @@ void mdma_transmit_buffer(const unsigned char *source, int length) {
         HAL_MDMA_Start_IT(&hmdma_referee,
                           (unsigned int) source,
                           (unsigned int) uart1_transmit_buffer,
-                          UART_DMA_BUFFER_SIZE,
+                          REFEREE_DMA_BUFFER_SIZE,
                           1);
     }
     power_manager_status_send_flag = 0;

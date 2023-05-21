@@ -5,8 +5,8 @@
 #include "main.h"
 #include "protect.h"
 
-extern volatile unsigned char uart2_receive_buffer1[UART_DMA_BUFFER_SIZE];
-extern volatile unsigned char uart1_receive_buffer1[UART_DMA_BUFFER_SIZE];
+extern volatile unsigned char uart2_receive_buffer1[REFEREE_DMA_BUFFER_SIZE];
+extern volatile unsigned char uart1_receive_buffer1[NUC_DMA_BUFFER_SIZE];
 
 protect_item_t protect_info = {0};
 
@@ -46,9 +46,9 @@ void protect_task(void *parameters) {
         }
 
         if (referee_available() == 0)
-            HAL_UART_Receive_DMA(&huart2, (unsigned char *) uart2_receive_buffer1, UART_DMA_BUFFER_SIZE);
+            HAL_UART_Receive_DMA(&huart2, (unsigned char *) uart2_receive_buffer1, REFEREE_DMA_BUFFER_SIZE);
         if (nuc_available() == 0)
-            HAL_UART_Receive_DMA(&huart1, (unsigned char *) uart1_receive_buffer1, UART_DMA_BUFFER_SIZE);
+            HAL_UART_Receive_DMA(&huart1, (unsigned char *) uart1_receive_buffer1, NUC_DMA_BUFFER_SIZE);
 
         delayms(PROTECT_TASK_PERIOD);
     }

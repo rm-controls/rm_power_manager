@@ -20,6 +20,7 @@ HAL_StatusTypeDef HAL_InitTick(uint32_t TickPriority) {
     uint32_t uwPrescalerValue;
     uint32_t pFLatency;
 
+    TickPriority = TIM6_GLOBAL_PRIORITY;
     if (TickPriority < (1UL << __NVIC_PRIO_BITS)) {
         HAL_NVIC_SetPriority(TIM6_DAC_IRQn, TickPriority, 0U);
         HAL_NVIC_EnableIRQ(TIM6_DAC_IRQn);

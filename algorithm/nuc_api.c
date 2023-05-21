@@ -8,7 +8,8 @@
 static unsigned char nuc_receive_status = 0;
 static unsigned int last_receive_nuc_timestamp = 0;
 void nuc_receive_callback(const unsigned char *buffer) {
-    for (unsigned char counter = 0; counter < UART_DMA_BUFFER_SIZE; ++counter) {
+    mode_target_t target_mode = refresh_mode;
+    for (unsigned char counter = 0; counter < NUC_DMA_BUFFER_SIZE; ++counter) {
         if (buffer[counter] == 0x01) {
             nuc_receive_status = 1;
             continue;
@@ -29,11 +30,11 @@ void nuc_receive_callback(const unsigned char *buffer) {
             case 4:nuc_receive_status = 0;
                 switch (buffer[counter]) {
                     default:
-                    case 0xE0:fsm_set_mode(normal_mode);
+                    case 0xE0:target_mode = normal_mode;
                         break;
-                    case 0xC8:fsm_set_mode(charge_mode);
+                    case 0xC8:target_mode = charge_mode;
                         break;
-                    case 0xCC:fsm_set_mode(boost_mode);
+                    case 0xCC:target_mode = boost_mode;
                         break;
                 }
                 break;
@@ -42,8 +43,10 @@ void nuc_receive_callback(const unsigned char *buffer) {
         }
     }
     last_receive_nuc_timestamp = HAL_GetTick();
+    if (target_mode != refresh_mode)
+        fsm_set_mode(target_mode);
 }
 
 unsigned int nuc_available(void) {
-    return ((HAL_GetTick() - last_receive_nuc_timestamp) < 200);
+    return ((HAL_GetTick() - last_receive_nuc_timestamp) < 1000);
 }
