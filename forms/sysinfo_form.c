@@ -5,8 +5,8 @@
 #include "main.h"
 
 Button_Struct_t TurnBack_Button4;
-Lable_Struct_t Referee_Online_Lable, Coefficient_Lable;
-Lable_Struct_t Referee_GameStatus_Lable;
+Lable_Struct_t Referee_Online_Lable, Coefficient_Lable, Build_Time_Lable;
+Lable_Struct_t Referee_GameStatus_Lable, Git_Version_Lable;
 
 void TurnBack_Button4_Callback(void *object, unsigned char key) {
     Form_Info_Structure.Form_Index = Log_Form_Index;
@@ -68,6 +68,16 @@ void SysInfoForm_Init(void) {
     Referee_GameStatus_Lable.Color = C_BLACK;
     Referee_GameStatus_Lable.Text = "   GameStatus: NAN   ";
 
+    Git_Version_Lable.X_Pos = 31;
+    Git_Version_Lable.Y_Pos = 44;
+    Git_Version_Lable.Color = C_BLACK;
+    Git_Version_Lable.Text = GIT_COMMIT_HASH;
+
+    Build_Time_Lable.X_Pos = 31;
+    Build_Time_Lable.Y_Pos = 58;
+    Build_Time_Lable.Color = C_BLACK;
+    Build_Time_Lable.Text = FIRMWARE_BUILD_TIME;
+
     TurnBack_Button4.X_Pos = 24;
     TurnBack_Button4.Y_Pos = 136;
     TurnBack_Button4.Width = 80;
@@ -77,7 +87,10 @@ void SysInfoForm_Init(void) {
     TurnBack_Button4.CallbackFunction = TurnBack_Button4_Callback;
 
     gui_clear_screen(C_WHITE);
-    GUI_InitButton(&TurnBack_Button4);
     GUI_InitLable(&Referee_Online_Lable);
+    GUI_InitLable(&Coefficient_Lable);
     GUI_InitLable(&Referee_GameStatus_Lable);
+    GUI_InitLable(&Git_Version_Lable);
+    GUI_InitLable(&Build_Time_Lable);
+    GUI_InitButton(&TurnBack_Button4);
 }
