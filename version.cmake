@@ -34,7 +34,7 @@ endif ()
 message(STATUS "Operation system is ${CMAKE_HOST_SYSTEM_NAME}")
 if (CMAKE_HOST_SYSTEM_NAME MATCHES "Linux")
     execute_process(
-            COMMAND date +"%Y-%m-%d %H:%M"
+            COMMAND TZ='Asia/Shanghai' date +"%Y-%m-%d %H:%M"
             OUTPUT_VARIABLE BUILD_TIME
             OUTPUT_STRIP_TRAILING_WHITESPACE
     )
