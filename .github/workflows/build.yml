@@ -39,7 +39,7 @@ jobs:
           PATH=$PATH:$compiler_path
           cd build && cmake --build . --target power_manager.elf -- -j $(nproc)
       - name: Upload Hex
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: power_manager_hex
           path: build/power_manager.hex

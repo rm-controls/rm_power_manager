@@ -38,9 +38,10 @@ if (CMAKE_HOST_SYSTEM_NAME MATCHES "Linux")
             OUTPUT_VARIABLE BUILD_TIME
             OUTPUT_STRIP_TRAILING_WHITESPACE
     )
+    string(REPLACE "\"" "" BUILD_TIME ${BUILD_TIME})
 elseif (CMAKE_HOST_SYSTEM_NAME MATCHES "Windows")
     execute_process(
-            COMMAND powershell -Command " Get-Date -Format 'yyyy-MM-dd HH:mm'"
+            COMMAND powershell -Command "Get-Date -Format 'yyyy-MM-dd HH:mm'"
             OUTPUT_VARIABLE BUILD_TIME
             OUTPUT_STRIP_TRAILING_WHITESPACE
     )
