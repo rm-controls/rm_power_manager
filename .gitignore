@@ -58,3 +58,5 @@ build
 cmake-build-debug
 .idea
 .idea/workspace.xml
+
+system/version.h
