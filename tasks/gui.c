@@ -11,6 +11,12 @@ void gui_task(void *parameters) {
     (void) parameters;
     static unsigned int running_timer_counter = 0;
     gui_clear_screen(C_WHITE);
+    gui_printf(22, 74, C_DARK_GREEN, C_WHITE, "Calibrating...");
+    lcd_refresh_once(lcd_frame_buffer);
+    for (int counter = 0; counter < 20; ++counter) {
+        HAL_IWDG_Refresh(&hiwdg1);
+        delayms(50);
+    }
     Form_Info_Structure.Form_Index = Main_Form_Index;
     MainForm_Init();
     while (1) {

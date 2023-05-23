@@ -28,19 +28,20 @@ void protect_task(void *parameters) {
         }
 
         /* Over power detect and protect. */
-        if (power_info.chassis_power > 220.0f && protect_info.over_current_flag == 0)
+        if (power_info.chassis_power > 240.0f && protect_info.over_current_flag == 0)
             protect_info.over_current_flag = 1;
-        else if (power_info.chassis_power > 220.0f && protect_info.over_current_flag == 1) {
+        else if (power_info.chassis_power > 240.0f && protect_info.over_current_flag == 1) {
             protect_info.over_current_flag = 2;
             fsm_set_mode(all_off_mode);
         }
 
-        if (power_info.battery_voltage < 18.0f && protect_info.under_voltage_flag == 0)
-            protect_info.under_voltage_flag = 1;
-        else if (power_info.battery_voltage < 18.0f && protect_info.under_voltage_flag == 1) {
-            protect_info.under_voltage_flag = 2;
-            fsm_set_mode(all_off_mode);
-        } else if (power_info.battery_voltage >= 20.0f && protect_info.under_voltage_flag == 2) {
+        if (power_info.battery_voltage < 18.0f && protect_info.under_voltage_flag == 0) {
+            delayms(100);
+            if (power_info.battery_voltage < 18.0f) {
+                fsm_set_mode(all_off_mode);
+                protect_info.under_voltage_flag = 1;
+            }
+        } else if (power_info.battery_voltage >= 20.0f && protect_info.under_voltage_flag == 1) {
             HAL_PWR_EnableBkUpAccess();
             HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR0, 0X83838383);
             HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR1, *((unsigned int *) &calibrate_params.current_k));
