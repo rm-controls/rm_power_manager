@@ -20,13 +20,13 @@ jobs:
           fetch-depth: 1
       - name: Configure Software
         run: |
-          sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get install -y cmake gcc g++ automake autoconf libtool make build-essential wget git
-          wget -q https://armkeil.blob.core.windows.net/developer/Files/downloads/gnu-rm/10.3-2021.10/gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
+          sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get install -y cmake gcc g++ automake autoconf libtool make build-essential wget git xz-utils
+          wget -q https://armkeil.blob.core.windows.net/developer/Files/downloads/gnu/12.2.rel1/binrel/arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi.tar.xz
       - name: Install Compiler
         run: |
-          tar jxf gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
-          mv gcc-arm-none-eabi-10.3-2021.10 ./gcc-arm-none-eabi
-          rm gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
+          tar -xf arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi.tar.xz
+          mv arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi ./gcc-arm-none-eabi
+          rm arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi.tar.xz
       - name: Configure CMake
         run: |
           export compiler_path=$(pwd)/gcc-arm-none-eabi/bin

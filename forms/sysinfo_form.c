@@ -6,7 +6,7 @@
 
 Button_Struct_t TurnBack_Button4;
 Lable_Struct_t Referee_Online_Lable, Coefficient_Lable, Build_Time_Lable;
-Lable_Struct_t Referee_GameStatus_Lable, Git_Version_Lable;
+Lable_Struct_t Referee_GameStatus_Lable, Git_Version_Lable, GCC_Version_Lable;
 
 void TurnBack_Button4_Callback(void *object, unsigned char key) {
     Form_Info_Structure.Form_Index = Log_Form_Index;
@@ -78,6 +78,11 @@ void SysInfoForm_Init(void) {
     Build_Time_Lable.Color = C_BLACK;
     Build_Time_Lable.Text = FIRMWARE_BUILD_TIME;
 
+    GCC_Version_Lable.X_Pos = 19;
+    GCC_Version_Lable.Y_Pos = 72;
+    GCC_Version_Lable.Color = C_BLACK;
+    GCC_Version_Lable.Text = GCC_VERSION_MAJOR;
+
     TurnBack_Button4.X_Pos = 24;
     TurnBack_Button4.Y_Pos = 136;
     TurnBack_Button4.Width = 80;
@@ -92,5 +97,6 @@ void SysInfoForm_Init(void) {
     GUI_InitLable(&Referee_GameStatus_Lable);
     GUI_InitLable(&Git_Version_Lable);
     GUI_InitLable(&Build_Time_Lable);
+    GUI_InitLable(&GCC_Version_Lable);
     GUI_InitButton(&TurnBack_Button4);
 }

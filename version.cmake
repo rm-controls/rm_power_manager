@@ -47,8 +47,15 @@ elseif (CMAKE_HOST_SYSTEM_NAME MATCHES "Windows")
     )
 endif ()
 
+# Get GCC version
+execute_process(
+        COMMAND arm-none-eabi-gcc -dumpfullversion
+        OUTPUT_VARIABLE GCC_VERSION)
+string(REGEX MATCH "[0-9][0-9].[0-9].[0-9]+" GCC_VERSION_MAJOR ${GCC_VERSION})
+
 message(STATUS "GIT_HASH ${GIT_COMMIT_HASH}${GIT_COMMIT_DIRTY}")
 message(STATUS "BUILD_TIME ${BUILD_TIME}")
+message(STATUS "GCC Version ${GCC_VERSION_MAJOR}")
 
 # Configure a header file to pass the Git commit hash and dirty flag to the source code
 configure_file(

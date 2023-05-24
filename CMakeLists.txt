@@ -1,7 +1,7 @@
 #THIS FILE IS AUTO GENERATED FROM THE TEMPLATE! DO NOT CHANGE!
 set(CMAKE_SYSTEM_NAME Generic)
 set(CMAKE_SYSTEM_VERSION 1)
-cmake_minimum_required(VERSION 3.24)
+cmake_minimum_required(VERSION 3.22)
 
 # specify cross-compilers and tools
 set(CMAKE_C_COMPILER arm-none-eabi-gcc)
@@ -16,6 +16,12 @@ set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
 # project settings
 project(power_manager C ASM)
 set(CMAKE_C_STANDARD 11)
+
+execute_process(
+        COMMAND ${CMAKE_C_COMPILER} -dumpversion
+        OUTPUT_VARIABLE GCC_VERSION_LOCAL
+)
+string(REGEX MATCH "[0-9]+" GCC_VERSION_LOCAL_MAJOR ${GCC_VERSION_LOCAL})
 
 add_custom_target(update_version_file ALL
         COMMAND ${CMAKE_COMMAND} -E echo "Updating version.h"
@@ -48,6 +54,10 @@ set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/system/stm32h750vb.ld)
 add_link_options(-Wl,-gc-sections,--print-memory-usage,-Map=${PROJECT_BINARY_DIR}/${PROJECT_NAME}.map)
 add_link_options(-mcpu=cortex-m7 -mthumb -mthumb-interwork)
 add_link_options(-T ${LINKER_SCRIPT})
+
+if (GCC_VERSION_LOCAL_MAJOR GREATER 11)
+    add_link_options(-Wl,--no-warn-rwx-segments)
+endif ()
 
 add_executable(${PROJECT_NAME}.elf ${SOURCES} ${LINKER_SCRIPT})
 add_dependencies(${PROJECT_NAME}.elf update_version_file)
