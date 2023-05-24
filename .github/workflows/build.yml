@@ -25,17 +25,18 @@ jobs:
       - name: Install Compiler
         run: |
           tar jxf gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
-          ls
           mv gcc-arm-none-eabi-10.3-2021.10 ./gcc-arm-none-eabi
           rm gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
       - name: Configure CMake
         run: |
           export compiler_path=$(pwd)/gcc-arm-none-eabi/bin
+          export TZ='Asia/Shanghai'
           PATH=$PATH:$compiler_path
           mkdir build -p && cd build && cmake ..
       - name: Build Hex
         run: |
           export compiler_path=$(pwd)/gcc-arm-none-eabi/bin
+          export TZ='Asia/Shanghai'
           PATH=$PATH:$compiler_path
           cd build && cmake --build . --target power_manager.elf -- -j $(nproc)
       - name: Upload Hex
