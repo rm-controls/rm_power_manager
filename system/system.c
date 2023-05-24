@@ -336,5 +336,7 @@ void error_check(void) {
             usart1_send_error_package(0x05, 2, error_info_str);
         }
     }
-    HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR0, 0X5A5A5A5A);
+    if (reset_reason == power_on_reset || reset_reason == rst_pin_reset
+        && HAL_RTCEx_BKUPRead(&hrtc, RTC_BKP_DR0) == 0X83838383)
+        HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR0, 0X83838384);
 }

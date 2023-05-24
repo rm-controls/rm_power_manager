@@ -68,17 +68,17 @@ void SysInfoForm_Init(void) {
     Referee_GameStatus_Lable.Color = C_BLACK;
     Referee_GameStatus_Lable.Text = "   GameStatus: NAN   ";
 
-    Git_Version_Lable.X_Pos = 31;
+    Git_Version_Lable.X_Pos = 15;
     Git_Version_Lable.Y_Pos = 44;
     Git_Version_Lable.Color = C_BLACK;
     Git_Version_Lable.Text = GIT_COMMIT_HASH;
 
-    Build_Time_Lable.X_Pos = 31;
+    Build_Time_Lable.X_Pos = 15;
     Build_Time_Lable.Y_Pos = 58;
     Build_Time_Lable.Color = C_BLACK;
     Build_Time_Lable.Text = FIRMWARE_BUILD_TIME;
 
-    GCC_Version_Lable.X_Pos = 19;
+    GCC_Version_Lable.X_Pos = 9;
     GCC_Version_Lable.Y_Pos = 72;
     GCC_Version_Lable.Color = C_BLACK;
     GCC_Version_Lable.Text = GCC_VERSION_MAJOR;
