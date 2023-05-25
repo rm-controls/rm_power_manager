@@ -5,6 +5,8 @@
 #include "main.h"
 
 #define ADC_COEFFICIENT (3.0f / 4096.0f)
+#define ZERO_ENERGY     (7.5f * 7.5f * 7.5f)        // Set 7.5V as 0%
+#define FULL_ENERGY     (7.5f * 16.0f * 16.0f)      // Set 16V as 100%
 
 volatile unsigned char power_manager_status_buffer[19] =
     {0xA5, 0x0A, 0x00, 0x00, 0xA9, 0x01, 0x83, [7 ... 18]=0x00};
@@ -49,9 +51,9 @@ void update_powerinfo(const unsigned short *adc_result) {
         get_filter_result(&capacitor_voltage_filter, (float) adc_result[3] * ADC_COEFFICIENT * 21.0f);
     power_info.chassis_voltage = (float) adc_result[4] * ADC_COEFFICIENT * 21.0f;
 
-    float capacitor_energy = 7.5f * power_info.capacitor_voltage * power_info.capacitor_voltage - 367.5f;
+    float capacitor_energy = 7.5f * power_info.capacitor_voltage * power_info.capacitor_voltage - ZERO_ENERGY;
     capacitor_energy = ((capacitor_energy < 0) ? 0 : capacitor_energy);
-    power_info.capacitor_percent = capacitor_energy * 100.0f / 1434.375f;      // Set 15.5V as 100%, 7V as 0%
+    power_info.capacitor_percent = capacitor_energy * 100.0f / FULL_ENERGY;
     power_info.capacitor_percent = (power_info.capacitor_percent > 100.0f) ? 100.0f : power_info.capacitor_percent;
 
     power_info.charge_current =
@@ -96,7 +98,7 @@ void calibrate_params_config(void) {
 
 void calibrate_referee_config(void) {              // Least square fitting of first order function
     HAL_PWR_EnableBkUpAccess();
-    if (HAL_RTCEx_BKUPRead(&hrtc, RTC_BKP_DR0) == 0x83838383) {
+    if (HAL_RTCEx_BKUPRead(&hrtc, RTC_BKP_DR0) == 0X83838384) {
         unsigned int param_k = HAL_RTCEx_BKUPRead(&hrtc, RTC_BKP_DR1);
         unsigned int param_b = HAL_RTCEx_BKUPRead(&hrtc, RTC_BKP_DR2);
         calibrate_params.current_k = *((float *) &param_k);

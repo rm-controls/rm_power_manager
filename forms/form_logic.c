@@ -13,6 +13,11 @@ void Form_UpdateEvent(void) {
     Key_Press_t key_num = ReadKey();
     GUI_Object_Struct_t *Current_Widget = FirstWidget, *Tmp_Widget = NULL;
 
+    if (key_num.Last_Num == 0 && key_num.Num != 0 && lcd_off_flag == 1) {
+        lcd_off_flag = 0;
+        gui_config();
+    }
+
     for (unsigned char counter = 0; counter < Form_Info_Structure.Widget_Index; counter++)
         Current_Widget = Current_Widget->NextObject;
     if (key_num.Last_Num == Left_Key && key_num.Num == 0)
@@ -100,10 +105,5 @@ void Form_UpdateEvent(void) {
         case SysInfo_Form_Index:SysInfoForm_Update();
             break;
         case LogView_Form_Index:LogViewForm_Update();
-    }
-
-    if (key_num.Last_Num == 0 && key_num.Num != 0 && lcd_off_flag == 1) {
-        lcd_off_flag = 0;
-        gui_config();
     }
 }

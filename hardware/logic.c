@@ -26,16 +26,19 @@ void charge_switch_only(void) {
 
 void passthrough_switch_only(unsigned char is_last_boost) {
     HAL_GPIO_WritePin(EN_NMOS_GPIO_Port, EN_NMOS_Pin, GPIO_PIN_RESET);
-    if (is_last_boost == 1)
+    if (is_last_boost)
         delayms(50);
     HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_SET);
     HAL_GPIO_WritePin(BOOST_EN_GPIO_Port, BOOST_EN_Pin, GPIO_PIN_SET);
 }
 
-void charge_with_boost_switches(unsigned char is_last_pass) {
-    HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_RESET);
+void charge_with_boost_switches(unsigned char is_last_pass, unsigned char is_over_voltage) {
+    if (is_over_voltage)
+        HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_SET);
+    else
+        HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_RESET);
     HAL_GPIO_WritePin(BOOST_EN_GPIO_Port, BOOST_EN_Pin, GPIO_PIN_RESET);
-    if (is_last_pass == 1)
+    if (is_last_pass)
         delayms(50);
     HAL_GPIO_WritePin(EN_NMOS_GPIO_Port, EN_NMOS_Pin, GPIO_PIN_SET);
 }

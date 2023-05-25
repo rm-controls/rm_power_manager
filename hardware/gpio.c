@@ -11,12 +11,12 @@ void gpio_config(void) {
     GPIO_InitTypeDef GPIO_Structure;
 
     /* GPIO Ports Clock Enable */
-    __HAL_RCC_GPIOH_CLK_ENABLE();
     __HAL_RCC_GPIOA_CLK_ENABLE();
-    __HAL_RCC_GPIOC_CLK_ENABLE();
     __HAL_RCC_GPIOB_CLK_ENABLE();
+    __HAL_RCC_GPIOC_CLK_ENABLE();
     __HAL_RCC_GPIOD_CLK_ENABLE();
     __HAL_RCC_GPIOE_CLK_ENABLE();
+    __HAL_RCC_GPIOH_CLK_ENABLE();
 
     GPIO_Structure.Pin = LCD_PWR_Pin;
     GPIO_Structure.Speed = GPIO_SPEED_FREQ_VERY_HIGH;

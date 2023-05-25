@@ -35,7 +35,7 @@ void fsm_task(void *parameters) {
                     main_fsm.typology = pass_through;
                 else
                     main_fsm.typology = charge_with_boost;
-                power_info.expect_chassis_power = 200.0f;
+                power_info.expect_chassis_power = 220.0f;
                 break;
             case all_off_mode:main_fsm.typology = switches_all_off;
                 power_info.expect_chassis_power = 0;
@@ -47,8 +47,9 @@ void fsm_task(void *parameters) {
         }
 
         if (main_fsm.typology == charge_with_boost) {
-            charge_with_boost_switches(last_typology == pass_through);
-            if (power_info.capacitor_voltage > 15.7f)
+            charge_with_boost_switches(last_typology == pass_through,
+                                       power_info.capacitor_voltage > 16.0f);
+            if (power_info.capacitor_voltage > 16.0f)
                 pid_set_expect(0);
             else {
                 if (referee_info.chassis_power_buffer < 10)

@@ -133,7 +133,7 @@ void MainForm_Init(void) {
     Expect_Power_Lable.Text = "  Expect Power: 30W  ";
 
     Log_Button.X_Pos = 2;
-    Log_Button.Y_Pos = 112;
+    Log_Button.Y_Pos = 114;
     Log_Button.Width = 60;
     Log_Button.Height = 20;
     Log_Button.Text = "Log&Info";
@@ -141,14 +141,14 @@ void MainForm_Init(void) {
     Log_Button.CallbackFunction = Log_Button_Callback;
 
     Settings_Button.X_Pos = 64;
-    Settings_Button.Y_Pos = 112;
+    Settings_Button.Y_Pos = 114;
     Settings_Button.Width = 60;
     Settings_Button.Height = 20;
     Settings_Button.Text = "Settings";
     Settings_Button.NextButton = &Self_Check_Button;
     Settings_Button.CallbackFunction = Settings_Button_Callback;
 
-    Self_Check_Button.X_Pos = 64;
+    Self_Check_Button.X_Pos = 2;
     Self_Check_Button.Y_Pos = 136;
     Self_Check_Button.Width = 60;
     Self_Check_Button.Height = 20;
