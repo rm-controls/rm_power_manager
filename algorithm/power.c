@@ -53,7 +53,7 @@ void update_powerinfo(const unsigned short *adc_result) {
 
     float capacitor_energy = 7.5f * power_info.capacitor_voltage * power_info.capacitor_voltage - ZERO_ENERGY;
     capacitor_energy = ((capacitor_energy < 0) ? 0 : capacitor_energy);
-    power_info.capacitor_percent = capacitor_energy * 100.0f / FULL_ENERGY;
+    power_info.capacitor_percent = capacitor_energy * 100.0f / (FULL_ENERGY - ZERO_ENERGY);
     power_info.capacitor_percent = (power_info.capacitor_percent > 100.0f) ? 100.0f : power_info.capacitor_percent;
 
     power_info.charge_current =
@@ -107,14 +107,15 @@ void calibrate_referee_config(void) {              // Least square fitting of fi
     }
 
     if (referee_available() == 1) {
-        float x[4], y[4], xy_sum = 0, x_ave, y_ave, x2_sum = 0, x_sum = 0, y_sum = 0;
+        float x[5], y[5], xy_sum = 0, x_ave, y_ave, x2_sum = 0, x_sum = 0, y_sum = 0;
         charge_switch_only();
         calibrate_params.current_k = 1.0f;
         calibrate_params.current_b = 0;
-        for (unsigned char counter = 0; counter < 4; counter++) {
+        x[0] = 0;
+        y[0] = 0;
+        for (unsigned char counter = 1; counter < 5; counter++) {
             float sample_local_sum = 0, sample_referee_sum = 0;
-            dac_set_output((unsigned short) (2730.0f * (float) (counter + 1)
-                / power_info.capacitor_voltage));       //10 ~ 40W
+            dac_set_output((unsigned short) (2730.0f * (float) (counter) / power_info.capacitor_voltage));
             for (unsigned char counterf = 0; counterf < 2; counterf++) {
                 delayms(125);
                 sample_local_sum += power_info.charge_power;
@@ -128,8 +129,8 @@ void calibrate_referee_config(void) {              // Least square fitting of fi
             y_sum += y[counter];
         }
         close_all_switches();
-        x_ave = x_sum / 4.0f;
-        y_ave = y_sum / 4.0f;
+        x_ave = x_sum / 5.0f;
+        y_ave = y_sum / 5.0f;
         calibrate_params.current_k = (xy_sum - 4 * x_ave * y_ave) / (x2_sum - 4 * x_ave * x_ave);
         calibrate_params.current_b = y_ave - calibrate_params.current_k * x_ave;
     } else {

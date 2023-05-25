@@ -9,7 +9,7 @@ TaskHandle_t fsm_task_handler;
 fsm_t main_fsm;
 
 void fsm_set_mode(mode_target_t target_mode) {
-    if (target_mode == all_off_mode) {
+    if (target_mode == all_off_mode || target_mode == selftest_all_off_mode) {
         power_info.expect_chassis_power = 0;
         main_fsm.typology = switches_all_off;
         pid_set_expect(0);
@@ -27,6 +27,7 @@ void fsm_task(void *parameters) {
     main_fsm.mode = normal_mode;
     while (1) {
         switch (main_fsm.mode) {
+            case selftest_charge_mode:
             case charge_mode:main_fsm.typology = charge_with_boost;
                 power_info.expect_chassis_power = 0.6f * (float) referee_info.chassis_power_limit;
                 break;
@@ -37,10 +38,12 @@ void fsm_task(void *parameters) {
                     main_fsm.typology = charge_with_boost;
                 power_info.expect_chassis_power = 220.0f;
                 break;
+            case selftest_all_off_mode:
             case all_off_mode:main_fsm.typology = switches_all_off;
                 power_info.expect_chassis_power = 0;
                 break;
             default:
+            case selftest_normal_mode:
             case normal_mode:main_fsm.typology = pass_through;
                 power_info.expect_chassis_power = (float) referee_info.chassis_power_limit;
                 break;
