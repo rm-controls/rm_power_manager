@@ -4,30 +4,30 @@
 
 #include "main.h"
 
-Button_Struct_t TurnBack_Button1, Format_Button, OSInfo_Button, SysInfo_Button;
-Lable_Struct_t DateTime_Lable;
-ListBox_Struct_t FileList_ListBox;
+static Button_Struct_t TurnBack_Button1, Format_Button, OSInfo_Button, SysInfo_Button;
+static Lable_Struct_t DateTime_Lable;
+static ListBox_Struct_t FileList_ListBox;
 
-void SysInfo_Button_Callback(void *object, unsigned char key) {
+static void SysInfo_Button_Callback(void *object, unsigned char key) {
     Form_Info_Structure.Form_Index = SysInfo_Form_Index;
     SysInfoForm_Init();
 }
 
-void OSInfo_Button_Callback(void *object, unsigned char key) {
+static void OSInfo_Button_Callback(void *object, unsigned char key) {
     Form_Info_Structure.Form_Index = OSInfo_Form_Index;
     OSInfoForm_Init();
 }
 
-void TurnBack_Button1_Callback(void *object, unsigned char key) {
+static void TurnBack_Button1_Callback(void *object, unsigned char key) {
     Form_Info_Structure.Form_Index = Main_Form_Index;
     MainForm_Init();
 }
 
-void Format_Button_Callback(void *object, unsigned char key) {
+static void Format_Button_Callback(void *object, unsigned char key) {
 
 }
 
-void FileList_ListBox_Callback(void *object, unsigned char key) {
+static void FileList_ListBox_Callback(void *object, unsigned char key) {
     if (key == Center_Key) {
         Form_Info_Structure.Form_Index = LogView_Form_Index;
         LogViewForm_Init(((ListBox_Struct_t *) object)->ItemIndex);
@@ -50,29 +50,7 @@ void LogForm_Update(void) {
 }
 
 void GFileList_ListBox_ScanFile() {
-# if USE_SPI_FLASH_FATFS == 1
-    if (FileSystem_Structure->FileNum != 1 && FileSystem_Available_Flag != 0) {
-        FileHead_Struct_t CurrentFile_Tmp;
-        unsigned int NextHeadAddr = FileSystem_Structure->FirstFileAddr;
-        for (unsigned char counter = 0; counter < FileSystem_Structure->FileNum - 1; counter++) {
-            W25QXX_Read((unsigned char *) &CurrentFile_Tmp, NextHeadAddr, sizeof(FileHead_Struct_t));
-            GUI_ListBoxAddItem(&FileList_ListBox,
-                               "20%d/%d/%d-%02d:%02d:%02d",
-                               CurrentFile_Tmp.Year,
-                               CurrentFile_Tmp.Month,
-                               CurrentFile_Tmp.Day,
-                               CurrentFile_Tmp.Hour,
-                               CurrentFile_Tmp.Minute,
-                               CurrentFile_Tmp.Second);
-            NextHeadAddr = CurrentFile_Tmp.NextFileAddr;
-        }
-    } else if (FileSystem_Available_Flag != 0)
-        GUI_ListBoxAddItem(&FileList_ListBox, "No Log Item");
-    else
-        GUI_ListBoxAddItem(&FileList_ListBox, "Flash Broken");
-#else
     GUI_ListBoxAddItem(&FileList_ListBox, "No Flash Use");
-#endif
 }
 
 void LogForm_Init(void) {

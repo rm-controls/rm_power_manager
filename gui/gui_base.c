@@ -7,8 +7,16 @@
 #include "string.h"
 #include "stdarg.h"
 #include "font.h"
+#include "lcd.h"
+#include "gpio.h"
 
 __attribute__((section(".dma_ram")))volatile unsigned char lcd_frame_buffer[128 * 160 * 2] = {0};
+
+void gui_config(void) {
+    HAL_GPIO_WritePin(LCD_PWR_Port, LCD_PWR_Pin, GPIO_PIN_RESET);
+    lcd_config();
+    lcd_scan_mode(4);
+}
 
 unsigned short gui_trans_color(unsigned short color) {
     unsigned int Result;

@@ -4,20 +4,29 @@
 
 #include "main.h"
 
-Chart_Struct_t Voltage_Chart, Power_Chart;
-Curve_Struct_t VCapacitor_Curve, VChassis_Curve, VBaterry_Curve;
-Curve_Struct_t PCapacitor_Curve, PChassis_Curve;
-Lable_Struct_t VCapacitor_Lable, VChassis_Lable, VBaterry_Lable;
-Lable_Struct_t PCapacitor_Lable, PChassis_Lable;
-Lable_Struct_t FSM_Mode_Lable, Charge_Mode_Lable, Expect_Power_Lable;
-Button_Struct_t Settings_Button, Log_Button;
+static Chart_Struct_t Voltage_Chart, Power_Chart;
+static Curve_Struct_t VCapacitor_Curve, VChassis_Curve, VBaterry_Curve;
+static Curve_Struct_t PCapacitor_Curve, PChassis_Curve;
+static Lable_Struct_t VCapacitor_Lable, VChassis_Lable, VBaterry_Lable;
+static Lable_Struct_t PCapacitor_Lable, PChassis_Lable;
+static Lable_Struct_t FSM_Mode_Lable, Charge_Mode_Lable, Expect_Power_Lable;
+static Button_Struct_t Settings_Button, Log_Button, Self_Check_Button, Off_LCD_Button;
 
-void Log_Button_Callback(void *object, unsigned char key) {
+static void Self_Check_Button_Callback(void *object, unsigned char key) {
+
+}
+
+static void Off_LCD_Button_Callback(void *object, unsigned char key) {
+    lcd_off_flag = 1;
+    HAL_GPIO_WritePin(LCD_PWR_Port, LCD_PWR_Pin, GPIO_PIN_SET);
+}
+
+static void Log_Button_Callback(void *object, unsigned char key) {
     Form_Info_Structure.Form_Index = Log_Form_Index;
     LogForm_Init();
 }
 
-void Settings_Button_Callback(void *object, unsigned char key) {
+static void Settings_Button_Callback(void *object, unsigned char key) {
     Form_Info_Structure.Form_Index = Settings_Form_Index;
     SettingsForm_Init();
 }
@@ -49,6 +58,7 @@ void MainForm_Update(void) {
             break;
         case all_off_mode:GUI_LableSetText(&FSM_Mode_Lable, "  FSM Mode: All off  ");
             break;
+        default:break;
     }
 
     switch (main_fsm.typology) {
@@ -123,20 +133,36 @@ void MainForm_Init(void) {
     Expect_Power_Lable.Text = "  Expect Power: 30W  ";
 
     Log_Button.X_Pos = 2;
-    Log_Button.Y_Pos = 134;
+    Log_Button.Y_Pos = 112;
     Log_Button.Width = 60;
-    Log_Button.Height = 22;
+    Log_Button.Height = 20;
     Log_Button.Text = "Log&Info";
     Log_Button.NextButton = &Settings_Button;
     Log_Button.CallbackFunction = Log_Button_Callback;
 
     Settings_Button.X_Pos = 64;
-    Settings_Button.Y_Pos = 134;
+    Settings_Button.Y_Pos = 112;
     Settings_Button.Width = 60;
-    Settings_Button.Height = 22;
+    Settings_Button.Height = 20;
     Settings_Button.Text = "Settings";
-    Settings_Button.NextButton = NULL;
+    Settings_Button.NextButton = &Self_Check_Button;
     Settings_Button.CallbackFunction = Settings_Button_Callback;
+
+    Self_Check_Button.X_Pos = 64;
+    Self_Check_Button.Y_Pos = 136;
+    Self_Check_Button.Width = 60;
+    Self_Check_Button.Height = 20;
+    Self_Check_Button.Text = "SelfCheck";
+    Self_Check_Button.NextButton = &Off_LCD_Button;
+    Self_Check_Button.CallbackFunction = Self_Check_Button_Callback;
+
+    Off_LCD_Button.X_Pos = 64;
+    Off_LCD_Button.Y_Pos = 136;
+    Off_LCD_Button.Width = 60;
+    Off_LCD_Button.Height = 20;
+    Off_LCD_Button.Text = "Off LCD";
+    Off_LCD_Button.NextButton = NULL;
+    Off_LCD_Button.CallbackFunction = Off_LCD_Button_Callback;
 
     gui_clear_screen(C_WHITE);
     GUI_InitCurve(&VCapacitor_Curve, &Voltage_Chart, VCapacitor_Lable.Color);
@@ -156,4 +182,6 @@ void MainForm_Init(void) {
     GUI_InitLable(&Expect_Power_Lable);
     GUI_InitButton(&Settings_Button);
     GUI_InitButton(&Log_Button);
+    GUI_InitButton(&Self_Check_Button);
+    GUI_InitButton(&Off_LCD_Button);
 }

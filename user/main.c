@@ -14,8 +14,6 @@ void initialize_task(void *parameters) {
     adc_config();
     dac_config();
     spi3_config();
-    lcd_config();
-    lcd_scan_mode(4);
     calibrate_params_config();
     iwdg_config();
 

@@ -4,10 +4,10 @@
 
 #include "main.h"
 
-Button_Struct_t TurnBack_Button3;
-unsigned char osinfo_update_counter = 0;
+static Button_Struct_t TurnBack_Button3;
+static unsigned char osinfo_update_counter = 0;
 
-unsigned char OSInfo_Printf(unsigned char row, unsigned char column, char *fmt) {
+static unsigned char OSInfo_Printf(unsigned char row, unsigned char column, char *fmt) {
     unsigned char n = 0;
     while (fmt[n] != '\n') {
         if (fmt[n] == '\t')
@@ -21,7 +21,7 @@ unsigned char OSInfo_Printf(unsigned char row, unsigned char column, char *fmt) 
     return n;
 }
 
-void RefreshTaskInfo(void) {
+static void RefreshTaskInfo(void) {
     char *buf_source = pvPortMalloc(1024), *buf = buf_source;
     vTaskList(buf);
     OSInfo_Printf(2, 6, "Name State Prio Stack\n");
@@ -34,14 +34,14 @@ void RefreshTaskInfo(void) {
     vPortFree(buf_source);
 }
 
-void TurnBack_Button3_Callback(void *object, unsigned char key) {
+static void TurnBack_Button3_Callback(void *object, unsigned char key) {
     Form_Info_Structure.Form_Index = Log_Form_Index;
     LogForm_Init();
 }
 
 void OSInfoForm_Update(void) {
     osinfo_update_counter++;
-    if (osinfo_update_counter == 20) {
+    if (osinfo_update_counter == 10) {
         RefreshTaskInfo();
         osinfo_update_counter = 0;
     }

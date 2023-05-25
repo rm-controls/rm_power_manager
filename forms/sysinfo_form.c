@@ -4,11 +4,11 @@
 
 #include "main.h"
 
-Button_Struct_t TurnBack_Button4;
-Lable_Struct_t Referee_Online_Lable, Coefficient_Lable, Build_Time_Lable;
-Lable_Struct_t Referee_GameStatus_Lable, Git_Version_Lable, GCC_Version_Lable;
+static Button_Struct_t TurnBack_Button4;
+static Lable_Struct_t Referee_Online_Lable, Coefficient_Lable, Build_Time_Lable;
+static Lable_Struct_t Referee_GameStatus_Lable, Git_Version_Lable, GCC_Version_Lable;
 
-void TurnBack_Button4_Callback(void *object, unsigned char key) {
+static void TurnBack_Button4_Callback(void *object, unsigned char key) {
     Form_Info_Structure.Form_Index = Log_Form_Index;
     LogForm_Init();
 }

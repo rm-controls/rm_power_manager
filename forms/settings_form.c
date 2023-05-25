@@ -6,24 +6,24 @@
 
 static Button_Struct_t TurnBack_Button2, Normal_Button, Charge_Button, Boost_Button;
 
-void TurnBack_Button2_Callback(void *object, unsigned char key) {
+static void TurnBack_Button2_Callback(void *object, unsigned char key) {
     Form_Info_Structure.Form_Index = Main_Form_Index;
     MainForm_Init();
 }
 
-void Normal_Button_Callback(void *object, unsigned char key) {
+static void Normal_Button_Callback(void *object, unsigned char key) {
     fsm_set_mode(normal_mode);
     Form_Info_Structure.Form_Index = Main_Form_Index;
     MainForm_Init();
 }
 
-void Charge_Button_Callback(void *object, unsigned char key) {
+static void Charge_Button_Callback(void *object, unsigned char key) {
     fsm_set_mode(charge_mode);
     Form_Info_Structure.Form_Index = Main_Form_Index;
     MainForm_Init();
 }
 
-void Boost_Button_Callback(void *object, unsigned char key) {
+static void Boost_Button_Callback(void *object, unsigned char key) {
     fsm_set_mode(boost_mode);
     Form_Info_Structure.Form_Index = Main_Form_Index;
     MainForm_Init();

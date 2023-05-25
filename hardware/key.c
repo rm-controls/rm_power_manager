@@ -5,7 +5,7 @@
 #include "key.h"
 #include "gpio.h"
 
-Key_Press_t KeyPress_Structure;
+static Key_Press_t KeyPress_Structure;
 
 Key_Press_t ReadKey() {
     KeyPress_Structure.Last_Num = KeyPress_Structure.Num;

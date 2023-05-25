@@ -40,6 +40,7 @@ typedef enum {
 
 extern GUI_Object_Struct_t *FirstWidget;
 extern Form_Info_t Form_Info_Structure;
+extern unsigned char lcd_off_flag;
 
 void Form_UpdateEvent(void);
 

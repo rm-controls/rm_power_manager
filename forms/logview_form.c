@@ -4,12 +4,12 @@
 
 #include "main.h"
 
-ListBox_Struct_t EventList_ListBox;
-Button_Struct_t TurnBack_Button5;
+static ListBox_Struct_t EventList_ListBox;
+static Button_Struct_t TurnBack_Button5;
 
-void EventList_ListBox_Callback(void *object, unsigned char key) {}
+static void EventList_ListBox_Callback(void *object, unsigned char key) {}
 
-void TurnBack_Button5_Callback(void *object, unsigned char key) {
+static void TurnBack_Button5_Callback(void *object, unsigned char key) {
     Form_Info_Structure.Form_Index = Log_Form_Index;
     LogForm_Init();
 }

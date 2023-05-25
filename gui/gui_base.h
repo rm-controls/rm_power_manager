@@ -19,6 +19,7 @@ typedef enum {
   GUI_DRAW_CIRCLE_BR,
 } Circle_Corner_e;
 
+void gui_config(void);
 unsigned short gui_trans_color(unsigned short color);
 void gui_draw_point(unsigned short x, unsigned short y, unsigned short color);
 void gui_clear_screen(unsigned short color);
