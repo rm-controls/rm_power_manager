@@ -54,10 +54,11 @@
 /////////////////////////// Forms ///////////////////////////
 #include "form_logic.h"
 #include "main_form.h"
-#include "info_form.h"
+#include "log_form.h"
 #include "settings_form.h"
 #include "osinfo_form.h"
 #include "sysinfo_form.h"
 #include "logview_form.h"
+#include "selfcheck_form.h"
 
 #endif /* POWER_MANAGER_SYSTEM_USER_MAIN_H_ */

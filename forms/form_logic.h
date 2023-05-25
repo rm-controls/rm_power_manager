@@ -12,6 +12,7 @@ typedef enum {
   OSInfo_Form_Index = 3,
   SysInfo_Form_Index = 4,
   LogView_Form_Index = 5,
+  SelfCheck_Form_Index = 6,
 } Form_Index_e;
 
 typedef struct {

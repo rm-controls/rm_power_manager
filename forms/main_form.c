@@ -13,7 +13,8 @@ static Lable_Struct_t FSM_Mode_Lable, Charge_Mode_Lable, Expect_Power_Lable;
 static Button_Struct_t Settings_Button, Log_Button, Self_Check_Button, Off_LCD_Button;
 
 static void Self_Check_Button_Callback(void *object, unsigned char key) {
-
+    Form_Info_Structure.Form_Index = SelfCheck_Form_Index;
+    SelfCheckForm_Init();
 }
 
 static void Off_LCD_Button_Callback(void *object, unsigned char key) {
