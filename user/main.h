@@ -36,6 +36,7 @@
 #include "gui_lable.h"
 #include "gui_numeric.h"
 #include "gui_listbox.h"
+#include "gui_textbox.h"
 
 /////////////////////////// Algorithm ///////////////////////////
 #include "power.h"
