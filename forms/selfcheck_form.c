@@ -18,11 +18,30 @@ void SelfCheckForm_Init(void) {
 
     gui_clear_screen(C_WHITE);
     GUI_InitTextBox(&SelfCheck_TextBox);
-    fsm_set_mode(selftest_all_off_mode);
+    fsm_set_mode(selftest_mode);
+    vTaskSuspend(fsm_task_handler);
 }
 
+static unsigned char capacitor_discharge_flag = 0, capacitor_charge_flag = 0;
 void SelfCheckForm_Update(void) {
+    if (power_info.capacitor_voltage > 13.0f) {
+        if (capacitor_discharge_flag == 0)
+            GUI_TextBoxAppend(&SelfCheck_TextBox, C_BLACK, "Discharging Cap");
+        charge_with_boost_switches(0, 1);
+        capacitor_discharge_flag = 1;
+        return;
+    } else if (power_info.capacitor_voltage < 10.0f) {
+        if (capacitor_charge_flag == 0)
+            GUI_TextBoxAppend(&SelfCheck_TextBox, C_BLACK, "Charging Cap");
+        pid_calculate_enable_flag = 0;
+        charge_switch_only();
+        dac_set_output((unsigned short) (273.0f * 35.0f / power_info.capacitor_voltage));
+        capacitor_charge_flag = 1;
+        return;
+    }
     round_counter++;
+    capacitor_charge_flag = 0;
+    capacitor_discharge_flag = 0;
     if (round_counter <= 10)
         slefcheck_current_sensor(&SelfCheck_TextBox, round_counter);
     else if (round_counter <= 20)
@@ -37,4 +56,16 @@ void SelfCheckForm_Update(void) {
         slefcheck_referee_status(&SelfCheck_TextBox, (round_counter - 50));
     else if (round_counter <= 80)
         slefcheck_nuc_status(&SelfCheck_TextBox, (round_counter - 60));
+    else {
+        fsm_set_mode(normal_mode);
+        vTaskResume(fsm_task_handler);
+        pid_calculate_enable_flag = 1;
+        capacitor_charge_flag = 0;
+        capacitor_discharge_flag = 0;
+        round_counter = 0;
+        Form_Info_Structure.Form_Index = Main_Form_Index;
+        MainForm_Init();
+    }
+
+    pack_powerinfo_buffer();
 }

@@ -10,19 +10,21 @@
 
 static char textbox_line_buffer[32] = {0};
 
+extern unsigned short adc_result[6];
 void slefcheck_current_sensor(TextBox_Struct_t *textbox, unsigned char step) {
     static unsigned char current_sensor_check_error_flag = 0;
     switch (step) {
-        case 1:fsm_set_mode(selftest_all_off_mode);
+        case 1: pid_set_expect(0);
+            close_all_switches();
             break;
-        case 5:
-            if (calibrate_params.chassis_current_offset<SELFCHECK_CURRENT_MINIMUM ||
-                calibrate_params.chassis_current_offset>SELFCHECK_CURRENT_MAXIMUM) {
+        case 3:
+            if (adc_result[1] < SELFCHECK_CURRENT_MINIMUM ||
+                adc_result[1] > SELFCHECK_CURRENT_MAXIMUM) {
                 GUI_TextBoxAppend(textbox, C_DARK_RED, "Chassis_cur mid err");
                 current_sensor_check_error_flag++;
             }
-            if (calibrate_params.charge_current_offset<SELFCHECK_CURRENT_MINIMUM ||
-                calibrate_params.charge_current_offset>SELFCHECK_CURRENT_MAXIMUM) {
+            if (adc_result[0] < SELFCHECK_CURRENT_MINIMUM ||
+                adc_result[0] > SELFCHECK_CURRENT_MAXIMUM) {
                 GUI_TextBoxAppend(textbox, C_DARK_RED, "Charge_cur mid err");
                 current_sensor_check_error_flag++;
             }

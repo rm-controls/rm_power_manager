@@ -113,6 +113,13 @@ void calibrate_referee_config(void) {              // Least square fitting of fi
         calibrate_params.current_b = 0;
         x[0] = 0;
         y[0] = 0;
+        while (1) {
+            if (power_info.capacitor_voltage < 4.0f)
+                dac_set_output(2730);
+            else
+                break;
+            delayms(100);
+        }
         for (unsigned char counter = 1; counter < 5; counter++) {
             float sample_local_sum = 0, sample_referee_sum = 0;
             dac_set_output((unsigned short) (2730.0f * (float) (counter) / power_info.capacitor_voltage));
