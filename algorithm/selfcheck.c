@@ -20,12 +20,14 @@ unsigned char slefcheck_current_sensor(TextBox_Struct_t *textbox, unsigned char 
         case 3:
             if (adc_result[1] < SELFCHECK_CURRENT_MINIMUM ||
                 adc_result[1] > SELFCHECK_CURRENT_MAXIMUM) {
-                GUI_TextBoxAppend(textbox, C_DARK_RED, "Chassis_cur mid err");
+                sprintf(textbox_line_buffer, "cha_cur mid %04d", adc_result[1]);
+                GUI_TextBoxAppend(textbox, C_DARK_RED, textbox_line_buffer);
                 current_sensor_check_error_flag++;
             }
             if (adc_result[0] < SELFCHECK_CURRENT_MINIMUM ||
                 adc_result[0] > SELFCHECK_CURRENT_MAXIMUM) {
-                GUI_TextBoxAppend(textbox, C_DARK_RED, "Charge_cur mid err");
+                sprintf(textbox_line_buffer, "cap_cur mid %04d", adc_result[0]);
+                GUI_TextBoxAppend(textbox, C_DARK_RED, textbox_line_buffer);
                 current_sensor_check_error_flag++;
             }
             break;
@@ -71,5 +73,12 @@ unsigned char slefcheck_referee_status(TextBox_Struct_t *textbox, unsigned char 
 }
 
 unsigned char slefcheck_nuc_status(TextBox_Struct_t *textbox, unsigned char step) {
-    return !nuc_available();
+    static unsigned char nuc_status_check_error_flag = 0;
+    if (!nuc_available())
+        nuc_status_check_error_flag++;
+    if (step == 10 && nuc_status_check_error_flag == 0)
+        GUI_TextBoxAppend(textbox, C_DARK_GREEN, "NUC link check pass");
+    else if (step == 10 && nuc_status_check_error_flag != 0)
+        GUI_TextBoxAppend(textbox, C_DARK_RED, "NUC link check err");
+    return nuc_status_check_error_flag;
 }
