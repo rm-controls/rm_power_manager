@@ -11,7 +11,7 @@
 static char textbox_line_buffer[32] = {0};
 
 extern unsigned short adc_result[6];
-void slefcheck_current_sensor(TextBox_Struct_t *textbox, unsigned char step) {
+unsigned char slefcheck_current_sensor(TextBox_Struct_t *textbox, unsigned char step) {
     static unsigned char current_sensor_check_error_flag = 0;
     switch (step) {
         case 1: pid_set_expect(0);
@@ -35,28 +35,29 @@ void slefcheck_current_sensor(TextBox_Struct_t *textbox, unsigned char step) {
             break;
         default:break;
     }
+    return current_sensor_check_error_flag;
 }
 
-void slefcheck_voltage_sensor(TextBox_Struct_t *textbox, unsigned char step) {
-
+unsigned char slefcheck_voltage_sensor(TextBox_Struct_t *textbox, unsigned char step) {
+    return 0;
 }
 
-void slefcheck_passthrough_components(TextBox_Struct_t *textbox, unsigned char step) {
-
+unsigned char slefcheck_passthrough_components(TextBox_Struct_t *textbox, unsigned char step) {
+    return 0;
 }
 
-void slefcheck_charge_components(TextBox_Struct_t *textbox, unsigned char step) {
-
+unsigned char slefcheck_charge_components(TextBox_Struct_t *textbox, unsigned char step) {
+    return 0;
 }
 
-void slefcheck_boost_components(TextBox_Struct_t *textbox, unsigned char step) {
-
+unsigned char slefcheck_boost_components(TextBox_Struct_t *textbox, unsigned char step) {
+    return 0;
 }
 
-void slefcheck_referee_status(TextBox_Struct_t *textbox, unsigned char step) {
-
+unsigned char slefcheck_referee_status(TextBox_Struct_t *textbox, unsigned char step) {
+    return 0;
 }
 
-void slefcheck_nuc_status(TextBox_Struct_t *textbox, unsigned char step) {
-
+unsigned char slefcheck_nuc_status(TextBox_Struct_t *textbox, unsigned char step) {
+    return 0;
 }

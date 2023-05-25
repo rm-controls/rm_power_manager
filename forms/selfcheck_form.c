@@ -22,7 +22,7 @@ void SelfCheckForm_Init(void) {
     vTaskSuspend(fsm_task_handler);
 }
 
-static unsigned char capacitor_discharge_flag = 0, capacitor_charge_flag = 0;
+static unsigned char capacitor_discharge_flag = 0, capacitor_charge_flag = 0, global_error_flag = 0;
 void SelfCheckForm_Update(void) {
     if (power_info.capacitor_voltage > 13.0f && capacitor_discharge_flag != 2 && capacitor_charge_flag != 2) {
         if (capacitor_discharge_flag == 0)
@@ -43,25 +43,26 @@ void SelfCheckForm_Update(void) {
     capacitor_discharge_flag = 2;
     capacitor_charge_flag = 2;
     if (round_counter <= 10)
-        slefcheck_current_sensor(&SelfCheck_TextBox, round_counter);
+        global_error_flag |= slefcheck_current_sensor(&SelfCheck_TextBox, round_counter);
     else if (round_counter <= 20)
-        slefcheck_voltage_sensor(&SelfCheck_TextBox, (round_counter - 10));
+        global_error_flag |= slefcheck_voltage_sensor(&SelfCheck_TextBox, (round_counter - 10));
     else if (round_counter <= 30)
-        slefcheck_passthrough_components(&SelfCheck_TextBox, (round_counter - 20));
+        global_error_flag |= slefcheck_passthrough_components(&SelfCheck_TextBox, (round_counter - 20));
     else if (round_counter <= 40)
-        slefcheck_charge_components(&SelfCheck_TextBox, (round_counter - 30));
+        global_error_flag |= slefcheck_charge_components(&SelfCheck_TextBox, (round_counter - 30));
     else if (round_counter <= 50)
-        slefcheck_boost_components(&SelfCheck_TextBox, (round_counter - 40));
+        global_error_flag |= slefcheck_boost_components(&SelfCheck_TextBox, (round_counter - 40));
     else if (round_counter <= 60)
-        slefcheck_referee_status(&SelfCheck_TextBox, (round_counter - 50));
+        global_error_flag |= slefcheck_referee_status(&SelfCheck_TextBox, (round_counter - 50));
     else if (round_counter <= 80)
-        slefcheck_nuc_status(&SelfCheck_TextBox, (round_counter - 60));
-    else {
+        global_error_flag |= slefcheck_nuc_status(&SelfCheck_TextBox, (round_counter - 60));
+    else if (global_error_flag == 0) {
         fsm_set_mode(normal_mode);
         vTaskResume(fsm_task_handler);
         pid_calculate_enable_flag = 1;
         capacitor_charge_flag = 0;
         capacitor_discharge_flag = 0;
+        global_error_flag = 0;
         round_counter = 0;
         Form_Info_Structure.Form_Index = Main_Form_Index;
         MainForm_Init();

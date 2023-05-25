@@ -39,12 +39,16 @@ if (CMAKE_HOST_SYSTEM_NAME MATCHES "Linux")
             OUTPUT_STRIP_TRAILING_WHITESPACE
     )
     string(REPLACE "\"" "" BUILD_TIME ${BUILD_TIME})
+    execute_process(COMMAND "date" "+%s" OUTPUT_VARIABLE CURRENT_TIME_SECONDS OUTPUT_STRIP_TRAILING_WHITESPACE)
+    set(CURRENT_TIME_SECONDS ${CURRENT_TIME_SECONDS}+28800)
 elseif (CMAKE_HOST_SYSTEM_NAME MATCHES "Windows")
     execute_process(
             COMMAND powershell -Command "Get-Date -Format 'yyyy-MM-dd HH:mm'"
             OUTPUT_VARIABLE BUILD_TIME
             OUTPUT_STRIP_TRAILING_WHITESPACE
     )
+    execute_process(COMMAND "powershell" "Get-Date -UFormat %s" OUTPUT_VARIABLE CURRENT_TIME_SECONDS OUTPUT_STRIP_TRAILING_WHITESPACE)
+    string(REGEX REPLACE "\\..*$" "" CURRENT_TIME_SECONDS ${CURRENT_TIME_SECONDS})
 endif ()
 
 # Get GCC version
@@ -56,6 +60,7 @@ string(REGEX MATCH "[0-9][0-9].[0-9].[0-9]+" GCC_VERSION_MAJOR ${GCC_VERSION})
 message(STATUS "GIT_HASH ${GIT_COMMIT_HASH}${GIT_COMMIT_DIRTY}")
 message(STATUS "BUILD_TIME ${BUILD_TIME}")
 message(STATUS "GCC Version ${GCC_VERSION_MAJOR}")
+message(STATUS "UTC Time ${CURRENT_TIME_SECONDS}")
 
 # Configure a header file to pass the Git commit hash and dirty flag to the source code
 configure_file(

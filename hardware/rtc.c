@@ -4,6 +4,9 @@
 
 #include "rtc.h"
 #include "system.h"
+#include "referee.h"
+#include "utils.h"
+#include "version.h"
 
 RTC_HandleTypeDef hrtc;
 
@@ -28,10 +31,13 @@ void rtc_set_date(unsigned char year, unsigned char month, unsigned char date, u
 }
 
 void rtc_config(void) {
+    static datetime_t current_datetime = {0};
+
+    referee_info.timestamp = 0;
     hrtc.Instance = RTC;
     hrtc.Init.HourFormat = RTC_HOURFORMAT_24;
-    hrtc.Init.AsynchPrediv = 127;
-    hrtc.Init.SynchPrediv = 255;
+    hrtc.Init.AsynchPrediv = 99;
+    hrtc.Init.SynchPrediv = 4999;
     hrtc.Init.OutPut = RTC_OUTPUT_DISABLE;
     hrtc.Init.OutPutPolarity = RTC_OUTPUT_POLARITY_HIGH;
     hrtc.Init.OutPutType = RTC_OUTPUT_TYPE_OPENDRAIN;
@@ -39,6 +45,10 @@ void rtc_config(void) {
     if (HAL_RTC_Init(&hrtc) != HAL_OK)
         error_handler(__FILE__, __LINE__);
     HAL_PWR_EnableBkUpAccess();
+
+    utc_second_to_date_time(CURRENT_TIME_UTC, &current_datetime);
+    rtc_set_date(current_datetime.year - 2000, current_datetime.month, current_datetime.day, 1);
+    rtc_set_time(current_datetime.hour, current_datetime.minute, current_datetime.second);
 }
 
 void HAL_RTC_MspInit(RTC_HandleTypeDef *rtcHandle) {

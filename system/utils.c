@@ -10,8 +10,7 @@ static unsigned char days_in_month[12] = {31, 28, 31, 30, 31, 30,
 void utc_second_to_date_time(uint64_t utc_seconds, datetime_t *datetime) {
     uint64_t days_since_epoch, remainder;
 
-    // Calculate days since epoch (1970-01-01), beijing time
-    utc_seconds = utc_seconds + 8 * 3600;
+    // Calculate days since epoch (1970-01-01)
     days_since_epoch = utc_seconds / 86400;
     remainder = utc_seconds % 86400;
 
