@@ -4,6 +4,8 @@
 
 #include "main.h"
 
+static unsigned char round_counter = 0;
+
 void SelfCheckForm_Init(void) {
     Form_Info_Structure.Widget_Index = 0;
     FirstWidget = NULL;
@@ -11,5 +13,9 @@ void SelfCheckForm_Init(void) {
 }
 
 void SelfCheckForm_Update(void) {
-
+    switch (round_counter) {
+        case 0:break;
+        default:break;
+    }
+    round_counter++;
 }

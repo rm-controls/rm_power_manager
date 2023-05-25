@@ -29,24 +29,8 @@ void GUI_InitCurve(Curve_Struct_t *Curve, Chart_Struct_t *Chart, unsigned short 
 }
 
 void GUI_CurveAppend(Curve_Struct_t *Curve, float Value) {
-    float Current_Amplify;
-    if (Value < 1.0f)
-        Current_Amplify = (float) (Curve->Chart->Y_Pos + Curve->Chart->Height - Curve->Chart->Y_Pos);
-    else if (Value < 10.0f)
-        Current_Amplify =
-            (float) (Curve->Chart->Y_Pos + Curve->Chart->Height - Curve->Chart->Y_Pos) / (Value + 1.0f);
-    else if (Value < 100.0f)
-        Current_Amplify =
-            (float) (Curve->Chart->Y_Pos + Curve->Chart->Height - Curve->Chart->Y_Pos) / (Value + 10.0f);
-    else if (Value < 1000.0f)
-        Current_Amplify =
-            (float) (Curve->Chart->Y_Pos + Curve->Chart->Height - Curve->Chart->Y_Pos) / (Value + 100.0f);
-    else if (Value < 10000.0f)
-        Current_Amplify =
-            (float) (Curve->Chart->Y_Pos + Curve->Chart->Height - Curve->Chart->Y_Pos) / (Value + 1000.0f);
-    else
-        Current_Amplify =
-            (float) (Curve->Chart->Y_Pos + Curve->Chart->Height - Curve->Chart->Y_Pos) / (Value + 10000.0f);
+    float Current_Amplify =
+        (float) (Curve->Chart->Y_Pos + Curve->Chart->Height - Curve->Chart->Y_Pos) / (Value * 1.2f);
 
     if (Current_Amplify < Curve->Chart->MaxAmplification)
         Curve->Chart->MaxAmplification = Current_Amplify;

@@ -103,10 +103,8 @@ void calibrate_referee_config(void) {              // Least square fitting of fi
         unsigned int param_b = HAL_RTCEx_BKUPRead(&hrtc, RTC_BKP_DR2);
         calibrate_params.current_k = *((float *) &param_k);
         calibrate_params.current_b = *((float *) &param_b);
-        HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR0, 0X5A5A5A5A);
-        return;
+        goto check_params_available;
     }
-    HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR0, 0X5A5A5A5A);
 
     if (referee_available() == 1) {
         float x[4], y[4], xy_sum = 0, x_ave, y_ave, x2_sum = 0, x_sum = 0, y_sum = 0;
@@ -139,8 +137,10 @@ void calibrate_referee_config(void) {              // Least square fitting of fi
         calibrate_params.current_b = 0;
     }
 
+    check_params_available:
     if (calibrate_params.current_k > 1.3f || calibrate_params.current_k < 0.9f) {
         calibrate_params.current_k = 1.2f;
         calibrate_params.current_b = 0;
     }
+    HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR0, 0X5A5A5A5A);
 }
