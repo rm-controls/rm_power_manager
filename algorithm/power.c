@@ -6,14 +6,14 @@
 
 #define ADC_COEFFICIENT (3.0f / 4096.0f)
 #define ZERO_ENERGY     (7.5f * 7.5f * 7.5f)        // Set 7.5V as 0%
-#define FULL_ENERGY     (7.5f * 16.0f * 16.0f)      // Set 16V as 100%
+#define FULL_ENERGY     (7.5f * 15.7f * 15.7f)      // Set 15.7V as 100%
 
 volatile unsigned char power_manager_status_buffer[19] =
     {0xA5, 0x0A, 0x00, 0x00, 0xA9, 0x01, 0x83, [7 ... 18]=0x00};
 const unsigned int k_power_manager_status_buffer_length = 19;
 
-calibrate_params_t calibrate_params;
-power_info_t power_info;
+volatile calibrate_params_t calibrate_params;
+volatile power_info_t power_info;
 
 void pack_powerinfo_buffer() {
     unsigned short chassis_power = (unsigned short) (power_info.chassis_power * 100.0f);

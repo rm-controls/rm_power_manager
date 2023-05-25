@@ -5,7 +5,7 @@
 #include "pid.h"
 #include "power.h"
 
-static struct pid_calculate_t {
+static volatile struct pid_calculate_t {
   float kp;
   float ki;
   float kd;
