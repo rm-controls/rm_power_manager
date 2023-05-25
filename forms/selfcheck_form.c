@@ -24,13 +24,13 @@ void SelfCheckForm_Init(void) {
 
 static unsigned char capacitor_discharge_flag = 0, capacitor_charge_flag = 0;
 void SelfCheckForm_Update(void) {
-    if (power_info.capacitor_voltage > 13.0f) {
+    if (power_info.capacitor_voltage > 13.0f && capacitor_discharge_flag != 2 && capacitor_charge_flag != 2) {
         if (capacitor_discharge_flag == 0)
             GUI_TextBoxAppend(&SelfCheck_TextBox, C_BLACK, "Discharging Cap");
         charge_with_boost_switches(0, 1);
         capacitor_discharge_flag = 1;
         return;
-    } else if (power_info.capacitor_voltage < 10.0f) {
+    } else if (power_info.capacitor_voltage < 10.0f && capacitor_discharge_flag != 2 && capacitor_charge_flag != 2) {
         if (capacitor_charge_flag == 0)
             GUI_TextBoxAppend(&SelfCheck_TextBox, C_BLACK, "Charging Cap");
         pid_calculate_enable_flag = 0;
@@ -40,8 +40,8 @@ void SelfCheckForm_Update(void) {
         return;
     }
     round_counter++;
-    capacitor_charge_flag = 0;
-    capacitor_discharge_flag = 0;
+    capacitor_discharge_flag = 2;
+    capacitor_charge_flag = 2;
     if (round_counter <= 10)
         slefcheck_current_sensor(&SelfCheck_TextBox, round_counter);
     else if (round_counter <= 20)

@@ -38,7 +38,8 @@ void gui_task(void *parameters) {
                 gui_draw_circle(123, 5, 4, C_DARK_RED, Filled);
         }
         Form_UpdateEvent();
-        lcd_refresh_once(lcd_frame_buffer);
+        if (lcd_off_flag != 1)
+            lcd_refresh_once(lcd_frame_buffer);
         delayms(100);
     }
 }
