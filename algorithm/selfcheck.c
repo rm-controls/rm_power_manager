@@ -58,7 +58,6 @@ unsigned char slefcheck_voltage_sensor(TextBox_Struct_t *textbox, unsigned char 
     } else if (nuc_status_check_error_flag != 0 &&
                !(power_info.battery_voltage > 22.0f && power_info.battery_voltage < 26.0f)) {
         voltage_sensor_check_error_flag++;
-
     }
 
     if (step == 10 && voltage_sensor_check_error_flag == 0) {
@@ -73,7 +72,39 @@ unsigned char slefcheck_voltage_sensor(TextBox_Struct_t *textbox, unsigned char 
 unsigned char slefcheck_passthrough_components(TextBox_Struct_t *textbox, unsigned char step) {
     /* TODO: 此处主要检测直通的高侧开关是否能够正常控制开启和关断，检测前先关断所有开关
      *       主要判断方法是关闭高侧开关时输出应无电压，开启时输出电压应与输入电压相差小于一个阈值。 */
-    return 0;
+    static unsigned char passthrough_components_check_error_flag = 0;
+    switch (step) {
+        case 1:
+            pid_set_expect(0);
+            close_all_switches();
+            break;
+        case 3:
+            if (power_info.chassis_voltage > 0.2f) {
+                passthrough_components_check_error_flag++;
+            }
+            break;
+        case 5:
+            passthrough_switch_only(0);
+            break;
+        case 7:
+            if ((fabs(power_info.chassis_voltage - power_info.battery_voltage) > 0.1f)) {
+                passthrough_components_check_error_flag++;
+            }
+            break;
+        case 9:
+            if (passthrough_components_check_error_flag == 0) {
+                GUI_TextBoxAppend(textbox, C_DARK_GREEN, "passthrough  pass");
+            } else {
+                GUI_TextBoxAppend(textbox, C_DARK_GREEN, "passthrough  err");
+
+            }
+            break;
+        case 10:
+            close_all_switches();
+            break;
+
+    }
+    return passthrough_components_check_error_flag;
 }
 
 unsigned char slefcheck_charge_components(TextBox_Struct_t *textbox, unsigned char step) {
