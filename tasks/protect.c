@@ -9,7 +9,22 @@ extern volatile unsigned char uart2_receive_buffer1[REFEREE_DMA_BUFFER_SIZE];
 extern volatile unsigned char uart1_receive_buffer1[NUC_DMA_BUFFER_SIZE];
 static unsigned int usart2_receive_timeout_counter = 0;
 
-protect_item_t protect_info = {0};
+static struct protect_item_t {
+  unsigned char over_current_flag;
+  unsigned char under_voltage_flag;
+  unsigned char usart1_error_flag;
+  unsigned char usart2_error_flag;
+} protect_info = {0};
+
+unsigned char protect_get_info(void) {
+    if (protect_info.over_current_flag != 0)
+        return 1;
+    if (protect_info.under_voltage_flag != 0)
+        return 2;
+    if (protect_info.usart2_error_flag != 0)
+        return 3;
+    return 0;
+}
 
 void protect_task(void *parameters) {
     (void) parameters;
