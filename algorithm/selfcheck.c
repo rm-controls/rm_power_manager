@@ -11,10 +11,12 @@
 static char textbox_line_buffer[32] = {0};
 
 extern unsigned short adc_result[6];
+
 unsigned char slefcheck_current_sensor(TextBox_Struct_t *textbox, unsigned char step) {
     static unsigned char current_sensor_check_error_flag = 0;
     switch (step) {
-        case 1: pid_set_expect(0);
+        case 1:
+            pid_set_expect(0);
             close_all_switches();
             break;
         case 3:
@@ -36,7 +38,8 @@ unsigned char slefcheck_current_sensor(TextBox_Struct_t *textbox, unsigned char 
             if (current_sensor_check_error_flag == 0)
                 GUI_TextBoxAppend(textbox, C_DARK_GREEN, "Current sensor pass");
             break;
-        default:break;
+        default:
+            break;
     }
     return current_sensor_check_error_flag;
 }
@@ -45,7 +48,26 @@ unsigned char slefcheck_voltage_sensor(TextBox_Struct_t *textbox, unsigned char 
     /* TODO: 此处可直接检测的传感器只有输入电压传感器，可用其值与裁判系统的做对比。若裁判系统离线，则做电压范围判断；
      *       电容电压传感器是否工作正常，无法直接判断（充电时电压不增加有可能是充电模块的问题）；
      *       输出电压传感器是否工作正常，无法直接判断（输出电压不正常有可能是其它模块的问题）*/
-    return 0;
+    static unsigned char voltage_sensor_check_error_flag = 0;
+    static unsigned char nuc_status_check_error_flag = 0;
+    if (!nuc_available())
+        nuc_status_check_error_flag++;
+    if (nuc_status_check_error_flag == 0 &&
+        fabs(power_info.battery_voltage - referee_info.chassis_voltage) > 0.1f) {
+        voltage_sensor_check_error_flag++;
+    } else if (nuc_status_check_error_flag != 0 &&
+               !(power_info.battery_voltage > 22.0f && power_info.battery_voltage < 26.0f)) {
+        voltage_sensor_check_error_flag++;
+
+    }
+
+    if (step == 10 && voltage_sensor_check_error_flag == 0) {
+        GUI_TextBoxAppend(textbox, C_DARK_GREEN, "voltage sensor pass");
+    } else if (step == 10 && voltage_sensor_check_error_flag != 0) {
+        GUI_TextBoxAppend(textbox, C_DARK_GREEN, "voltage sensor err");
+    }
+
+    return voltage_sensor_check_error_flag;
 }
 
 unsigned char slefcheck_passthrough_components(TextBox_Struct_t *textbox, unsigned char step) {
@@ -63,6 +85,7 @@ unsigned char slefcheck_charge_components(TextBox_Struct_t *textbox, unsigned ch
 unsigned char slefcheck_boost_components(TextBox_Struct_t *textbox, unsigned char step) {
     /* TODO: 此处主要检测升压模块是否正常，检测前先关断所有开关，只开启升压
      *       主要判断方法是输出电压应大于26V，以及输出电流传感器应有微小的值 */
+
     return 0;
 }
 
