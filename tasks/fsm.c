@@ -18,7 +18,8 @@ void fsm_set_mode(mode_target_e target_mode) {
         pid_set_expect(0);
         close_all_switches();
     }
-    main_fsm.mode = target_mode;
+    if (!(power_info.battery_voltage < 18.0f && main_fsm.mode == all_off_mode))
+        main_fsm.mode = target_mode;
 }
 
 mode_target_e fsm_get_mode(void) {
