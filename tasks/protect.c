@@ -7,6 +7,7 @@
 
 extern volatile unsigned char uart2_receive_buffer1[REFEREE_DMA_BUFFER_SIZE];
 extern volatile unsigned char uart1_receive_buffer1[NUC_DMA_BUFFER_SIZE];
+static unsigned int usart2_receive_timeout_counter = 0;
 
 protect_item_t protect_info = {0};
 
@@ -27,13 +28,15 @@ void protect_task(void *parameters) {
         }
 
         /* Over power detect and protect. */
-        if (power_info.chassis_power > 240.0f && protect_info.over_current_flag == 0)
-            protect_info.over_current_flag = 1;
-        else if (power_info.chassis_power > 240.0f && protect_info.over_current_flag == 1) {
-            protect_info.over_current_flag = 2;
-            fsm_set_mode(all_off_mode);
+        if (power_info.chassis_power > 240.0f && protect_info.over_current_flag == 0) {
+            delayms(100);
+            if (power_info.chassis_power > 240.0f) {
+                protect_info.over_current_flag = 1;
+                fsm_set_mode(all_off_mode);
+            }
         }
 
+        /* Under voltage detect and restart. */
         if (power_info.battery_voltage < 18.0f && protect_info.under_voltage_flag == 0) {
             delayms(100);
             if (power_info.battery_voltage < 18.0f) {
@@ -48,8 +51,17 @@ void protect_task(void *parameters) {
             soft_reset();
         }
 
-        if (referee_available() == 0)
+        if (referee_available() == 0) {
             HAL_UART_Receive_DMA(&huart2, (unsigned char *) uart2_receive_buffer1, REFEREE_DMA_BUFFER_SIZE);
+            usart2_receive_timeout_counter++;
+            referee_info.chassis_power_buffer = 5;
+            if (usart2_receive_timeout_counter >= 40)
+                protect_info.usart2_error_flag = 1;
+        } else {
+            usart2_receive_timeout_counter = 0;
+            protect_info.usart2_error_flag = 0;
+        }
+
         if (nuc_available() == 0)
             HAL_UART_Receive_DMA(&huart1, (unsigned char *) uart1_receive_buffer1, NUC_DMA_BUFFER_SIZE);
 

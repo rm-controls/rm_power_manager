@@ -50,7 +50,7 @@ void MainForm_Update(void) {
     GUI_LableSetText(&PChassis_Lable, "%3d.%1dW", (int) power_info.chassis_power,
                      (int) (power_info.chassis_power * 10) - ((int) power_info.chassis_power * 10));
 
-    switch (main_fsm.mode) {
+    switch (fsm_get_mode()) {
         case charge_mode:GUI_LableSetText(&FSM_Mode_Lable, "  FSM Mode: Charge   ");
             break;
         case boost_mode:GUI_LableSetText(&FSM_Mode_Lable, "   FSM Mode: Boost   ");
@@ -59,10 +59,12 @@ void MainForm_Update(void) {
             break;
         case all_off_mode:GUI_LableSetText(&FSM_Mode_Lable, "  FSM Mode: All off  ");
             break;
+        case selftest_mode:GUI_LableSetText(&FSM_Mode_Lable, " FSM Mode: Self Test ");
+            break;
         default:break;
     }
 
-    switch (main_fsm.typology) {
+    switch (fsm_get_typology()) {
         case pass_through:GUI_LableSetText(&Charge_Mode_Lable, "Typology: Passthrough");
             break;
         case charge_with_boost:GUI_LableSetText(&Charge_Mode_Lable, "Typology: ChargeBoost");
@@ -121,17 +123,17 @@ void MainForm_Init(void) {
     FSM_Mode_Lable.X_Pos = 2;
     FSM_Mode_Lable.Y_Pos = 74;
     FSM_Mode_Lable.Color = C_BLACK;
-    FSM_Mode_Lable.Text = "  FSM Mode: Normal   ";
+    FSM_Mode_Lable.Text = "  FSM Mode: XXXXXX   ";
 
     Charge_Mode_Lable.X_Pos = 2;
     Charge_Mode_Lable.Y_Pos = 88;
     Charge_Mode_Lable.Color = C_BLACK;
-    Charge_Mode_Lable.Text = "Typology: Passthrough";
+    Charge_Mode_Lable.Text = "Typology: XXXXXXXXXXX";
 
     Expect_Power_Lable.X_Pos = 2;
     Expect_Power_Lable.Y_Pos = 102;
     Expect_Power_Lable.Color = C_BLACK;
-    Expect_Power_Lable.Text = "  Expect Power: 30W  ";
+    Expect_Power_Lable.Text = "  Expect Power: XXW  ";
 
     Log_Button.X_Pos = 2;
     Log_Button.Y_Pos = 114;

@@ -6,9 +6,12 @@
 #include "fsm.h"
 
 TaskHandle_t fsm_task_handler;
-fsm_t main_fsm;
+static struct fsm_t {
+  mode_target_e mode;
+  typology_e typology;
+} main_fsm;
 
-void fsm_set_mode(mode_target_t target_mode) {
+void fsm_set_mode(mode_target_e target_mode) {
     if (target_mode == all_off_mode || target_mode == selftest_mode) {
         power_info.expect_chassis_power = 0;
         main_fsm.typology = switches_all_off;
@@ -18,9 +21,17 @@ void fsm_set_mode(mode_target_t target_mode) {
     main_fsm.mode = target_mode;
 }
 
+mode_target_e fsm_get_mode(void) {
+    return main_fsm.mode;
+}
+
+typology_e fsm_get_typology(void) {
+    return main_fsm.typology;
+}
+
 void fsm_task(void *parameters) {
     (void) parameters;
-    static enum typology_e last_typology = refresh_typology;
+    static typology_e last_typology = refresh_typology;
     delayms(100);
     main_fsm.mode = all_off_mode;
     main_fsm.typology = switches_all_off;

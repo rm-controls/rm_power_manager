@@ -290,7 +290,7 @@ void error_handler(const char *file, unsigned int line) {
         HAL_RTCEx_BKUPWrite(&hrtc, counter, 0x00000000);
     HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR0, 0X5A5A0001);
     HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR1, line);
-    char *last_space = strrchr(file, '\\');  // 查找最后一个空格
+    char *last_space = strrchr(file, '\\');
     if (last_space == NULL) {
         last_space = strrchr(file, '/');
         if (last_space == NULL)

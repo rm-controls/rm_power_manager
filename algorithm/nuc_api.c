@@ -8,7 +8,7 @@
 static unsigned char nuc_receive_status = 0;
 static unsigned int last_receive_nuc_timestamp = 0;
 void nuc_receive_callback(const unsigned char *buffer) {
-    mode_target_t target_mode = refresh_mode;
+    mode_target_e target_mode = refresh_mode;
     for (unsigned char counter = 0; counter < NUC_DMA_BUFFER_SIZE; ++counter) {
         if (buffer[counter] == 0x01) {
             nuc_receive_status = 1;
