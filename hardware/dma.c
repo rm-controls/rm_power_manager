@@ -52,6 +52,7 @@ void dma_config(void) {
 __attribute__((section(".dma_ram")))volatile unsigned char uart1_transmit_buffer[REFEREE_DMA_BUFFER_SIZE * 2] = {0};
 unsigned char power_manager_status_send_flag = 0, mdma_status_flag = 0, *last_mdma_transfer_buf;
 unsigned int last_mdma_transfer_pos = 0;
+extern const unsigned int k_power_manager_status_buffer_length;
 void mdma_transmit_buffer(const unsigned char *source, int length) {
     if (length != -1 && power_manager_status_send_flag == 1) {
         last_mdma_transfer_buf = (unsigned char *) source;
@@ -64,7 +65,7 @@ void mdma_transmit_buffer(const unsigned char *source, int length) {
                           (unsigned int) uart1_transmit_buffer,
                           length,
                           1);
-    } else {
+    } else if (power_manager_status_send_flag == 0) {
         mdma_status_flag = 0;
         hmdma_referee.State = HAL_MDMA_STATE_READY;
         hmdma_referee.Lock = HAL_UNLOCKED;
@@ -72,6 +73,15 @@ void mdma_transmit_buffer(const unsigned char *source, int length) {
                           (unsigned int) source,
                           (unsigned int) uart1_transmit_buffer,
                           REFEREE_DMA_BUFFER_SIZE,
+                          1);
+    } else if (power_manager_status_send_flag == 2) {
+        mdma_status_flag = 4;
+        hmdma_referee.State = HAL_MDMA_STATE_READY;
+        hmdma_referee.Lock = HAL_UNLOCKED;
+        HAL_MDMA_Start_IT(&hmdma_referee,
+                          (unsigned int) source,
+                          (unsigned int) uart1_transmit_buffer,
+                          k_power_manager_status_buffer_length,
                           1);
     }
     power_manager_status_send_flag = 0;

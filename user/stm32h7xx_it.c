@@ -113,6 +113,11 @@ void HAL_MDMA_BlockTransferCpltCallback(MDMA_HandleTypeDef *hmdma) {
                                   (unsigned char *) uart1_transmit_buffer,
                                   REFEREE_DMA_BUFFER_SIZE + k_power_manager_status_buffer_length);
             break;
+        case 4:
+            HAL_UART_Transmit_DMA(&huart1,
+                                  (unsigned char *) uart1_transmit_buffer,
+                                  k_power_manager_status_buffer_length);
+            break;
         default:break;
     }
 }

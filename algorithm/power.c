@@ -35,7 +35,12 @@ void pack_powerinfo_buffer() {
                                                (unsigned char *) &power_manager_status_buffer[7], 10);
     power_manager_status_buffer[17] = crc16_val & 0x00FF;
     power_manager_status_buffer[18] = (crc16_val >> 8) & 0x00FF;
-    power_manager_status_send_flag = 1;
+    if (protect_get_info() != 3)
+        power_manager_status_send_flag = 1;
+    else {
+        power_manager_status_send_flag = 2;
+        mdma_transmit_buffer((unsigned char *) power_manager_status_buffer, -1);
+    }
 }
 
 int compare_ushort(const void *a, const void *b) {
