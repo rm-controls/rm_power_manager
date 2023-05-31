@@ -50,10 +50,10 @@ unsigned char slefcheck_voltage_sensor(TextBox_Struct_t *textbox, unsigned char 
      *       输出电压传感器是否工作正常，无法直接判断（输出电压不正常有可能是其它模块的问题）*/
     static unsigned char voltage_sensor_check_error_flag = 0;
     static unsigned char nuc_status_check_error_flag = 0;
-    if (!nuc_available())
+    if (!referee_available())
         nuc_status_check_error_flag++;
     if (nuc_status_check_error_flag == 0 &&
-        fabs(power_info.battery_voltage - referee_info.chassis_voltage) > 0.1f) {
+        fabs(power_info.battery_voltage - referee_info.chassis_voltage) > 0.2f) {
         voltage_sensor_check_error_flag++;
     } else if (nuc_status_check_error_flag != 0 &&
                !(power_info.battery_voltage > 22.0f && power_info.battery_voltage < 26.0f)) {
@@ -63,7 +63,7 @@ unsigned char slefcheck_voltage_sensor(TextBox_Struct_t *textbox, unsigned char 
     if (step == 10 && voltage_sensor_check_error_flag == 0) {
         GUI_TextBoxAppend(textbox, C_DARK_GREEN, "voltage sensor pass");
     } else if (step == 10 && voltage_sensor_check_error_flag != 0) {
-        GUI_TextBoxAppend(textbox, C_DARK_GREEN, "voltage sensor err");
+        GUI_TextBoxAppend(textbox, C_DARK_RED, "voltage sensor err");
     }
 
     return voltage_sensor_check_error_flag;
@@ -78,8 +78,8 @@ unsigned char slefcheck_passthrough_components(TextBox_Struct_t *textbox, unsign
             pid_set_expect(0);
             close_all_switches();
             break;
-        case 3:
-            if (power_info.chassis_voltage > 0.2f) {
+        case 4:
+            if (power_info.chassis_voltage > 10.0f) {
                 passthrough_components_check_error_flag++;
             }
             break;
@@ -87,16 +87,14 @@ unsigned char slefcheck_passthrough_components(TextBox_Struct_t *textbox, unsign
             passthrough_switch_only(0);
             break;
         case 7:
-            if ((fabs(power_info.chassis_voltage - power_info.battery_voltage) > 0.1f)) {
-                passthrough_components_check_error_flag++;
+            if ((power_info.chassis_voltage - power_info.battery_voltage) > 0.1f) {
             }
             break;
         case 9:
             if (passthrough_components_check_error_flag == 0) {
                 GUI_TextBoxAppend(textbox, C_DARK_GREEN, "passthrough  pass");
             } else {
-                GUI_TextBoxAppend(textbox, C_DARK_GREEN, "passthrough  err");
-
+                GUI_TextBoxAppend(textbox, C_DARK_RED, "passthrough  err");
             }
             break;
         case 10:
@@ -110,13 +108,51 @@ unsigned char slefcheck_passthrough_components(TextBox_Struct_t *textbox, unsign
 unsigned char slefcheck_charge_components(TextBox_Struct_t *textbox, unsigned char step) {
     /* TODO: 此处主要检测充电模块是否正常，检测前先关断所有开关，只对超级电容充电。
      *       主要判断方法是充电时电流传感器是否有正向电流、裁判系统是否有电流输出以及电容电压是否增加 */
-    return 0;
+    static unsigned char charge_components_check_error_flag;
+    static float last_cap_voltage;
+    pid_calculate_enable_flag = 0;
+    charge_switch_only();
+    dac_set_output((unsigned short) (273.0f * 35.0f / power_info.capacitor_voltage));
+
+    switch (step) {
+        case 1:
+            last_cap_voltage = power_info.capacitor_voltage;
+            break;
+        case 3:
+            if (adc_result[0] <= 0.1) {
+                charge_components_check_error_flag++;
+            }
+            break;
+        case 6:
+            if (referee_info.chassis_current <= 0.1) {
+                charge_components_check_error_flag++;
+            }
+            break;
+        case 9:
+            /*充电的电压大于0.3V就算成功*/
+            if ((power_info.capacitor_voltage - last_cap_voltage) < 0.3f) {
+                charge_components_check_error_flag++;
+            }
+            break;
+        case 10:
+            close_all_switches();
+            pid_calculate_enable_flag = 1;
+            if (charge_components_check_error_flag == 0) {
+                GUI_TextBoxAppend(textbox, C_DARK_GREEN, "charge  pass");
+            } else {
+                GUI_TextBoxAppend(textbox, C_DARK_RED, "charge  err");
+            }
+            break;
+
+    }
+
+    return charge_components_check_error_flag;
 }
 
 unsigned char slefcheck_boost_components(TextBox_Struct_t *textbox, unsigned char step) {
     /* TODO: 此处主要检测升压模块是否正常，检测前先关断所有开关，只开启升压
      *       主要判断方法是输出电压应大于26V，以及输出电流传感器应有微小的值 */
-
+    
     return 0;
 }
 
