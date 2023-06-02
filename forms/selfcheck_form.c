@@ -4,7 +4,6 @@
 
 #include "main.h"
 
-static unsigned int round_counter = 0;
 static TextBox_Struct_t SelfCheck_TextBox;
 
 void SelfCheckForm_Init(void) {
@@ -23,7 +22,7 @@ void SelfCheckForm_Init(void) {
 }
 
 static unsigned char capacitor_discharge_flag = 0, capacitor_charge_flag = 0, global_error_flag = 0;
-static unsigned int capacitor_voltage_control_timeout = 0;
+static unsigned int capacitor_voltage_control_timeout = 0, round_counter = 0;
 void SelfCheckForm_Update(void) {
     if (capacitor_voltage_control_timeout == 400) {
         if (capacitor_discharge_flag == 1)
@@ -54,20 +53,20 @@ void SelfCheckForm_Update(void) {
     round_counter++;
     capacitor_discharge_flag = 2;
     capacitor_charge_flag = 2;
-    if (round_counter <= 10)
+    if (round_counter <= 20)
         global_error_flag |= slefcheck_current_sensor(&SelfCheck_TextBox, round_counter);
-    else if (round_counter <= 20)
-        global_error_flag |= slefcheck_voltage_sensor(&SelfCheck_TextBox, (round_counter - 10));
-    else if (round_counter <= 30)
-        global_error_flag |= slefcheck_passthrough_components(&SelfCheck_TextBox, (round_counter - 20));
     else if (round_counter <= 40)
-        global_error_flag |= slefcheck_charge_components(&SelfCheck_TextBox, (round_counter - 30));
-    else if (round_counter <= 50)
-        global_error_flag |= slefcheck_boost_components(&SelfCheck_TextBox, (round_counter - 40));
+        global_error_flag |= slefcheck_voltage_sensor(&SelfCheck_TextBox, (round_counter - 20));
     else if (round_counter <= 60)
-        global_error_flag |= slefcheck_referee_status(&SelfCheck_TextBox, (round_counter - 50));
+        global_error_flag |= slefcheck_passthrough_components(&SelfCheck_TextBox, (round_counter - 40));
     else if (round_counter <= 80)
-        global_error_flag |= slefcheck_nuc_status(&SelfCheck_TextBox, (round_counter - 60));
+        global_error_flag |= slefcheck_charge_components(&SelfCheck_TextBox, (round_counter - 60));
+    else if (round_counter <= 100)
+        global_error_flag |= slefcheck_boost_components(&SelfCheck_TextBox, (round_counter - 80));
+    else if (round_counter <= 120)
+        global_error_flag |= slefcheck_referee_status(&SelfCheck_TextBox, (round_counter - 100));
+    else if (round_counter <= 160)
+        global_error_flag |= slefcheck_nuc_status(&SelfCheck_TextBox, (round_counter - 120));
     else if (global_error_flag == 0) {
         return_to_main_form:
         fsm_set_mode(normal_mode);
