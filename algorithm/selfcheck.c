@@ -33,7 +33,6 @@ unsigned char slefcheck_current_sensor(TextBox_Struct_t *textbox, unsigned char 
                 current_sensor_check_error_flag++;
             }
             break;
-            /* TODO: 此处可以多加一个步骤，即与裁判系统返回的电流进行比较，进一步验证电流传感器是否正确 */
         case 20:
             if (current_sensor_check_error_flag == 0)
                 GUI_TextBoxAppend(textbox, C_DARK_GREEN, "Current Sensor Pass");
@@ -73,14 +72,16 @@ unsigned char slefcheck_passthrough_components(TextBox_Struct_t *textbox, unsign
         case 12:
             if (power_info.chassis_voltage > SELF_CHECK_VOLTAGE_GND_MAXIMUM) {
                 passthrough_components_check_error_flag++;
-                GUI_TextBoxAppend(textbox, C_DARK_RED, "pass_sw can't close");
+                sprintf(textbox_line_buffer, "pass_sw close %.1fV", power_info.chassis_voltage);
+                GUI_TextBoxAppend(textbox, C_DARK_RED, textbox_line_buffer);
             }
             passthrough_switch_only(0);
             break;
         case 16:
             if ((fabsf(power_info.chassis_voltage - power_info.battery_voltage) > SELF_CHECK_VOLTAGE_DIFF_TOLERANCE)) {
                 passthrough_components_check_error_flag++;
-                GUI_TextBoxAppend(textbox, C_DARK_RED, "pass_sw can't open");
+                sprintf(textbox_line_buffer, "pass_sw open %.1fV", power_info.chassis_voltage);
+                GUI_TextBoxAppend(textbox, C_DARK_RED, textbox_line_buffer);
             }
             break;
         case 20:
@@ -104,21 +105,21 @@ unsigned char slefcheck_charge_components(TextBox_Struct_t *textbox, unsigned ch
             charge_switch_only();
             break;
         case 6:
-            if (power_info.charge_current <= 0.1f) {
+            if (power_info.charge_current <= SELF_CHECK_CHARGE_CURRENT_MINIMUM) {
                 charge_components_check_error_flag++;
                 sprintf(textbox_line_buffer, "cap_cur nan %.2fA", power_info.charge_current);
                 GUI_TextBoxAppend(textbox, C_DARK_RED, textbox_line_buffer);
             }
             break;
         case 12:
-            if (referee_info.chassis_current <= 0.1f) {
+            if (referee_info.chassis_current <= SELF_CHECK_CHARGE_CURRENT_MINIMUM) {
                 charge_components_check_error_flag++;
                 sprintf(textbox_line_buffer, "ref_cur nan %.2fA", referee_info.chassis_current);
                 GUI_TextBoxAppend(textbox, C_DARK_RED, textbox_line_buffer);
             }
             break;
         case 18:current_cap_energy = 7.5f * power_info.capacitor_voltage * power_info.capacitor_voltage;
-            if ((current_cap_energy - last_cap_energy) < 30.0f) {
+            if ((current_cap_energy - last_cap_energy) < SELF_CHECK_CHARGE_ENERGY_MINIMUM) {
                 charge_components_check_error_flag++;
                 sprintf(textbox_line_buffer, "cap_energy %.1fJ", (current_cap_energy - last_cap_energy));
                 GUI_TextBoxAppend(textbox, C_DARK_RED, textbox_line_buffer);
@@ -146,14 +147,16 @@ unsigned char slefcheck_boost_components(TextBox_Struct_t *textbox, unsigned cha
         case 12:
             if (power_info.chassis_voltage > SELF_CHECK_VOLTAGE_GND_MAXIMUM) {
                 boost_components_check_error_flag++;
-                GUI_TextBoxAppend(textbox, C_DARK_RED, "boost_sw can't close");
+                sprintf(textbox_line_buffer, "bst_sw close %.1fV", power_info.chassis_voltage);
+                GUI_TextBoxAppend(textbox, C_DARK_RED, textbox_line_buffer);
             }
             charge_with_boost_switches(0, 0);
             break;
-        case 16:
-            if (power_info.chassis_voltage < 23.5f) {
+        case 19:
+            if (power_info.chassis_voltage < SELF_CHECK_VOLTAGE_BOOST_MINIMUM) {
                 boost_components_check_error_flag++;
-                GUI_TextBoxAppend(textbox, C_DARK_RED, "boost_sw can't open");
+                sprintf(textbox_line_buffer, "bst_sw open %.1fV", power_info.chassis_voltage);
+                GUI_TextBoxAppend(textbox, C_DARK_RED, textbox_line_buffer);
             }
             break;
         case 20:
