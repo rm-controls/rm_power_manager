@@ -53,6 +53,7 @@ void SelfCheckForm_Update(void) {
     round_counter++;
     capacitor_discharge_flag = 2;
     capacitor_charge_flag = 2;
+    capacitor_voltage_control_timeout = 0;
     if (round_counter <= 20)
         global_error_flag |= slefcheck_current_sensor(&SelfCheck_TextBox, round_counter);
     else if (round_counter <= 40)

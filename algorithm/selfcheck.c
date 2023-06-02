@@ -96,23 +96,24 @@ unsigned char slefcheck_passthrough_components(TextBox_Struct_t *textbox, unsign
 unsigned char slefcheck_charge_components(TextBox_Struct_t *textbox, unsigned char step) {
     static unsigned char charge_components_check_error_flag = 0;
     static float last_cap_energy = 0, current_cap_energy = 0;
+    pid_calculate_enable_flag = 0;
+    dac_set_output((unsigned short) (273.0f * 40.0f / power_info.capacitor_voltage));
     switch (step) {
         case 1:charge_components_check_error_flag = 0, last_cap_energy = 0, current_cap_energy = 0;
             last_cap_energy = 7.5f * power_info.capacitor_voltage * power_info.capacitor_voltage;
             charge_switch_only();
-            dac_set_output((unsigned short) (273.0f * 24.0f / power_info.capacitor_voltage));
             break;
         case 6:
             if (power_info.charge_current <= 0.1f) {
                 charge_components_check_error_flag++;
-                sprintf(textbox_line_buffer, "cap_cur nan %.2f", power_info.charge_current);
+                sprintf(textbox_line_buffer, "cap_cur nan %.2fA", power_info.charge_current);
                 GUI_TextBoxAppend(textbox, C_DARK_RED, textbox_line_buffer);
             }
             break;
         case 12:
             if (referee_info.chassis_current <= 0.1f) {
                 charge_components_check_error_flag++;
-                sprintf(textbox_line_buffer, "ref_cur nan %.2f", referee_info.chassis_current);
+                sprintf(textbox_line_buffer, "ref_cur nan %.2fA", referee_info.chassis_current);
                 GUI_TextBoxAppend(textbox, C_DARK_RED, textbox_line_buffer);
             }
             break;
@@ -150,7 +151,7 @@ unsigned char slefcheck_boost_components(TextBox_Struct_t *textbox, unsigned cha
             charge_with_boost_switches(0, 0);
             break;
         case 16:
-            if (power_info.chassis_voltage >= 24.0f) {
+            if (power_info.chassis_voltage >= 23.0f) {
                 boost_components_check_error_flag++;
                 GUI_TextBoxAppend(textbox, C_DARK_RED, "boost_sw can't open");
             }
