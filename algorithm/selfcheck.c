@@ -151,7 +151,7 @@ unsigned char slefcheck_boost_components(TextBox_Struct_t *textbox, unsigned cha
             charge_with_boost_switches(0, 0);
             break;
         case 16:
-            if (power_info.chassis_voltage >= 23.0f) {
+            if (power_info.chassis_voltage < 23.5f) {
                 boost_components_check_error_flag++;
                 GUI_TextBoxAppend(textbox, C_DARK_RED, "boost_sw can't open");
             }
