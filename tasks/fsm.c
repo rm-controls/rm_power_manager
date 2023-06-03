@@ -61,10 +61,12 @@ void fsm_task(void *parameters) {
         }
 
         if (main_fsm.typology == charge_with_boost) {
-            if (power_info.capacitor_voltage >= 15.7f)
+            if (power_info.capacitor_voltage >= 15.7f || referee_info.chassis_power_buffer < 2)
                 pid_set_expect(0);
             else {
-                if (referee_info.chassis_power_buffer < 10)
+                if (referee_info.chassis_power_buffer < 5)
+                    pid_set_expect((float) (referee_info.chassis_power_limit) * 0.6f);
+                else if (referee_info.chassis_power_buffer < 10)
                     pid_set_expect((float) (referee_info.chassis_power_limit - 5));
                 else if (referee_info.chassis_power_buffer < 20)
                     pid_set_expect((float) (referee_info.chassis_power_limit));
@@ -72,7 +74,8 @@ void fsm_task(void *parameters) {
                     pid_set_expect((float) (referee_info.chassis_power_limit + 5));
             }
             charge_with_boost_switches(last_typology == pass_through,
-                                       power_info.capacitor_voltage >= 15.7f);
+                                       power_info.capacitor_voltage >= 15.7f ||
+                                           referee_info.chassis_power_buffer < 2);
         } else if (last_typology != main_fsm.typology) {
             switch (main_fsm.typology) {
                 case pass_through:pid_set_expect(0);
