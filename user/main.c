@@ -5,7 +5,6 @@ void initialize_task(void *parameters) {
     BaseType_t xReturned;
     rtc_config();
     filter_config();
-    gpio_config();
     dma_config();
     ramecc_config();
     usart1_config();
@@ -58,6 +57,7 @@ void initialize_task(void *parameters) {
 
 int main(void) {
     system_config();
+    gpio_config();
 
     BaseType_t xReturned = xTaskCreate((TaskFunction_t) initialize_task,
                                        (const char *) "InitTask",

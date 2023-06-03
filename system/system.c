@@ -21,12 +21,9 @@ HAL_StatusTypeDef HAL_InitTick(uint32_t TickPriority) {
     uint32_t pFLatency;
 
     TickPriority = TIM6_GLOBAL_PRIORITY;
-    if (TickPriority < (1UL << __NVIC_PRIO_BITS)) {
-        HAL_NVIC_SetPriority(TIM6_DAC_IRQn, TickPriority, 0U);
-        HAL_NVIC_EnableIRQ(TIM6_DAC_IRQn);
-        uwTickPrio = TickPriority;
-    } else
-        return HAL_ERROR;
+    HAL_NVIC_SetPriority(TIM6_DAC_IRQn, TickPriority, 0U);
+    HAL_NVIC_EnableIRQ(TIM6_DAC_IRQn);
+    uwTickPrio = TickPriority;
 
     __HAL_RCC_TIM6_CLK_ENABLE();
 
@@ -253,7 +250,7 @@ void vApplicationStackOverflowHook(TaskHandle_t xTask, char *pcTaskName) {
         HAL_RTCEx_BKUPWrite(&hrtc, counter, 0x00000000);
     HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR0, 0X5A5A0003);
     for (unsigned int counter = 1; counter < (strlen(pcTaskName) + 1); counter++)
-        HAL_RTCEx_BKUPWrite(&hrtc, counter, *pcTaskName++);
+        HAL_RTCEx_BKUPWrite(&hrtc, counter, pcTaskName[counter - 1]);
     soft_reset();
 }
 
@@ -322,21 +319,20 @@ void error_check(void) {
             error_info_str[(counter - 1) * 4 + 1] = ((current_reg >> 16) & 0x000000FF);
             error_info_str[(counter - 1) * 4 + 2] = ((current_reg >> 8) & 0x000000FF);
             error_info_str[(counter - 1) * 4 + 3] = (current_reg & 0x000000FF);
-            usart1_send_error_package(0x03, 32, error_info_str);
         }
+        usart1_send_error_package(0x03, 32, error_info_str);
     } else if (HAL_RTCEx_BKUPRead(&hrtc, RTC_BKP_DR0) == 0X5A5A0003) {
         for (unsigned char counter = 1; counter < 32; counter++)
             error_info_str[counter - 1] = HAL_RTCEx_BKUPRead(&hrtc, counter) & 0x000000FF;
         usart1_send_error_package(0x04, 32, error_info_str);
     } else {
-        if (reset_reason != power_on_reset && reset_reason != rst_pin_reset &&
-            HAL_RTCEx_BKUPRead(&hrtc, RTC_BKP_DR0) != 0X83838383) {
+        if (reset_reason == software_reset && HAL_RTCEx_BKUPRead(&hrtc, RTC_BKP_DR0) == 0X83838383)
+            HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR0, 0X83838384);
+        else {
             error_info_str[0] = reset_reason;
             error_info_str[1] = 0;
             usart1_send_error_package(0x05, 2, error_info_str);
         }
     }
-    if ((reset_reason == power_on_reset || reset_reason == rst_pin_reset)
-        && HAL_RTCEx_BKUPRead(&hrtc, RTC_BKP_DR0) == 0X83838383)
-        HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR0, 0X83838384);
+
 }

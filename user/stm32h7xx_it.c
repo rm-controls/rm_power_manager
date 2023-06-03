@@ -11,10 +11,10 @@ extern TIM_HandleTypeDef htim6;
 extern EventGroupHandle_t interrupt_event;
 
 void NMI_Handler(void) { SYSFAULT_HANDLE(); }
-void HardFault_Handler(void) { error_handler(__FILE__, __LINE__); }
-void MemManage_Handler(void) { error_handler(__FILE__, __LINE__); }
-void BusFault_Handler(void) { error_handler(__FILE__, __LINE__); }
-void UsageFault_Handler(void) { error_handler(__FILE__, __LINE__); }
+void HardFault_Handler(void) { SYSFAULT_HANDLE(); }
+void MemManage_Handler(void) { SYSFAULT_HANDLE(); }
+void BusFault_Handler(void) { SYSFAULT_HANDLE(); }
+void UsageFault_Handler(void) { SYSFAULT_HANDLE(); }
 
 void DMA1_Stream0_IRQHandler(void) { HAL_DMA_IRQHandler(&hdma_usart2_rx); }
 void DMA1_Stream1_IRQHandler(void) { HAL_DMA_IRQHandler(&hdma_adc1); }
