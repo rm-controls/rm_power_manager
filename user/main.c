@@ -21,7 +21,7 @@ void initialize_task(void *parameters) {
                             (configSTACK_DEPTH_TYPE) 2048,
                             (void *) NULL,
                             (UBaseType_t) 1,
-                            (TaskHandle_t *) &fsm_task_handler);
+                            (TaskHandle_t *) NULL);
     if (xReturned != pdPASS)
         error_handler(__FILE__, __LINE__);
 

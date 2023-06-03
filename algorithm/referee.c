@@ -157,7 +157,10 @@ static void referee_process_struct(referee_package_t *package) {
             referee_info.timestamp = game_status.time_stamp;
             break;
         case k_game_robot_status_cmd:memcpy(&game_robot_status, package->data, k_game_robot_status_size);
-            referee_info.chassis_power_limit = game_robot_status.chassis_power_limit;
+            if (game_robot_status.chassis_power_limit <= 240)
+                referee_info.chassis_power_limit = game_robot_status.chassis_power_limit;
+            else
+                referee_info.chassis_power_limit = 80;
             break;
         case k_power_heat_data_cmd:memcpy(&power_heat_data, package->data, k_power_heat_data_size);
             referee_info.chassis_power = power_heat_data.chassis_power;
