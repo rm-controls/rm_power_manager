@@ -26,7 +26,7 @@ void initialize_task(void *parameters) {
         if (xReturned != pdPASS)
             error_handler(__FILE__, __LINE__);
     } else {
-
+        iic_config();
     }
 
     xReturned = xTaskCreate((TaskFunction_t) fsm_task,
