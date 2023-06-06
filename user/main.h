@@ -1,5 +1,5 @@
-#ifndef POWER_MANAGER_SYSTEM_USER_MAIN_H_
-#define POWER_MANAGER_SYSTEM_USER_MAIN_H_
+#ifndef POWER_MANAGER_USER_MAIN_H_
+#define POWER_MANAGER_USER_MAIN_H_
 
 /////////////////////////// System ///////////////////////////
 #include "stm32h7xx_hal.h"
@@ -63,4 +63,4 @@
 #include "logview_form.h"
 #include "selfcheck_form.h"
 
-#endif /* POWER_MANAGER_SYSTEM_USER_MAIN_H_ */
+#endif  // POWER_MANAGER_USER_MAIN_H_

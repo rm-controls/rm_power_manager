@@ -98,7 +98,7 @@ unsigned char slefcheck_charge_components(TextBox_Struct_t *textbox, unsigned ch
     static unsigned char charge_components_check_error_flag = 0;
     static float last_cap_energy = 0, current_cap_energy = 0;
     pid_calculate_enable_flag = 0;
-    dac_set_output((unsigned short) (273.0f * 40.0f / power_info.capacitor_voltage));
+    dac_set_output((unsigned short) (273.0f * SELF_CHECK_CHARGE_POWER / power_info.capacitor_voltage));
     switch (step) {
         case 1:charge_components_check_error_flag = 0, last_cap_energy = 0, current_cap_energy = 0;
             last_cap_energy = 7.5f * power_info.capacitor_voltage * power_info.capacitor_voltage;
@@ -138,7 +138,8 @@ unsigned char slefcheck_charge_components(TextBox_Struct_t *textbox, unsigned ch
 
 unsigned char slefcheck_boost_components(TextBox_Struct_t *textbox, unsigned char step) {
     static unsigned char boost_components_check_error_flag = 0;
-    dac_set_output((unsigned short) (273.0f * 40.0f / power_info.capacitor_voltage));
+    if (step >= 12)
+        dac_set_output((unsigned short) (273.0f * SELF_CHECK_CHARGE_POWER / power_info.capacitor_voltage));
     switch (step) {
         case 1:close_all_switches();
             dac_set_output(0);

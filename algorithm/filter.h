@@ -16,4 +16,4 @@ extern lowpass_filter_t chassis_power_filter, charge_power_filter, capacitor_vol
 void filter_config(void);
 float get_filter_result(lowpass_filter_t *filter, float value);
 
-#endif //POWER_MANAGER_ALGORITHM_FILTER_H_
+#endif  // POWER_MANAGER_ALGORITHM_FILTER_H_

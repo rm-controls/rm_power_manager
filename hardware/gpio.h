@@ -42,6 +42,7 @@
 #define BOOST_EN_Pin GPIO_PIN_10
 #define BOOST_EN_GPIO_Port GPIOE
 
+unsigned char gpio_use_lcd(void);
 void gpio_config(void);
 
 #endif /* POWER_MANAGER_HARDWARE_GPIO_H_ */

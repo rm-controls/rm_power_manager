@@ -2,8 +2,8 @@
 // Created by Lao·Zhu on 2021/5/1.
 //
 
-#ifndef PROGRAM_FORMS_FORM_LOGIC_H_
-#define PROGRAM_FORMS_FORM_LOGIC_H_
+#ifndef POWER_MANAGER_FORMS_FORM_LOGIC_H_
+#define POWER_MANAGER_FORMS_FORM_LOGIC_H_
 
 typedef enum {
   Main_Form_Index = 0,
@@ -45,4 +45,4 @@ extern unsigned char lcd_off_flag;
 
 void Form_UpdateEvent(void);
 
-#endif //PROGRAM_FORMS_FORM_LOGIC_H_
+#endif  // POWER_MANAGER_FORMS_FORM_LOGIC_H_

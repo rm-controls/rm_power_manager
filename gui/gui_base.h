@@ -2,8 +2,8 @@
 // Created by Lao·Zhu on 2021/2/26.
 //
 
-#ifndef POWER_MANAGER_GUI_GUI_H_
-#define POWER_MANAGER_GUI_GUI_H_
+#ifndef POWER_MANAGER_GUI_GUI_BASE_H_
+#define POWER_MANAGER_GUI_GUI_BASE_H_
 
 #include "color.h"
 
@@ -70,4 +70,4 @@ void gui_draw_triangle(unsigned char x1,
                        unsigned short color,
                        Filled_Status_e filled);
 
-#endif
+#endif  // POWER_MANAGER_GUI_GUI_BASE_H_

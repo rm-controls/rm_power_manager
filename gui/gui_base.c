@@ -288,6 +288,7 @@ void gui_draw_round_rectangle(unsigned char x,
             gui_draw_rectangle(x, y, width, height, color, UnFilled);
     }
 }
+
 void gui_draw_triangle(unsigned char x1,
                        unsigned char y1,
                        unsigned char x2,

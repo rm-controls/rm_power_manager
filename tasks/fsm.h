@@ -28,4 +28,4 @@ mode_target_e fsm_get_mode(void);
 typology_e fsm_get_typology(void);
 void fsm_task(void *parameters);
 
-#endif //POWER_MANAGER_TASKS_FSM_H_
+#endif  // POWER_MANAGER_TASKS_FSM_H_

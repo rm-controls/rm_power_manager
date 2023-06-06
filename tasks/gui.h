@@ -7,4 +7,4 @@
 
 void gui_task(void *parameters);
 
-#endif //POWER_MANAGER_TASKS_GUI_H_
+#endif  // POWER_MANAGER_TASKS_GUI_H_

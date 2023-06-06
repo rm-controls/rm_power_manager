@@ -1,11 +1,11 @@
 #include "gpio.h"
 
-/** Configure pins
-     PH0-OSC_IN (PH0)   ------> RCC_OSC_IN
-     PH1-OSC_OUT (PH1)   ------> RCC_OSC_OUT
-     PA13 (JTMS/SWDIO)   ------> DEBUG_JTMS-SWDIO
-     PA14 (JTCK/SWCLK)   ------> DEBUG_JTCK-SWCLK
-*/
+unsigned char gpio_use_lcd(void) {
+    if (HAL_GPIO_ReadPin(UP_KEY_PORT, UP_KEY_PIN) == GPIO_PIN_RESET &&
+        HAL_GPIO_ReadPin(DOWN_KEY_PORT, DOWN_KEY_PIN) == GPIO_PIN_RESET)
+        return 0;
+    return 1;
+}
 
 void gpio_config(void) {
     GPIO_InitTypeDef GPIO_Structure;
