@@ -27,6 +27,15 @@ void initialize_task(void *parameters) {
             error_handler(__FILE__, __LINE__);
     } else {
         iic_config();
+        tm1650_config();
+        xReturned = xTaskCreate((TaskFunction_t) digital_tube_task,
+                                (const char *) "TubeTask",
+                                (configSTACK_DEPTH_TYPE) 512,
+                                (void *) NULL,
+                                (UBaseType_t) 1,
+                                (TaskHandle_t *) NULL);
+        if (xReturned != pdPASS)
+            error_handler(__FILE__, __LINE__);
     }
 
     xReturned = xTaskCreate((TaskFunction_t) fsm_task,

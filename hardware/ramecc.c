@@ -36,7 +36,7 @@ void ramecc_config(void) {
         error_handler(__FILE__, __LINE__);
 
     hramecc2_m1.Instance = RAMECC2_Monitor1;
-    if (HAL_RAMECC_Init(&hramecc2_m1) != HAL_OK
+    if (HAL_RAMECC_Init(&hramecc2_m1) != HAL_OK)
         error_handler(__FILE__, __LINE__);
 
     hramecc2_m2.Instance = RAMECC2_Monitor2;

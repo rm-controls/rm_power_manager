@@ -53,6 +53,7 @@
 #include "fsm.h"
 #include "protect.h"
 #include "gui.h"
+#include "digital_tube.h"
 
 /////////////////////////// Forms ///////////////////////////
 #include "form_logic.h"
@@ -63,5 +64,8 @@
 #include "sysinfo_form.h"
 #include "logview_form.h"
 #include "selfcheck_form.h"
+
+/////////////////////////// Device ///////////////////////////
+#include "tm1650.h"
 
 #endif  // POWER_MANAGER_USER_MAIN_H_
