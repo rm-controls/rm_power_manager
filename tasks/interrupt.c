@@ -21,7 +21,7 @@ __attribute__((section(".dma_ram")))volatile unsigned char uart1_receive_buffer1
 __attribute__((section(".dma_ram")))volatile unsigned char uart1_receive_buffer2[NUC_DMA_BUFFER_SIZE] = {0};
 static unsigned char uart1_receive_buffer = 1;
 
-void interrupt_handle_task(void *parameters) {
+_Noreturn void interrupt_handle_task(void *parameters) {
     (void) parameters;
     interrupt_event = xEventGroupCreate();
     HAL_UART_Receive_DMA(&huart2, (unsigned char *) uart2_receive_buffer1, REFEREE_DMA_BUFFER_SIZE);

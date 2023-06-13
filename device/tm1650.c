@@ -4,6 +4,7 @@
 
 #include "tm1650.h"
 #include "iic.h"
+#include "gpio.h"
 
 static const unsigned char digital_tube_segment_cmd[4] = {0x68, 0x6A, 0x6C, 0x6E};
 static const unsigned char digital_tube_number_data[32] =
@@ -17,24 +18,34 @@ void tm1650_config(void) {
     tm1650_write_data(0, clear_tube_number);
 }
 
+static unsigned char last_display_status = 0x00;
 void tm1650_write_data(unsigned char disp_on, const unsigned char *data) {
-    iic_start();
-    iic_send_byte(0x48);
-    if (iic_wait_ack())
-        return;
-    iic_send_byte((disp_on & 0x01));
-    if (iic_wait_ack())
-        return;
-    iic_stop();
-
-    for (unsigned char counter = 0; counter < 4; ++counter) {
+    if ((disp_on & 0x01) == 0x00)
+        HAL_GPIO_WritePin(LCD_PWR_Port, LCD_PWR_Pin, GPIO_PIN_SET);
+    else {
+        if (last_display_status == 0x00) {
+            HAL_GPIO_WritePin(LCD_PWR_Port, LCD_PWR_Pin, GPIO_PIN_RESET);
+            delayms(100);
+        }
         iic_start();
-        iic_send_byte(digital_tube_segment_cmd[counter]);
+        iic_send_byte(0x48);
         if (iic_wait_ack())
             return;
-        iic_send_byte(digital_tube_number_data[data[counter]]);
+        iic_send_byte((disp_on & 0x01));
         if (iic_wait_ack())
             return;
         iic_stop();
+
+        for (unsigned char counter = 0; counter < 4; ++counter) {
+            iic_start();
+            iic_send_byte(digital_tube_segment_cmd[counter]);
+            if (iic_wait_ack())
+                return;
+            iic_send_byte(digital_tube_number_data[data[counter]]);
+            if (iic_wait_ack())
+                return;
+            iic_stop();
+        }
     }
+    last_display_status = (disp_on & 0x01);
 }

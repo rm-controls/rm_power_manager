@@ -5,6 +5,6 @@
 #ifndef POWER_MANAGER_TASKS_DIGITAL_TUBE_H_
 #define POWER_MANAGER_TASKS_DIGITAL_TUBE_H_
 
-void digital_tube_task(void *parameters);
+_Noreturn void digital_tube_task(void *parameters);
 
 #endif //POWER_MANAGER_TASKS_DIGITAL_TUBE_H_

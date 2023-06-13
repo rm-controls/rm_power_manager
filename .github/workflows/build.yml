@@ -2,7 +2,7 @@ name: Compile Firmware
 
 on:
   schedule:
-    - cron: '0 0 1,11,20,29 * *'
+    - cron: '0 0 */3 * *'
   push:
     branches:
       - master

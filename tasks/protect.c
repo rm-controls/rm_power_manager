@@ -26,7 +26,7 @@ unsigned char protect_get_info(void) {
     return 0;
 }
 
-void protect_task(void *parameters) {
+_Noreturn void protect_task(void *parameters) {
     (void) parameters;
     static unsigned int cycle_counter = 0;
     while (1) {

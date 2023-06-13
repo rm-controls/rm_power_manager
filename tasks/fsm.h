@@ -26,6 +26,6 @@ extern TaskHandle_t fsm_task_handler;
 void fsm_set_mode(mode_target_e target_mode);
 mode_target_e fsm_get_mode(void);
 typology_e fsm_get_typology(void);
-void fsm_task(void *parameters);
+_Noreturn void fsm_task(void *parameters);
 
 #endif  // POWER_MANAGER_TASKS_FSM_H_

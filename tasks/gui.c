@@ -21,7 +21,7 @@ static void form_config(void) {
     MainForm_Init();
 }
 
-void gui_task(void *parameters) {
+_Noreturn void gui_task(void *parameters) {
     (void) parameters;
     static unsigned int running_timer_counter = 0;
     form_config();
