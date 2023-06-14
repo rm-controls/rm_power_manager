@@ -18,6 +18,18 @@ void gpio_config(void) {
     __HAL_RCC_GPIOE_CLK_ENABLE();
     __HAL_RCC_GPIOH_CLK_ENABLE();
 
+    HAL_GPIO_WritePin(SPI_FLASH_CS_Port, SPI_FLASH_CS_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(BOOST_EN_GPIO_Port, BOOST_EN_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(EN_NMOS_GPIO_Port, EN_NMOS_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(LCD_PWR_Port, LCD_PWR_Pin, GPIO_PIN_SET);
+
+    GPIO_Structure.Pin = SPI_FLASH_CS_Pin;
+    GPIO_Structure.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+    GPIO_Structure.Mode = GPIO_MODE_OUTPUT_PP;
+    GPIO_Structure.Pull = GPIO_PULLUP;
+    HAL_GPIO_Init(SPI_FLASH_CS_Port, &GPIO_Structure);
+
     GPIO_Structure.Pin = LCD_PWR_Pin;
     GPIO_Structure.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
     GPIO_Structure.Mode = GPIO_MODE_OUTPUT_PP;
@@ -83,9 +95,4 @@ void gpio_config(void) {
     GPIO_Structure.Mode = GPIO_MODE_OUTPUT_PP;
     GPIO_Structure.Pull = GPIO_PULLUP;
     HAL_GPIO_Init(EN_NMOS_GPIO_Port, &GPIO_Structure);
-
-    HAL_GPIO_WritePin(CHG_EN_GPIO_Port, CHG_EN_Pin, GPIO_PIN_SET);
-    HAL_GPIO_WritePin(BOOST_EN_GPIO_Port, BOOST_EN_Pin, GPIO_PIN_SET);
-    HAL_GPIO_WritePin(EN_NMOS_GPIO_Port, EN_NMOS_Pin, GPIO_PIN_SET);
-    HAL_GPIO_WritePin(LCD_PWR_Port, LCD_PWR_Pin, GPIO_PIN_SET);
 }

@@ -32,6 +32,7 @@
 #define LCD_A0_Pin GPIO_PIN_1
 #define LCD_A0_Port GPIOD
 
+
 //////////////////// Others ////////////////////
 #define CHG_EN_Pin GPIO_PIN_11
 #define CHG_EN_GPIO_Port GPIOE
@@ -41,6 +42,9 @@
 
 #define BOOST_EN_Pin GPIO_PIN_10
 #define BOOST_EN_GPIO_Port GPIOE
+
+#define SPI_FLASH_CS_Pin GPIO_PIN_6
+#define SPI_FLASH_CS_Port GPIOB
 
 unsigned char gpio_use_lcd(void);
 void gpio_config(void);

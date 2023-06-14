@@ -12,6 +12,7 @@ static void form_config(void) {
     gui_printf(22, 74, C_DARK_GREEN, C_WHITE, "Calibrating...");
     HAL_IWDG_Refresh(&hiwdg1);
     gui_config();
+    spi_setspeed(&hspi3, SPI_BAUDRATEPRESCALER_4);
     lcd_refresh_once(lcd_frame_buffer);
     for (int counter = 0; counter < 20; ++counter) {
         HAL_IWDG_Refresh(&hiwdg1);
