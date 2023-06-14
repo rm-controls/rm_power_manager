@@ -67,5 +67,6 @@
 
 /////////////////////////// Device ///////////////////////////
 #include "tm1650.h"
+#include "w25qxx.h"
 
 #endif  // POWER_MANAGER_USER_MAIN_H_

@@ -12,11 +12,13 @@ void initialize_task(void *parameters) {
     error_check();
     adc_config();
     dac_config();
+    spi1_config();
+    spi3_config();
+    w25qxx_config();
     calibrate_params_config();
     iwdg_config();
 
     if (gpio_use_lcd() == 1) {
-        spi3_config();
         xReturned = xTaskCreate((TaskFunction_t) gui_task,
                                 (const char *) "GUITask",
                                 (configSTACK_DEPTH_TYPE) 2048,
@@ -26,11 +28,9 @@ void initialize_task(void *parameters) {
         if (xReturned != pdPASS)
             error_handler(__FILE__, __LINE__);
     } else {
-        iic_config();
-        tm1650_config();
         xReturned = xTaskCreate((TaskFunction_t) digital_tube_task,
                                 (const char *) "TubeTask",
-                                (configSTACK_DEPTH_TYPE) 512,
+                                (configSTACK_DEPTH_TYPE) 2048,
                                 (void *) NULL,
                                 (UBaseType_t) 1,
                                 (TaskHandle_t *) NULL);
