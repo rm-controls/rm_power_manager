@@ -27,7 +27,7 @@
 #include "logic.h"
 #include "rtc.h"
 #include "key.h"
-
+#include "tim.h"
 /////////////////////////// GUI ///////////////////////////
 #include "lcd.h"
 #include "gui_base.h"

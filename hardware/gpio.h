@@ -42,6 +42,10 @@
 #define BOOST_EN_Pin GPIO_PIN_10
 #define BOOST_EN_GPIO_Port GPIOE
 
+#define HARDWARE_IWD_Pin GPIO_PIN_13
+#define HARDWARE_IWD_GPIO_Port GPIOD
+
+
 void gpio_config(void);
 
 #endif /* POWER_MANAGER_HARDWARE_GPIO_H_ */

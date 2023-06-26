@@ -15,6 +15,7 @@ void initialize_task(void *parameters) {
     spi3_config();
     calibrate_params_config();
     iwdg_config();
+    htim7_config();
 
     xReturned = xTaskCreate((TaskFunction_t) gui_task,
                             (const char *) "GUITask",
@@ -67,6 +68,9 @@ int main(void) {
                                        (TaskHandle_t *) NULL);
     if (xReturned != pdPASS)
         error_handler(__FILE__, __LINE__);
+
+    //在使用tps3823的版本中，需要多使用一个IO口来辅助ldo的开启
+    HAL_GPIO_WritePin(HARDWARE_IWD_GPIO_Port, GPIO_PIN_10, GPIO_PIN_RESET);
 
     freertos_is_running();
     vTaskStartScheduler();
