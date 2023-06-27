@@ -4,11 +4,12 @@ SPI_HandleTypeDef hspi1;
 SPI_HandleTypeDef hspi3;
 DMA_HandleTypeDef hdma_spi3_tx;
 
-void spi_setspeed(SPI_HandleTypeDef *hspi, unsigned int SPI_BaudRatePrescaler) {
-    assert_param(IS_SPI_BAUDRATE_PRESCALER(SPI_BaudRatePrescaler));
+void spi_setspeed(SPI_HandleTypeDef *hspi, unsigned int spi_prescaler) {
+    assert_param(IS_SPI_BAUDRATE_PRESCALER(spi_prescaler));
     __HAL_SPI_DISABLE(hspi);
-    hspi->Instance->CR1 &= 0XFFC7;
-    hspi->Instance->CR1 |= SPI_BaudRatePrescaler;
+    unsigned int cfg1_value = hspi->Instance->CFG1 & 0x8FFFFFFF;
+    cfg1_value = cfg1_value | spi_prescaler;
+    hspi->Instance->CFG1 = cfg1_value;
     __HAL_SPI_ENABLE(hspi);
 }
 

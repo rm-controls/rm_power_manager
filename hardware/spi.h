@@ -9,7 +9,7 @@ extern SPI_HandleTypeDef hspi3;
 
 void spi1_config(void);
 void spi3_config(void);
-void spi_setspeed(SPI_HandleTypeDef *hspi, unsigned int SPI_BaudRatePrescaler);
+void spi_setspeed(SPI_HandleTypeDef *hspi, unsigned int spi_prescaler);
 
 #endif /* POWER_MANAGER_HARDWARE_SPI_H_ */
 
