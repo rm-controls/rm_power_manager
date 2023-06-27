@@ -29,4 +29,4 @@ typedef struct {
 void GUI_TextBoxAppend(TextBox_Struct_t *textbox, unsigned short color, char *str);
 void GUI_InitTextBox(TextBox_Struct_t *textbox);
 
-#endif //POWER_MANAGER_GUI_GUI_TEXTBOX_H_
+#endif  // POWER_MANAGER_GUI_GUI_TEXTBOX_H_

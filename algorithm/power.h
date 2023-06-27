@@ -32,4 +32,4 @@ void update_powerinfo(const unsigned short *adc_result);
 void calibrate_params_config(void);
 void calibrate_referee_config(void);
 
-#endif //POWER_MANAGER_ALGORITHM_POWER_H_
+#endif  // POWER_MANAGER_ALGORITHM_POWER_H_

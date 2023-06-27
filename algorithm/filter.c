@@ -13,6 +13,7 @@ void filter_config(void) {
     float RC = 1.0f / (2.0f * 3.14159265359f * FILTER_CUTOFF_FREQ);
     float alpha = 1.0f / (1.0f + RC * FILTER_SAMPLE_RATE);
     float beta = 1.0f - alpha;
+
     chassis_power_filter.prev_value = 0;
     chassis_power_filter.alpha = alpha;
     chassis_power_filter.beta = beta;

@@ -1,5 +1,5 @@
-#ifndef POWER_MANAGER_SYSTEM_USER_MAIN_H_
-#define POWER_MANAGER_SYSTEM_USER_MAIN_H_
+#ifndef POWER_MANAGER_USER_MAIN_H_
+#define POWER_MANAGER_USER_MAIN_H_
 
 /////////////////////////// System ///////////////////////////
 #include "stm32h7xx_hal.h"
@@ -28,6 +28,8 @@
 #include "rtc.h"
 #include "key.h"
 #include "tim.h"
+#include "iic.h"
+
 /////////////////////////// GUI ///////////////////////////
 #include "lcd.h"
 #include "gui_base.h"
@@ -52,6 +54,7 @@
 #include "fsm.h"
 #include "protect.h"
 #include "gui.h"
+#include "digital_tube.h"
 
 /////////////////////////// Forms ///////////////////////////
 #include "form_logic.h"
@@ -63,4 +66,8 @@
 #include "logview_form.h"
 #include "selfcheck_form.h"
 
-#endif /* POWER_MANAGER_SYSTEM_USER_MAIN_H_ */
+/////////////////////////// Device ///////////////////////////
+#include "tm1650.h"
+#include "w25qxx.h"
+
+#endif  // POWER_MANAGER_USER_MAIN_H_

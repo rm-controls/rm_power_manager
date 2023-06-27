@@ -14,4 +14,4 @@
 #define C_BLACK                     gui_trans_color(0x0000)
 #define C_WHITE                     gui_trans_color(0xFFFF)
 
-#endif //POWER_MANAGER_GUI_COLOR_H_
+#endif  // POWER_MANAGER_GUI_COLOR_H_

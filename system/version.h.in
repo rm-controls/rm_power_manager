@@ -6,4 +6,4 @@
 #define GCC_VERSION_MAJOR       "GCC Version ${GCC_VERSION_MAJOR}"
 #define CURRENT_TIME_UTC        ${CURRENT_TIME_SECONDS}
 
-#endif
+#endif  // POWER_MANAGER_SYSTEM_VERSION_H_

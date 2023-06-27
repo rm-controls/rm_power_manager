@@ -8,4 +8,4 @@
 void SelfCheckForm_Init(void);
 void SelfCheckForm_Update(void);
 
-#endif //POWER_MANAGER_FORMS_SELFCHECK_FORM_H_
+#endif  // POWER_MANAGER_FORMS_SELFCHECK_FORM_H_

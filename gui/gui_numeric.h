@@ -2,8 +2,8 @@
 // Created by Lao·Zhu on 2021/5/1.
 //
 
-#ifndef PROGRAM_GUI_GUI_NUMERIC_H_
-#define PROGRAM_GUI_GUI_NUMERIC_H_
+#ifndef POWER_MANAGER_GUI_GUI_NUMERIC_H_
+#define POWER_MANAGER_GUI_GUI_NUMERIC_H_
 
 #define NUMERIC_NORMAL_EDGE     gui_trans_color(0xad75)
 
@@ -32,4 +32,4 @@ void GUI_InitNumeric(Numeric_Struct_t *Numeric);
 void GUI_UpdateNumeric(Numeric_Struct_t *Numeric, Numeric_Button_State_e btn_state);
 void GUI_NumericSetText(Numeric_Struct_t *Numeric, const char *fmt, ...);
 
-#endif //PROGRAM_GUI_GUI_NUMERIC_H_
+#endif  // POWER_MANAGER_GUI_GUI_NUMERIC_H_

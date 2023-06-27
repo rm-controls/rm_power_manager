@@ -2,8 +2,8 @@
 // Created by Lao·Zhu on 2021/5/3.
 //
 
-#ifndef PROGRAM_HARDWARE_RTC_H_
-#define PROGRAM_HARDWARE_RTC_H_
+#ifndef POWER_MANAGER_HARDWARE_RTC_H_
+#define POWER_MANAGER_HARDWARE_RTC_H_
 
 #include "stm32h7xx_hal.h"
 

@@ -30,7 +30,7 @@ typology_e fsm_get_typology(void) {
     return main_fsm.typology;
 }
 
-void fsm_task(void *parameters) {
+_Noreturn void fsm_task(void *parameters) {
     (void) parameters;
     static typology_e last_typology = refresh_typology;
     delayms(100);

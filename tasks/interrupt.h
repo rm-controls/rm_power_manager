@@ -5,6 +5,6 @@
 #ifndef POWER_MANAGER_TASKS_INTERRUPT_H_
 #define POWER_MANAGER_TASKS_INTERRUPT_H_
 
-void interrupt_handle_task(void *parameters);
+_Noreturn void interrupt_handle_task(void *parameters);
 
-#endif //POWER_MANAGER_TASKS_INTERRUPT_H_
+#endif  // POWER_MANAGER_TASKS_INTERRUPT_H_

@@ -2,8 +2,8 @@
 // Created by Lao·Zhu on 2021/4/29.
 //
 
-#ifndef PROGRAM_GUI_GUI_BUTTON_H_
-#define PROGRAM_GUI_GUI_BUTTON_H_
+#ifndef POWER_MANAGER_GUI_GUI_BUTTON_H_
+#define POWER_MANAGER_GUI_GUI_BUTTON_H_
 
 #define BUTTON_COLOR_NORMAL         gui_trans_color(0xe73c)
 #define BUTTON_COLOR_NORMAL_EDGE    gui_trans_color(0xce59)
@@ -35,4 +35,4 @@ typedef struct BUTTON_TYPE_T {
 void GUI_InitButton(Button_Struct_t *button);
 void GUI_UpdateButton(Button_Struct_t *button, Button_State_e status);
 
-#endif //PROGRAM_GUI_GUI_BUTTON_H_
+#endif  // POWER_MANAGER_GUI_GUI_BUTTON_H_

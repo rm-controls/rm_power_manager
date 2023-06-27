@@ -20,4 +20,4 @@ extern volatile referee_info_t referee_info;
 unsigned int referee_available(void);
 void referee_process_buffer(const unsigned char *buffer);
 
-#endif //POWER_MANAGER_ALGORITHM_REFEREE_H_
+#endif  // POWER_MANAGER_ALGORITHM_REFEREE_H_

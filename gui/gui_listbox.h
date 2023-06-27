@@ -2,8 +2,8 @@
 // Created by Lao·Zhu on 2021/5/6.
 //
 
-#ifndef PROGRAM_GUI_GUI_LISTBOX_H_
-#define PROGRAM_GUI_GUI_LISTBOX_H_
+#ifndef POWER_MANAGER_GUI_GUI_LISTBOX_H_
+#define POWER_MANAGER_GUI_GUI_LISTBOX_H_
 
 #define LISTBOX_COLOR_EDGE      gui_trans_color(0xad56)
 #define LISTBOX_COLOR_FOCUS     gui_trans_color(0x03da)
@@ -38,4 +38,4 @@ void GUI_ListBoxUpdate(ListBox_Struct_t *ListBox, unsigned char keynum);
 void GUI_ListBoxAddItem(ListBox_Struct_t *ListBox, const char *fmt, ...);
 void GUI_InitListBox(ListBox_Struct_t *ListBox);
 
-#endif //PROGRAM_GUI_GUI_LISTBOX_H_
+#endif  // POWER_MANAGER_GUI_GUI_LISTBOX_H_
