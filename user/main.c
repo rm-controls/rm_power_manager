@@ -71,6 +71,7 @@ void initialize_task(void *parameters) {
 int main(void) {
     system_config();
     gpio_config();
+    htim7_config();
 
     BaseType_t xReturned = xTaskCreate((TaskFunction_t) initialize_task,
                                        (const char *) "InitTask",

@@ -7,8 +7,8 @@
 
 TaskHandle_t fsm_task_handler;
 static struct fsm_t {
-  mode_target_e mode;
-  typology_e typology;
+    mode_target_e mode;
+    typology_e typology;
 } main_fsm;
 
 void fsm_set_mode(mode_target_e target_mode) {
@@ -41,7 +41,8 @@ _Noreturn void fsm_task(void *parameters) {
     main_fsm.mode = normal_mode;
     while (1) {
         switch (main_fsm.mode) {
-            case charge_mode:main_fsm.typology = charge_with_boost;
+            case charge_mode:
+                main_fsm.typology = charge_with_boost;
                 power_info.expect_chassis_power = 0.6f * (float) referee_info.chassis_power_limit;
                 break;
             case boost_mode:
@@ -51,11 +52,13 @@ _Noreturn void fsm_task(void *parameters) {
                     main_fsm.typology = charge_with_boost;
                 power_info.expect_chassis_power = 220.0f;
                 break;
-            case all_off_mode:main_fsm.typology = switches_all_off;
+            case all_off_mode:
+                main_fsm.typology = switches_all_off;
                 power_info.expect_chassis_power = 0;
                 break;
             default:
-            case normal_mode:main_fsm.typology = pass_through;
+            case normal_mode:
+                main_fsm.typology = pass_through;
                 power_info.expect_chassis_power = (float) referee_info.chassis_power_limit;
                 break;
         }
@@ -75,16 +78,19 @@ _Noreturn void fsm_task(void *parameters) {
             }
             charge_with_boost_switches(last_typology == pass_through,
                                        power_info.capacitor_voltage >= 15.7f ||
-                                           referee_info.chassis_power_buffer < 2);
+                                       referee_info.chassis_power_buffer < 2);
         } else if (last_typology != main_fsm.typology) {
             switch (main_fsm.typology) {
-                case pass_through:pid_set_expect(0);
+                case pass_through:
+                    pid_set_expect(0);
                     passthrough_switch_only(last_typology == charge_with_boost);
                     break;
-                case switches_all_off:pid_set_expect(0);
+                case switches_all_off:
+                    pid_set_expect(0);
                     close_all_switches();
                     break;
-                default:pid_set_expect(0);
+                default:
+                    pid_set_expect(0);
                     close_all_switches();
                     error_handler(__FILE__, __LINE__);
                     break;

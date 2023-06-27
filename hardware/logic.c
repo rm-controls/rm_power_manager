@@ -42,3 +42,7 @@ void charge_with_boost_switches(unsigned char is_last_pass, unsigned char is_ove
         delayms(50);
     HAL_GPIO_WritePin(EN_NMOS_GPIO_Port, EN_NMOS_Pin, GPIO_PIN_SET);
 }
+
+void hardware_wdi_toggle(void) {
+    HAL_GPIO_TogglePin(HARDWARE_IWD_GPIO_Port, HARDWARE_IWD_Pin);
+}

@@ -7,19 +7,28 @@ extern DMA_HandleTypeDef hdma_usart2_rx;
 extern DMA_HandleTypeDef hdma_usart1_tx;
 extern DMA_HandleTypeDef hdma_usart1_rx;
 extern TIM_HandleTypeDef htim6;
+extern TIM_HandleTypeDef htim7;
 
 extern EventGroupHandle_t interrupt_event;
 
 void NMI_Handler(void) { SYSFAULT_HANDLE(); }
+
 void HardFault_Handler(void) { SYSFAULT_HANDLE(); }
+
 void MemManage_Handler(void) { SYSFAULT_HANDLE(); }
+
 void BusFault_Handler(void) { SYSFAULT_HANDLE(); }
+
 void UsageFault_Handler(void) { SYSFAULT_HANDLE(); }
 
 void DMA1_Stream0_IRQHandler(void) { HAL_DMA_IRQHandler(&hdma_usart2_rx); }
+
 void DMA1_Stream1_IRQHandler(void) { HAL_DMA_IRQHandler(&hdma_adc1); }
+
 void DMA1_Stream2_IRQHandler(void) { HAL_DMA_IRQHandler(&hdma_usart1_tx); }
+
 void DMA1_Stream3_IRQHandler(void) { HAL_DMA_IRQHandler(&hdma_usart1_rx); }
+
 void DMA2_Stream0_IRQHandler(void) { HAL_DMA_IRQHandler(&hdma_spi3_tx); }
 
 void SPI3_IRQHandler(void) { HAL_SPI_IRQHandler(&hspi3); }
@@ -30,7 +39,12 @@ void TIM6_DAC_IRQHandler(void) {
     HAL_TIM_IRQHandler(&htim6);
 }
 
+void TIM7_IRQHandler(void) {
+    HAL_TIM_IRQHandler(&htim7);
+}
+
 void USART1_IRQHandler(void) { HAL_UART_IRQHandler(&huart1); }
+
 void USART2_IRQHandler(void) { HAL_UART_IRQHandler(&huart2); }
 
 void MDMA_IRQHandler(void) { HAL_MDMA_IRQHandler(&hmdma_referee); }
@@ -42,6 +56,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
             unsigned short dac_value = pid_calculate(power_info.charge_power);
             dac_set_output(dac_value);
         }
+    } else if (htim->Instance == TIM7) {
+        hardware_wdi_toggle();
     }
 }
 
@@ -71,7 +87,9 @@ void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart) {
 
 __attribute__((section(".dma_ram")))volatile unsigned short adc_dma_result[6] = {0};
 unsigned short adc_result_buffer[6][10] = {0}, adc_result[6] = {0}, buffer_counter = 0;
+
 extern int compare_ushort(const void *a, const void *b);
+
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
     for (unsigned char counter = 0; counter < 6; counter++)
         adc_result_buffer[counter][buffer_counter] = adc_dma_result[counter];
@@ -91,10 +109,12 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
 
 extern volatile unsigned char uart1_transmit_buffer[REFEREE_DMA_BUFFER_SIZE * 2];
 extern const unsigned int k_power_manager_status_buffer_length;
+
 void HAL_MDMA_BlockTransferCpltCallback(MDMA_HandleTypeDef *hmdma) {
     BaseType_t higher_priority_task_woken = pdFALSE, result;
     switch (mdma_status_flag) {
-        case 0:HAL_UART_Transmit_DMA(&huart1, (unsigned char *) uart1_transmit_buffer, REFEREE_DMA_BUFFER_SIZE);
+        case 0:
+            HAL_UART_Transmit_DMA(&huart1, (unsigned char *) uart1_transmit_buffer, REFEREE_DMA_BUFFER_SIZE);
             break;
         case 1:
             result = xEventGroupSetBitsFromISR(interrupt_event, 0x01,
@@ -118,6 +138,7 @@ void HAL_MDMA_BlockTransferCpltCallback(MDMA_HandleTypeDef *hmdma) {
                                   (unsigned char *) uart1_transmit_buffer,
                                   k_power_manager_status_buffer_length);
             break;
-        default:break;
+        default:
+            break;
     }
 }

@@ -6,9 +6,15 @@
 #define POWER_MANAGER_HARDWARE_LOGIC_H_
 
 void dac_set_output(unsigned short value);
+
 void close_all_switches(void);
+
 void charge_switch_only(void);
+
 void passthrough_switch_only(unsigned char is_last_boost);
+
 void charge_with_boost_switches(unsigned char is_last_pass, unsigned char is_over_voltage);
+
+void hardware_wdi_toggle(void);
 
 #endif //POWER_MANAGER_HARDWARE_LOGIC_H_
