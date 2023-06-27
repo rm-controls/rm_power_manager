@@ -1,34 +1,8 @@
-/* USER CODE BEGIN Header */
-/**
-  ******************************************************************************
-  * @file    tim.c
-  * @brief   This file provides code for the configuration
-  *          of the TIM instances.
-  ******************************************************************************
-  * @attention
-  *
-  * Copyright (c) 2023 STMicroelectronics.
-  * All rights reserved.
-  *
-  * This software is licensed under terms that can be found in the LICENSE file
-  * in the root directory of this software component.
-  * If no LICENSE file comes with this software, it is provided AS-IS.
-  *
-  ******************************************************************************
-  */
-/* USER CODE END Header */
-/* Includes ------------------------------------------------------------------*/
 #include "tim.h"
-
-/* USER CODE BEGIN 0 */
-
-/* USER CODE END 0 */
 
 TIM_HandleTypeDef htim7;
 
-/* TIM7 init function */
-void htim7_config(void) {
-
+void tim7_config(void) {
     RCC_ClkInitTypeDef clkconfig;
     uint32_t uwTimclock, uwAPB1Prescaler;
     uint32_t uwPrescalerValue;
@@ -49,24 +23,21 @@ void htim7_config(void) {
     htim7.Init.ClockDivision = 0;
     htim7.Init.CounterMode = TIM_COUNTERMODE_UP;
 
-    if (HAL_TIM_Base_Init(&htim7) == HAL_OK) {
+    if (HAL_TIM_Base_Init(&htim7) == HAL_OK)
         HAL_TIM_Base_Start_IT(&htim7);
-    }
-
+    else
+        error_handler(__FILE__, __LINE__);
 }
 
-
 void HAL_TIM_Base_MspInit(TIM_HandleTypeDef *tim_baseHandle) {
-
     if (tim_baseHandle->Instance == TIM7) {
         __HAL_RCC_TIM7_CLK_ENABLE();
-        HAL_NVIC_SetPriority(TIM7_IRQn, 4, 0);
+        HAL_NVIC_SetPriority(TIM7_IRQn, TIM7_GLOBAL_PRIORITY, 0);
         HAL_NVIC_EnableIRQ(TIM7_IRQn);
     }
 }
 
 void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef *tim_baseHandle) {
-
     if (tim_baseHandle->Instance == TIM7) {
         __HAL_RCC_TIM7_CLK_DISABLE();
         HAL_NVIC_DisableIRQ(TIM7_IRQn);

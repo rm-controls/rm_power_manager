@@ -43,12 +43,11 @@
 #define BOOST_EN_Pin GPIO_PIN_10
 #define BOOST_EN_GPIO_Port GPIOE
 
-#define HARDWARE_IWD_Pin GPIO_PIN_13
-#define HARDWARE_IWD_GPIO_Port GPIOD
+#define EXTERNAL_WDG_Pin GPIO_PIN_13
+#define EXTERNAL_WDG_Port GPIOD
 
 #define SPI_FLASH_CS_Pin GPIO_PIN_6
 #define SPI_FLASH_CS_Port GPIOB
-
 
 unsigned char gpio_use_lcd(void);
 void gpio_config(void);

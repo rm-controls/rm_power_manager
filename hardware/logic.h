@@ -15,6 +15,4 @@ void passthrough_switch_only(unsigned char is_last_boost);
 
 void charge_with_boost_switches(unsigned char is_last_pass, unsigned char is_over_voltage);
 
-void hardware_wdi_toggle(void);
-
 #endif //POWER_MANAGER_HARDWARE_LOGIC_H_

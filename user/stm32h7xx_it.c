@@ -7,7 +7,6 @@ extern DMA_HandleTypeDef hdma_usart2_rx;
 extern DMA_HandleTypeDef hdma_usart1_tx;
 extern DMA_HandleTypeDef hdma_usart1_rx;
 extern TIM_HandleTypeDef htim6;
-extern TIM_HandleTypeDef htim7;
 
 extern EventGroupHandle_t interrupt_event;
 
@@ -56,9 +55,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
             unsigned short dac_value = pid_calculate(power_info.charge_power);
             dac_set_output(dac_value);
         }
-    } else if (htim->Instance == TIM7) {
-        hardware_wdi_toggle();
-    }
+    } else if (htim->Instance == TIM7)
+        HAL_GPIO_TogglePin(EXTERNAL_WDG_Port, EXTERNAL_WDG_Pin);
 }
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
@@ -91,6 +89,7 @@ unsigned short adc_result_buffer[6][10] = {0}, adc_result[6] = {0}, buffer_count
 extern int compare_ushort(const void *a, const void *b);
 
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
+    (void) hadc;
     for (unsigned char counter = 0; counter < 6; counter++)
         adc_result_buffer[counter][buffer_counter] = adc_dma_result[counter];
     buffer_counter++;
@@ -111,10 +110,10 @@ extern volatile unsigned char uart1_transmit_buffer[REFEREE_DMA_BUFFER_SIZE * 2]
 extern const unsigned int k_power_manager_status_buffer_length;
 
 void HAL_MDMA_BlockTransferCpltCallback(MDMA_HandleTypeDef *hmdma) {
+    (void) hmdma;
     BaseType_t higher_priority_task_woken = pdFALSE, result;
     switch (mdma_status_flag) {
-        case 0:
-            HAL_UART_Transmit_DMA(&huart1, (unsigned char *) uart1_transmit_buffer, REFEREE_DMA_BUFFER_SIZE);
+        case 0:HAL_UART_Transmit_DMA(&huart1, (unsigned char *) uart1_transmit_buffer, REFEREE_DMA_BUFFER_SIZE);
             break;
         case 1:
             result = xEventGroupSetBitsFromISR(interrupt_event, 0x01,
@@ -138,7 +137,6 @@ void HAL_MDMA_BlockTransferCpltCallback(MDMA_HandleTypeDef *hmdma) {
                                   (unsigned char *) uart1_transmit_buffer,
                                   k_power_manager_status_buffer_length);
             break;
-        default:
-            break;
+        default:break;
     }
 }

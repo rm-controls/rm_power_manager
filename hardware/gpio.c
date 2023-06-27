@@ -23,7 +23,7 @@ void gpio_config(void) {
     HAL_GPIO_WritePin(BOOST_EN_GPIO_Port, BOOST_EN_Pin, GPIO_PIN_SET);
     HAL_GPIO_WritePin(EN_NMOS_GPIO_Port, EN_NMOS_Pin, GPIO_PIN_SET);
     HAL_GPIO_WritePin(LCD_PWR_Port, LCD_PWR_Pin, GPIO_PIN_SET);
-    HAL_GPIO_WritePin(HARDWARE_IWD_GPIO_Port, HARDWARE_IWD_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(EXTERNAL_WDG_Port, EXTERNAL_WDG_Pin, GPIO_PIN_RESET);
 
     GPIO_Structure.Pin = SPI_FLASH_CS_Pin;
     GPIO_Structure.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
@@ -97,9 +97,9 @@ void gpio_config(void) {
     GPIO_Structure.Pull = GPIO_PULLUP;
     HAL_GPIO_Init(EN_NMOS_GPIO_Port, &GPIO_Structure);
 
-    GPIO_Structure.Pin = HARDWARE_IWD_Pin;
+    GPIO_Structure.Pin = EXTERNAL_WDG_Pin;
     GPIO_Structure.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
     GPIO_Structure.Mode = GPIO_MODE_OUTPUT_PP;
     GPIO_Structure.Pull = GPIO_PULLUP;
-    HAL_GPIO_Init(HARDWARE_IWD_GPIO_Port, &GPIO_Structure);
+    HAL_GPIO_Init(EXTERNAL_WDG_Port, &GPIO_Structure);
 }

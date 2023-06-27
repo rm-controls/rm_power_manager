@@ -11,7 +11,7 @@
 #define W25QXX_CS_LOW   HAL_GPIO_WritePin(SPI_FLASH_CS_Port, SPI_FLASH_CS_Pin, GPIO_PIN_RESET)
 #define W25QXX_CS_HIGH  HAL_GPIO_WritePin(SPI_FLASH_CS_Port, SPI_FLASH_CS_Pin, GPIO_PIN_SET)
 
-unsigned short w25qxx_id = 0x0000;
+static unsigned short w25qxx_id = 0x0000;
 static unsigned char w25qxx_sector_buffer[4096];
 
 static unsigned char spi_readwrite_byte(unsigned char data) {

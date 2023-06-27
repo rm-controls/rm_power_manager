@@ -7,7 +7,7 @@
 
 extern TIM_HandleTypeDef htim7;
 
-void htim7_config(void);
+void tim7_config(void);
 
 #endif /* POWER_MANAGER_HARDWARE_TIM_H_ */
 
