@@ -24,7 +24,7 @@ static void TurnBack_Button1_Callback(void *object, unsigned char key) {
 }
 
 static void Format_Button_Callback(void *object, unsigned char key) {
-
+    make_rmfs_table();
 }
 
 static void FileList_ListBox_Callback(void *object, unsigned char key) {
@@ -50,7 +50,17 @@ void LogForm_Update(void) {
 }
 
 void GFileList_ListBox_ScanFile() {
-    GUI_ListBoxAddItem(&FileList_ListBox, "No Flash Use");
+    unsigned char fs_status = get_rmfs_status();
+    switch (fs_status) {
+        case 0:GUI_ListBoxAddItem(&FileList_ListBox, "First");
+            break;
+        case 1:GUI_ListBoxAddItem(&FileList_ListBox, "No Flash Found");
+            break;
+        case 2:GUI_ListBoxAddItem(&FileList_ListBox, "FS Table Error");
+            break;
+        default:GUI_ListBoxAddItem(&FileList_ListBox, "Unknown Error");
+            break;
+    }
 }
 
 void LogForm_Init(void) {
@@ -114,5 +124,5 @@ void LogForm_Init(void) {
 
     gui_printf(4, 96, C_BLACK, C_WHITE, "OS:%2d.%1dKB", xPortGetFreeHeapSize() / 1024,
                (xPortGetFreeHeapSize() % 1024) / 100);
-    gui_printf(64, 96, C_BLACK, C_WHITE, "FS:%03d/256", 0);
+    gui_printf(80, 96, C_BLACK, C_WHITE, "FS:%04d", get_rmfs_remain());
 }

@@ -29,6 +29,7 @@
 #define W25X_Exit4ByteAddr      0xE9
 
 void w25qxx_config(void);
+unsigned short w25qxx_get_total_sector(void);
 void w25qxx_read(unsigned char *pBuffer, unsigned int ReadAddr, unsigned short NumByteToRead);
 void w25qxx_write(unsigned char *pBuffer, unsigned int WriteAddr, unsigned short NumByteToWrite);
 void w25qxx_erase_chip(void);

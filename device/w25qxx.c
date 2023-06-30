@@ -6,11 +6,20 @@
 #include "system.h"
 #include "spi.h"
 #include "gpio.h"
+#include "iwdg.h"
 
 #define FLASH_DELAY()   __NOP(); __NOP(); __NOP(); __NOP(); __NOP(); __NOP()
 #define W25QXX_CS_LOW   HAL_GPIO_WritePin(SPI_FLASH_CS_Port, SPI_FLASH_CS_Pin, GPIO_PIN_RESET)
 #define W25QXX_CS_HIGH  HAL_GPIO_WritePin(SPI_FLASH_CS_Port, SPI_FLASH_CS_Pin, GPIO_PIN_SET)
 
+#define W25Q80_ID  0XEF13
+#define W25Q16_ID  0XEF14
+#define W25Q32_ID  0XEF15
+#define W25Q64_ID  0XEF16
+#define W25Q128_ID 0XEF17
+#define W25Q256_ID 0XEF18
+
+static unsigned short total_sector = 0;
 static unsigned short w25qxx_id = 0x0000;
 static unsigned char w25qxx_sector_buffer[4096];
 
@@ -40,7 +49,10 @@ static void w25qxx_write_enable(void) {
 }
 
 static void w25qxx_wait_busy(void) {
-    while ((w25qxx_read_sr1() & 0x01));
+    while ((w25qxx_read_sr1() & 0x01)) {
+        delayms(1);
+        HAL_IWDG_Refresh(&hiwdg1);
+    }
 }
 
 static unsigned short w25qxx_read_id(void) {
@@ -82,11 +94,32 @@ static void w25qxx_erase_sector(unsigned int Dst_Addr) {
     w25qxx_wait_busy();
 }
 
+unsigned short w25qxx_get_total_sector(void) {
+    return total_sector;
+}
+
 void w25qxx_config(void) {
     FLASH_DELAY();
     W25QXX_CS_HIGH;
     w25qxx_wakeup();
     w25qxx_id = w25qxx_read_id();
+    spi_setspeed(&hspi1, SPI_BAUDRATEPRESCALER_4);
+    switch (w25qxx_id) {
+        case W25Q80_ID:total_sector = 1024 / 4;
+            break;
+        case W25Q16_ID:total_sector = 2048 / 4;
+            break;
+        case W25Q32_ID:total_sector = 4096 / 4;
+            break;
+        case W25Q64_ID:total_sector = 8192 / 4;
+            break;
+        case W25Q128_ID:total_sector = 16384 / 4;
+            break;
+        case W25Q256_ID:total_sector = 32768 / 4;
+            break;
+        default:total_sector = 0;
+            break;
+    }
 }
 
 void w25qxx_read(unsigned char *pBuffer, unsigned int ReadAddr, unsigned short NumByteToRead) {

@@ -43,11 +43,11 @@ add_compile_options($<$<COMPILE_LANGUAGE:ASM>:-x$<SEMICOLON>assembler-with-cpp>)
 add_compile_options(-Ofast)
 
 include_directories(library/include library/include/Legacy system user hardware system/cmsis freertos
-        algorithm tasks gui forms device)
+        algorithm tasks gui forms device rmfs)
 add_definitions(-DUSE_HAL_DRIVER -DSTM32H750xx) # -DDEBUG
 
 file(GLOB_RECURSE SOURCES "hardware/*.c" "user/*.c" "system/*.c" "system/startup.s" "library/source/*.c"
-        "freertos/*.c" "algorithm/*.c" "tasks/*.c" "gui/*.c" "forms/*.c" "device/*.c")
+        "freertos/*.c" "algorithm/*.c" "tasks/*.c" "gui/*.c" "forms/*.c" "device/*.c" "rmfs/*.c")
 
 set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/system/stm32h750vb.ld)
 

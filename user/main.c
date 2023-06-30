@@ -15,6 +15,7 @@ void initialize_task(void *parameters) {
     spi1_config();
     spi3_config();
     w25qxx_config();
+    filesystem_config();
     calibrate_params_config();
     iwdg_config();
 
