@@ -50,6 +50,8 @@
 #define SPI_FLASH_CS_Port GPIOB
 
 unsigned char gpio_use_lcd(void);
+void lcd_key_config(void);
+void digital_tube_key_config(void);
 void gpio_config(void);
 
 #endif /* POWER_MANAGER_HARDWARE_GPIO_H_ */

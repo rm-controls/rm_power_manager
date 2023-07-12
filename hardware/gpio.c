@@ -7,6 +7,43 @@ unsigned char gpio_use_lcd(void) {
     return 1;
 }
 
+void digital_tube_key_config(void) {
+
+}
+
+void lcd_key_config(void) {
+    GPIO_InitTypeDef GPIO_Structure;
+    GPIO_Structure.Pin = UP_KEY_PIN;
+    GPIO_Structure.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+    GPIO_Structure.Mode = GPIO_MODE_INPUT;
+    GPIO_Structure.Pull = GPIO_PULLUP;
+    HAL_GPIO_Init(UP_KEY_PORT, &GPIO_Structure);
+
+    GPIO_Structure.Pin = DOWN_KEY_PIN;
+    GPIO_Structure.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+    GPIO_Structure.Mode = GPIO_MODE_INPUT;
+    GPIO_Structure.Pull = GPIO_PULLUP;
+    HAL_GPIO_Init(DOWN_KEY_PORT, &GPIO_Structure);
+
+    GPIO_Structure.Pin = LEFT_KEY_PIN;
+    GPIO_Structure.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+    GPIO_Structure.Mode = GPIO_MODE_INPUT;
+    GPIO_Structure.Pull = GPIO_PULLUP;
+    HAL_GPIO_Init(LEFT_KEY_PORT, &GPIO_Structure);
+
+    GPIO_Structure.Pin = RIGHT_KEY_PIN;
+    GPIO_Structure.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+    GPIO_Structure.Mode = GPIO_MODE_INPUT;
+    GPIO_Structure.Pull = GPIO_PULLUP;
+    HAL_GPIO_Init(RIGHT_KEY_PORT, &GPIO_Structure);
+
+    GPIO_Structure.Pin = CENTER_KEY_PIN;
+    GPIO_Structure.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+    GPIO_Structure.Mode = GPIO_MODE_INPUT;
+    GPIO_Structure.Pull = GPIO_PULLUP;
+    HAL_GPIO_Init(CENTER_KEY_PORT, &GPIO_Structure);
+}
+
 void gpio_config(void) {
     GPIO_InitTypeDef GPIO_Structure;
 
@@ -49,35 +86,7 @@ void gpio_config(void) {
     GPIO_Structure.Pull = GPIO_PULLUP;
     HAL_GPIO_Init(LCD_A0_Port, &GPIO_Structure);
 
-    GPIO_Structure.Pin = UP_KEY_PIN;
-    GPIO_Structure.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-    GPIO_Structure.Mode = GPIO_MODE_INPUT;
-    GPIO_Structure.Pull = GPIO_PULLUP;
-    HAL_GPIO_Init(UP_KEY_PORT, &GPIO_Structure);
-
-    GPIO_Structure.Pin = DOWN_KEY_PIN;
-    GPIO_Structure.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-    GPIO_Structure.Mode = GPIO_MODE_INPUT;
-    GPIO_Structure.Pull = GPIO_PULLUP;
-    HAL_GPIO_Init(DOWN_KEY_PORT, &GPIO_Structure);
-
-    GPIO_Structure.Pin = LEFT_KEY_PIN;
-    GPIO_Structure.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-    GPIO_Structure.Mode = GPIO_MODE_INPUT;
-    GPIO_Structure.Pull = GPIO_PULLUP;
-    HAL_GPIO_Init(LEFT_KEY_PORT, &GPIO_Structure);
-
-    GPIO_Structure.Pin = RIGHT_KEY_PIN;
-    GPIO_Structure.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-    GPIO_Structure.Mode = GPIO_MODE_INPUT;
-    GPIO_Structure.Pull = GPIO_PULLUP;
-    HAL_GPIO_Init(RIGHT_KEY_PORT, &GPIO_Structure);
-
-    GPIO_Structure.Pin = CENTER_KEY_PIN;
-    GPIO_Structure.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-    GPIO_Structure.Mode = GPIO_MODE_INPUT;
-    GPIO_Structure.Pull = GPIO_PULLUP;
-    HAL_GPIO_Init(CENTER_KEY_PORT, &GPIO_Structure);
+    lcd_key_config();
 
     GPIO_Structure.Pin = CHG_EN_Pin;
     GPIO_Structure.Speed = GPIO_SPEED_FREQ_VERY_HIGH;

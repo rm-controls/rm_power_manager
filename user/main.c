@@ -1,5 +1,32 @@
 #include "main.h"
 
+unsigned char lcd_digital_tube_check(unsigned int delay_xms) {
+    BaseType_t xReturned;
+    unsigned char using_lcd_flag = gpio_use_lcd();
+    HAL_IWDG_Refresh(&hiwdg1);
+    if (using_lcd_flag == 1) {
+        xReturned = xTaskCreate((TaskFunction_t) gui_task,
+                                (const char *) "GUITask",
+                                (configSTACK_DEPTH_TYPE) 2048,
+                                (void *) NULL,
+                                (UBaseType_t) 1,
+                                (TaskHandle_t *) NULL);
+        if (xReturned != pdPASS)
+            error_handler(__FILE__, __LINE__);
+    } else {
+        xReturned = xTaskCreate((TaskFunction_t) digital_tube_task,
+                                (const char *) "TubeTask",
+                                (configSTACK_DEPTH_TYPE) 2048,
+                                (void *) NULL,
+                                (UBaseType_t) 1,
+                                (TaskHandle_t *) NULL);
+        if (xReturned != pdPASS)
+            error_handler(__FILE__, __LINE__);
+    }
+    delayms(delay_xms);
+    return using_lcd_flag;
+}
+
 void initialize_task(void *parameters) {
     (void) parameters;
     BaseType_t xReturned;
@@ -19,25 +46,7 @@ void initialize_task(void *parameters) {
     calibrate_params_config();
     iwdg_config();
 
-    if (gpio_use_lcd() == 1) {
-        xReturned = xTaskCreate((TaskFunction_t) gui_task,
-                                (const char *) "GUITask",
-                                (configSTACK_DEPTH_TYPE) 2048,
-                                (void *) NULL,
-                                (UBaseType_t) 1,
-                                (TaskHandle_t *) NULL);
-        if (xReturned != pdPASS)
-            error_handler(__FILE__, __LINE__);
-    } else {
-        xReturned = xTaskCreate((TaskFunction_t) digital_tube_task,
-                                (const char *) "TubeTask",
-                                (configSTACK_DEPTH_TYPE) 2048,
-                                (void *) NULL,
-                                (UBaseType_t) 1,
-                                (TaskHandle_t *) NULL);
-        if (xReturned != pdPASS)
-            error_handler(__FILE__, __LINE__);
-    }
+    lcd_digital_tube_check(1);
 
     xReturned = xTaskCreate((TaskFunction_t) fsm_task,
                             (const char *) "FSMTask",

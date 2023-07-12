@@ -6,8 +6,10 @@
 #include "gui.h"
 
 extern volatile unsigned char lcd_frame_buffer[128 * 160 * 2];
+extern unsigned char lcd_digital_tube_check(unsigned int delay_xms);
 
 static void form_config(void) {
+    lcd_key_config();
     gui_clear_screen(C_WHITE);
     gui_printf(22, 74, C_DARK_GREEN, C_WHITE, "Calibrating...");
     HAL_IWDG_Refresh(&hiwdg1);
@@ -41,6 +43,7 @@ _Noreturn void gui_task(void *parameters) {
         Form_UpdateEvent();
         if (lcd_off_flag != 1)
             lcd_refresh_once(lcd_frame_buffer);
-        delayms(100);
+        if (lcd_digital_tube_check(100) == 0)
+            vTaskDelete(NULL);
     }
 }
