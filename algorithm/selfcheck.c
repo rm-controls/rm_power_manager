@@ -190,11 +190,14 @@ unsigned char slefcheck_nuc_status(TextBox_Struct_t *textbox, unsigned char step
         nuc_status_check_error_flag = 0;
     if (!nuc_available())
         nuc_status_check_error_flag++;
-    if (step == 20 && nuc_status_check_error_flag == 0)
+    if (step == 20 && nuc_status_check_error_flag < 10) {
         GUI_TextBoxAppend(textbox, C_DARK_GREEN, "NUC link check pass");
-    else if (step == 20 && nuc_status_check_error_flag != 0)
+        return 0;
+    } else if (step == 20 && nuc_status_check_error_flag >= 10) {
         GUI_TextBoxAppend(textbox, C_DARK_RED, "NUC link check err");
-    return nuc_status_check_error_flag;
+        return 1;
+    }
+    return 0;
 }
 
 static unsigned char capacitor_discharge_flag = 0, capacitor_charge_flag = 0;
@@ -231,7 +234,7 @@ unsigned short selfcheck_digital_tube(void) {
     capacitor_discharge_flag = 2;
     capacitor_charge_flag = 2;
     capacitor_voltage_control_timeout = 0;
-    unsigned char error_flag = 0;
+    unsigned char error_flag;
     if (round_counter <= 20)
         error_flag = slefcheck_current_sensor(NULL, round_counter);
     else if (round_counter <= 40)
@@ -259,5 +262,5 @@ unsigned short selfcheck_digital_tube(void) {
     }
 
     pack_powerinfo_buffer();
-    return error_flag << 8 | (round_counter / 20);
+    return ((unsigned short) error_flag << 8UL) | ((round_counter / 20) + 1);
 }

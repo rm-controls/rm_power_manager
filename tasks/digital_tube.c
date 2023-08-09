@@ -15,14 +15,14 @@ _Noreturn void digital_tube_task(void *parameters) {
     iic_config();
     digital_tube_key_config();
     tm1650_config();
+    tm1650_write_data(1, digital_tube_display_buffer);
     while (1) {
         running_timer_counter++;
         mode_target_e current_mode = fsm_get_mode();
         typology_e current_typo = fsm_get_typology();
         if (last_mode != current_mode || last_typo != current_typo || running_timer_counter % 5 == 0) {
-            unsigned char current_status = (current_mode & 0x03) | ((current_typo & 0x03) << 2);
-            digital_tube_display_buffer[0] = 0;
-            digital_tube_display_buffer[1] = current_status + (16 * (running_timer_counter % 10 == 0));
+            digital_tube_display_buffer[0] = current_typo + (16 * (running_timer_counter % 10 == 0));
+            digital_tube_display_buffer[1] = current_mode + (16 * (running_timer_counter % 10 == 0));
             tm1650_write_data(1, digital_tube_display_buffer);
         }
         last_typo = current_typo;
@@ -41,13 +41,14 @@ _Noreturn void digital_tube_task(void *parameters) {
             for (;;) {
                 HAL_IWDG_Refresh(&hiwdg1);
                 unsigned short check_message = selfcheck_digital_tube();
+                if (check_message == 0x0000)
+                    break;
                 digital_tube_display_buffer[0] = check_message >> 8;
                 digital_tube_display_buffer[1] = check_message & 0x00FF;
                 tm1650_write_data(1, digital_tube_display_buffer);
-                if (check_message == 0x0000)
-                    break;
                 delayms(100);
             }
+            last_push_time = HAL_GetTick();
         }
 
         if (lcd_digital_tube_check(100, 0) == 1)
