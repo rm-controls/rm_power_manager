@@ -4,6 +4,7 @@
 
 #include "pid.h"
 #include "power.h"
+#include "referee.h"
 
 static volatile struct pid_calculate_t {
   float kp;
@@ -58,4 +59,13 @@ unsigned short pid_calculate(float collected) {
         charge_pid.i_sum = 0;
         return 0;
     }
+}
+
+unsigned short pid_output_check(unsigned short pid_calculate) {
+    float target_current = (float) pid_calculate / 273.0f;
+    float target_power = target_current * power_info.capacitor_voltage;
+    if (target_power > (charge_pid.user + 20.0f) || referee_info.chassis_power > ((float) charge_pid.user + 20.0f))
+        return (unsigned short) (((float) charge_pid.user - 10.0f) * 273.0f / power_info.capacitor_voltage);
+    else
+        return pid_calculate;
 }

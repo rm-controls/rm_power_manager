@@ -52,7 +52,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
     if (htim->Instance == TIM6) {
         HAL_IncTick();
         if (pid_calculate_enable_flag == 1) {
-            unsigned short dac_value = pid_calculate(power_info.charge_power);
+            unsigned short pid_calc = pid_calculate(power_info.charge_power);
+            unsigned short dac_value = pid_output_check(pid_calc);
             dac_set_output(dac_value);
         }
     } else if (htim->Instance == TIM7)
