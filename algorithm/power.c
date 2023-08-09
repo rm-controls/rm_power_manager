@@ -49,13 +49,13 @@ int compare_ushort(const void *a, const void *b) {
 
 void update_powerinfo(const unsigned short *adc_result) {
     power_info.charge_current =
-        (float) (adc_result[0] - calibrate_params.charge_current_offset) * ADC_COEFFICIENT * 20.0f;
+        (float) (adc_result[0] - calibrate_params.charge_current_offset) * ADC_COEFFICIENT * 5.0f;
     power_info.chassis_current =
-        (float) (adc_result[1] - calibrate_params.chassis_current_offset) * ADC_COEFFICIENT * 20.0f;
-    power_info.battery_voltage = (float) adc_result[2] * ADC_COEFFICIENT * 21.0f;
+        (float) (adc_result[1] - calibrate_params.chassis_current_offset) * ADC_COEFFICIENT * 5.0f;
+    power_info.battery_voltage = (float) adc_result[2] * ADC_COEFFICIENT * 11.0f;
     power_info.capacitor_voltage =
-        get_filter_result(&capacitor_voltage_filter, (float) adc_result[3] * ADC_COEFFICIENT * 21.0f);
-    power_info.chassis_voltage = (float) adc_result[4] * ADC_COEFFICIENT * 21.0f;
+        get_filter_result(&capacitor_voltage_filter, (float) adc_result[3] * ADC_COEFFICIENT * 6.60f);
+    power_info.chassis_voltage = (float) adc_result[4] * ADC_COEFFICIENT * 11.0f;
 
     float capacitor_energy = 7.5f * power_info.capacitor_voltage * power_info.capacitor_voltage - ZERO_ENERGY;
     capacitor_energy = ((capacitor_energy < 0) ? 0 : capacitor_energy);
