@@ -7,6 +7,8 @@
 #include "string.h"
 
 void GUI_TextBoxAppend(TextBox_Struct_t *textbox, unsigned short color, char *str) {
+    if (textbox == NULL)
+        return;
     TextBox_Line_Struct_t *current_line;
     if (textbox->first_line == NULL) {
         textbox->first_line = &textbox->line[0];

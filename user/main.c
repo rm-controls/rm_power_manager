@@ -1,10 +1,10 @@
 #include "main.h"
 
-unsigned char lcd_digital_tube_check(unsigned int delay_xms) {
+unsigned char lcd_digital_tube_check(unsigned int delay_xms, unsigned char gui_task_call) {
     BaseType_t xReturned;
     unsigned char using_lcd_flag = gpio_use_lcd();
     HAL_IWDG_Refresh(&hiwdg1);
-    if (using_lcd_flag == 1) {
+    if (using_lcd_flag == 1 && gui_task_call != 1) {
         xReturned = xTaskCreate((TaskFunction_t) gui_task,
                                 (const char *) "GUITask",
                                 (configSTACK_DEPTH_TYPE) 2048,
@@ -13,7 +13,7 @@ unsigned char lcd_digital_tube_check(unsigned int delay_xms) {
                                 (TaskHandle_t *) NULL);
         if (xReturned != pdPASS)
             error_handler(__FILE__, __LINE__);
-    } else {
+    } else if (using_lcd_flag == 0 && gui_task_call != 0) {
         xReturned = xTaskCreate((TaskFunction_t) digital_tube_task,
                                 (const char *) "TubeTask",
                                 (configSTACK_DEPTH_TYPE) 2048,
@@ -46,7 +46,7 @@ void initialize_task(void *parameters) {
     calibrate_params_config();
     iwdg_config();
 
-    lcd_digital_tube_check(1);
+    lcd_digital_tube_check(1, 2);
 
     xReturned = xTaskCreate((TaskFunction_t) fsm_task,
                             (const char *) "FSMTask",

@@ -6,7 +6,7 @@
 #include "gui.h"
 
 extern volatile unsigned char lcd_frame_buffer[128 * 160 * 2];
-extern unsigned char lcd_digital_tube_check(unsigned int delay_xms);
+extern unsigned char lcd_digital_tube_check(unsigned int delay_xms, unsigned char gui_task_call);
 
 static void form_config(void) {
     lcd_key_config();
@@ -43,7 +43,7 @@ _Noreturn void gui_task(void *parameters) {
         Form_UpdateEvent();
         if (lcd_off_flag != 1)
             lcd_refresh_once(lcd_frame_buffer);
-        if (lcd_digital_tube_check(100) == 0)
+        if (lcd_digital_tube_check(100, 1) == 0)
             vTaskDelete(NULL);
     }
 }

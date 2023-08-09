@@ -5,7 +5,16 @@
 #include "key.h"
 #include "gpio.h"
 
-static Key_Press_t KeyPress_Structure;
+static Key_Press_t KeyPress_Structure, Key_Press_Digital_Structure;
+
+Key_Press_t ReadKey_DigitalTube() {
+    Key_Press_Digital_Structure.Last_Num = Key_Press_Digital_Structure.Num;
+    if (HAL_GPIO_ReadPin(CENTER_KEY_PORT, CENTER_KEY_PIN) == GPIO_PIN_RESET)
+        Key_Press_Digital_Structure.Num = User_Key;
+    else
+        Key_Press_Digital_Structure.Num = No_Key;
+    return Key_Press_Digital_Structure;
+}
 
 Key_Press_t ReadKey() {
     KeyPress_Structure.Last_Num = KeyPress_Structure.Num;
@@ -20,6 +29,6 @@ Key_Press_t ReadKey() {
     else if (HAL_GPIO_ReadPin(CENTER_KEY_PORT, CENTER_KEY_PIN) == GPIO_PIN_RESET)
         KeyPress_Structure.Num = Center_Key;
     else
-        KeyPress_Structure.Num = 0;
+        KeyPress_Structure.Num = No_Key;
     return KeyPress_Structure;
 }

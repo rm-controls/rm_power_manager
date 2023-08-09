@@ -66,7 +66,7 @@ void SelfCheckForm_Update(void) {
         global_error_flag |= slefcheck_boost_components(&SelfCheck_TextBox, (round_counter - 80));
     else if (round_counter <= 120)
         global_error_flag |= slefcheck_referee_status(&SelfCheck_TextBox, (round_counter - 100));
-    else if (round_counter <= 160)
+    else if (round_counter <= 140)
         global_error_flag |= slefcheck_nuc_status(&SelfCheck_TextBox, (round_counter - 120));
     else if (global_error_flag == 0) {
         return_to_main_form:

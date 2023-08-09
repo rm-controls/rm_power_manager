@@ -196,3 +196,68 @@ unsigned char slefcheck_nuc_status(TextBox_Struct_t *textbox, unsigned char step
         GUI_TextBoxAppend(textbox, C_DARK_RED, "NUC link check err");
     return nuc_status_check_error_flag;
 }
+
+static unsigned char capacitor_discharge_flag = 0, capacitor_charge_flag = 0;
+static unsigned int capacitor_voltage_control_timeout = 0, round_counter = 0;
+unsigned short selfcheck_digital_tube(void) {
+    if (capacitor_voltage_control_timeout == 400) {
+        if (capacitor_discharge_flag == 1)
+            GUI_TextBoxAppend(NULL, C_DARK_RED, "Discharging Timeout");
+        else if (capacitor_charge_flag == 1)
+            GUI_TextBoxAppend(NULL, C_DARK_RED, "Charging Timeout");
+        return 0x0A05;
+    }
+    if (capacitor_voltage_control_timeout >= 430)
+        goto resume_normal_mode;
+    if (power_info.capacitor_voltage > 13.0f && capacitor_discharge_flag != 2 && capacitor_charge_flag != 2) {
+        if (capacitor_discharge_flag == 0)
+            GUI_TextBoxAppend(NULL, C_BLACK, "Discharging Cap");
+        charge_with_boost_switches(0, 1);
+        capacitor_discharge_flag = 1;
+        capacitor_voltage_control_timeout++;
+        return 0x0F0F;
+    } else if (power_info.capacitor_voltage < 10.0f && capacitor_discharge_flag != 2
+        && capacitor_charge_flag != 2) {
+        if (capacitor_charge_flag == 0)
+            GUI_TextBoxAppend(NULL, C_BLACK, "Charging Cap");
+        pid_calculate_enable_flag = 0;
+        charge_switch_only();
+        dac_set_output((unsigned short) (273.0f * 35.0f / power_info.capacitor_voltage));
+        capacitor_charge_flag = 1;
+        capacitor_voltage_control_timeout++;
+        return 0x0F0E;
+    }
+    round_counter++;
+    capacitor_discharge_flag = 2;
+    capacitor_charge_flag = 2;
+    capacitor_voltage_control_timeout = 0;
+    unsigned char error_flag = 0;
+    if (round_counter <= 20)
+        error_flag = slefcheck_current_sensor(NULL, round_counter);
+    else if (round_counter <= 40)
+        error_flag = slefcheck_voltage_sensor(NULL, (round_counter - 20));
+    else if (round_counter <= 60)
+        error_flag = slefcheck_passthrough_components(NULL, (round_counter - 40));
+    else if (round_counter <= 80)
+        error_flag = slefcheck_charge_components(NULL, (round_counter - 60));
+    else if (round_counter <= 100)
+        error_flag = slefcheck_boost_components(NULL, (round_counter - 80));
+    else if (round_counter <= 120)
+        error_flag = slefcheck_referee_status(NULL, (round_counter - 100));
+    else if (round_counter <= 140)
+        error_flag = slefcheck_nuc_status(NULL, (round_counter - 120));
+    else {
+        resume_normal_mode:
+        fsm_set_mode(normal_mode);
+        vTaskResume(fsm_task_handler);
+        pid_calculate_enable_flag = 1;
+        capacitor_charge_flag = 0;
+        capacitor_discharge_flag = 0;
+        round_counter = 0;
+        capacitor_voltage_control_timeout = 0;
+        return 0x0000;
+    }
+
+    pack_powerinfo_buffer();
+    return error_flag << 8 | (round_counter / 20);
+}
